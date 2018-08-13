@@ -13,9 +13,9 @@ public:
 		set("r",r);
 	}
 	
-	float cx() const { return std::stof(get("cx").value_or("0")); }
-	float cy() const { return std::stof(get("cy").value_or("0")); }
-	float r() const { return std::stof(get("r").value_or("0")); }
+	float cx() const noexcept { return get_float("cx"); }
+	float cy() const noexcept { return get_float("cy"); }
+	float r() const noexcept  { return get_float("r");  }
 	
 	BoundingBox bounding_box() const noexcept override { 
 		return BoundingBox(cx()-r(),cy()-r(),cx()+r(),cy()+r());

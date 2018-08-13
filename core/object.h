@@ -65,6 +65,11 @@ public:
 		}
 	}
 	
+	float get_float(const std::string& key, float default_value = 0) const noexcept {
+		if (auto v = get(key)) return stof(v.value()); 
+		else return default_value;
+	}
+	
 	std::string attributes_to_string() const noexcept {
 		std::stringstream sstr;
 		for (const auto & [k,v] : attributes)
@@ -72,7 +77,7 @@ public:
 		return sstr.str();
 	}
 	
-	constexpr const std::string& tag() const {
+	constexpr const std::string& tag() const noexcept {
 		return tag_;
 	}
 	
