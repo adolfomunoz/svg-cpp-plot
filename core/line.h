@@ -1,10 +1,11 @@
 #pragma once 
 
 #include "object.h"
+#include "presentation-attributes.h"
 
 namespace svg_cpp_plot {
 
-class Line : public Terminal {
+class Line : public Terminal, public PresentationAttributes<Line> {
 public:
 	Line(float x1, float y1, float x2, float y2) : Terminal("line") 
 	{

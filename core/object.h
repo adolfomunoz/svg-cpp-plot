@@ -7,6 +7,7 @@
 #include <memory>
 #include <list>
 #include <limits>
+#include "presentation-attributes.h"
 
 namespace svg_cpp_plot {
 
@@ -15,14 +16,32 @@ class BoundingBox {
 public:
 	BoundingBox(float xmin, float ymin, float xmax, float ymax) :
 		min(xmin,ymin), max(xmax,ymax) { }
+
+	BoundingBox(const std::tuple<float,float>& min, const std::tuple<float, float>& max) :
+		min(min), max(max) { }
 		
 	BoundingBox() : BoundingBox(std::numeric_limits<float>::max(),std::numeric_limits<float>::max(),std::numeric_limits<float>::min(),std::numeric_limits<float>::min()) {}
 		
-	void join(const BoundingBox& that) { 
+	BoundingBox& join(const BoundingBox& that) { 
 		if (std::get<0>(that.min)<std::get<0>(min)) std::get<0>(min)=std::get<0>(that.min);
 		if (std::get<1>(that.min)<std::get<1>(min)) std::get<1>(min)=std::get<1>(that.min);
 		if (std::get<0>(that.max)>std::get<0>(max)) std::get<0>(max)=std::get<0>(that.max);
 		if (std::get<1>(that.max)>std::get<1>(max)) std::get<1>(max)=std::get<1>(that.max);
+		return (*this);
+	}
+
+	//A point
+	BoundingBox& join(const std::tuple<float, float>& p) {
+		return join(BoundingBox(p,p));
+	}
+
+	//Expand by a distance
+	BoundingBox& expand(float f) {
+		std::get<0>(min)-=f;
+		std::get<1>(min)-=f;
+		std::get<0>(max)+=f;
+		std::get<1>(max)+=f;
+		return(*this);
 	}
 
 	std::string to_string() const {
@@ -95,39 +114,41 @@ public:
 	}
 };
 
-class Node : public Object, public std::list<std::shared_ptr<Object>> {
+class Node : public Object, public PresentationAttributes<Node> {
+	std::list<std::shared_ptr<Object>> children;
 public:
 	Node(const std::string& tag) : Object(tag) {}
 	
 	std::string to_string() const noexcept override {
 		std::stringstream sstr;
 		sstr<<"<"<<tag()<<" "<<attributes_to_string()<<">"<<std::endl;
-		for (auto o : (*this)) if (o) sstr<<"   "<<o->to_string()<<std::endl;
+		for (auto o : children) if (o) sstr<<"   "<<o->to_string()<<std::endl;
 		sstr<<"</"<<tag()<<">"<<std::endl;
 		return sstr.str();
 	}
 
 	//Add directly the pointer (instancing?)
 	Node& add(const std::shared_ptr<Object>& o) {
-		this->push_back(o);
+		children.push_back(o);
 		return *this;
 	}	
 	//Add by copy
 	template<typename T> 
 	Node& add(const T& t) {
-		this->push_back(std::make_shared<T>(t));
+		children.push_back(std::make_shared<std::decay_t<T>>(t));
 		return *this;
 	}
 	//Add by move if possible
 	template<typename T> 
 	Node& add(T&& t) {
-		this->push_back(std::make_shared<T>(std::forward<T>(t)));
+		children.push_back(std::make_shared<std::decay_t<T>>(std::forward<T>(t)));
 		return *this;
 	}
 	
 	BoundingBox bounding_box() const noexcept override { 
 		BoundingBox bb;
-		for (auto o : (*this)) if (o) bb.join(o->bounding_box());
+		for (auto o : children) if (o) bb.join(o->bounding_box());
+		bb.expand(get_float("stroke-width",0.0f));
 		return bb;
 	}
 

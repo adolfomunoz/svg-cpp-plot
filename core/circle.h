@@ -1,10 +1,11 @@
 #pragma once 
 
 #include "object.h"
+#include "presentation-attributes.h"
 
 namespace svg_cpp_plot {
 
-class Circle : public Terminal {
+class Circle : public Terminal, public PresentationAttributes<Circle> {
 public:
 	Circle(float cx, float cy, float r) : Terminal("circle") 
 	{
