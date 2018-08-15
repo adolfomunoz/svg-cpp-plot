@@ -17,6 +17,17 @@ public:
 		set("points",sstr.str());
 	}
 
+	Poly& add_point(float x, float y) {
+		std::stringstream sstr;
+		sstr << get("points").value_or("") <<x<<","<<y<<" ";
+		set("points", sstr.str());
+		return (*this);
+	}
+
+	Poly& add_point(const std::tuple<float, float>& p) {
+		return add_point(std::get<0>(p), std::get<1>(p));
+	}
+
 	std::list<std::tuple<float,float>> points() const noexcept {
 		std::stringstream sstr(get("points").value_or(""));
 		std::list<std::tuple<float,float>> l;
@@ -41,8 +52,9 @@ public:
 class Polygon : public Poly {
 public:
 	template<typename PointList>
-	Polygon(const PointList& pl) : Poly("polygon",pl) { }
+	Polygon(const PointList& pl = {}) : Poly("polygon",pl) { }
 	Polygon(std::initializer_list<std::tuple<float,float>> pl) : Poly("polygon",pl) { }
+	Polygon() : Polygon(std::list<std::tuple<float,float>>()) { }
 };
 
 class Polyline : public Poly {
@@ -50,6 +62,7 @@ public:
 	template<typename PointList>
 	Polyline(const PointList& pl) : Poly("polyline",pl) { fill("none").stroke("black"); }
 	Polyline(std::initializer_list<std::tuple<float,float>> pl) : Poly("polyline",pl) { fill("none").stroke("black"); }
+	Polyline() : Polyline(std::list<std::tuple<float,float>>()) { }
 };
 
 

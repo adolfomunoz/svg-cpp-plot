@@ -5,9 +5,15 @@
 using namespace svg_cpp_plot;
 int main(int argc, char** argv) {
 	SVG svg;
+	Path heart(5,5);
+	heart
+	   .line_to(2,2)
+	   .curve_to(1,1,4.8,1,5,2)
+	   .curve_to(5.2,1,9,1,8,2)
+	   .close()
+	   .fill("red");
 	svg
-	   .add(Polygon({{0,1},{0.5,0},{1,1}}).fill("red"))
-	   .add(Polyline().add_point(0,1).add_point(0.5,0).add_point(1,1).stroke("black").stroke_width(0.1));
+	   .add(heart);
 	std::ofstream f("output.svg");
 	f<<svg.automatic_viewBox();
 }
