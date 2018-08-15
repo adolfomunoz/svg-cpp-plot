@@ -13,6 +13,7 @@ public:
 		std::stringstream sstr;
 		sstr<<"M "<<x<<" "<<y<<" ";
 		set("d",sstr.str());
+		set("fill","none"); set("stroke","black");
 	}
 
 	Path& line_to(float x, float y) {
