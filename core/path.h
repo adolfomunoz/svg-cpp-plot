@@ -2,6 +2,7 @@
 
 #include "object.h"
 #include "presentation-attributes.h"
+#include <type_traits>
 
 namespace svg_cpp_plot {
 
@@ -14,6 +15,15 @@ public:
 		sstr<<"M "<<x<<" "<<y<<" ";
 		set("d",sstr.str());
 		set("fill","none"); set("stroke","black");
+	}
+
+	Path(const Path&) = default;
+	Path(Path&&) = default;
+
+	//stating_point
+	template<typename P>
+	Path(const P& p) : Path(std::get<0>(p),std::get<1>(p)) {
+		static_assert(is_2d_point_v<P>, "Parameter should be a two dimensional point");
 	}
 
 	Path& line_to(float x, float y) {
@@ -49,6 +59,14 @@ public:
 		sstr<<get("d").value_or("")<<"C "<<x1<<" "<<y1<<" "<<x2<<" "<<y2<<" "<<x<<" "<<y<<" ";
 		set("d",sstr.str());
 		return (*this);
+	}
+
+	template<typename P>
+	Path& curve_to(const P& p1, const P& p2, const P& p) {
+		static_assert(is_2d_point_v<P>, "Parameter should be a two dimensional point");
+		return curve_to(std::get<0>(p1), std::get<1>(p1), 
+				std::get<0>(p2), std::get<1>(p2), 
+				std::get<0>(p), std::get<1>(p));
 	}
 
 	Path& curve_string_to(float x2, float y2, float x, float y) {

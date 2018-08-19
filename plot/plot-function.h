@@ -2,6 +2,7 @@
 
 #include "../core/path.h"
 #include <cmath>
+#include <type_traits>
 
 namespace svg_cpp_plot {
 
@@ -9,6 +10,10 @@ namespace svg_cpp_plot {
 //if needed
 template<typename F, typename DF>
 Path plot_function(const F& f, const DF& df, float xmin, float xmax, unsigned int nsamples = 100) {
+	static_assert(std::is_floating_point_v<decltype(f(xmin))>,
+	       "Function f should be a unary floating point function returning floating point");	
+	static_assert(std::is_floating_point_v<decltype(f(xmin))>,
+	       "Derivative df should be a unary floating point function returning floating point");	
 	float dx = (xmax - xmin)/float(nsamples-1);
 	float x;
 	Path path(xmin, -f(xmin));

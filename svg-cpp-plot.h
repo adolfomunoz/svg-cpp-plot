@@ -6,3 +6,4 @@
 #include "core/path.h"
 
 #include "plot/plot-function.h"
+#include "plot/plot-curve.h"
