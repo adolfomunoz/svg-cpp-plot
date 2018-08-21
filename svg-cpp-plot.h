@@ -7,3 +7,4 @@
 
 #include "plot/plot-function.h"
 #include "plot/plot-curve.h"
+#include "plot/plot-curve-3d.h"
