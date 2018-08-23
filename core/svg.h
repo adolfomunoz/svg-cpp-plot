@@ -4,7 +4,7 @@
 
 namespace svg_cpp_plot {
 
-class SVG : public Node {
+class SVG : public Node, public Attributes<SVG> {
 public:
 	SVG() : Node("svg") {
 		set("xmlns","http://www.w3.org/2000/svg");

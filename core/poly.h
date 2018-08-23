@@ -2,12 +2,13 @@
 
 #include "object.h"
 #include "presentation-attributes.h"
+#include "style-attributes.h"
 
 namespace svg_cpp_plot {
 
-class Poly : public Terminal, public PresentationAttributes<Poly> {
+class Poly : public Terminal, public Attributes<Poly>, public StyleAttributes<Poly>, public PresentationAttributes<Poly> {
 public:
-	//PointList is any iterable thing of std::tuple<float,float>
+	//PointList is any iterable thing of std::tuple<float,float> (or point, generally speaking)
 	template<typename PointList> 
 	Poly(const std::string& tag, const PointList& pl) : Terminal(tag) 
 	{
@@ -24,7 +25,9 @@ public:
 		return (*this);
 	}
 
-	Poly& add_point(const std::tuple<float, float>& p) {
+	template<typename P>
+	Poly& add_point(const P& p) {
+		static_assert(is_2d_point_v<P>,"Expecting a 2D point");
 		return add_point(std::get<0>(p), std::get<1>(p));
 	}
 

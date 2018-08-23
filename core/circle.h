@@ -2,10 +2,11 @@
 
 #include "object.h"
 #include "presentation-attributes.h"
+#include "style-attributes.h"
 
 namespace svg_cpp_plot {
 
-class Circle : public Terminal, public PresentationAttributes<Circle> {
+class Circle : public Terminal, public Attributes<Circle>, public StyleAttributes<Circle>, public PresentationAttributes<Circle> {
 public:
 	Circle(float cx, float cy, float r) : Terminal("circle") 
 	{

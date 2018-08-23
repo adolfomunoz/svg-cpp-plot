@@ -7,7 +7,6 @@
 #include <memory>
 #include <list>
 #include <limits>
-#include "presentation-attributes.h"
 
 namespace svg_cpp_plot {
 
@@ -64,29 +63,10 @@ public:
 	}
 };
 
-class Object {
-	std::string tag_;
+class AttributesBase {
 	std::unordered_map<std::string, std::string> attributes;
-	
 public:
-	Object(const std::string& tag) : tag_(tag) { }
-	
 	std::string& operator[](const std::string& key) noexcept { return attributes[key]; }
-	
-	template<typename T>
-	Object& set(const std::string& key, const T& value) noexcept { 
-		attributes[key] = std::to_string(value); return *this;
-	}
-
-	Object& set(const std::string& key, const char* value) noexcept { 
-		attributes[key] = std::string(value); return *this;
-	}
-
-	Object& set(const std::string& key, const std::string& value) noexcept { 
-		attributes[key] = value; return *this;
-	}
-	
-	
 	std::optional<std::string> get(const std::string& key) const noexcept {
 		try {
 			return attributes.at(key);
@@ -94,23 +74,58 @@ public:
 			return {};
 		}
 	}
-	
 	float get_float(const std::string& key, float default_value = 0) const noexcept {
 		if (auto v = get(key)) return stof(v.value()); 
 		else return default_value;
 	}
-	
-	std::string attributes_to_string() const noexcept {
+	float get_int(const std::string& key, int default_value = 0) const noexcept {
+		if (auto v = get(key)) return stoi(v.value()); 
+		else return default_value;
+	}
+
+	std::string attributes_to_string(const std::string& middle, 
+			                 const std::string& end) const noexcept {
 		std::stringstream sstr;
 		for (const auto & [k,v] : attributes)
-			sstr<<k<<"=\""<<v<<"\" ";
+			sstr<<k<<middle<<v<<end;
 		return sstr.str();
 	}
+};
+
+//CRTP
+template<typename T>
+class Attributes {
+public:
+	template<typename V>
+	T& set(const std::string& key, const V& value) noexcept { 
+		static_cast<T&>(*this)[key] = std::to_string(value); return static_cast<T&>(*this);
+	}
+
+	T& set(const std::string& key, const char* value) noexcept { 
+		static_cast<T&>(*this)[key] = std::string(value); return static_cast<T&>(*this);
+	}
+
+	T& set(const std::string& key, const std::string& value) noexcept { 
+		static_cast<T&>(*this)[key] = value; return static_cast<T&>(*this);
+	}
+};
+
+class Object : public AttributesBase {
+	std::string tag_;
 	
+public:
+	Object(const std::string& tag) : tag_(tag) { }
+	
+
 	constexpr const std::string& tag() const noexcept {
 		return tag_;
 	}
 	
+
+	std::string attributes_to_string() const noexcept {
+		return AttributesBase::attributes_to_string("=\"","\" ");
+	}
+
 	virtual std::string to_string() const noexcept = 0;
 	virtual BoundingBox bounding_box() const noexcept { return BoundingBox(); }
 };	
@@ -125,7 +140,7 @@ public:
 	}
 };
 
-class Node : public Object, public PresentationAttributes<Node> {
+class Node : public Object {
 	std::list<std::shared_ptr<Object>> children;
 public:
 	Node(const std::string& tag) : Object(tag) {}
@@ -139,21 +154,22 @@ public:
 	}
 
 	//Add directly the pointer (instancing?)
-	Node& add(const std::shared_ptr<Object>& o) {
+	Object& add(const std::shared_ptr<Object>& o) {
 		children.push_back(o);
-		return *this;
+		return (*children.back());
 	}	
 	//Add by copy
 	template<typename T> 
-	Node& add(const T& t) {
+	T& add(const T& t) {
 		children.push_back(std::make_shared<std::decay_t<T>>(t));
-		return *this;
+		return static_cast<T&>(*children.back());
 	}
+
 	//Add by move if possible
 	template<typename T> 
-	Node& add(T&& t) {
+	T& add(T&& t) {
 		children.push_back(std::make_shared<std::decay_t<T>>(std::forward<T>(t)));
-		return *this;
+		return static_cast<T&>(*children.back());
 	}
 	
 	BoundingBox bounding_box() const noexcept override { 
