@@ -12,9 +12,13 @@ public:
 		set("height","100%");
 	}
 	
-	SVG& automatic_viewBox() {
-		set("viewBox",bounding_box().to_string());
+	SVG& set_viewBox(const BoundingBox& bb) {
+		set("viewBox",bb.to_string());
 		return (*this);
+	}
+	
+	SVG& automatic_viewBox() {
+		return set_viewBox(bounding_box().expand(0.1f));
 	}
 };
 

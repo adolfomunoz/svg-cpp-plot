@@ -7,20 +7,20 @@
 namespace svg_cpp_plot {
 
 template<typename F, typename DF>
-Path plot_function(const F& f, const DF& df, float xmin, float xmax, unsigned int nsamples = 100) {
+Path plot_function_derivative(const F& f, const DF& df, float xmin, float xmax, unsigned int nsamples = 100) {
 	static_assert(std::is_floating_point_v<decltype(f(xmin))>,
 	       "Function f should be a unary floating point function returning floating point");	
 	static_assert(std::is_floating_point_v<decltype(f(xmin))>,
 	       "Derivative df should be a unary floating point function returning floating point");
 	
-	return plot_curve([&f] (float x) { return std::tuple(x,f(x)); }, [&df] (float x) { return std::tuple(1.0f,df(x)); },
+	return plot_curve_derivative([&f] (float x) { return std::tuple(x,f(x)); }, [&df] (float x) { return std::tuple(1.0f,df(x)); },
 		xmin, xmax, nsamples);
 }	
 
 template<typename F>
 Path plot_function(const F& f, float xmin, float xmax, unsigned int nsamples = 100) {
 	float dx = (xmax - xmin)/float(nsamples-1);
-	return plot_function(f,[&f,dx] (float x) { return (f(x+0.05f*dx)-f(x))/(0.05f*dx); },xmin, xmax, nsamples);
+	return plot_function_derivative(f,[&f,dx] (float x) { return (f(x+0.05f*dx)-f(x))/(0.05f*dx); },xmin, xmax, nsamples);
 }
 
 /*

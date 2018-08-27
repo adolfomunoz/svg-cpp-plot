@@ -1,4 +1,5 @@
 #include "core/group.h"
+#include "core/group-z-ordered.h"
 #include "core/svg.h"
 #include "core/circle.h"
 #include "core/line.h"
@@ -9,3 +10,4 @@
 #include "plot/plot-function.h"
 #include "plot/plot-curve.h"
 #include "plot/plot-curve-3d.h"
+#include "plot/graph-3d.h"

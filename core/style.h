@@ -42,6 +42,14 @@ public:
 			return entries.back();
 		}
 	}
+	
+	StyleEntry& add_class(const std::string& classname) noexcept {
+		if (classname.empty()) return dummy;
+		else {
+			entries.push_back(StyleEntry(std::string(".")+classname));
+			return entries.back();
+		}
+	}
 
 	std::string to_string() const noexcept override {
 		std::stringstream sstr;

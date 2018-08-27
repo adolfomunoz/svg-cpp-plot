@@ -72,7 +72,7 @@ endfunction(add_subdirectories_and_compile)
 # TARGETS
 ###################################################################################
 
-add_subdirectories_and_compile(main/test)
+add_subdirectories_and_compile(main/examples)
 add_subdirectories_and_compile(main/doc)
 
 

@@ -42,7 +42,7 @@ std::tuple<float, float> operator/(const T& t, float f) {
 //Took a while but I have nailed the maths. We need the derivative in this case but it is calculated numerically below 
 //if needed
 template<typename F, typename DF>
-Path plot_curve(const F& f, const DF& df, float tmin, float tmax, unsigned int nsamples = 100) {
+Path plot_curve_derivative(const F& f, const DF& df, float tmin, float tmax, unsigned int nsamples = 100) {
 	static_assert(is_2d_point_v<decltype(f(tmin))>, "Function f should return a two dimensional point");
 	static_assert(is_2d_point_v<decltype(df(tmin))>, "Derivative df should return a two dimensional point");
 	float dt = (tmax - tmin)/float(nsamples-1);
@@ -53,13 +53,13 @@ Path plot_curve(const F& f, const DF& df, float tmin, float tmax, unsigned int n
 			      point_to_path(f(t+dt) - df(t+dt)*(dt/3.0f)),
 			      point_to_path(f(t+dt)));
 	}
-	return path;
+	return path.stroke_linecap("round");
 }
 
 template<typename F>
 Path plot_curve(const F& f, float tmin, float tmax, unsigned int nsamples = 100) {
 	float dt = (tmax - tmin)/float(nsamples-1);
-	return plot_function(f,[&f,dt] (float t) { return (f(t+0.05f*dt)-f(t))/(0.05f*dt); },tmin, tmax, nsamples);
+	return plot_curve_derivative(f,[&f,dt] (float t) { return (f(t+0.05f*dt)-f(t))/(0.05f*dt); },tmin, tmax, nsamples);
 }
 
 }

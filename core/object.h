@@ -45,13 +45,23 @@ public:
 		return join(BoundingBox(p,p));
 	}
 
+	//Expand by a distance in x and y
+	BoundingBox& expand(float dx, float dy) {
+		std::get<0>(min)-=dx;
+		std::get<1>(min)-=dy;
+		std::get<0>(max)+=dx;
+		std::get<1>(max)+=dy;
+		return(*this);
+	}
 	//Expand by a distance
 	BoundingBox& expand(float f) {
-		std::get<0>(min)-=f;
-		std::get<1>(min)-=f;
-		std::get<0>(max)+=f;
-		std::get<1>(max)+=f;
-		return(*this);
+		return expand(f,f);
+	}
+	
+	//Expand by a relative percentage
+	BoundingBox& expand_rate(float rate) {
+		return expand(rate*(std::get<0>(max)-std::get<0>(min)),
+					rate*(std::get<1>(max)-std::get<1>(min)));
 	}
 
 	std::string to_string() const {
@@ -108,6 +118,21 @@ public:
 	T& set(const std::string& key, const std::string& value) noexcept { 
 		static_cast<T&>(*this)[key] = value; return static_cast<T&>(*this);
 	}
+	
+	template<typename V>
+	T& set_custom(const std::string& key, const V& value) noexcept { 
+		static_cast<T&>(*this)[key] = std::string("data-")+std::to_string(value); 
+		return static_cast<T&>(*this);
+	}
+
+	T& set_custom(const std::string& key, const char* value) noexcept { 
+		static_cast<T&>(*this)[key] = std::string("data-")+std::string(value); return static_cast<T&>(*this);
+	}
+
+	T& set_custom(const std::string& key, const std::string& value) noexcept { 
+		static_cast<T&>(*this)[key] = std::string("data-")+value; return static_cast<T&>(*this);
+	}
+	
 };
 
 class Object : public AttributesBase {
