@@ -2,6 +2,10 @@
 
 namespace svg_cpp_plot {
 
+namespace StrokeLinecap {
+	constexpr const char* text[3] = {"butt","round","square"};
+	enum Value { BUTT, ROUND, SQUARE };
+}
 
 //CRTP
 //Presentation attributes (common to all tags although not used in many of them? I don't know...)
@@ -20,8 +24,8 @@ public:
 	T& fill(const std::string& w) noexcept {
 		return static_cast<T*>(this)->set("fill",w); 
 	}
-	T& stroke_linecap(const std::string& w) noexcept {
-		return static_cast<T*>(this)->set("stroke-linecap",w); 		
+	T& stroke_linecap(const StrokeLinecap::Value& w) noexcept {
+		return static_cast<T*>(this)->set("stroke-linecap",StrokeLinecap::text[w]); 		
 	}
 };
 

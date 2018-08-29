@@ -53,7 +53,7 @@ Path plot_curve_derivative(const F& f, const DF& df, float tmin, float tmax, uns
 			      point_to_path(f(t+dt) - df(t+dt)*(dt/3.0f)),
 			      point_to_path(f(t+dt)));
 	}
-	return path.stroke_linecap("round");
+	return path.stroke_linecap(StrokeLinecap::ROUND);
 }
 
 template<typename F>

@@ -2,10 +2,11 @@
 
 #include "object.h"
 #include "presentation-attributes.h"
+#include "text-presentation-attributes.h"
 
 namespace svg_cpp_plot {
 
-class StyleEntry : public AttributesBase, public Attributes<StyleEntry>, public PresentationAttributes<StyleEntry> {
+class StyleEntry : public AttributesBase, public Attributes<StyleEntry>, public PresentationAttributes<StyleEntry>, public TextPresentationAttributes<StyleEntry> {
 	std::string id_;
 public:
 	constexpr const std::string& id() const noexcept { return id_; }
@@ -21,11 +22,11 @@ public:
 	}		
 };
 
-class Style : public Object {
+class Style : public NotTerminal {
 	StyleEntry dummy;
 	std::list<StyleEntry> entries;
 public:
-	Style() : Object("style") { }
+	Style() : NotTerminal("style") { (*this)["type"]="text/css"; }
 	
 	StyleEntry& add(const StyleEntry& entry) noexcept {
 		if (entry.id().empty()) return dummy;
@@ -51,11 +52,11 @@ public:
 		}
 	}
 
-	std::string to_string() const noexcept override {
+	std::string content() const noexcept override {
 		std::stringstream sstr;
-		sstr<<"<"<<tag()<<" type=\"text/css\">"<<std::endl<<"/* <![CDATA[ */"<<std::endl;
+		sstr<<"/* <![CDATA[ */"<<std::endl;
 		for (StyleEntry e : entries) sstr<<e.to_string()<<std::endl;
-		sstr<<"/* ]]> */"<<std::endl<<"</"<<tag()<<">"<<std::endl;
+		sstr<<"/* ]]> */"<<std::endl<<std::endl;
 	       	return sstr.str();	
 	}
 };

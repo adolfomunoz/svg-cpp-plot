@@ -7,7 +7,7 @@
 
 namespace svg_cpp_plot {
 
-class GroupZOrdered : public Object, public Attributes<GroupZOrdered>, public StyleAttributes<GroupZOrdered>, public PresentationAttributes<GroupZOrdered> {
+class GroupZOrdered : public NotTerminal, public Attributes<GroupZOrdered>, public StyleAttributes<GroupZOrdered>, public PresentationAttributes<GroupZOrdered> {
 	std::multimap<float, std::shared_ptr<Object>> children;
 	
 private:
@@ -18,13 +18,11 @@ private:
 	}
 
 public:
-	GroupZOrdered() : Object("g") {}
+	GroupZOrdered() : NotTerminal("g") {}
 	
-	std::string to_string() const noexcept override {
+	std::string content() const noexcept override {
 		std::stringstream sstr;
-		sstr<<"<"<<tag()<<" "<<attributes_to_string()<<">"<<std::endl;
 		for (auto [k,o] : children) if (o) sstr<<"   "<<o->to_string()<<std::endl;
-		sstr<<"</"<<tag()<<">"<<std::endl;
 		return sstr.str();
 	}
 

@@ -36,17 +36,10 @@ class Graph3D : public GroupZOrdered {//, public Attributes<Graph3D>, public Sty
 			plot_curve_3d_slice(f,df,tmed,tmax,pmed,pmax,dpmed,dpmax,dt_min,classname);
 		}
 	}
-public:
-	Graph3D(const Matrix& matrix, float z_threshold = 0.1f, float dz_threshold = 0.2f) :
-		matrix(matrix), z_threshold(z_threshold), dz_threshold(dz_threshold), nplots(0), 
-		style(GroupZOrdered::add(Style(),1.e10f))	{ }
-		
+
 	template<typename F, typename DF>
-	StyleEntry& plot_curve_derivative_3d(const F& f, const DF& df, float tmin, float tmax, int min_samples = 10, int max_samples = 10000) {
-		static_assert(is_3d_point_v<decltype(f(tmin))>, "Function f should return a two dimensional point");
-		static_assert(is_3d_point_v<decltype(df(tmin))>, "Derivative df should return a two dimensional point");
+	void curve_derivative_3d(const F& f, const DF& df, float tmin, float tmax, int min_samples, int max_samples, const std::string& classname) {
 		float dt_min = (tmax - tmin)/float(max_samples-1);
-		std::string classname = std::string("plot")+std::to_string(++nplots);
 		float dt = (tmax - tmin)/float(min_samples-1);
 		float t;
 		for (t=tmin;t<(tmax-0.5*dt); t+=dt)
@@ -54,12 +47,24 @@ public:
 				transform_point(matrix,f(t)),transform_point(matrix,f(t+dt)),
 				transform_direction(matrix,df(t)),transform_direction(matrix,df(t+dt)),
 				dt_min, classname);
-		return style.add_class(classname).stroke_linecap("round").fill("none");
+	}
+public:
+	Graph3D(const Matrix& matrix, float z_threshold = 0.1f, float dz_threshold = 0.2f) :
+		matrix(matrix), z_threshold(z_threshold), dz_threshold(dz_threshold), nplots(0), 
+		style(GroupZOrdered::add(Style(),1.e10f))	{ }
+		
+	template<typename F, typename DF>
+	StyleEntry& plot_curve_derivative_3d(const F& f, const DF& df, float tmin, float tmax, int min_samples = 10, int max_samples = 10000) {
+		static_assert(is_3d_point_v<decltype(f(tmin))>, "Function f should return a three dimensional point");
+		static_assert(is_3d_point_v<decltype(df(tmin))>, "Derivative df should return a three dimensional point");
+		std::string classname = std::string("plot")+std::to_string(++nplots);
+		curve_derivative_3d(f, df, tmin, tmax, min_samples, max_samples, classname);
+		return style.add_class(classname).stroke_linecap(StrokeLinecap::ROUND).fill("none");
 	}
 
 	template<typename F>
 	StyleEntry& plot_curve_3d(const F& f, float tmin, float tmax, int min_samples = 10,int max_samples = 10000) {
-		static_assert(is_3d_point_v<decltype(f(tmin))>, "Function f should return a two dimensional point");
+		static_assert(is_3d_point_v<decltype(f(tmin))>, "Function f should return a three dimensional point");
 		float dt = (tmax - tmin)/float(max_samples-1);
 		return this->plot_curve_derivative_3d(f, [&f,dt] (float t) { 
 			auto p0 = f(t);

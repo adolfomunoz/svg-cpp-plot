@@ -1,6 +1,6 @@
 #include "../../../svg-cpp-plot.h"
 #include <fstream>
-#include <strings.h>
+#include <cstring>
 
 using namespace svg_cpp_plot;
 int main(int argc, char** argv) {
