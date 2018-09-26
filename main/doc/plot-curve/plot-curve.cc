@@ -18,11 +18,11 @@ using namespace svg_cpp_plot;
 int main(int argc, char** argv) {
 	SVG svg;
 	svg.add(plot_curve_derivative(lissajous_curve(4,4,1,3), lissajous_derivative(4,4,1,3),0,2*M_PI))
-		   .stroke("green").stroke_width(0.1);
+		   .stroke(green).stroke_width(0.1);
 	svg.add(plot_curve_derivative(lissajous_curve(4,8,3,2), lissajous_derivative(4,8,3,2),0,2*M_PI))
-		   .stroke("red").stroke_width(0.1);
+		   .stroke(red).stroke_width(0.1);
 	svg.add(plot_curve_derivative(lissajous_curve(8,4,2,6), lissajous_derivative(8,4,2,6),0,2*M_PI))
-		   .stroke("blue").stroke_width(0.1);
+		   .stroke(blue).stroke_width(0.1);
 	
 	std::ofstream f("output.svg");
 	f<<svg.automatic_viewBox();

@@ -25,7 +25,7 @@ int main(int argc, char** argv) {
 	SVG svg;
 	
 	svg.add(plot_curve_derivative_3d(spiral(1,1), spiral_derivative(1,1),0,12*M_PI,matrix::isometric))
-		   .stroke("green").stroke_width(0.1);
+		   .stroke(green).stroke_width(0.1);
 	
 	std::ofstream f("output.svg");
 	f<<svg.automatic_viewBox();

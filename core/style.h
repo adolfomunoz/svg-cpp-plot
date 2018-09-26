@@ -1,6 +1,7 @@
 #pragma once
 
 #include "object.h"
+#include "attributes.h"
 #include "presentation-attributes.h"
 #include "text-presentation-attributes.h"
 
@@ -21,6 +22,7 @@ public:
 		return sstr.str();
 	}		
 };
+
 
 class Style : public NotTerminal {
 	StyleEntry dummy;

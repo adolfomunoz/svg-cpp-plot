@@ -4,20 +4,10 @@
 #include <cmath>
 #include <iostream>
 #include <iomanip>
+#include "point-3d.h"
 
 namespace svg_cpp_plot {
 	
-template<typename T>
-struct is_3d_point {
-	static constexpr bool value = std::tuple_size_v<T> == 3 &&
-			std::is_floating_point_v<std::tuple_element_t<0,T>> &&
-			std::is_floating_point_v<std::tuple_element_t<1,T>> &&
-			std::is_floating_point_v<std::tuple_element_t<2,T>>;
-};
-
-template<typename T>
-constexpr bool is_3d_point_v = is_3d_point<T>::value;
-
 template<typename P>
 std::tuple<float, float> point_3d_to_2d(const P& p) {
 	static_assert(is_3d_point_v<P>,"Should be a 3D point");

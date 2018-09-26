@@ -88,7 +88,6 @@ public:
 		bb.expand(get_float("stroke-width",0.0f));
 		return bb;
 	}
-
 };
 
 }

@@ -3,18 +3,9 @@
 #include <limits>
 #include <string>
 #include <type_traits>
+#include "point.h"
 
 namespace svg_cpp_plot {
-
-template<typename T>
-struct is_2d_point {
-	static constexpr bool value = std::tuple_size_v<T> == 2 &&
-			std::is_floating_point_v<std::tuple_element_t<0,T>> &&
-			std::is_floating_point_v<std::tuple_element_t<1,T>>;
-};
-
-template<typename T>
-constexpr bool is_2d_point_v = is_2d_point<T>::value;
 
 
 class BoundingBox {

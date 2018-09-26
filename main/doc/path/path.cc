@@ -11,7 +11,7 @@ int main(int argc, char** argv) {
 	   .curve_to(1,1,4.8,1,5,2)
 	   .curve_to(5.2,1,9,1,8,2)
 	   .close()
-	   .fill("red");
+	   .fill(red);
 	svg
 	   .add(heart);
 	std::ofstream f("output.svg");

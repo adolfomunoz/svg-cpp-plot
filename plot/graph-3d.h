@@ -4,14 +4,16 @@
 #include "plot-curve.h"
 #include "../core/group-z-ordered.h"
 #include "../core/style.h"
+#include "transform.h"
 
 namespace svg_cpp_plot {
+
 	
 class Graph3D : public GroupZOrdered {//, public Attributes<Graph3D>, public StyleAttributes<Graph3D>, public PresentationAttributes<Graph3D> {
 	Matrix matrix;
 	float z_threshold;
 	float dz_threshold;
-	int nplots;
+	int nplots, nlines, npolygons;
 	Style& style;
 	
 	template<typename F, typename DF, typename P, typename DP>
@@ -39,6 +41,8 @@ class Graph3D : public GroupZOrdered {//, public Attributes<Graph3D>, public Sty
 
 	template<typename F, typename DF>
 	void curve_derivative_3d(const F& f, const DF& df, float tmin, float tmax, int min_samples, int max_samples, const std::string& classname) {
+		if (min_samples<2) min_samples = 2;
+		if (max_samples<2) max_samples = 2;
 		float dt_min = (tmax - tmin)/float(max_samples-1);
 		float dt = (tmax - tmin)/float(min_samples-1);
 		float t;
@@ -48,9 +52,10 @@ class Graph3D : public GroupZOrdered {//, public Attributes<Graph3D>, public Sty
 				transform_direction(matrix,df(t)),transform_direction(matrix,df(t+dt)),
 				dt_min, classname);
 	}
+
 public:
 	Graph3D(const Matrix& matrix, float z_threshold = 0.1f, float dz_threshold = 0.2f) :
-		matrix(matrix), z_threshold(z_threshold), dz_threshold(dz_threshold), nplots(0), 
+		matrix(matrix), z_threshold(z_threshold), dz_threshold(dz_threshold), nplots(0), nlines(0), npolygons(0), 
 		style(GroupZOrdered::add(Style(),1.e10f))	{ }
 		
 	template<typename F, typename DF>
@@ -59,21 +64,23 @@ public:
 		static_assert(is_3d_point_v<decltype(df(tmin))>, "Derivative df should return a three dimensional point");
 		std::string classname = std::string("plot")+std::to_string(++nplots);
 		curve_derivative_3d(f, df, tmin, tmax, min_samples, max_samples, classname);
-		return style.add_class(classname).stroke_linecap(StrokeLinecap::ROUND).fill("none");
+		return style.add_class(classname).stroke_linecap(round).fill(none);
 	}
 
 	template<typename F>
 	StyleEntry& plot_curve_3d(const F& f, float tmin, float tmax, int min_samples = 10,int max_samples = 10000) {
 		static_assert(is_3d_point_v<decltype(f(tmin))>, "Function f should return a three dimensional point");
 		float dt = (tmax - tmin)/float(max_samples-1);
-		return this->plot_curve_derivative_3d(f, [&f,dt] (float t) { 
-			auto p0 = f(t);
-			auto p1 = f(t+0.25f*dt);
-			return std::tuple<float, float,float>(
-				(std::get<0>(p1)-std::get<0>(p0))/(0.25f*dt),
-				(std::get<1>(p1)-std::get<1>(p0))/(0.25f*dt),
-				(std::get<2>(p1)-std::get<2>(p0))/(0.25f*dt)); }, 
+		return this->plot_curve_derivative_3d(f, [&f,dt] (float t) { return (f(t+0.25f*dt) - f(t))/(0.25f*dt); },
 			tmin, tmax, min_samples, max_samples);
+	}
+
+	template<typename P0, typename P1>
+	StyleEntry& line(const P0& p0, const P1& p1, int max_samples = 10000) {
+		static_assert(is_3d_point_v<P0> && is_3d_point_v<P1>, "Line should connect two 3D points");
+		std::string classname = std::string("line")+std::to_string(++nlines);
+		curve_derivative_3d([p0, p1] (float t) { return p0*(1.0f-t) + p1*t; }, [p0, p1] (float t) { return p1-p0; }, 0, 1, 2, max_samples, classname);
+		return style.add_class(classname).stroke_linecap(round).fill(none);
 	}
 };
 	

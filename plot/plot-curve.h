@@ -12,33 +12,6 @@ std::tuple<float, float> point_to_path(const T& t) {
 	return std::tuple<float,float>(std::get<0>(t), -std::get<1>(t));
 }
 
-template<typename T>
-std::tuple<float, float> operator+(const T& t1, const T& t2) {
-	static_assert(is_2d_point_v<T>, "Expecting a two dimensional point");
-	return std::tuple<float,float>(std::get<0>(t1)+std::get<0>(t2), std::get<1>(t1)+std::get<1>(t2));
-}
-
-template<typename T>
-std::tuple<float, float> operator-(const T& t1, const T& t2) {
-	static_assert(is_2d_point_v<T>, "Expecting a two dimensional point");
-	return std::tuple<float,float>(std::get<0>(t1)-std::get<0>(t2), std::get<1>(t1)-std::get<1>(t2));
-}
-
-
-template<typename T>
-std::tuple<float, float> operator*(const T& t, float f) {
-	static_assert(is_2d_point_v<T>, "Expecting a two dimensional point");
-	return std::tuple<float,float>(std::get<0>(t)*f, std::get<1>(t)*f);
-}
-
-template<typename T>
-std::tuple<float, float> operator/(const T& t, float f) {
-	static_assert(is_2d_point_v<T>, "Expecting a two dimensional point");
-	return std::tuple<float,float>(std::get<0>(t)/f, std::get<1>(t)/f);
-}
-
-
-
 //Took a while but I have nailed the maths. We need the derivative in this case but it is calculated numerically below 
 //if needed
 template<typename F, typename DF>
@@ -53,7 +26,7 @@ Path plot_curve_derivative(const F& f, const DF& df, float tmin, float tmax, uns
 			      point_to_path(f(t+dt) - df(t+dt)*(dt/3.0f)),
 			      point_to_path(f(t+dt)));
 	}
-	return path.stroke_linecap(StrokeLinecap::ROUND);
+	return path.stroke_linecap(round);
 }
 
 template<typename F>

@@ -22,7 +22,7 @@ public:
 	
 	std::string content() const noexcept override {
 		std::stringstream sstr;
-		for (auto [k,o] : children) if (o) sstr<<"   "<<o->to_string()<<std::endl;
+		for (auto o : children) if (o.second) sstr<<"   "<<o.second->to_string()<<std::endl;
 		return sstr.str();
 	}
 
@@ -45,7 +45,7 @@ public:
 	
 	BoundingBox bounding_box() const noexcept override { 
 		BoundingBox bb;
-		for (auto [k,o] : children) if (o) bb.join(o->bounding_box());
+		for (auto o : children) if (o.second) bb.join(o.second->bounding_box());
 		bb.expand(get_float("stroke-width",0.0f));
 		return bb;
 	}

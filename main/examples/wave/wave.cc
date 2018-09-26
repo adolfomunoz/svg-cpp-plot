@@ -3,6 +3,7 @@
 #include <cstring>
 
 using namespace svg_cpp_plot;
+
 int main(int argc, char** argv) {
 	float lambda = 1.0;
 	float length = 6.0;
@@ -22,24 +23,20 @@ int main(int argc, char** argv) {
 	
 	SVG svg;
 	Graph3D& graph = svg.add(Graph3D(matrix::oblique*matrix::zyx));
+
+	auto wave = [&] (float t) {	return std::tuple(power_x*sin(2*M_PI*t/lambda + phase_x),
+						power_y*sin(2*M_PI*t/lambda + phase_y),t); };
 	
-	graph.plot_curve_3d(
-		[&] (float t) {	return std::tuple(0.0f,0.0f,t); },
-		0.0,length*1.1f)
-		.stroke("#000000").stroke_width(0.04*power_x);
-	graph.plot_curve_3d(
-		[&] (float t) {	return std::tuple(power_x*sin(2*M_PI*t/lambda + phase_x),0.0f,t); },
-		0.0,length,4*std::max(1,int(length/lambda)))
-		.stroke("#66AA00").stroke_width(0.02*power_x);
-	graph.plot_curve_3d(
-		[&] (float t) {	return std::tuple(0.0f,power_y*sin(2*M_PI*t/lambda + phase_y),t); },
-		0.0,length,4*std::max(1,int(length/lambda)))
-		.stroke("#FF8800").stroke_width(0.02*power_x);
-	graph.plot_curve_3d(
-		[&] (float t) {	return std::tuple(power_x*sin(2*M_PI*t/lambda + phase_x),
-						power_y*sin(2*M_PI*t/lambda + phase_y),t); },
-		0.0,length,4*std::max(1,int(length/lambda)))
-		.stroke("#EEEE00").stroke_width(0.04*power_x);
+	graph.line(std::tuple(0.0f,0.0f,0.0f),std::tuple(0.0f,0.0f,length*1.1f))
+		.stroke(black).stroke_width(0.04*power_x);
+	graph.plot_curve_3d(project_to_x(wave,1.1f), 0.0,length, 4*std::max(1,int(length/lambda)))
+		.stroke(rgb(0.5,0.8,0)).stroke_width(0.02*power_x);
+	graph.plot_curve_3d(project_to_y(wave,-1.1f), 0.0,length, 4*std::max(1,int(length/lambda)))
+		.stroke(rgb(1.0,0.6,0)).stroke_width(0.02*power_x);
+	graph.plot_curve_3d(project_to_z(wave,-0.1f), 0.0,length, 4*std::max(1,int(length/lambda)))
+		.stroke(rgb(0.2,0.2,0.8)).stroke_width(0.02*power_x);
+	graph.plot_curve_3d(wave, 0.0,length,4*std::max(1,int(length/lambda)))
+		.stroke(rgb(0.9,0.9,0.0)).stroke_width(0.04*power_x);
 	
 	std::fstream f(filename, std::ofstream::out | std::ofstream::trunc);
 	f<<svg.automatic_viewBox();

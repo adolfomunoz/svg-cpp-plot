@@ -11,3 +11,4 @@
 #include "plot/plot-curve.h"
 #include "plot/plot-curve-3d.h"
 #include "plot/graph-3d.h"
+#include "plot/project.h"
