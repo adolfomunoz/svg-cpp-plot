@@ -53,6 +53,12 @@ class Graph3D : public GroupZOrdered {//, public Attributes<Graph3D>, public Sty
 				dt_min, classname);
 	}
 
+	template<typename P0, typename P1>
+	void line_simple(const P0& p0, const P1& p1, int max_samples, const std::string& classname) {
+		curve_derivative_3d([p0, p1] (float t) { return p0*(1.0f-t) + p1*t; }, [p0, p1] (float t) { return p1-p0; }, 0, 1, 2, max_samples, classname);
+	}
+
+
 public:
 	Graph3D(const Matrix& matrix, float z_threshold = 0.1f, float dz_threshold = 0.2f) :
 		matrix(matrix), z_threshold(z_threshold), dz_threshold(dz_threshold), nplots(0), nlines(0), npolygons(0), 
@@ -79,7 +85,14 @@ public:
 	StyleEntry& line(const P0& p0, const P1& p1, int max_samples = 10000) {
 		static_assert(is_3d_point_v<P0> && is_3d_point_v<P1>, "Line should connect two 3D points");
 		std::string classname = std::string("line")+std::to_string(++nlines);
-		curve_derivative_3d([p0, p1] (float t) { return p0*(1.0f-t) + p1*t; }, [p0, p1] (float t) { return p1-p0; }, 0, 1, 2, max_samples, classname);
+		line_simple(p0,p1,max_samples, classname);
+		return style.add_class(classname).stroke_linecap(round).fill(none);
+	}
+	
+	//This is so it can be called with ({ }, { })
+	StyleEntry& line(const std::tuple<float, float, float>& p0, const std::tuple<float, float, float>& p1, int max_samples = 10000) {
+		std::string classname = std::string("line")+std::to_string(++nlines);
+		line_simple(p0,p1,max_samples, classname);
 		return style.add_class(classname).stroke_linecap(round).fill(none);
 	}
 };

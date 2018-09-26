@@ -24,10 +24,10 @@ int main(int argc, char** argv) {
 	SVG svg;
 	Graph3D& graph = svg.add(Graph3D(matrix::oblique*matrix::zyx));
 
-	auto wave = [&] (float t) {	return std::tuple(power_x*sin(2*M_PI*t/lambda + phase_x),
+	auto wave = [&] (float t) { return std::tuple(power_x*sin(2*M_PI*t/lambda + phase_x),
 						power_y*sin(2*M_PI*t/lambda + phase_y),t); };
 	
-	graph.line(std::tuple(0.0f,0.0f,0.0f),std::tuple(0.0f,0.0f,length*1.1f))
+	graph.line({0.0f,0.0f,0.0f},{0.0f,0.0f,length*1.2f})
 		.stroke(black).stroke_width(0.04*power_x);
 	graph.plot_curve_3d(project_to_x(wave,1.1f), 0.0,length, 4*std::max(1,int(length/lambda)))
 		.stroke(rgb(0.5,0.8,0)).stroke_width(0.02*power_x);

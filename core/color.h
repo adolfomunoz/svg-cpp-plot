@@ -37,5 +37,4 @@ NAMED_COLOR(yellow)
 NAMED_COLOR(pink)
 NAMED_COLOR(purple)
 NAMED_COLOR(grey)
-
-	}
+}
