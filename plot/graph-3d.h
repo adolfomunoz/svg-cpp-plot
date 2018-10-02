@@ -13,7 +13,7 @@ class Graph3D : public GroupZOrdered {//, public Attributes<Graph3D>, public Sty
 	Matrix matrix;
 	float z_threshold;
 	float dz_threshold;
-	int nplots, nlines, npolygons;
+	int nplots, nlines, npolylines, narrows;
 	Style& style;
 	
 	template<typename F, typename DF, typename P, typename DP>
@@ -58,10 +58,41 @@ class Graph3D : public GroupZOrdered {//, public Attributes<Graph3D>, public Sty
 		curve_derivative_3d([p0, p1] (float t) { return p0*(1.0f-t) + p1*t; }, [p0, p1] (float t) { return p1-p0; }, 0, 1, 2, max_samples, classname);
 	}
 
+	template<typename Points>
+	void polyline_simple(const Points& ps, int max_samples, const std::string& classname) {
+		auto p0 = std::begin(ps);
+		auto p1 = p0; ++p1;
+		for (; p1 != std::end(ps); ++p0, ++p1) line_simple(*p0,*p1, max_samples, classname);
+	}
+
+	template<typename P, typename N>
+	void circle_simple(const P& center, const N& normal, float radius, int max_samples, const std::string& classname) {
+		std::tuple<float, float, float> tu, tv;
+
+		if (dot({0.0f,0.0f,1.0f},normal)<0.1f) 
+			tu = normalize(cross({0.0f,0.0f,1.0f},normal));
+	        else 
+			tu = normalize(cross({0.0f,1.0f,0.0f},normal));	
+		tv = normalize(cross(normal, tu));
+
+		curve_derivative_3d([center, tu, tv, radius] (float t) { return center + tu*(radius*std::cos(t)) + tv*(radius*std::sin(t)); }, 
+				    [center, tu, tv, radius] (float t) { return tu*(-radius*std::sin(t)) + tv*(radius*std::cos(t)); }, 
+				    0.0f, 2.0f*M_PI, 64, max_samples, classname);
+	}
+
+	template<typename P0, typename P1>
+	void arrowhead(const P0& p0, const P1& p1, int ncircles, int max_samples, const std::string& classname) {
+		//Angle is 30 degrees
+		for (int i = 0; i<ncircles; ++i) {
+			circle_simple(p0*float(ncircles - i - 1)/float(ncircles - 1) + p1*float(i)/float(ncircles - 1), p1 - p0, length(p1 - p0)*(0.5*float(ncircles - i - 1)/float(ncircles - 1)), 
+					max_samples, classname);
+		}
+	}
+
 
 public:
 	Graph3D(const Matrix& matrix, float z_threshold = 0.1f, float dz_threshold = 0.2f) :
-		matrix(matrix), z_threshold(z_threshold), dz_threshold(dz_threshold), nplots(0), nlines(0), npolygons(0), 
+		matrix(matrix), z_threshold(z_threshold), dz_threshold(dz_threshold), nplots(0), nlines(0), npolylines(0), 
 		style(GroupZOrdered::add(Style(),1.e10f))	{ }
 		
 	template<typename F, typename DF>
@@ -95,6 +126,40 @@ public:
 		line_simple(p0,p1,max_samples, classname);
 		return style.add_class(classname).stroke_linecap(round).fill(none);
 	}
+
+	template<typename Points>
+	StyleEntry& polyline(const Points& ps, int max_samples = 10000) {
+		static_assert(is_3d_point_v<*std::begin(ps)>, "Polyline should be of 3D points");
+		std::string classname = std::string("polyline")+std::to_string(++npolylines);
+		polyline_simple(ps,max_samples, classname);
+		return style.add_class(classname).stroke_linecap(round).fill(none);
+	}
+
+	//This is so it can be called with ({ }, { })
+	StyleEntry& polyline(const std::initializer_list<std::tuple<float, float, float>>& ps, int max_samples = 10000) {
+		std::string classname = std::string("polyline")+std::to_string(++npolylines);
+		polyline_simple(ps,max_samples, classname);
+		return style.add_class(classname).stroke_linecap(round).fill(none);
+	}
+
+	template<typename P0, typename P1>
+	StyleEntry& arrow(const P0& p0, const P1& p1, float arrowsize, int max_samples = 10000) {
+		static_assert(is_3d_point_v<P0> && is_3d_point_v<P1>, "Arrow should connect two 3D points");
+		std::string classname = std::string("arrow")+std::to_string(++narrows);
+		line_simple(p0,p1,max_samples, classname);
+		arrowhead(p0 + (p1-p0)*arrowsize, p1, 10, max_samples/10, classname);
+		return style.add_class(classname).stroke_linecap(round).fill(none);
+	}
+
+	//This is so it can be called with ({ }, { })
+	StyleEntry& arrow(const std::tuple<float, float, float>& p0, const std::tuple<float, float, float>& p1, float arrowsize, int max_samples = 10000) {
+		std::string classname = std::string("arrow")+std::to_string(++narrows);
+		line_simple(p0,p1,max_samples, classname);
+		arrowhead(p1 - (p1-p0)*arrowsize, p1, 20, max_samples/10, classname);
+		return style.add_class(classname).stroke_linecap(round).fill(none);
+	}
+
+
 };
 	
 };
