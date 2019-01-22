@@ -21,7 +21,7 @@ public:
 		if (auto v = get(key)) return stof(v.value()); 
 		else return default_value;
 	}
-	float get_int(const std::string& key, int default_value = 0) const noexcept {
+	int get_int(const std::string& key, int default_value = 0) const noexcept {
 		if (auto v = get(key)) return stoi(v.value()); 
 		else return default_value;
 	}

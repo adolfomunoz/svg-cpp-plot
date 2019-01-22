@@ -5,6 +5,7 @@
 #include "core/line.h"
 #include "core/poly.h"
 #include "core/path.h"
+#include "core/text.h"
 #include "core/style.h"
 
 #include "plot/plot-function.h"
