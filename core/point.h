@@ -45,12 +45,27 @@ constexpr std::tuple<float, float> operator/(const P0& p0, const P1& p1) {
 }
 
 template<typename P0, typename P1, typename = std::enable_if_t<is_2d_point_v<P0> && is_2d_point_v<P1>> >
-float dot(const P0& p0, const P1& p1) {
+constexpr float dot(const P0& p0, const P1& p1) {
 	return std::get<0>(p0)*std::get<0>(p1) + std::get<1>(p0)*std::get<1>(p1);
 }
 
-template<typename P0, typename P1, typename = std::enable_if_t<is_2d_point_v<P0> && is_2d_point_v<P1>> >
-float distance(const P0& p0, const P1& p1) {
+template<typename P, typename = std::enable_if_t<is_2d_point_v<P>> >
+constexpr float dot(const std::tuple<float, float>& p0, const P& p1) {
+	return std::get<0>(p0)*std::get<0>(p1) + std::get<1>(p0)*std::get<1>(p1);
+}
+
+template<typename P, typename = std::enable_if_t<is_2d_point_v<P>> >
+constexpr float dot(const P& p0, const std::tuple<float, float>& p1) {
+	return std::get<0>(p0)*std::get<0>(p1) + std::get<1>(p0)*std::get<1>(p1);
+}
+
+constexpr float dot(const std::tuple<float, float>& p0, const std::tuple<float, float>& p1) {
+	return std::get<0>(p0)*std::get<0>(p1) + std::get<1>(p0)*std::get<1>(p1);
+}
+
+
+template<typename P0, typename P1>
+constexpr float distance(const P0& p0, const P1& p1) {
 	return std::sqrt(dot(p1-p0,p1-p0));
 }
 

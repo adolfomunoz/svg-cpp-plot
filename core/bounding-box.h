@@ -54,6 +54,14 @@ public:
 					rate*(std::get<1>(max())-std::get<1>(min())));
 	}
 
+	template<typename P, typename = std::enable_if_t<is_2d_point_v<P>> >
+	bool is_inside(const P& p) {
+		return (std::get<0>(p) >= std::get<0>(min())) &&
+		       (std::get<1>(p) >= std::get<1>(min())) &&
+		       (std::get<0>(p) <= std::get<0>(max())) &&
+		       (std::get<1>(p) <= std::get<1>(max()));
+	}
+
 	std::string to_string() const {
 		std::stringstream sstr;
 		sstr<<std::get<0>(min())<<" "<<std::get<1>(min())<<" "<<

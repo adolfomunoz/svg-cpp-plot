@@ -4,6 +4,7 @@
 #include <sstream>
 #include <memory>
 #include <list>
+#include <iostream>
 
 #include "bounding-box.h"
 #include "attributes.h"
@@ -67,7 +68,8 @@ public:
 	Object& add(const std::shared_ptr<Object>& o) {
 		children.push_back(o);
 		return (*children.back());
-	}	
+	}
+
 	//Add by copy
 	template<typename T> 
 	T& add(const T& t) {

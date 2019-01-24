@@ -15,11 +15,13 @@ public:
 		std::stringstream sstr;
 		sstr<<"M "<<x<<" "<<y<<" ";
 		set("d",sstr.str());
-		set("fill","none"); set("stroke","black");
+		fill(none);
 	}
 
 	Path(const Path&) = default;
 	Path(Path&&) = default;
+	Path& operator=(const Path&) = default;
+	Path& operator=(Path&&) = default;
 
 	//stating_point
 	template<typename P>
