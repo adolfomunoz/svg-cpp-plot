@@ -1,21 +1,29 @@
 <html>
 	<head>
 		<link rel="stylesheet" href="graphs.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> 
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	</head>
 	<body>
-		<p id="debug">HELLO BABY</p>
-		<div id="DivContent"> </div>
-		<!--		<img src="../build/output.svg" width="49%"> --!>
-	  	<div id="error"></div>
-	<script>
-		$("#debug").html(window.location.href+"/../build/output.svg")
-		$("#DivContent").load("output.svg", function( response, status, xhr ) {
- 		  if ( status == "error" ) {
-    			var msg = "Sorry but there was an error: ";
-    			$( "error" ).html( msg + xhr.status + " " + xhr.statusText );
-  		}
+		<img class="svg" src="output.svg" width="49%"></img>
+		<script>
+$("img.svg").each(function(){
+	var $img = $(this);
+	var imgID = $img.attr("id");
+	var imgClass = $img.attr("class");
+	var imgURL = $img.attr("src");
+
+	$.get(imgURL, function(data) {
+		var $svg = $(data).find("svg");
+		if (typeof imgID !== "undefined") {
+			$svg = $svg.attr("id", imgID);
+		}
+		if (typeof imgClass !== "undefined") {
+			$svg = $svg.attr("class", imgClass+" replaced-svg");
+		}
+		$svg = $svg.removeAttr("xmlns:a");
+		$img.replaceWith($svg);
 	});
-	</script>
+});
+		</script>
 	</body>
 </html>
