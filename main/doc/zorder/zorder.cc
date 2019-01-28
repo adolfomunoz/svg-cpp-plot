@@ -16,6 +16,6 @@ int main(int argc, char** argv) {
 	g.add(c2); zg.add(c2, 0);
 	g.add(c3); zg.add(c3, 1);
 	
-	std::ofstream f("output.svg");
+	std::ofstream f(std::string(argv[0])+".svg");
 	f<<svg.set_viewBox(BoundingBox(-1.5,-1.5,3,3)); //BoundingBox does not understand transforms
 }

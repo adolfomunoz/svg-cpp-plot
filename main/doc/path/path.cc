@@ -14,6 +14,6 @@ int main(int argc, char** argv) {
 	   .fill(red);
 	svg
 	   .add(heart);
-	std::ofstream f("output.svg");
+	std::ofstream f(std::string(argv[0])+".svg");
 	f<<svg.automatic_viewBox();
 }

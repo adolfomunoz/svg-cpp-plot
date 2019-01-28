@@ -13,7 +13,6 @@ int main(int argc, char** argv) {
 	style.add(".yellow:hover").fill(yellow);
 	style.add(".green:hover").fill(green);
 	svg.add(style);
-	
-	std::ofstream f("output.svg");
+	std::ofstream f(std::string(argv[0])+".svg");
 	f<<svg.automatic_viewBox();
 }

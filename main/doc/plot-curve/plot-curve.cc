@@ -23,7 +23,6 @@ int main(int argc, char** argv) {
 		   .stroke(red).stroke_width(0.1);
 	svg.add(plot_curve_derivative(lissajous_curve(8,4,2,6), lissajous_derivative(8,4,2,6),0,2*M_PI))
 		   .stroke(blue).stroke_width(0.1);
-	
-	std::ofstream f("output.svg");
+	std::ofstream f(std::string(argv[0])+".svg");
 	f<<svg.automatic_viewBox();
 }

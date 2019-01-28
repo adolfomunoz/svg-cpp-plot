@@ -4,6 +4,7 @@
 #include "attributes.h"
 #include "presentation-attributes.h"
 #include "text-presentation-attributes.h"
+#include <map>
 
 namespace svg_cpp_plot {
 
@@ -25,39 +26,27 @@ public:
 
 
 class Style : public NotTerminal {
-	StyleEntry dummy;
-	std::list<StyleEntry> entries;
+	std::map<std::string,StyleEntry> entries;
 public:
 	Style() : NotTerminal("style") { (*this)["type"]="text/css"; }
 	
 	StyleEntry& add(const StyleEntry& entry) noexcept {
-		if (entry.id().empty()) return dummy;
-		else { 
-			entries.push_back(entry);
-			return entries.back();
-		}
+		return entries[entry.id()].merge_with(entry);
 	}
 
 	StyleEntry& add(const std::string& id) noexcept {
-		if (id.empty()) return dummy;
-		else {
-			entries.push_back(StyleEntry(id));
-			return entries.back();
-		}
+		return entries[id].id(id);
 	}
 	
 	StyleEntry& add_class(const std::string& classname) noexcept {
-		if (classname.empty()) return dummy;
-		else {
-			entries.push_back(StyleEntry(std::string(".")+classname));
-			return entries.back();
-		}
+		if (classname.empty()) return add("");
+		else return add(std::string(".")+classname);
 	}
 
 	std::string content() const noexcept override {
 		std::stringstream sstr;
 		sstr<<"/* <![CDATA[ */"<<std::endl;
-		for (StyleEntry e : entries) sstr<<e.to_string()<<std::endl;
+		for (auto e : entries) sstr<<e.second.to_string()<<std::endl;
 		sstr<<"/* ]]> */"<<std::endl<<std::endl;
 	       	return sstr.str();	
 	}

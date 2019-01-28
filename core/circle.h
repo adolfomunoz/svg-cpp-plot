@@ -14,6 +14,9 @@ public:
 		set("cy",cy);
 		set("r",r);
 	}
+
+	template<typename P, typename = std::enable_if_t<is_2d_point_v<P>> >
+	Circle(const P& p, float r) : Circle(std::get<0>(p), std::get<1>(p), r) { }
 	
 	float cx() const noexcept { return get_float("cx"); }
 	float cy() const noexcept { return get_float("cy"); }

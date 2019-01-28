@@ -14,7 +14,7 @@ class Graph2D : public Group {
 	std::tuple<float, float> size; //<-- The group's bounding box should be (0,0) to size
 	BoundingBox bb; //<-- This is the bounding box in world's coordinates, that is fit into (0,0) size
 	float border_threshold;
-	int nplots;
+	int nplots, npoints;
 	Style& style;
 
 	template<typename P, typename = std::enable_if_t<is_2d_point_v<P>> >
@@ -25,6 +25,18 @@ class Graph2D : public Group {
 		       (std::get<1>(p) <= std::get<1>(size));
 	}
 
+	template<typename P, typename = std::enable_if_t<is_2d_point_v<P>> >
+	void point_local(const P& p, float radius, const std::string& classname) {
+		if (is_inside(p)) this->add(Circle(p,radius)).class_(classname);	
+	}
+
+	template<typename P, typename = std::enable_if_t<is_2d_point_v<P>> >
+	void point_global(const P& p, float radius, const std::string& classname) {
+		std::tuple<float, float> plocal(
+			std::get<0>(size)*( (std::get<0>(p) - std::get<0>(bb.min()))/(std::get<0>(bb.max())-std::get<0>(bb.min())) ),
+			std::get<1>(size)*(1.0f - (std::get<1>(p) - std::get<1>(bb.min()))/(std::get<1>(bb.max())-std::get<1>(bb.min())) ));
+		point_local(plocal, radius, classname);	
+	}
 
 	template<typename F, typename Pin, typename Pout>
 	float bolzano_border(const F& f, float tin, float tout, const Pin& pin, const Pout& pout) {
@@ -41,6 +53,7 @@ class Graph2D : public Group {
 			else return bolzano_border(f,tin,tmed,pin,pmed);
 		}
 	}
+
 
 	template<typename F, typename DF>
 	void plot_curve_local(const F& f, const DF& df, float tmin, float tmax, unsigned int nsamples, const std::string& classname) {
@@ -73,8 +86,12 @@ class Graph2D : public Group {
 	template<typename F, typename DF>
 	void plot_curve_global(const F& f, const DF& df, float tmin, float tmax, unsigned int nsamples, const std::string& classname) {
 		plot_curve_local(
-			[&] (float t) { return size*((f(t) - bb.min())/(bb.max() - bb.min())); },
-			[&] (float t) { return size*df(t)/(bb.max() - bb.min()); },
+			[&] (float t) {
+		       		auto p = (f(t) - bb.min())/(bb.max() - bb.min()); std::get<1>(p) = 1.0f - std::get<1>(p);	
+				return size*p; },
+			[&] (float t) { 
+				auto d = df(t)/(bb.max() - bb.min()); std::get<1>(d)*=-1.0f;
+				return size*d; },
 		        tmin, tmax,nsamples, classname);
 	}
 
@@ -89,7 +106,13 @@ class Graph2D : public Group {
 	}
 
 	template<typename Points>
-	void polyline(const Points& ps, int max_samples, const std::string& classname) {
+	void polyline(const Points& ps, const std::string& classname) {
+		auto p0 = std::begin(ps);
+		auto p1 = p0; ++p1;
+		for (; p1 != std::end(ps); ++p0, ++p1) line(*p0,*p1, classname);
+	}
+
+	void polyline(std::initializer_list<std::tuple<float,float>> ps, const std::string& classname) {
 		auto p0 = std::begin(ps);
 		auto p1 = p0; ++p1;
 		for (; p1 != std::end(ps); ++p0, ++p1) line(*p0,*p1, classname);
@@ -97,7 +120,7 @@ class Graph2D : public Group {
 
 public:
 	Graph2D(const std::tuple<float, float>& size, const BoundingBox& bb, float border_threshold = 1.e-3f):
-	       size(size),bb(bb),border_threshold(border_threshold), nplots(0), style(Group::add(Style())) 
+	       size(size),bb(bb),border_threshold(border_threshold), nplots(0), npoints(0),style(Group::add(Style())) 
 	{ }
 		
 	template<typename F, typename DF>
@@ -132,6 +155,19 @@ public:
 		return plot_function_derivative(f, [&f,dx] (float x) { return (f(x+0.25f*dx) - f(x))/(0.25f*dx); }, nsamples);
 	}
 
+	template<typename Points>
+	StyleEntry& plot_points(const Points& ps, float radius = 0) {
+		static_assert(is_2d_point_v<std::decay_t<decltype(*(std::begin(ps)))>>, "List of points should contain 2d points");
+		std::string classname = std::string("points")+std::to_string(++npoints);
+		for (auto p : ps) point_global(p,radius,classname);
+		return style.add_class(classname);
+	}
+
+	StyleEntry& plot_points(std::initializer_list<std::tuple<float,float>> ps, float radius = 0) {
+		return plot_points(std::list<std::tuple<float,float>>(ps), radius);
+	}
+
+
 	StyleEntry& axis() {
 		std::string classname = "axis";
 		line({0.0f,std::get<1>(bb.min())},{0.0f,std::get<1>(bb.max())},classname);
@@ -140,11 +176,27 @@ public:
 	}
 
 	StyleEntry& border() {
-		std::string classname = "axis";
-		line({0.0f,std::get<1>(bb.min())},{0.0f,std::get<1>(bb.max())},classname);
-		line({std::get<0>(bb.min()),0.0f},{std::get<0>(bb.max()),0.0f},classname);
+		std::string classname = "border";
+		polyline({{std::get<0>(bb.min()),std::get<1>(bb.min())},
+			  {std::get<0>(bb.min()),std::get<1>(bb.max())},
+			  {std::get<0>(bb.max()),std::get<1>(bb.max())},
+			  {std::get<0>(bb.max()),std::get<1>(bb.min())}},"border");
 		return style.add_class(classname).stroke_linecap(round).fill(none);
 	}
+
+/*
+	StyleEntry& xtick(float x, float height = 2.0f, float y = 0.0) {
+		
+	}
+
+	StyleEntry& horizontal_ticks(int n, float height = float y = 0.0) {
+		std::string classname = "ticks";
+		float dx = (std::get<0>(bb.max()) - std::get<0>(bb.min()))/float(n-1);
+		for (int i = 0; i<n; ++i) {
+			
+		}
+	}
+*/
 
 
 

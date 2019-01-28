@@ -1,6 +1,7 @@
 #pragma once
 
 #include "color.h"
+#include <initializer_list>
 
 namespace svg_cpp_plot {
 
@@ -34,6 +35,12 @@ public:
 
 	T& stroke_linecap(const StrokeLinecap& w) noexcept {
 		return static_cast<T*>(this)->set("stroke-linecap",detail::stroke_linecap_text[w]); 		
+	}
+
+	T& stroke_dasharray(std::initializer_list<float> l) noexcept {
+		std::stringstream sstr;
+		for (float x : l) sstr<<x<<" ";
+		return static_cast<T*>(this)->set("stroke-dasharray",sstr.str());
 	}
 };
 

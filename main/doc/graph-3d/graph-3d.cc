@@ -38,6 +38,6 @@ int main(int argc, char** argv) {
 	group.set("transform","translate(-2,0)");
 	graph.set("transform","translate(2,0)");
 	
-	std::ofstream f("output.svg");
+	std::ofstream f(std::string(argv[0])+".svg");
 	f<<svg.automatic_viewBox(); //BoundingBox does not understand transforms
 }

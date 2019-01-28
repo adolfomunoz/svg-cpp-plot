@@ -33,6 +33,10 @@ public:
 			sstr<<k<<middle<<v<<end;
 		return sstr.str();
 	}
+
+	template<typename T>
+	friend class Attributes;
+
 };
 
 //CRTP
@@ -77,6 +81,14 @@ public:
 	T& tabindex(const std::string& value) noexcept {
 		return set("tabindex",value);
 	}
+
+	T& merge_with(const T& that) noexcept {
+		auto local_copy = static_cast<T&>(*this).attributes;
+		static_cast<T&>(*this).attributes = that.attributes;
+		static_cast<T&>(*this).attributes.insert(local_copy.begin(), local_copy.end());
+		return static_cast<T&>(*this);
+	}
+
 }; 
 
 }
