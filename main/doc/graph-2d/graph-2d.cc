@@ -12,6 +12,9 @@ int main(int argc, char** argv) {
 	graph.plot_points({{M_PI,0.2},{M_PI,-0.2},{-M_PI,0.2},{-M_PI,-0.2}},0.5).stroke_width(1).stroke(green).fill(yellow);
 	graph.axis().stroke(black).stroke_width(0.5);
 	graph.border().stroke(black).stroke_width(1);
+	graph.ticks(5,5).stroke(black).stroke_width(0.5);
+	graph.xlabels();
+	graph.ylabels();
 	std::ofstream f(std::string(argv[0])+".svg");
 	f<<svg.automatic_viewBox(); //BoundingBox does not understand transforms
 }

@@ -29,14 +29,21 @@ public:
 	
 	BoundingBox bounding_box() const noexcept override {
 		//We account for size and anchor for now. It is not extremelly accurate
-		int left = 0; int right = 0;
-		int measure = (get_font_size()*text().size()*2)/5;
+		float left = 0; float right = 0;
+		float xmeasure = (get_font_size()*text().size()*2.0)/5.0;
 		switch (get_text_anchor()) {
-			case start: right = measure; break;
-			case end: left  = measure; break;
-			default: right = left = measure/2; break;
+			case start: right = xmeasure; break;
+			case end: left  = xmeasure; break;
+			default: right = left = xmeasure/2.0; break;
 		}
-		return BoundingBox(x()-left,y()-(get_font_size()*3)/4,x()+right,y()+get_font_size()/4);
+		int top = 0; int bottom = 0;
+		float ymeasure = get_font_size();
+		switch (get_alignment_baseline()) {
+			case baseline: top = ymeasure*3.0/4.0; bottom = ymeasure/4.0; break;
+			case hanging:  top = ymeasure/4.0; bottom = ymeasure*3.0/4.0; break;
+			default:  top = ymeasure/2.0; bottom = ymeasure/2.0; break;
+		}
+		return BoundingBox(x()-left,y()-top,x()+right,y()+bottom);
 	}
 };
 

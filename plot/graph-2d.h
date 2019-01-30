@@ -27,7 +27,7 @@ class Graph2D : public Group {
 
 	template<typename P, typename = std::enable_if_t<is_2d_point_v<P>> >
 	void point_local(const P& p, float radius, const std::string& classname) {
-		if (is_inside(p)) this->add(Circle(p,radius)).class_(classname);	
+		this->add(Circle(p,radius)).class_(classname);	
 	}
 
 	template<typename P, typename = std::enable_if_t<is_2d_point_v<P>> >
@@ -35,8 +35,18 @@ class Graph2D : public Group {
 		std::tuple<float, float> plocal(
 			std::get<0>(size)*( (std::get<0>(p) - std::get<0>(bb.min()))/(std::get<0>(bb.max())-std::get<0>(bb.min())) ),
 			std::get<1>(size)*(1.0f - (std::get<1>(p) - std::get<1>(bb.min()))/(std::get<1>(bb.max())-std::get<1>(bb.min())) ));
-		point_local(plocal, radius, classname);	
+		if (is_inside(plocal)) point_local(plocal, radius, classname);	
 	}
+
+	template<typename P, typename = std::enable_if_t<is_2d_point_v<P>> >
+	void text_local(const P& p, std::string text, const std::string& classname) {
+		this->add(Text(std::get<0>(p), std::get<1>(p), text)).class_(classname);
+	}
+
+	void text_local(const std::tuple<float,float>& p, std::string text, const std::string& classname) {
+		this->add(Text(std::get<0>(p), std::get<1>(p), text)).class_(classname);
+	}
+
 
 	template<typename F, typename Pin, typename Pout>
 	float bolzano_border(const F& f, float tin, float tout, const Pin& pin, const Pout& pout) {
@@ -96,6 +106,16 @@ class Graph2D : public Group {
 	}
 
 	template<typename P0, typename P1, typename = std::enable_if_t<is_2d_point_v<P0> && is_2d_point_v<P1>> >
+	void line_local(const P0& p0, const P1& p1, const std::string& classname) {
+		this->add(Line(std::get<0>(p0),std::get<1>(p0), std::get<0>(p1),std::get<1>(p1))).class_(classname);
+	}
+
+	//So it can be called with {} {}
+	void line_local(const std::tuple<float,float>& p0, const std::tuple<float,float>& p1, const std::string& classname) {
+		this->add(Line(std::get<0>(p0),std::get<1>(p0), std::get<0>(p1),std::get<1>(p1))).class_(classname);
+	}
+
+	template<typename P0, typename P1, typename = std::enable_if_t<is_2d_point_v<P0> && is_2d_point_v<P1>> >
 	void line(const P0& p0, const P1& p1, const std::string& classname) {
 		plot_curve_global([&] (float t) { return p0*(1-t) + p1*t; }, [&] (float t) { return p1-p0; }, 0.0f, 1.0f, 2, classname);
 	}
@@ -117,6 +137,32 @@ class Graph2D : public Group {
 		auto p1 = p0; ++p1;
 		for (; p1 != std::end(ps); ++p0, ++p1) line(*p0,*p1, classname);
 	}
+
+	template<typename Points>
+	void polygon(const Points& ps, const std::string& classname) {
+		auto p0 = std::begin(ps);
+		auto p1 = p0; ++p1;
+		for (; p1 != std::end(ps); ++p0, ++p1) line(*p0,*p1, classname);
+		line(*p0,*(std::begin(ps)),classname);
+	}
+
+	void polygon(std::initializer_list<std::tuple<float,float>> ps, const std::string& classname) {
+		auto p0 = std::begin(ps);
+		auto p1 = p0; ++p1;
+		for (; p1 != std::end(ps); ++p0, ++p1) line(*p0,*p1, classname);
+		line(*p0,*(std::begin(ps)),classname);
+	}
+
+
+	void xtick(float xlocal, float height, float ylocal, const std::string& classname) {
+		line_local({xlocal,ylocal-0.5f*height},{xlocal,ylocal+0.5f*height},classname);
+	}
+
+	void ytick(float ylocal, float width, float xlocal, const std::string& classname) {
+		line_local({xlocal-0.5f*width,ylocal},{xlocal+0.5f*width,ylocal},classname);
+	}
+
+
 
 public:
 	Graph2D(const std::tuple<float, float>& size, const BoundingBox& bb, float border_threshold = 1.e-3f):
@@ -167,38 +213,56 @@ public:
 		return plot_points(std::list<std::tuple<float,float>>(ps), radius);
 	}
 
-
-	StyleEntry& axis() {
-		std::string classname = "axis";
-		line({0.0f,std::get<1>(bb.min())},{0.0f,std::get<1>(bb.max())},classname);
-		line({std::get<0>(bb.min()),0.0f},{std::get<0>(bb.max()),0.0f},classname);
+	StyleEntry& axis(float x = 0.0f, float y = 0.0f, std::string classname = "axis") {
+		line({x,std::get<1>(bb.min())},{x,std::get<1>(bb.max())},classname);
+		line({std::get<0>(bb.min()),x},{std::get<0>(bb.max()),x},classname);
 		return style.add_class(classname).stroke_linecap(round).fill(none);
 	}
 
-	StyleEntry& border() {
-		std::string classname = "border";
-		polyline({{std::get<0>(bb.min()),std::get<1>(bb.min())},
+	StyleEntry& border(std::string classname = "border") {
+		polygon({{std::get<0>(bb.min()),std::get<1>(bb.min())},
 			  {std::get<0>(bb.min()),std::get<1>(bb.max())},
 			  {std::get<0>(bb.max()),std::get<1>(bb.max())},
-			  {std::get<0>(bb.max()),std::get<1>(bb.min())}},"border");
+			  {std::get<0>(bb.max()),std::get<1>(bb.min())}},classname);
 		return style.add_class(classname).stroke_linecap(round).fill(none);
 	}
 
-/*
-	StyleEntry& xtick(float x, float height = 2.0f, float y = 0.0) {
-		
+	StyleEntry& xticks(int count = 2, float height = 3.0f, float ylocal = 0.0f, std::string classname = "xticks") {
+		float dx = std::get<0>(size)/float(count - 1);
+		for (int i = 0;i<count;++i) xtick(i*dx, height, std::get<1>(size) - ylocal, classname);
+		return style.add_class(classname).stroke_linecap(round).fill(none);
 	}
 
-	StyleEntry& horizontal_ticks(int n, float height = float y = 0.0) {
-		std::string classname = "ticks";
-		float dx = (std::get<0>(bb.max()) - std::get<0>(bb.min()))/float(n-1);
-		for (int i = 0; i<n; ++i) {
-			
+	StyleEntry& yticks(int count = 2, float width = 3.0f, float xlocal = 0.0f, std::string classname = "yticks") {
+		float dy = std::get<1>(size)/float(count - 1);
+		for (int i = 0;i<count;++i) ytick(i*dy, width, xlocal, classname);
+		return style.add_class(classname).stroke_linecap(round).fill(none);
+	}
+
+	StyleEntry& ticks(int xs = 2, int ys = 2, float size = 3.0f, float xlocal = 0.0f, float ylocal = 0.0f, std::string classname = "ticks") {
+		xticks(xs,size,ylocal, classname);
+		return yticks(ys,size,xlocal,classname);
+	}
+
+	StyleEntry& xlabels(int count = 2, float ylocal = -3.0f, std::string classname = "xlabels") {
+		float dxlocal = std::get<0>(size)/float(count - 1);
+		float dx = (std::get<0>(bb.max())-std::get<0>(bb.min()))/float(count - 1);
+		for (int i = 0;i<count;++i) {
+			std::stringstream stext;	stext<<(std::get<0>(bb.min())+i*dx);
+			text_local({i*dxlocal,std::get<1>(size) - ylocal},stext.str(),classname);
 		}
+		return style.add_class(classname).text_anchor(middle).font_size(float(std::get<1>(size))/float(20)).alignment_baseline(hanging);
 	}
-*/
 
-
+	StyleEntry& ylabels(int count = 2, float xlocal = -3.0f, std::string classname = "ylabels") {
+		float dylocal = std::get<1>(size)/float(count - 1);
+		float dy = (std::get<1>(bb.max())-std::get<1>(bb.min()))/float(count - 1);
+		for (int i = 0;i<count;++i) {
+			std::stringstream stext;	stext<<(std::get<1>(bb.min())+i*dy);
+			text_local({xlocal, std::get<1>(size) - i*dylocal},stext.str(),classname);
+		}
+		return style.add_class(classname).text_anchor(end).font_size(float(std::get<1>(size))/float(20)).alignment_baseline(baseline_middle);
+	}
 
 };
 	
