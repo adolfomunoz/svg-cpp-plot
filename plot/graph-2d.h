@@ -27,7 +27,7 @@ class Graph2D : public Group {
 
 	template<typename P, typename = std::enable_if_t<is_2d_point_v<P>> >
 	void point_local(const P& p, float radius, const std::string& classname) {
-		this->add(Circle(p,radius)).class_(classname);	
+		this->add(Circle(p,radius)).class_(classname+" points");	
 	}
 
 	template<typename P, typename = std::enable_if_t<is_2d_point_v<P>> >
@@ -67,6 +67,7 @@ class Graph2D : public Group {
 
 	template<typename F, typename DF>
 	void plot_curve_local(const F& f, const DF& df, float tmin, float tmax, unsigned int nsamples, const std::string& classname) {
+		Group& g = this->add(Group()).class_(classname);
 		float dt = (tmax - tmin)/float(nsamples-1);
 		auto p0 = f(tmin);
 		Path path(p0); 
@@ -81,7 +82,7 @@ class Graph2D : public Group {
 				auto pend = f(tend);
 				float dtend = tend - t;
 				path.curve_to(p0+df(t)*(dtend/3.0f), pend - df(tend)*(dtend/3.0f),pend);
-				this->add(path).class_(classname);
+				g.add(path);
 			} else if (!is_inside(p0) && (is_inside(p1))) { //We find the bolzano t and start a new path
 				float tstart = bolzano_border(f,t+dt,t,p1,p0);
 				auto pstart = f(tstart);
@@ -90,7 +91,7 @@ class Graph2D : public Group {
 			p0 = p1;
 		}
 		//We have finished a path, we store it.
-		if (is_inside(f(t)) && is_inside(f(tmax))) this->add(path).class_(classname);
+		if (is_inside(f(t)) && is_inside(f(tmax))) g.add(path);
 	}
 
 	template<typename F, typename DF>
@@ -165,17 +166,24 @@ class Graph2D : public Group {
 
 
 public:
+	//Note that if it already exists it is not added but just returned.
+	StyleEntry& all_plots() noexcept { return style.add_class("plot"); }
+	StyleEntry& all_points() noexcept { return style.add_class("points"); }
+
 	Graph2D(const std::tuple<float, float>& size, const BoundingBox& bb, float border_threshold = 1.e-3f):
 	       size(size),bb(bb),border_threshold(border_threshold), nplots(0), npoints(0),style(Group::add(Style())) 
-	{ }
+	{
+       		all_plots().stroke_linecap(round).fill(none);
+		style.add("text").font_size(float(std::get<1>(size))/float(20));
+	}
 		
 	template<typename F, typename DF>
 	StyleEntry& plot_curve_derivative(const F& f, const DF& df, float tmin, float tmax, int nsamples = 100) {
 		static_assert(is_2d_point_v<decltype(f(tmin))>, "Function f should return a two dimensional point");
 		static_assert(is_2d_point_v<decltype(df(tmin))>, "Derivative df should return a two dimensional point");
 		std::string classname = std::string("plot")+std::to_string(++nplots);
-		plot_curve_global(f, df, tmin, tmax, nsamples, classname);
-		return style.add_class(classname).stroke_linecap(round).fill(none);
+		plot_curve_global(f, df, tmin, tmax, nsamples, classname+" plot");
+		return style.add_class(classname);
 	}
 
 	template<typename F>
@@ -251,7 +259,7 @@ public:
 			std::stringstream stext;	stext<<(std::get<0>(bb.min())+i*dx);
 			text_local({i*dxlocal,std::get<1>(size) - ylocal},stext.str(),classname);
 		}
-		return style.add_class(classname).text_anchor(middle).font_size(float(std::get<1>(size))/float(20)).alignment_baseline(hanging);
+		return style.add_class(classname).text_anchor(middle).alignment_baseline(hanging);
 	}
 
 	StyleEntry& ylabels(int count = 2, float xlocal = -3.0f, std::string classname = "ylabels") {
@@ -261,7 +269,7 @@ public:
 			std::stringstream stext;	stext<<(std::get<1>(bb.min())+i*dy);
 			text_local({xlocal, std::get<1>(size) - i*dylocal},stext.str(),classname);
 		}
-		return style.add_class(classname).text_anchor(end).font_size(float(std::get<1>(size))/float(20)).alignment_baseline(baseline_middle);
+		return style.add_class(classname).text_anchor(end).alignment_baseline(baseline_middle);
 	}
 
 };
