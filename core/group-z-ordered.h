@@ -8,7 +8,7 @@
 namespace svg_cpp_plot {
 
 class GroupZOrdered : public NotTerminal, public Attributes<GroupZOrdered>, public StyleAttributes<GroupZOrdered>, public PresentationAttributes<GroupZOrdered> {
-	std::multimap<float, std::shared_ptr<Object>> children;
+	std::multimap<float, std::shared_ptr<Element>> children;
 	
 private:
 	template<typename T> 
@@ -27,7 +27,7 @@ public:
 	}
 
 	//Add directly the pointer (instancing?)
-	Object& add(const std::shared_ptr<Object>& o, float z) {
+	Object& add(const std::shared_ptr<Element>& o, float z) {
 		return set_z(*((*children.insert(std::pair(-z,o))).second),z);
 	}	
 	

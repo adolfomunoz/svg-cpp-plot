@@ -4,92 +4,104 @@
 #include <sstream>
 #include <memory>
 #include <list>
+#include <unordered_map>
 #include <iostream>
-
-#include "bounding-box.h"
-#include "attributes.h"
 
 namespace svg_cpp_plot {
 
-class Object : public AttributesBase {
-	std::string tag_;
-	
+class Object {
 public:
-	Object(const std::string& tag) : tag_(tag) { }
-	
-
-	constexpr const std::string& tag() const noexcept {
-		return tag_;
-	}
-	
-	std::string attributes_to_string() const noexcept {
-		return AttributesBase::attributes_to_string("=\"","\" ");
-	}
-
 	virtual std::string to_string() const noexcept = 0;
-	virtual BoundingBox bounding_box() const noexcept { return BoundingBox(); }
-};	
-
-class Terminal : public Object {
-public:
-	Terminal(const std::string& tag) : Object(tag) {}
-	std::string to_string() const noexcept override {
-		std::stringstream sstr;
-		sstr<<"<"<<tag()<<" "<<attributes_to_string()<<"/>";
-		return sstr.str();
-	}
 };
 
-class NotTerminal : public Object {
+template<typename T> 
+class ObjectConstant : public Object {
+	T t;
 public:
-	NotTerminal(const std::string& tag) : Object(tag) {}
-	virtual std::string content() const noexcept = 0;
-	std::string to_string() const noexcept override {
-		std::stringstream sstr;
-		sstr<<"<"<<tag()<<" "<<attributes_to_string()<<">"<<std::endl;
-		sstr<<content()<<std::endl;
-		sstr<<"</"<<tag()<<">"<<std::endl;
-		return sstr.str();
-	}
+	ObjectConstant(const T& t) : t(t) { }
+	ObjectConstant(T&& t) : t(std::forward<T>(t)) { }
+	std::string to_string() const override { return std::to_string(t); }
 };
 
-class Node : public NotTerminal {
-	std::list<std::shared_ptr<Object>> children;
+class ObjectMap {
+	std::unordered_map<std::string, std::shared_ptr<Object>> object_map;
 public:
-	Node(const std::string& tag) : NotTerminal(tag) {}
-	
-	std::string content() const noexcept override {
+//	std::string& operator[](const std::string& key) noexcept { return attributes[key]; }
+	std::shared_ptr<Object> get(const std::string& key) const noexcept {
+		try {
+			return attributes.at(key);
+		} catch (const std::out_of_range& e) {
+			return std::shared_ptr<Object>();
+		}
+	}
+
+	void set(const std::string& key, std::shared_ptr<Object>> object) const noexcept {
+		if (object) object_map[key]=object;
+	}
+
+	template<typename V>
+	const V& get_default(const std::string& key, const V& default_value) const {
+		if (auto v = get(key)) return (*dynamic_cast<const V*>(v));
+		else return default_value;
+	}
+
+	float get_float(const std::string& key, float default_value = 0) const {
+		return get_default(key, default_value);
+	}
+	int get_int(const std::string& key, int default_value = 0) const {
+		return get_default(key, default_value);
+	}
+
+	std::string map_to_string(const std::string& middle, 
+			                 const std::string& end) const noexcept {
 		std::stringstream sstr;
-		for (auto o : children) if (o) sstr<<"   "<<o->to_string()<<std::endl;
+		for (const auto & [k,v] : attributes)
+			sstr<<k<<middle<<v<<end;
 		return sstr.str();
 	}
 
-	//Add directly the pointer (instancing?)
-	Object& add(const std::shared_ptr<Object>& o) {
-		children.push_back(o);
-		return (*children.back());
-	}
-
-	//Add by copy
-	template<typename T> 
-	T& add(const T& t) {
-		children.push_back(std::make_shared<std::decay_t<T>>(t));
-		return static_cast<T&>(*children.back());
-	}
-
-	//Add by move if possible
-	template<typename T> 
-	T& add(T&& t) {
-		children.push_back(std::make_shared<std::decay_t<T>>(std::forward<T>(t)));
-		return static_cast<T&>(*children.back());
-	}
-	
-	BoundingBox bounding_box() const noexcept override { 
-		BoundingBox bb;
-		for (auto o : children) if (o) bb.join(o->bounding_box());
-		bb.expand(get_float("stroke-width",0.0f));
-		return bb;
-	}
+	template<typename T>
+	friend class ObjectMapCRTP;
 };
+
+template<typename T>
+class ObjectMapCRTP {
+	template<typename V, typename = std::enable_if_t<std::is_base_of_v<Object,V>> >
+	T& set(const std::string& key, const V& value) noexcept { //If it inherites from object we copy it
+		static_cast<T*>(this)->set(key,std::make_shared<V>(value)); 
+		return static_cast<T&>(*this);
+	}
+
+	template<typename V, typename = std::enable_if_t<std::is_base_of_v<Object,V>> >
+	T& set(const std::string& key, V&& value) noexcept { //If it inherites from object we copy it
+		static_cast<T*>(this)->set(key,std::make_shared<V>(std::forward<V>(value))); 
+		return static_cast<T&>(*this);
+	}
+
+	template<typename V, typename = std::enable_if_t<!std::is_base_of_v<Object,V>> >
+	T& set(const std::string& key, const V& value) noexcept { //If it does not inherit, it is a constant
+		static_cast<T*>(this)->set(key,std::make_shared<ObjectConstant<V>>(value)); 
+		return static_cast<T&>(*this);
+	}
+
+	template<typename V, typename = std::enable_if_t<!std::is_base_of_v<Object,V>> >
+	T& set(const std::string& key, V&& value) noexcept { //If it does not inherit, it is a constant
+		static_cast<T*>(this)->set(key,std::make_shared<ObjectConstant<V>>(std::forward<V>(value))); 
+		return static_cast<T&>(*this);
+	}
+
+	T& set(const std::string& key, const char* value) noexcept { 
+		return this->set(key,std::string(value));
+	}
+
+	T& merge_with(const T& that) noexcept {
+		auto local_copy = static_cast<T&>(*this).object_map
+		static_cast<T&>(*this).object_map = that.object_map;
+		static_cast<T&>(*this).object_map.insert(local_copy.begin(), local_copy.end());
+		return static_cast<T&>(*this);
+	}
+
+};
+
 
 }
