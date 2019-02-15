@@ -26,22 +26,29 @@ public:
 
 	template<typename V>
 	const V& get_default(const std::string& key, const V& default_value) const {
-		if (auto v = get(key)) return (*std::dynamic_pointer_cast<V>(v));
+		if (auto v = get(key)) {
+			if constexpr (std::is_base_of_v<Object,std::decay_t<V>>) 
+				return (*std::dynamic_pointer_cast<V>(v));
+			else
+				return std::dynamic_pointer_cast<ObjectConstant<std::decay_t<V>>>(v)->value();
+		}
 		else return default_value;
 	}
 
+	//vv Not necessary, backwards compatibility
 	float get_float(const std::string& key, float default_value = 0) const {
-		return get_default(key, ObjectConstant<float>(default_value)).value();
+		return get_default(key, default_value);
 	}
+	//vv Not necessary, backwards compatibility
 	int get_int(const std::string& key, int default_value = 0) const {
-		return get_default(key, ObjectConstant<int>(default_value)).value();
+		return get_default(key, default_value);
 	}
 
 	std::string map_to_string(const std::string& middle, 
 			                 const std::string& end) const noexcept {
 		std::stringstream sstr;
 		for (const auto & [k,v] : object_map)
-			sstr<<k<<middle<<v<<end;
+			sstr<<k<<middle<<v->to_string()<<end;
 		return sstr.str();
 	}
 
