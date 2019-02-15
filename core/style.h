@@ -1,6 +1,6 @@
 #pragma once
 
-#include "object.h"
+#include "element.h"
 #include "attributes.h"
 #include "presentation-attributes.h"
 #include "text-presentation-attributes.h"
@@ -41,7 +41,7 @@ public:
 	std::string to_string(const std::string& prefix = "") const noexcept {
 		std::stringstream sstr;
 		if (!id().empty()) sstr<<prefix+id()<<" {"<<std::endl;
-		sstr<<attributes_to_string(": ","; ");
+		sstr<<map_to_string(": ","; ");
 		if (!id().empty()) sstr<<std::endl<<"}"<<std::endl;
 		if (!id().empty()) for( auto const& [key, style] : nested ) sstr<<style->to_string(prefix+id())<<std::endl;
 		return sstr.str();
@@ -49,10 +49,10 @@ public:
 };
 
 
-class Style : public NotTerminal {
+class Style : public NotTerminal, public Attributes<Style> {
 	std::unordered_map<std::string,StyleEntry> entries;
 public:
-	Style() : NotTerminal("style") { (*this)["type"]="text/css"; }
+	Style() : NotTerminal("style") { set("type","text/css"); }
 
 	StyleEntry& add(const StyleEntry& entry) noexcept {
 		return entries[entry.id()].merge_with(entry);
