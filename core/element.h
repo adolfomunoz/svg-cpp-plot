@@ -24,7 +24,7 @@ public:
 	}
 	
 	std::string attributes_to_string() const noexcept {
-		return AttributesBase::attributes_to_string("=\"","\" ");
+		return AttributesBase::map_to_string("=\"","\" ");
 	}
 
 	virtual BoundingBox bounding_box() const noexcept { return BoundingBox(); }

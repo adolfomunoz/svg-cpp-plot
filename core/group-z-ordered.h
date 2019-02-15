@@ -13,7 +13,7 @@ class GroupZOrdered : public NotTerminal, public Attributes<GroupZOrdered>, publ
 private:
 	template<typename T> 
 	T& set_z(T& t, float z) { 
-		t["data-z"]=std::to_string(z);
+		set_custom("z",z);
 		return t; 
 	}
 

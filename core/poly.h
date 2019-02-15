@@ -20,7 +20,7 @@ public:
 
 	Poly& add_point(float x, float y) {
 		std::stringstream sstr;
-		sstr << get("points").value_or("") <<x<<","<<y<<" ";
+		sstr << get_default("points",std::string(""))<<x<<","<<y<<" ";
 		set("points", sstr.str());
 		return (*this);
 	}
@@ -32,7 +32,7 @@ public:
 	}
 
 	std::list<std::tuple<float,float>> points() const noexcept {
-		std::stringstream sstr(get("points").value_or(""));
+		std::stringstream sstr(get_default("points",std::string("")));
 		std::list<std::tuple<float,float>> l;
 		std::tuple<float,float> t;
 		char dummy;

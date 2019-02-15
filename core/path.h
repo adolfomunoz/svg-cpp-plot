@@ -15,7 +15,7 @@ public:
 		std::stringstream sstr;
 		sstr<<"M "<<x<<" "<<y<<" ";
 		set("d",sstr.str());
-		fill(none);
+		fill(none); 
 	}
 
 	Path(const Path&) = default;
@@ -31,35 +31,35 @@ public:
 
 	Path& line_to(float x, float y) {
 		std::stringstream sstr;
-		sstr<<get("d").value_or("")<<"L "<<x<<" "<<y<<" ";
+		sstr<<get_default("d",std::string(""))<<"L "<<x<<" "<<y<<" ";
 		set("d",sstr.str());
 		return (*this);
 	}
 
 	Path& horizontal_line_to(float x) {
 		std::stringstream sstr;
-		sstr<<get("d").value_or("")<<"H "<<x<<" ";
+		sstr<<get_default("d",std::string(""))<<"H "<<x<<" ";
 		set("d",sstr.str());
 		return (*this);
 	}
 
 	Path& vertial_line_to(float y) {
 		std::stringstream sstr;
-		sstr<<get("d").value_or("")<<"V "<<y<<" ";
+		sstr<<get_default("d",std::string(""))<<"V "<<y<<" ";
 		set("d",sstr.str());
 		return (*this);
 	}
 
 	Path& close() {
 		std::stringstream sstr;
-		sstr<<get("d").value_or("")<<"Z ";
+		sstr<<get_default("d",std::string(""))<<"Z ";
 		set("d",sstr.str());
 		return (*this);
 	}
 
 	Path& curve_to(float x1, float y1, float x2, float y2, float x, float y) {
 		std::stringstream sstr;
-		sstr<<get("d").value_or("")<<"C "<<x1<<" "<<y1<<" "<<x2<<" "<<y2<<" "<<x<<" "<<y<<" ";
+		sstr<<get_default("d",std::string(""))<<"C "<<x1<<" "<<y1<<" "<<x2<<" "<<y2<<" "<<x<<" "<<y<<" ";
 		set("d",sstr.str());
 		return (*this);
 	}
@@ -74,21 +74,21 @@ public:
 
 	Path& curve_string_to(float x2, float y2, float x, float y) {
 		std::stringstream sstr;
-		sstr<<get("d").value_or("")<<"S "<<x2<<" "<<y2<<" "<<x<<" "<<y<<" ";
+		sstr<<get_default("d",std::string(""))<<"S "<<x2<<" "<<y2<<" "<<x<<" "<<y<<" ";
 		set("d",sstr.str());
 		return (*this);
 	}
 
 	Path& quadratic_curve_to(float x1, float y1, float x, float y) {
 		std::stringstream sstr;
-		sstr<<get("d").value_or("")<<"Q "<<x1<<" "<<y1<<" "<<x<<" "<<y<<" ";
+		sstr<<get_default("d",std::string(""))<<"Q "<<x1<<" "<<y1<<" "<<x<<" "<<y<<" ";
 		set("d",sstr.str());
 		return (*this);
 	}
 
 	Path& quadratic_curve_string_to(float x, float y) {
 		std::stringstream sstr;
-		sstr<<get("d").value_or("")<<"T "<<x<<" "<<y<<" ";
+		sstr<<get_default("d",std::string(""))<<"T "<<x<<" "<<y<<" ";
 		set("d",sstr.str());
 		return (*this);
 	}
@@ -96,7 +96,7 @@ public:
 	BoundingBox bounding_box() const noexcept override { 
 		BoundingBox bb;
 		char c; float x, y;
-		std::stringstream sstr(get("d").value_or(""));
+		std::stringstream sstr(get_default("d",std::string("")));
 
 		while (sstr) {
 			sstr>>c;

@@ -1,94 +1,36 @@
 #pragma once
 
-#include <unordered_map>
-#include <sstream>
-#include <string>
+#include "object-map.h"
 
 namespace svg_cpp_plot {
 
-class AttributesBase {
-	std::unordered_map<std::string, std::string> attributes;
-public:
-	std::string& operator[](const std::string& key) noexcept { return attributes[key]; }
-	std::optional<std::string> get(const std::string& key) const noexcept {
-		try {
-			return attributes.at(key);
-		} catch (const std::out_of_range& e) {
-			return {};
-		}
-	}
-	float get_float(const std::string& key, float default_value = 0) const noexcept {
-		if (auto v = get(key)) return stof(v.value()); 
-		else return default_value;
-	}
-	int get_int(const std::string& key, int default_value = 0) const noexcept {
-		if (auto v = get(key)) return stoi(v.value()); 
-		else return default_value;
-	}
-
-	std::string attributes_to_string(const std::string& middle, 
-			                 const std::string& end) const noexcept {
-		std::stringstream sstr;
-		for (const auto & [k,v] : attributes)
-			sstr<<k<<middle<<v<<end;
-		return sstr.str();
-	}
-
-	template<typename T>
-	friend class Attributes;
-
-};
+using AttributesBase = ObjectMap;
 
 //CRTP
 template<typename T>
-class Attributes {
+class Attributes : public ObjectMapCRTP<T> {
 public:
 	template<typename V>
-	T& set(const std::string& key, const V& value) noexcept { 
-		static_cast<T&>(*this)[key] = std::to_string(value); return static_cast<T&>(*this);
-	}
-
-	T& set(const std::string& key, const char* value) noexcept { 
-		static_cast<T&>(*this)[key] = std::string(value); return static_cast<T&>(*this);
-	}
-
-	T& set(const std::string& key, const std::string& value) noexcept { 
-		static_cast<T&>(*this)[key] = value; return static_cast<T&>(*this);
-	}
-	
-	template<typename V>
 	T& set_custom(const std::string& key, const V& value) noexcept { 
-		static_cast<T&>(*this)[key] = std::string("data-")+std::to_string(value); 
-		return static_cast<T&>(*this);
+		return this->set(std::string("data-")+key, value);
 	}
 
-	T& set_custom(const std::string& key, const char* value) noexcept { 
-		static_cast<T&>(*this)[key] = std::string("data-")+std::string(value); return static_cast<T&>(*this);
-	}
-
-	T& set_custom(const std::string& key, const std::string& value) noexcept { 
-		static_cast<T&>(*this)[key] = std::string("data-")+value; return static_cast<T&>(*this);
+	template<typename V>
+	T& set_custom(const std::string& key, V&& value) noexcept { 
+		return this->set(std::string("data-")+key, std::forward<V>(value));
 	}
 	
 	T& id(const std::string& value) noexcept {
-		return set("id",value);
+		return this->set("id",value);
 	}
 
 	T& lang(const std::string& value) noexcept {
-		return set("lang",value);
+		return this->set("lang",value);
 	}
 	
 	T& tabindex(const std::string& value) noexcept {
-		return set("tabindex",value);
+		return this->set("tabindex",value);
 	}
-
-	T& merge_with(const T& that) noexcept {
-		auto local_copy = static_cast<T&>(*this).attributes;
-		static_cast<T&>(*this).attributes = that.attributes;
-		static_cast<T&>(*this).attributes.insert(local_copy.begin(), local_copy.end());
-		return static_cast<T&>(*this);
-	}
-
 }; 
 
 }
