@@ -37,12 +37,13 @@ public:
 
 
 	StyleEntry(const std::string& id = "") : id_(id) {}
+	//Nested styles are ignored if there is no ID. With no ID, a styleEntry can be attached to any element.
 	std::string to_string(const std::string& prefix = "") const noexcept {
 		std::stringstream sstr;
 		if (!id().empty()) sstr<<prefix+id()<<" {"<<std::endl;
 		sstr<<attributes_to_string(": ","; ");
 		if (!id().empty()) sstr<<std::endl<<"}"<<std::endl;
-		for( auto const& [key, style] : nested ) sstr<<style->to_string(prefix+id())<<std::endl;
+		if (!id().empty()) for( auto const& [key, style] : nested ) sstr<<style->to_string(prefix+id())<<std::endl;
 		return sstr.str();
 	}		
 };

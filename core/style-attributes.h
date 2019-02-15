@@ -14,6 +14,7 @@ public:
 		static_cast<T*>(this)->set("class",w); 
 		return static_cast<T&>(*this);
 	}
+
 	T& style(const StyleEntry& w) noexcept {
 		StyleEntry n(w); 
 		static_cast<T*>(this)->set("style",n.id("").to_string()); 
