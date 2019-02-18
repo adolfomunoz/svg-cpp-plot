@@ -8,6 +8,15 @@
 
 namespace svg_cpp_plot {
 
+/**
+class StyleEntry : public Object, public ObjectMap, public Attributes<StyleEntry>, public PresentationAttributes<StyleEntry>, public TextPresentationAttributes<StyleEntry> {
+public:
+	std::string to_string() const noexcept override {
+		return map_to_string(": ","; ");
+	}
+};
+**/
+
 class StyleEntry : public AttributesBase, public Attributes<StyleEntry>, public PresentationAttributes<StyleEntry>, public TextPresentationAttributes<StyleEntry> {
 	std::string id_;
 	//We need them to be shared pointers because otherwise the type is incomplete.

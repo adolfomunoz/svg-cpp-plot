@@ -4,7 +4,7 @@
 
 namespace svg_cpp_plot {
 
-using AttributesBase = ObjectMap;
+using AttributesBase = ObjectMap<Object>;
 
 //CRTP
 template<typename T>
