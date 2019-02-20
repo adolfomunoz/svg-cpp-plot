@@ -30,14 +30,14 @@ public:
 	BoundingBox bounding_box() const noexcept override {
 		//We account for size and anchor for now. It is not extremelly accurate
 		float left = 0; float right = 0;
-		float xmeasure = (get_font_size()*text().size()*2.0)/5.0;
-		if (get_text_anchor() == start)    right = xmeasure; 
-		else if (get_text_anchor() == end) left = xmeasure; 
-		else                               right = left = xmeasure/2.0f;
+		float xmeasure = (font_size()*text().size()*2.0)/5.0;
+		if (text_anchor() == text_anchor_start)    right = xmeasure; 
+		else if (text_anchor() == text_anchor_end) left = xmeasure; 
+		else                      right = left = xmeasure/2.0f;
 		int top = 0; int bottom = 0;
-		float ymeasure = get_font_size();
-		if (get_alignment_baseline() == baseline)     { top = ymeasure*3.0/4.0; bottom = ymeasure/4.0; }
-		else if (get_alignment_baseline() == hanging) { top = ymeasure/4.0; bottom = ymeasure*3.0/4.0; }
+		float ymeasure = font_size();
+		if (dominant_baseline() == dominant_baseline_alphabetic)     { top = ymeasure*3.0/4.0; bottom = ymeasure/4.0; }
+		else if (dominant_baseline() == dominant_baseline_hanging) { top = ymeasure/4.0; bottom = ymeasure*3.0/4.0; }
 		else                                          { top = ymeasure/2.0; bottom = ymeasure/2.0; }
 		return BoundingBox(x()-left,y()-top,x()+right,y()+bottom);
 	}

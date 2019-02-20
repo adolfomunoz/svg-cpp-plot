@@ -259,7 +259,7 @@ public:
 			std::stringstream stext;	stext<<(std::get<0>(bb.min())+i*dx);
 			text_local({i*dxlocal,std::get<1>(size) - ylocal},stext.str(),classname);
 		}
-		return style.add_class(classname).text_anchor(middle).alignment_baseline(hanging);
+		return style.add_class(classname).text_anchor(text_anchor_middle).dominant_baseline(dominant_baseline_hanging);
 	}
 
 	StyleEntry& ylabels(int count = 2, float xlocal = -3.0f, std::string classname = "ylabels") {
@@ -269,7 +269,7 @@ public:
 			std::stringstream stext;	stext<<(std::get<1>(bb.min())+i*dy);
 			text_local({xlocal, std::get<1>(size) - i*dylocal},stext.str(),classname);
 		}
-		return style.add_class(classname).text_anchor(end).alignment_baseline(baseline_middle);
+		return style.add_class(classname).text_anchor(text_anchor_end).dominant_baseline(dominant_baseline_middle);
 	}
 
 };

@@ -24,7 +24,7 @@ public:
 		try {
 			return object_map.at(key);
 		} catch (const std::out_of_range& e) {
-			return std::shared_ptr<Object>();
+			return std::shared_ptr<O>();
 		}
 	}
 
@@ -49,6 +49,57 @@ public:
 		}
 		else return default_value;
 	}
+
+	template<typename V>
+	V& get_or_set(const std::string& key, const V& value) {
+		auto v = get(key);
+		if (!v) {
+			if constexpr (std::is_base_of_v<O,std::decay_t<V>>)
+				set_pointer(key,std::make_shared<std::decay_t<V>>(value)); 
+			else if constexpr (std::is_same_v<Object,O>) //Otherwise it is a constant (if these are objects)
+				set_pointer(key,std::make_shared<ObjectConstant<std::decay_t<V>>>(value)); 
+			else throw wrong_object_type();
+		}
+		v = get(key); //Should return something, because we have added it above
+		if constexpr (std::is_base_of_v<O,std::decay_t<V>>) { 
+			auto ptr_v = std::dynamic_pointer_cast<V>(v);
+			if (!ptr_v) throw wrong_object_type();
+			else return (*v);
+		}
+		else if constexpr (std::is_same_v<O,Object>) {
+			auto ptr_v = std::dynamic_pointer_cast<ObjectConstant<std::decay_t<V>>>(v);
+			if (!ptr_v) throw wrong_object_type();
+			else return v->value();
+		}
+		else throw wrong_object_type();
+	}
+
+/*
+	template<typename V>
+	V& get_or_set(const std::string& key, V&& value) {
+		if (auto v = get(key)) {
+			if constexpr (std::is_base_of_v<O,std::decay_t<V>>) { 
+				auto ptr_v = std::dynamic_pointer_cast<V>(v);
+				if (!ptr_v) throw wrong_object_type();
+				else return (*v);
+			}
+			else if constexpr (std::is_same_v<O,Object>) {
+				auto ptr_v = std::dynamic_pointer_cast<ObjectConstant<std::decay_t<V>>>(v);
+				if (!ptr_v) throw wrong_object_type();
+				else return v->value();
+			}
+			else throw wrong_object_type();
+		}
+		else {
+			if constexpr (std::is_base_of_v<Object,std::decay_t<V>>)
+				set_pointer(key,std::make_shared<std::decay_t<V>>(std::forward<V>(value))); 
+			else if constexpr (std::is_same_v<Object,O>) //Otherwise it is a constant (if these are objects)
+				set_pointer(key,std::make_shared<ObjectConstant<std::decay_t<V>>>(std::forward<V>(value))); 
+			else throw wrong_object_type();
+			return get_default(key, std::forward<V>(value));
+		}
+	}*/
+
 
 
 
@@ -99,47 +150,6 @@ public:
 		return static_cast<T&>(*this);
 	}
 
-	template<typename V>
-	const V& get_or_set(const std::string& key, const V& value) const {
-		if (auto v = static_cast<T*>(this)->get(key)) {
-			if constexpr (std::is_base_of_v<O,std::decay_t<V>>) { 
-				auto ptr_v = std::dynamic_pointer_cast<V>(v);
-				if (!ptr_v) throw wrong_object_type();
-				else return (*v);
-			}
-			else if constexpr (std::is_same_v<O,Object>) {
-				auto ptr_v = std::dynamic_pointer_cast<ObjectConstant<std::decay_t<V>>>(v);
-				if (!ptr_v) throw wrong_object_type();
-				else return v->value();
-			}
-			else throw wrong_object_type();
-		}
-		else {
-			set(key, value);
-			return static_cast<T*>(this)->get_default(key, value);
-		}
-	}
-
-	template<typename V>
-	const V& get_or_set(const std::string& key, V&& value) const {
-		if (auto v = static_cast<T*>(this)->get(key)) {
-			if constexpr (std::is_base_of_v<O,std::decay_t<V>>) { 
-				auto ptr_v = std::dynamic_pointer_cast<V>(v);
-				if (!ptr_v) throw wrong_object_type();
-				else return (*v);
-			}
-			else if constexpr (std::is_same_v<O,Object>) {
-				auto ptr_v = std::dynamic_pointer_cast<ObjectConstant<std::decay_t<V>>>(v);
-				if (!ptr_v) throw wrong_object_type();
-				else return v->value();
-			}
-			else throw wrong_object_type();
-		}
-		else {
-			set(key, std::forward<V>(value));
-			return static_cast<T*>(this)->get_default(key, std::forward<V>(value));
-		}
-	}
 
 
 

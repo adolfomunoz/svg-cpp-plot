@@ -11,14 +11,16 @@ template<typename T>
 class StyleAttributes {
 public:
 	T& class_(const std::string& w) noexcept {
-		static_cast<T*>(this)->set("class",w); 
+		return static_cast<T*>(this)->set("class",w); 
+	}
+
+	T& style(const ElementStyle& w) noexcept {
+		static_cast<T*>(this)->set("style",w); 
 		return static_cast<T&>(*this);
 	}
 
-	T& style(const StyleEntry& w) noexcept {
-		StyleEntry n(w); 
-		static_cast<T*>(this)->set("style",n.id("").to_string()); 
-		return static_cast<T&>(*this);
+	ElementStyle& style() {
+		return static_cast<T*>(this)->get_or_set("style",ElementStyle());
 	}
 };
 

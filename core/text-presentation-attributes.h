@@ -9,38 +9,50 @@ namespace detail {
 	constexpr const char* alignment_baseline_text[3] = {"hanging","middle","baseline"};
 }*/
 
-ENUM_TYPE(TextAnchor) start("start"), middle("middle"), end("end");
-ENUM_TYPE(AlignmentBaseline) hanging("hanging"), baseline_middle("middle"), baseline("baseline");
+ENUM_TYPE(TextAnchor) text_anchor_start("start"), text_anchor_middle("middle"), text_anchor_end("end");
+ENUM_TYPE(AlignmentBaseline) alignment_baseline_hanging("hanging"), alignment_baseline_middle("middle"), alignment_baseline("baseline");
+ENUM_TYPE(DominantBaseline) dominant_baseline_hanging("hanging"), dominant_baseline_middle("middle"), dominant_baseline_center("center"), dominant_baseline_alphabetic("alphabetic"), dominant_baseline_mathematical("mathematical");
+
 
 //CRTP
 //Presentation attributes (common to all tags although not used in many of them? I don't know...)
 template<typename T>
 class TextPresentationAttributes {
+	constexpr T* t() noexcept { return static_cast<T*>(this); } 
+	constexpr const T* t() const noexcept { return static_cast<const T*>(this); } 
 public:
 	T& font_size(int s) noexcept {
-		return static_cast<T*>(this)->set("font-size",std::to_string(s)+"px"); 
+		return t()->set("font-size",s); 
 	}
 
 	T& text_anchor(const TextAnchor& a) noexcept {
-		return static_cast<T*>(this)->set("text-anchor",a);
+		return t()->set("text-anchor",a);
 	}
 
 	T& alignment_baseline(const AlignmentBaseline& a) noexcept {
-		return static_cast<T*>(this)->set("alignment-baseline",a);
+		return t()->set("alignment-baseline",a);
 	}
 
-
-	int get_font_size() const noexcept {
-		return static_cast<const T*>(this)->get_int("font-size",16);
+	T& dominant_baseline(const DominantBaseline& b) noexcept {
+		return t()->set("dominant-baseline",b);
 	}
 
-	TextAnchor get_text_anchor() const noexcept {
-		return static_cast<const T*>(this)->get_default("text-anchor",start);
+	int font_size() const noexcept {
+		return t()->get_default("font-size",16);
 	}
 
-	AlignmentBaseline get_alignment_baseline() const noexcept {
-		return static_cast<const T*>(this)->get_default("alignment-baseline",baseline);
+	TextAnchor text_anchor() const noexcept {
+		return t()->get_default("text-anchor",text_anchor_start);
 	}
+
+	AlignmentBaseline alignment_baseline() const noexcept {
+		return t()->get_default("alignment-baseline",alignment_baseline);
+	}
+
+	DominantBaseline dominant_baseline() const noexcept {
+		return t()->get_default("dominant-baseline",dominant_baseline_alphabetic);
+	}
+
 
 };
 
