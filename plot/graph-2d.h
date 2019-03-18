@@ -173,7 +173,7 @@ public:
 	Graph2D(const std::tuple<float, float>& size, const BoundingBox& bb, float border_threshold = 1.e-3f):
 	       size(size),bb(bb),border_threshold(border_threshold), nplots(0), npoints(0),style(Group::add(Style())) 
 	{
-       		all_plots().stroke_linecap(round).fill(none);
+       		all_plots().stroke_linecap(stroke_linecap_round).fill(none);
 		style.add("text").font_size(float(std::get<1>(size))/float(20));
 	}
 		
@@ -224,7 +224,7 @@ public:
 	StyleEntry& axis(float x = 0.0f, float y = 0.0f, std::string classname = "axis") {
 		line({x,std::get<1>(bb.min())},{x,std::get<1>(bb.max())},classname);
 		line({std::get<0>(bb.min()),x},{std::get<0>(bb.max()),x},classname);
-		return style.add_class(classname).stroke_linecap(round).fill(none);
+		return style.add_class(classname).stroke_linecap(stroke_linecap_round).fill(none);
 	}
 
 	StyleEntry& border(std::string classname = "border") {
@@ -232,19 +232,19 @@ public:
 			  {std::get<0>(bb.min()),std::get<1>(bb.max())},
 			  {std::get<0>(bb.max()),std::get<1>(bb.max())},
 			  {std::get<0>(bb.max()),std::get<1>(bb.min())}},classname);
-		return style.add_class(classname).stroke_linecap(round).fill(none);
+		return style.add_class(classname).stroke_linecap(stroke_linecap_round).fill(none);
 	}
 
 	StyleEntry& xticks(int count = 2, float height = 3.0f, float ylocal = 0.0f, std::string classname = "xticks") {
 		float dx = std::get<0>(size)/float(count - 1);
 		for (int i = 0;i<count;++i) xtick(i*dx, height, std::get<1>(size) - ylocal, classname);
-		return style.add_class(classname).stroke_linecap(round).fill(none);
+		return style.add_class(classname).stroke_linecap(stroke_linecap_round).fill(none);
 	}
 
 	StyleEntry& yticks(int count = 2, float width = 3.0f, float xlocal = 0.0f, std::string classname = "yticks") {
 		float dy = std::get<1>(size)/float(count - 1);
 		for (int i = 0;i<count;++i) ytick(i*dy, width, xlocal, classname);
-		return style.add_class(classname).stroke_linecap(round).fill(none);
+		return style.add_class(classname).stroke_linecap(stroke_linecap_round).fill(none);
 	}
 
 	StyleEntry& ticks(int xs = 2, int ys = 2, float size = 3.0f, float xlocal = 0.0f, float ylocal = 0.0f, std::string classname = "ticks") {

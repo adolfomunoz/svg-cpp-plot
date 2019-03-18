@@ -74,6 +74,7 @@ endfunction(add_subdirectories_and_compile)
 
 add_subdirectories_and_compile(main/examples)
 add_subdirectories_and_compile(main/doc)
+add_subdirectories_and_compile(main/test)
 
 
 

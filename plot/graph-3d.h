@@ -101,7 +101,7 @@ public:
 		static_assert(is_3d_point_v<decltype(df(tmin))>, "Derivative df should return a three dimensional point");
 		std::string classname = std::string("plot")+std::to_string(++nplots);
 		curve_derivative_3d(f, df, tmin, tmax, min_samples, max_samples, classname);
-		return style.add_class(classname).stroke_linecap(round).fill(none);
+		return style.add_class(classname).stroke_linecap(stroke_linecap_round).fill(none);
 	}
 
 	template<typename F>
@@ -117,14 +117,14 @@ public:
 		static_assert(is_3d_point_v<P0> && is_3d_point_v<P1>, "Line should connect two 3D points");
 		std::string classname = std::string("line")+std::to_string(++nlines);
 		line_simple(p0,p1,max_samples, classname);
-		return style.add_class(classname).stroke_linecap(round).fill(none);
+		return style.add_class(classname).stroke_linecap(stroke_linecap_round).fill(none);
 	}
 	
 	//This is so it can be called with ({ }, { })
 	StyleEntry& line(const std::tuple<float, float, float>& p0, const std::tuple<float, float, float>& p1, int max_samples = 10000) {
 		std::string classname = std::string("line")+std::to_string(++nlines);
 		line_simple(p0,p1,max_samples, classname);
-		return style.add_class(classname).stroke_linecap(round).fill(none);
+		return style.add_class(classname).stroke_linecap(stroke_linecap_round).fill(none);
 	}
 
 	template<typename Points>
@@ -132,14 +132,14 @@ public:
 		static_assert(is_3d_point_v<*std::begin(ps)>, "Polyline should be of 3D points");
 		std::string classname = std::string("polyline")+std::to_string(++npolylines);
 		polyline_simple(ps,max_samples, classname);
-		return style.add_class(classname).stroke_linecap(round).fill(none);
+		return style.add_class(classname).stroke_linecap(stroke_linecap_round).fill(none);
 	}
 
 	//This is so it can be called with ({ }, { })
 	StyleEntry& polyline(const std::initializer_list<std::tuple<float, float, float>>& ps, int max_samples = 10000) {
 		std::string classname = std::string("polyline")+std::to_string(++npolylines);
 		polyline_simple(ps,max_samples, classname);
-		return style.add_class(classname).stroke_linecap(round).fill(none);
+		return style.add_class(classname).stroke_linecap(stroke_linecap_round).fill(none);
 	}
 
 	template<typename P0, typename P1>
@@ -148,7 +148,7 @@ public:
 		std::string classname = std::string("arrow")+std::to_string(++narrows);
 		line_simple(p0,p1,max_samples, classname);
 		arrowhead(p0 + (p1-p0)*arrowsize, p1, 10, max_samples/10, classname);
-		return style.add_class(classname).stroke_linecap(round).fill(none);
+		return style.add_class(classname).stroke_linecap(stroke_linecap_round).fill(none);
 	}
 
 	//This is so it can be called with ({ }, { })
@@ -156,7 +156,7 @@ public:
 		std::string classname = std::string("arrow")+std::to_string(++narrows);
 		line_simple(p0,p1,max_samples, classname);
 		arrowhead(p1 - (p1-p0)*arrowsize, p1, 20, max_samples/10, classname);
-		return style.add_class(classname).stroke_linecap(round).fill(none);
+		return style.add_class(classname).stroke_linecap(stroke_linecap_round).fill(none);
 	}
 
 

@@ -7,6 +7,7 @@
 #include "core/path.h"
 #include "core/text.h"
 #include "core/style.h"
+#include "core/script.h"
 
 #include "plot/plot-function.h"
 #include "plot/plot-curve.h"
@@ -14,3 +15,7 @@
 #include "plot/graph-3d.h"
 #include "plot/graph-2d.h"
 #include "plot/project.h"
+
+#include "scripts/self-reload.h"
+
+#include "utils/browse.h"

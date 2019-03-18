@@ -7,6 +7,7 @@
 #include <iostream>
 
 #include "object.h"
+#include "object-list.h"
 #include "bounding-box.h"
 #include "attributes.h"
 
@@ -53,40 +54,17 @@ public:
 	}
 };
 
-class Node : public NotTerminal {
-	std::list<std::shared_ptr<Element>> children;
+class Node : public NotTerminal, public ObjectList<Element> {
 public:
 	Node(const std::string& tag) : NotTerminal(tag) {}
 	
 	std::string content() const noexcept override {
-		std::stringstream sstr;
-		for (auto o : children) if (o) sstr<<"   "<<o->to_string()<<std::endl;
-		return sstr.str();
+		return list_to_string("\n");
 	}
 
-	//Add directly the pointer (instancing?)
-	Element& add(const std::shared_ptr<Element>& o) {
-		children.push_back(o);
-		return (*children.back());
-	}
-
-	//Add by copy
-	template<typename T> 
-	T& add(const T& t) {
-		children.push_back(std::make_shared<std::decay_t<T>>(t));
-		return static_cast<T&>(*children.back());
-	}
-
-	//Add by move if possible
-	template<typename T> 
-	T& add(T&& t) {
-		children.push_back(std::make_shared<std::decay_t<T>>(std::forward<T>(t)));
-		return static_cast<T&>(*children.back());
-	}
-	
 	BoundingBox bounding_box() const noexcept override { 
 		BoundingBox bb;
-		for (auto o : children) if (o) bb.join(o->bounding_box());
+		for (auto o : object_list) if (o) bb.join(o->bounding_box());
 		bb.expand(get_float("stroke-width",0.0f));
 		return bb;
 	}
