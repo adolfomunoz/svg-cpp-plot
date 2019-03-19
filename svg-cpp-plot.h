@@ -17,5 +17,6 @@
 #include "plot/project.h"
 
 #include "scripts/self-reload.h"
+#include "scripts/set-timeout.h"
 
 #include "utils/browse.h"
