@@ -16,7 +16,9 @@
 #include "plot/graph-2d.h"
 #include "plot/project.h"
 
-#include "scripts/self-reload.h"
+#include "scripts/window-reload.h"
 #include "scripts/set-timeout.h"
+#include "scripts/reload.h"
+#include "scripts/for-all.h"
 
 #include "utils/browse.h"

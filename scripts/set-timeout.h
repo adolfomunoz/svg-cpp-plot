@@ -10,7 +10,7 @@ class SetTimeout : public Code {
 public:
 	SetTimeout(std::shared_ptr<Code> code, float time) : code(code), time(time) { }
 	template<typename C, typename = std::enable_if_t<std::is_base_of_v<Code,C>> >
-	SetTimeout(const C& code, float time) : code(std::make_shared<C>(code)), time(time) { }
+	SetTimeout(const C& code, float time) : SetTimeout(std::make_shared<C>(code),time) { }
 
 	std::string to_string() const noexcept override {
 		std::stringstream output;

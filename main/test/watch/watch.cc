@@ -12,7 +12,7 @@ int main(int argc, char** argv) {
   	std::normal_distribution<float> distribution(0.0,2.0);
 	svg.add(Line(0,-2,0,2)).stroke(black).stroke_width(0.05);
 	svg.add(Line(-2,0,2,0)).stroke(black).stroke_width(0.05);
-	svg.add(Script()).add(script::SetTimeout(script::SelfReload(),1));
+	svg.add(Script()).add(script::SetTimeout(script::WindowReload(),1));
 	std::ofstream f(std::string(argv[0])+".svg");
 	f<<svg.automatic_viewBox();
 	f.close();
