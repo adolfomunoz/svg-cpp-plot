@@ -1,0 +1,15 @@
+<svg viewBox="0 0 100 100" height="100%" xmlns="http://www.w3.org/2000/svg" width="100%" >
+<rect x="5" y="5" width="90" height="90" stroke-width="1" fill="none" stroke="black" />
+<image x="7" y="7" width="86" height="86" href="cat.jpg" preserveAspectRatio="xMidYMid meet" />
+<object data="circle.svg" type="image/svg+xml"  x="7" y="7" height="50" width="50" preserveAspectRatio="xMidYMid meet" >
+  <img src="yourfallback.jpg" />
+</object>
+<image x="8" y="8" width="48" height="48" href="circle.svg" preserveAspectRatio="xMidYMid meet" />
+<use   x="48" y="8" width="48" height="48" href="circle.svg" preserveAspectRatio="xMidYMid meet" />
+<foreignObject x="8" y="48" width="48" height="48" preserveAspectRatio="xMidYMid meet" >
+	<object data="circle.svg" type="image/svg+xml" width="100%" height="100%" />
+</foreignObject>
+<foreignObject x="48" y="48" width="48" height="48" preserveAspectRatio="xMidYMid meet" >
+<iframe src="circle.svg" frameborder="0" />
+</foreignObject>
+</svg>

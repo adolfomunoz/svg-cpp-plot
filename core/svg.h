@@ -4,21 +4,25 @@
 
 namespace svg_cpp_plot {
 
-class SVG : public Node, public Attributes<SVG> {
+class SVG : public NodeBase, public Attributes<SVG> {
 public:
-	SVG() : Node("svg") {
+	SVG() : NodeBase("svg") {
 		set("xmlns","http://www.w3.org/2000/svg");
 		set("width","100%");
 		set("height","100%");
 	}
 	
 	SVG& set_viewBox(const BoundingBox& bb) {
-		set("viewBox",bb.to_string());
+		set("viewBox",bb);
 		return (*this);
 	}
 	
 	SVG& automatic_viewBox() {
 		return set_viewBox(bounding_box().expand(0.1f));
+	}
+
+	BoundingBox& viewBox() {
+		return get_or_set("viewBox",BoundingBox());
 	}
 };
 

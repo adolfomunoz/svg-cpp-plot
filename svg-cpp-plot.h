@@ -8,6 +8,7 @@
 #include "core/text.h"
 #include "core/style.h"
 #include "core/script.h"
+#include "core/external.h"
 
 #include "plot/plot-function.h"
 #include "plot/plot-curve.h"

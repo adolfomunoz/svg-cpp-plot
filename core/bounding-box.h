@@ -4,11 +4,12 @@
 #include <string>
 #include <type_traits>
 #include "point.h"
+#include "object.h"
 
 namespace svg_cpp_plot {
 
 
-class BoundingBox {
+class BoundingBox : public Object {
 	std::tuple<float, float> min_, max_;
 public:
 	BoundingBox(float xmin, float ymin, float xmax, float ymax) :
@@ -22,7 +23,7 @@ public:
 	const std::tuple<float, float>& min() const noexcept { return min_; }
 	const std::tuple<float, float>& max() const noexcept { return max_; }
 		
-	BoundingBox& join(const BoundingBox& that) { 
+	BoundingBox& join(const BoundingBox& that) noexcept { 
 		if (std::get<0>(that.min())<std::get<0>(min())) std::get<0>(min_)=std::get<0>(that.min());
 		if (std::get<1>(that.min())<std::get<1>(min())) std::get<1>(min_)=std::get<1>(that.min());
 		if (std::get<0>(that.max())>std::get<0>(max())) std::get<0>(max_)=std::get<0>(that.max());
@@ -31,12 +32,12 @@ public:
 	}
 
 	//A point
-	BoundingBox& join(const std::tuple<float, float>& p) {
+	BoundingBox& join(const std::tuple<float, float>& p) noexcept {
 		return join(BoundingBox(p,p));
 	}
 
 	//Expand by a distance in x and y
-	BoundingBox& expand(float dx, float dy) {
+	BoundingBox& expand(float dx, float dy) noexcept {
 		std::get<0>(min_)-=dx;
 		std::get<1>(min_)-=dy;
 		std::get<0>(max_)+=dx;
@@ -44,25 +45,25 @@ public:
 		return(*this);
 	}
 	//Expand by a distance
-	BoundingBox& expand(float f) {
+	BoundingBox& expand(float f) noexcept {
 		return expand(f,f);
 	}
 	
 	//Expand by a relative percentage
-	BoundingBox& expand_rate(float rate) {
+	BoundingBox& expand_rate(float rate) noexcept {
 		return expand(rate*(std::get<0>(max())-std::get<0>(min())),
 					rate*(std::get<1>(max())-std::get<1>(min())));
 	}
 
 	template<typename P, typename = std::enable_if_t<is_2d_point_v<P>> >
-	bool is_inside(const P& p) {
+	bool is_inside(const P& p) noexcept {
 		return (std::get<0>(p) >= std::get<0>(min())) &&
 		       (std::get<1>(p) >= std::get<1>(min())) &&
 		       (std::get<0>(p) <= std::get<0>(max())) &&
 		       (std::get<1>(p) <= std::get<1>(max()));
 	}
 
-	std::string to_string() const {
+	std::string to_string() const noexcept override {
 		std::stringstream sstr;
 		sstr<<std::get<0>(min())<<" "<<std::get<1>(min())<<" "<<
 				(std::get<0>(max()) - std::get<0>(min()))<<" "<<

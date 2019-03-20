@@ -64,7 +64,7 @@ public:
 		if constexpr (std::is_base_of_v<O,std::decay_t<V>>) { 
 			auto ptr_v = std::dynamic_pointer_cast<V>(v);
 			if (!ptr_v) throw wrong_object_type();
-			else return (*v);
+			else return (*ptr_v);
 		}
 		else if constexpr (std::is_same_v<O,Object>) {
 			auto ptr_v = std::dynamic_pointer_cast<ObjectConstant<std::decay_t<V>>>(v);
