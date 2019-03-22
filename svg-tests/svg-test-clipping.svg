@@ -1,0 +1,70 @@
+<svg viewBox="0 0 100 80" height="100%" xmlns="http://www.w3.org/2000/svg" width="100%" onload="makeDraggable(evt)">
+<script type="text/javascript">
+// <![CDATA[
+function makeDraggable(evt) {
+  var svg = evt.target;
+  svg.addEventListener('mousedown', startDrag);
+  svg.addEventListener('mousemove', drag);
+  svg.addEventListener('mouseup', endDrag);
+  svg.addEventListener('mouseleave', endDrag);
+  var selectedElement = null;
+  var offset_element, offset_clipper, transform_element, transform_clipper;
+  var element = svg.getElementById('drag')
+  var clipper = svg.getElementById('clippingrectangle')
+  //We insert new empty translation transform to both the element and the clipper
+  var translate = svg.createSVGTransform();
+  translate.setTranslate(0,0);
+  element.transform.baseVal.insertItemBefore(translate,0)
+  clipper.transform.baseVal.insertItemBefore(translate,0)
+
+  function getMousePosition(evt) {
+    var CTM = svg.getScreenCTM();
+    return {
+      x: (evt.clientX - CTM.e) / CTM.a,
+      y: (evt.clientY - CTM.f) / CTM.d
+    };
+  }
+
+  function startDrag(evt) { 
+     if (evt.target.classList.contains('draggable')) {
+	selectedElement = element;
+	offset_element = getMousePosition(evt);
+	offset_clipper = getMousePosition(evt);
+	// Get initial translation amount
+	transform_element = element.transform.baseVal.getItem(0);
+	transform_clipper = clipper.transform.baseVal.getItem(0);
+	offset_element.x -= transform_element.matrix.e;
+	offset_element.y -= transform_element.matrix.f;
+	offset_clipper.x -= transform_clipper.matrix.e;
+	offset_clipper.y -= transform_clipper.matrix.f;
+     }
+  }
+  function drag(evt) {
+    if (selectedElement) {
+       evt.preventDefault();
+       var coord = getMousePosition(evt);
+       transform_element.setTranslate(coord.x - offset_element.x, coord.y - offset_element.y);
+       transform_clipper.setTranslate(- coord.x + offset_element.x, - coord.y + offset_element.y);
+    }
+  }
+  function endDrag(evt) {
+    selectedElement=null
+  }
+}
+ 
+   // ]]>
+</script>
+<style>
+// <![CDATA[
+.draggable {
+   cursor: move;
+}
+   // ]]>
+</style>
+<clipPath id="coolclip">
+	<rect id="clippingrectangle" x="20" y="20" width="40" height="40" stroke-width="1" fill="none" stroke="black" />
+</clipPath>
+
+<image id="drag" class="draggable" x="2" y="2" width="98" height="78" href="cat.jpg" preserveAspectRatio="xMidYMid meet" clip-path="url(#coolclip)"/>
+<rect x="20" y="20" width="40" height="40" stroke-width="1" fill="none" stroke="black" />
+</svg>
