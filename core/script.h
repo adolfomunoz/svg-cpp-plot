@@ -1,9 +1,7 @@
 #pragma once
 
 #include "element.h"
-#include "attributes.h"
-#include "presentation-attributes.h"
-#include "text-presentation-attributes.h"
+#include "../attributes/attributes.h"
 #include <sstream>
 #include <array>
 #include <random>

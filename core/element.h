@@ -9,7 +9,7 @@
 #include "object.h"
 #include "object-list.h"
 #include "bounding-box.h"
-#include "attributes.h"
+#include "../attributes/attributes.h"
 
 namespace svg_cpp_plot {
 

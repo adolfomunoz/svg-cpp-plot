@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../core/path.h"
+#include "../primitives/path.h"
 #include <cmath>
 #include <type_traits>
 #include "plot-curve.h"

@@ -2,8 +2,8 @@
 
 #include "transform.h"
 #include "plot-curve.h"
-#include "../core/group-z-ordered.h"
-#include "../core/style.h"
+#include "../primitives/group-z-ordered.h"
+#include "../attributes/style.h"
 #include "transform.h"
 
 namespace svg_cpp_plot {

@@ -2,9 +2,8 @@
 
 #include "transform.h"
 #include "plot-curve.h"
-#include "../core/group.h"
-#include "../core/style.h"
-#include "transform.h"
+#include "../primitives/group.h"
+#include "../attributes/style.h"
 #include <cassert>
 
 namespace svg_cpp_plot {
