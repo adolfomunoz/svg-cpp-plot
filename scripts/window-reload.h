@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../core/script.h"
+#include "script.h"
 
 namespace svg_cpp_plot {
 namespace script {
