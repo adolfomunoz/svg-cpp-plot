@@ -12,9 +12,13 @@ template<typename O = Object>
 class ObjectList {
 	static_assert(std::is_base_of_v<Object,O>,"Should inherit from object");
 protected:
+	virtual void on_add(O& o) {}
+
 	std::list<std::shared_ptr<O>> object_list;
 	O& add_ptr(const std::shared_ptr<O>& o) {
-		object_list.push_back(o); return (*object_list.back());
+		object_list.push_back(o); 
+		on_add(*object_list.back());
+		return (*object_list.back());
 	}
 public:
 	//Add directly the pointer (instancing?)

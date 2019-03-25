@@ -4,10 +4,11 @@
 #include "../attributes/presentation-attributes.h"
 #include "../attributes/text-presentation-attributes.h"
 #include "../attributes/style-attributes.h"
+#include "../attributes/graphical-attributes.h"
 
 namespace svg_cpp_plot {
 
-class Text : public NotTerminal, public Attributes<Text>, public StyleAttributes<Text>, public PresentationAttributes<Text>, public TextPresentationAttributes<Text> {
+class Text : public NotTerminal, public Attributes<Text>, public GraphicalAttributes<Text>, public StyleAttributes<Text>, public PresentationAttributes<Text>, public TextPresentationAttributes<Text> {
 	std::string text_;
 public:
 

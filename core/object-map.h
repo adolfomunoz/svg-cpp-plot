@@ -50,6 +50,32 @@ public:
 		else return default_value;
 	}
 
+	template<typename V> //This is the version for general elements that belong to the inheritance tree
+	V& get_or_set(const std::string& key, const V& value, 
+			typename std::enable_if<std::is_base_of_v<O,std::decay_t<V>>>::type* = nullptr)
+	{
+		auto v = get(key);
+		if (!v) set_pointer(key,std::make_shared<std::decay_t<V>>(value)); 
+		v = get(key); //Should return something, because we have added it above
+		auto ptr_v = std::dynamic_pointer_cast<std::decay_t<V>>(v);
+		if (!ptr_v) throw wrong_object_type();
+		else return (*ptr_v);
+	}
+
+	template<typename V> //This is the version for constant values (strings, integers) that can also be added
+	const V& get_or_set(const std::string& key, const V& value, 
+			typename std::enable_if<(!std::is_base_of_v<O,std::decay_t<V>>) && std::is_same_v<O,Object>>::type* = nullptr)
+	{
+		auto v = get(key);
+		if (!v) set_pointer(key,std::make_shared<ObjectConstant<std::decay_t<V>>>(value)); 
+		v = get(key); //Should return something, because we have added it above
+		auto ptr_v = std::dynamic_pointer_cast<ObjectConstant<std::decay_t<V>>>(v);
+		if (!ptr_v) throw wrong_object_type();
+		else return ptr_v->value();
+	}
+
+
+/*
 	template<typename V>
 	V& get_or_set(const std::string& key, const V& value) {
 		auto v = get(key);
@@ -69,12 +95,12 @@ public:
 		else if constexpr (std::is_same_v<O,Object>) {
 			auto ptr_v = std::dynamic_pointer_cast<ObjectConstant<std::decay_t<V>>>(v);
 			if (!ptr_v) throw wrong_object_type();
-			else return v->value();
+			else return ptr_v->value();
 		}
 		else throw wrong_object_type();
 	}
 
-/*
+
 	template<typename V>
 	V& get_or_set(const std::string& key, V&& value) {
 		if (auto v = get(key)) {

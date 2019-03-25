@@ -6,6 +6,8 @@ namespace svg_cpp_plot {
 
 class NodeBase : public NotTerminal, public ObjectList<Element> {
 public:
+	void on_add(Element& e) { e.parent_ = this; }
+
 	NodeBase(const std::string& tag) : NotTerminal(tag) {}
 	
 	std::string content() const noexcept override {

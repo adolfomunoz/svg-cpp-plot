@@ -5,6 +5,7 @@
 #include <memory>
 #include <list>
 #include <iostream>
+#include <iomanip>
 
 #include "object.h"
 #include "object-list.h"
@@ -13,11 +14,21 @@
 
 namespace svg_cpp_plot {
 
-class Element : public AttributesBase, public Object {
+class NodeBase;
+
+class Element : public AttributesBase, public Object {	
 	std::string tag_;
-	
+	NodeBase* parent_;	
+	friend class NodeBase;
 public:
-	Element(const std::string& tag) : tag_(tag) { }
+	NodeBase* parent() const noexcept { return parent_; }
+
+	Element(const std::string& tag) : tag_(tag),parent_(nullptr) { 
+		static unsigned long ids = 0;
+		std::stringstream ss;
+		ss << "id" << std::setw(10) << std::setfill('0') << ids++;
+		this->get_or_set("id",ss.str());	
+	}
 	
 
 	constexpr const std::string& tag() const noexcept {
