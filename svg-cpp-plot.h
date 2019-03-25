@@ -23,3 +23,4 @@
 #include "scripts/for-all.h"
 
 #include "utils/browse.h"
+#include "utils/watch.h"
