@@ -24,6 +24,10 @@ public:
 		return this->set("id",value);
 	}
 
+	std::string id() const noexcept {
+		return static_cast<const T*>(this)->get_default("id",std::string());
+	}
+
 	T& lang(const std::string& value) noexcept {
 		return this->set("lang",value);
 	}

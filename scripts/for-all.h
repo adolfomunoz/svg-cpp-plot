@@ -10,12 +10,12 @@ class ForAll : public Code {
 public:
 	ForAll(const std::string& selector, std::shared_ptr<CodeFunction<1>> code) : selector(selector), code(code) { }
 	template<typename C, typename = std::enable_if_t<std::is_base_of_v<CodeFunction<1>,C>> >
-	ForAll(const std::string& selector, const C& code) : ForAll(selector,code) { }
+	ForAll(const std::string& selector, const C& code) : ForAll(selector,std::make_shared<C>(code)) { }
 
 	std::string to_string() const noexcept override {
 		std::string param = random_parameter_name();
 		std::stringstream output;
-		output << "querySelectorAll(\"" << selector <<"\").forEach(function("<<param<<") {"<<std::endl;
+		output << "document.querySelectorAll(\"" << selector <<"\").forEach(function("<<param<<") {"<<std::endl;
 		output << code->apply({param})->indented()<< std::endl;
 		output << "});"<<std::endl;
 		return output.str();

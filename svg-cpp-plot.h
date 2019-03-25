@@ -18,6 +18,7 @@
 
 #include "scripts/window-reload.h"
 #include "scripts/set-timeout.h"
+#include "scripts/set-interval.h"
 #include "scripts/reload.h"
 #include "scripts/for-all.h"
 
