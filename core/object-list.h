@@ -15,6 +15,7 @@ protected:
 	virtual void on_add(O& o) {}
 
 	std::list<std::shared_ptr<O>> object_list;
+	
 	O& add_ptr(const std::shared_ptr<O>& o) {
 		object_list.push_back(o); 
 		on_add(*object_list.back());

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "color.h"
+#include "attribute-list.h"
 #include <initializer_list>
 
 namespace svg_cpp_plot {
@@ -47,9 +48,7 @@ public:
 	}
 
 	T& stroke_dasharray(std::initializer_list<float> l) noexcept {
-		std::stringstream sstr;
-		for (float x : l) sstr<<x<<" ";
-		return static_cast<T*>(this)->set("stroke-dasharray",sstr.str());
+		return t()->set("stroke-dasharray",AttributeList<float>(l));
 	}
 };
 
