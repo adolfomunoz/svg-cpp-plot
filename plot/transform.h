@@ -16,7 +16,7 @@ std::tuple<float, float> point_3d_to_2d(const P& p) {
 
 using Matrix = std::array<std::array<float,4>,4>;
 
-namespace matrix {
+namespace matrix3 {
 constexpr Matrix oblique   = { {{1,0,1.0/sqrt(2),0},{0,1,1.0/sqrt(2),0},{0, 0, 1, 0},{0,0,0,1}} };
 constexpr Matrix isometric = { {{1.0/sqrt(2),0,-1.0/sqrt(2),0},
 	                       {1.0/sqrt(6),2.0/sqrt(6),1.0/sqrt(6),0},

@@ -24,7 +24,7 @@ using namespace svg_cpp_plot;
 int main(int argc, char** argv) {
 	SVG svg;
 	
-	svg.add(plot_curve_derivative_3d(spiral(1,1), spiral_derivative(1,1),0,12*M_PI,matrix::isometric))
+	svg.add(plot_curve_derivative_3d(spiral(1,1), spiral_derivative(1,1),0,12*M_PI,matrix3::isometric))
 		   .stroke(green).stroke_width(0.1);
 	std::ofstream f(std::string(argv[0])+".svg");
 	f<<svg.automatic_viewBox();

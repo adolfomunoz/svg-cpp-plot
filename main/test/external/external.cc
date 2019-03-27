@@ -11,7 +11,7 @@ int main(int argc, char** argv) {
 	std::string inner_name = std::string(argv[0])+"_inner.svg";
 	std::ofstream fin(inner_name);
 	fin<<svg_inner.automatic_viewBox();
-	SVG svg; svg.add(Image(inner_name)); svg.set_viewBox(svg_inner.viewBox());
+	SVG svg; svg.add(Image(inner_name)); svg.viewBox(svg_inner.viewBox());
 	std::ofstream f(std::string(argv[0])+".svg");
 	f<<svg;
 }

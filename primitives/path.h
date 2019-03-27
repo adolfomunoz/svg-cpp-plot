@@ -3,11 +3,12 @@
 #include "../core/element.h"
 #include "../attributes/presentation-attributes.h"
 #include "../attributes/style-attributes.h"
+#include "../attributes/graphical-attributes.h"
 #include <type_traits>
 
 namespace svg_cpp_plot {
 
-class Path : public Terminal, public Attributes<Path>, public StyleAttributes<Path>, public PresentationAttributes<Path> {
+class Path : public Terminal, public Attributes<Path>, public GraphicalAttributes<Path>, public StyleAttributes<Path>, public PresentationAttributes<Path> {
 public:
 	//Starting point
 	Path(float x, float y) : Terminal("path") 

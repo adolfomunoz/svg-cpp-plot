@@ -4,10 +4,11 @@
 #include "../attributes/presentation-attributes.h"
 #include "../attributes/style-attributes.h"
 #include "../attributes/geometry-attributes.h"
+#include "../attributes/graphical-attributes.h"
 
 namespace svg_cpp_plot {
 
-class Rect : public Terminal, public Attributes<Rect>, public StyleAttributes<Rect>, public PresentationAttributes<Rect>, public GeometryAttributes<Rect> {
+class Rect : public Terminal, public Attributes<Rect>, public GraphicalAttributes<Rect>, public StyleAttributes<Rect>, public PresentationAttributes<Rect>, public GeometryAttributes<Rect> {
 public:
 	Rect(float x1, float y1, float x2, float y2) : Terminal("rect")  {
 		rect(x1,y1,x2,y2);

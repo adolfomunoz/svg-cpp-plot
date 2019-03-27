@@ -3,10 +3,11 @@
 #include "../core/element.h"
 #include "../attributes/presentation-attributes.h"
 #include "../attributes/style-attributes.h"
+#include "../attributes/graphical-attributes.h"
 
 namespace svg_cpp_plot {
 
-class Poly : public Terminal, public Attributes<Poly>, public StyleAttributes<Poly>, public PresentationAttributes<Poly> {
+class Poly : public Terminal, public Attributes<Poly>, public GraphicalAttributes<Poly>, public StyleAttributes<Poly>, public PresentationAttributes<Poly> {
 public:
 	//PointList is any iterable thing of std::tuple<float,float> (or point, generally speaking)
 	template<typename PointList> 

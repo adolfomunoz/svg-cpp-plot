@@ -10,12 +10,12 @@ int main(int argc, char** argv) {
 	Circle c1(0,0,1); c1.fill(red);
 	Circle c2(0.5,0.5,1.2); c2.fill(yellow);
 	Circle c3(1.1,1.1,1.4); c3.fill(green);
-	g.set("transform","translate(-2,0)");
-	zg.set("transform","translate(2,0)");
+	g.transform(translate(-2));
+	zg.transform(translate(2));
 	g.add(c1); zg.add(c1,-1);
 	g.add(c2); zg.add(c2, 0);
 	g.add(c3); zg.add(c3, 1);
 	
 	std::ofstream f(std::string(argv[0])+".svg");
-	f<<svg.set_viewBox(BoundingBox(-1.5,-1.5,3,3)); //BoundingBox does not understand transforms
+	f<<svg.viewBox({-1.5,-1.5,3,3}); //BoundingBox does not understand transforms
 }

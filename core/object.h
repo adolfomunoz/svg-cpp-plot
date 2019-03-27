@@ -17,6 +17,7 @@ public:
 	ObjectConstant(T&& t) : t(std::forward<T>(t)) { }
 	std::string to_string() const noexcept override { return std::to_string(t); }
 	const T& value() const noexcept { return t; }
+	T& value() noexcept { return t; }
 };
 
 template<> 
@@ -28,6 +29,7 @@ public:
 	std::string to_string() const noexcept override { return t; }
 	bool operator==(const ObjectConstant<std::string>& that) { return this->t == that.t; }
 	const std::string& value() const noexcept { return t; }
+	std::string& value() noexcept { return t; }
 };
 
 #define ENUM_TYPE(T) \

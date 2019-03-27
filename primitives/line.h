@@ -3,10 +3,11 @@
 #include "../core/element.h"
 #include "../attributes/presentation-attributes.h"
 #include "../attributes/style-attributes.h"
+#include "../attributes/graphical-attributes.h"
 
 namespace svg_cpp_plot {
 
-class Line : public Terminal, public Attributes<Line>, public StyleAttributes<Line>, public PresentationAttributes<Line> {
+class Line : public Terminal, public Attributes<Line>, public GraphicalAttributes<Line>, public StyleAttributes<Line>, public PresentationAttributes<Line> {
 public:
 	Line(float x1, float y1, float x2, float y2) : Terminal("line") 
 	{

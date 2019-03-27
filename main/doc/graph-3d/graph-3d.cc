@@ -19,7 +19,7 @@ auto spiral_derivative(float r, float h, float p) {
 using namespace svg_cpp_plot;
 int main(int argc, char** argv) {
 	SVG svg;
-	Matrix m = matrix::oblique;
+	Matrix m = matrix3::oblique;
 	Group& group = svg.add(Group()); 
 	Graph3D& graph = svg.add(Graph3D(m));
 	group.add(plot_curve_derivative_3d(spiral(1,1,0), spiral_derivative(1,1,0),0,14*M_PI,m))

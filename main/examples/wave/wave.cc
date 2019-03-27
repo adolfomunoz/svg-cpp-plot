@@ -25,7 +25,7 @@ int main(int argc, char** argv) {
 	}
 	
 	SVG svg;
-	Graph3D& graph = svg.add(Graph3D(matrix::oblique*matrix::zyx));
+	Graph3D& graph = svg.add(Graph3D(matrix3::oblique*matrix3::zyx));
 
 	float max_power_x = 0.0;
 	for (float power_x: powers_x) if (power_x > max_power_x) max_power_x = power_x;

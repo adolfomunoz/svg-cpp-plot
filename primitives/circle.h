@@ -3,10 +3,11 @@
 #include "../core/element.h"
 #include "../attributes/presentation-attributes.h"
 #include "../attributes/style-attributes.h"
+#include "../attributes/graphical-attributes.h"
 
 namespace svg_cpp_plot {
 
-class Circle : public Terminal, public Attributes<Circle>, public StyleAttributes<Circle>, public PresentationAttributes<Circle> {
+class Circle : public Terminal, public Attributes<Circle>, public GraphicalAttributes<Circle>, public StyleAttributes<Circle>, public PresentationAttributes<Circle> {
 public:
 	Circle(float cx, float cy, float r) : Terminal("circle") 
 	{

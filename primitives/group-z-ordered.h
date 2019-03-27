@@ -3,11 +3,12 @@
 #include "../core/element.h"
 #include "../attributes/presentation-attributes.h"
 #include "../attributes/style-attributes.h"
+#include "../attributes/graphical-attributes.h"
 #include <map>
 
 namespace svg_cpp_plot {
 
-class GroupZOrdered : public NotTerminal, public Attributes<GroupZOrdered>, public StyleAttributes<GroupZOrdered>, public PresentationAttributes<GroupZOrdered> {
+class GroupZOrdered : public NotTerminal, public Attributes<GroupZOrdered>, public GraphicalAttributes<GroupZOrdered>, public StyleAttributes<GroupZOrdered>, public PresentationAttributes<GroupZOrdered> {
 	std::multimap<float, std::shared_ptr<Element>> children;
 	
 private:
