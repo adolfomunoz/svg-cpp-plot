@@ -41,7 +41,9 @@ public:
 
 	std::string list_to_string(const std::string& sep) const noexcept {
 		std::stringstream sstr;
-		for (const auto& o: object_list) sstr<<o->to_string()<<sep;
+		auto it = object_list.begin();
+		sstr<<(*it)->to_string(); ++it;
+		while (it != object_list.end()) { sstr<<sep<<(*it)->to_string(); ++it; }
 		return sstr.str();
 	}
 };

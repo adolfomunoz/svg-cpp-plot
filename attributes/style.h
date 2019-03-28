@@ -41,6 +41,14 @@ public:
 	StyleEntry& hover() noexcept {
 		return pseudoclass("hover");
 	}
+
+	StyleEntry& nth_of_type(unsigned int i, unsigned int n = 0) {
+		std::stringstream sstr;
+		sstr<<"nth-of-type(";
+		if (n>1) sstr<<n<<"n+";
+		sstr<<i<<")";
+		return pseudoclass(sstr.str());
+	}
 };
 
 class Style : public NotTerminal, public Attributes<Style> {
