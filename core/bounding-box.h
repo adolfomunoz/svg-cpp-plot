@@ -36,6 +36,9 @@ public:
 		return join(BoundingBox(p,p));
 	}
 
+	float width() const noexcept { return std::get<0>(max())-std::get<0>(min()); }
+	float height() const noexcept { return std::get<1>(max())-std::get<1>(min()); }
+
 	//Expand by a distance in x and y
 	BoundingBox& expand(float dx, float dy) noexcept {
 		std::get<0>(min_)-=dx;

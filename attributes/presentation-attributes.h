@@ -40,15 +40,23 @@ public:
 	}
 
 	T& stroke_linecap(const StrokeLinecap& w) noexcept {
-		return t()->set("stroke_linecap",w); 		
+		return t()->set("stroke-linecap",w); 		
 	}
 
 	StrokeLinecap stroke_linecap() const noexcept {
-		return t()->get_default("stroke_linecap",stroke_linecap_butt);
+		return t()->get_default("stroke-linecap",stroke_linecap_butt);
 	}
 
 	T& stroke_dasharray(std::initializer_list<float> l) noexcept {
 		return t()->set("stroke-dasharray",AttributeList<float>(l));
+	}
+
+	T& stroke_opacity(float v) noexcept {
+		return t()->set("stroke-opacity",v);
+	}
+
+	T& fill_opacity(float v) noexcept {
+		return t()->set("fill-opacity",v);
 	}
 };
 

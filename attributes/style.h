@@ -4,6 +4,7 @@
 #include "attributes.h"
 #include "presentation-attributes.h"
 #include "text-presentation-attributes.h"
+#include "graphical-attributes.h"
 #include <memory>
 
 namespace svg_cpp_plot {
@@ -15,14 +16,14 @@ public:
 	}
 };
 
-class ElementStyle : public StyleEntryBase, public Attributes<ElementStyle>, public PresentationAttributes<ElementStyle>, public TextPresentationAttributes<ElementStyle> {
+class ElementStyle : public StyleEntryBase, public Attributes<ElementStyle>, public GraphicalAttributes<ElementStyle>, public PresentationAttributes<ElementStyle>, public TextPresentationAttributes<ElementStyle> {
 };
 
 class Style;
 class StyleEntry;
 StyleEntry& add(Style& style, const std::string& id);
 
-class StyleEntry : public StyleEntryBase, public Attributes<StyleEntry>, public PresentationAttributes<StyleEntry>, public TextPresentationAttributes<StyleEntry> {
+class StyleEntry : public StyleEntryBase, public Attributes<StyleEntry>, public GraphicalAttributes<StyleEntry>, public PresentationAttributes<StyleEntry>, public TextPresentationAttributes<StyleEntry> {
 	std::string id_;
 	Style& style_;
 public:
@@ -56,6 +57,12 @@ public:
 		if (classname.empty()) return add("");
 		else return add(std::string(".")+classname);
 	}
+
+	StyleEntry& add_id(const std::string& idname) noexcept {
+		if (idname.empty()) return add("");
+		else return add(std::string("#")+idname);
+	}
+
 
 	std::string content() const noexcept override {
 		std::stringstream sstr;

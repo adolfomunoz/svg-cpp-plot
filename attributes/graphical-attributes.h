@@ -84,6 +84,7 @@ std::shared_ptr<Transform> rotate(float a, float x, float y) { return std::make_
 
 
 
+ENUM_TYPE(VectorEffect) vector_effect_default("default"), non_scaling_stroke("non-scaling-stroke");
 
 
 
@@ -105,17 +106,25 @@ public:
 		}
 	}
 
-	T& transform(const AttributeList<Transform>& tr) {
+	T& transform(const AttributeList<Transform>& tr) noexcept {
 		return t()->set("transform",tr);
 	}
 
 	template<typename Q, typename... Qs>
-	T& transform(std::tuple<Q,Qs...> tr) {
+	T& transform(std::tuple<Q,Qs...> tr) noexcept {
 		return this->transform(AttributeList<Transform>(tr));
 	}
 
 	AttributeList<Transform>& transform() {
 		return t()->get_or_set("transform",AttributeList<Transform>());
+	}
+
+	T& opacity(float f) noexcept {
+		return t()->set("opacity",f);
+	}
+
+	T& vector_effect(const VectorEffect& ve) noexcept {
+		return t()->set("vector-effect",ve);
 	}
 };
 

@@ -12,16 +12,28 @@ Path plot_function_derivative(const F& f, const DF& df, float xmin, float xmax, 
 	       "Function f should be a unary floating point function returning floating point");	
 	static_assert(std::is_floating_point_v<decltype(f(xmin))>,
 	       "Derivative df should be a unary floating point function returning floating point");
-	
+
 	return plot_curve_derivative([&f] (float x) { return std::tuple(x,f(x)); }, [&df] (float x) { return std::tuple(1.0f,df(x)); },
 		xmin, xmax, nsamples);
-}	
+}
+
+template<typename F, typename DF>
+Path plot_function_derivative_area(const F& f, const DF& df, float xmin, float xmax, unsigned int nsamples = 100) {
+	return plot_function_derivative(f,df,xmin,xmax,nsamples).line_to(xmax,0).line_to(xmin,0).close();
+}
 
 template<typename F>
-Path plot_function(const F& f, float xmin, float xmax, unsigned int nsamples = 100) {
+auto plot_function(const F& f, float xmin, float xmax, unsigned int nsamples = 100) {
 	float dx = (xmax - xmin)/float(nsamples-1);
 	return plot_function_derivative(f,[&f,dx] (float x) { return (f(x+0.05f*dx)-f(x))/(0.05f*dx); },xmin, xmax, nsamples);
 }
+
+template<typename F>
+auto plot_function_area(const F& f, float xmin, float xmax, unsigned int nsamples = 100) {
+	float dx = (xmax - xmin)/float(nsamples-1);
+	return plot_function_derivative_area(f,[&f,dx] (float x) { return (f(x+0.05f*dx)-f(x))/(0.05f*dx); },xmin, xmax, nsamples);
+}
+
 
 /*
 //Took a while but I have nailed the maths. We need the derivative in this case but it is calculated numerically below 

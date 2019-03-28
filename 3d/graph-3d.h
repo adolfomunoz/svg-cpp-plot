@@ -1,7 +1,6 @@
 #pragma once
 
-#include "transform.h"
-#include "plot-curve.h"
+#include "../plot/plot-curve.h"
 #include "../primitives/group-z-ordered.h"
 #include "../attributes/style.h"
 #include "transform.h"

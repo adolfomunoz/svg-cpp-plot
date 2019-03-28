@@ -3,7 +3,7 @@
 #include "../primitives/path.h"
 #include <cmath>
 #include <type_traits>
-#include "plot-curve.h"
+#include "../plot/plot-curve.h"
 #include "transform.h"
 
 namespace svg_cpp_plot {
