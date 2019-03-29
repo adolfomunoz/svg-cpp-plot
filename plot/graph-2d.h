@@ -62,6 +62,18 @@ public:
 	}
 
 	template<typename F>
+	Graph2D& add_plot(const Path& p, bool include_area = true) {
+		plots_.add(p).class_("plot");
+		if (include_area) {
+			Path a = p;
+			a.vertical_line_to(0).horizontal_line_to(std::get<0>(p.first_point())).close();
+			areaplots_.add(a).class_("plotarea");
+		} else {
+			areaplots_.add(Path(0,0)).stroke_width(0).fill(none);
+		}
+	}
+
+	template<typename F>
 	Graph2D& plot_function(const F& f, float xmin, float xmax, unsigned int nsamples = 100) {
 		plots_.add(svg_cpp_plot::plot_function(f,xmin,xmax,nsamples)).class_("plot");
 		areaplots_.add(svg_cpp_plot::plot_function_area(f,xmin,xmax,nsamples)).class_("plotarea");

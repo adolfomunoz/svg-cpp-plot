@@ -19,6 +19,13 @@ public:
 		fill(none); 
 	}
 
+	std::tuple<float, float> first_point() {
+		std::istringstrieam sstr(get_default("d",std::string("")));
+		std::tuple<float,float> p; char M;
+		sstr>>M>>std::get<0>(p)>>std::get<1>(p);
+		return p;
+	}
+
 	Path(const Path&) = default;
 	Path(Path&&) = default;
 	Path& operator=(const Path&) = default;
@@ -44,7 +51,7 @@ public:
 		return (*this);
 	}
 
-	Path& vertial_line_to(float y) {
+	Path& vertical_line_to(float y) {
 		std::stringstream sstr;
 		sstr<<get_default("d",std::string(""))<<"V "<<y<<" ";
 		set("d",sstr.str());
