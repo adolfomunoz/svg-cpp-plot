@@ -21,13 +21,13 @@ class ElementStyle : public StyleEntryBase, public Attributes<ElementStyle>, pub
 
 class Style;
 class StyleEntry;
-StyleEntry& add(Style& style, const std::string& id);
+StyleEntry& add(Style* style, const std::string& id);
 
 class StyleEntry : public StyleEntryBase, public Attributes<StyleEntry>, public GraphicalAttributes<StyleEntry>, public PresentationAttributes<StyleEntry>, public TextPresentationAttributes<StyleEntry> {
 	std::string id_;
-	Style& style_;
+	Style* style_;
 public:
-	StyleEntry(const std::string& id, Style& style) : id_(id), style_(style) {}
+	StyleEntry(const std::string& id, Style* style) : id_(id), style_(style) {}
 	constexpr const std::string& id() const noexcept { return id_; }
 
 	StyleEntry& nest(const std::string& nested) noexcept {
@@ -49,6 +49,8 @@ public:
 		sstr<<i<<")";
 		return pseudoclass(sstr.str());
 	}
+
+	friend class Style;
 };
 
 class Style : public NotTerminal, public Attributes<Style> {
@@ -58,7 +60,7 @@ public:
 	Style() : NotTerminal("style") { set("type","text/css"); }
 
 	StyleEntry& add(const std::string& id) noexcept {
-		return entries.get_or_set(id,StyleEntry(id,*this));
+		return entries.get_or_set(id,StyleEntry(id,this));
 	}
 	
 	StyleEntry& add_class(const std::string& classname) noexcept {
@@ -79,10 +81,32 @@ public:
 		sstr<<"/* ]]> */"<<std::endl;
 	       	return sstr.str();	
 	}
+
+	Style(const Style& that) : NotTerminal("style"), entries(that.entries) {
+		this->entries.for_all([this] (StyleEntry& se) { se.style_ = this; });
+	}
+
+	Style(Style&& that) : NotTerminal("style"), entries(std::move(that.entries)) {
+		this->entries.for_all([this] (StyleEntry& se) { se.style_ = this; });
+	}
+
+
+	Style& operator=(const Style& that) {
+		this->entries = that.entries;
+		this->entries.for_all([this] (StyleEntry& se) { se.style_ = this; });
+		return (*this);	
+	}
+
+	Style& operator=(Style&& that) {
+		this->entries = std::move(that.entries);
+		this->entries.for_all([this] (StyleEntry& se) { se.style_ = this; });
+		return (*this);	
+	}
+
 };
 
-inline StyleEntry& add(Style& style, const std::string& id) {
-	return style.add(id);
+inline StyleEntry& add(Style* style, const std::string& id) {
+	return style->add(id);
 }
 
 }

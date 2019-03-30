@@ -10,7 +10,13 @@ int main(int argc, char** argv) {
 	//Anything can be added to the graph itself (it is a group).
 	graph.add(Rect(-10,-10,110,110)).stroke(black).stroke_width(0.5).fill(none);
 	//Besides that, there are specialized methods for most things that take care of everything, including plotting functions, axis, automatic styling, cutting of borders...
-	graph.plot_function([] (float x) { return sin(x); }).plot_function([] (float x) { return 1.3*cos(x); }).axis().ticks(5,5).xlabels().ylabels();
+	graph.add_plot(plot_function([] (float x) { return sin(x); },-10,10))
+	     .add_plot(plot_function([] (float x) { return 1.3*cos(x); },-10,10))
+	     .axis().
+	     ticks(5,5).
+	     xlabels().
+	     ylabels();
+	
 	//Styling can also be done (plots are all the plots)
 	graph.graph_style().add_class("plot").hover().stroke_width(10);
 	

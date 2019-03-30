@@ -19,8 +19,8 @@ public:
 		fill(none); 
 	}
 
-	std::tuple<float, float> first_point() {
-		std::istringstrieam sstr(get_default("d",std::string("")));
+	std::tuple<float, float> first_point() const {
+		std::istringstream sstr(get_default("d",std::string("")));
 		std::tuple<float,float> p; char M;
 		sstr>>M>>std::get<0>(p)>>std::get<1>(p);
 		return p;

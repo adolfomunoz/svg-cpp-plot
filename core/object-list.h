@@ -39,6 +39,11 @@ public:
 		return static_cast<T&>(add_ptr(std::make_shared<std::decay_t<T>>(std::forward<T>(t))));
 	}
 
+	template<typename P>
+	void remove_if(const P& p) {
+		object_list.remove_if([&p] (const std::shared_ptr<O>& o) { return p(*o); });
+	}
+
 	std::string list_to_string(const std::string& sep) const noexcept {
 		std::stringstream sstr;
 		auto it = object_list.begin();

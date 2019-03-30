@@ -28,6 +28,11 @@ public:
 		}
 	}
 
+	template<typename F>
+	void for_all(const F& f) {
+		for (auto const& i : object_map) f(*(i.second));
+	}
+
 	void set_pointer(const std::string& key, std::shared_ptr<O> object) noexcept {
 		if (object) object_map[key]=object;
 	}
