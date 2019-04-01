@@ -45,10 +45,10 @@ public:
 		plot.nth_of_type(1,7).stroke(black);
 		plot.nth_of_type(2,7).stroke(grey);
 		plot.nth_of_type(3,7).stroke(black).stroke_dasharray({2*w,2*w});
-		plot.nth_of_type(4,7).stroke(black).stroke_dasharray({4*w,2*w,2*w,4*w});
-		plot.nth_of_type(3,7).stroke(black).stroke_dasharray({4*w,4*w});
-		plot.nth_of_type(4,7).stroke(black).stroke_dasharray({8*w,4*w,4*w,8*w});
-		plot.nth_of_type(3,7).stroke(grey).stroke_dasharray({2*w,2*w});
+		plot.nth_of_type(4,7).stroke(grey).stroke_dasharray({2*w,2*w});
+		plot.nth_of_type(5,7).stroke(black).stroke_dasharray({4*w,2*w,2*w,4*w});
+		plot.nth_of_type(6,7).stroke(black).stroke_dasharray({4*w,4*w});
+		plot.nth_of_type(7,7).stroke(black).stroke_dasharray({8*w,4*w,4*w,8*w});
 
 		s.add_class("plotarea").stroke_width(0).fill(none);
 
