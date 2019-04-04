@@ -17,6 +17,7 @@ class Graph2D : public Group {
 	Rect& border_;
 	Group& areaplots_;
 	Group& plots_;
+	Rect& background_;
 
 	auto xtick(float xlocal, float height, float ylocal, const std::string& classname) {
 		return this->add(Line(xlocal,ylocal-0.5f*height,xlocal,ylocal+0.5f*height)).class_(classname);
@@ -42,8 +43,8 @@ public:
 		return (*this);
 	}
 
-	Graph2D& add_plot(const Path& p, bool include_area = true) {
-		plots_.add(p).class_("plot");
+	Path& add_plot(const Path& p, bool include_area = true) {
+		Path& s = plots_.add(p).class_("plot");
 		if (include_area) {
 			Path a = p;
 			a.vertical_line_to(0).horizontal_line_to(std::get<0>(p.first_point())).close();
@@ -51,26 +52,26 @@ public:
 		} else {
 			areaplots_.add(Path(0,0)).stroke_width(0).fill(none);
 		}
-		return (*this);
+		return s;
 	}
 
 	Graph2D(const std::tuple<float, float>& size, const BoundingBox& bb):
-	       size(size),bb(bb),style_(Group::add(Style())),area_(Group::add(Group())),border_(Group::add(Rect({0,0},size))),areaplots_(area_.add(Group())),plots_(area_.add(Group()))
+	       size(size),bb(bb),style_(Group::add(Style())),area_(Group::add(Group())),border_(Group::add(Rect({0,0},size))),areaplots_(area_.add(Group())),plots_(area_.add(Group())),background_(area_.add(Rect(-2.e10,-2.e10,2.e10,2.e10)))
 	{
 		border_.style().fill(none); //<-- Using local style has the highest priority
 		border_.class_("border");
-		area_.id("area");
+		area_.class_("area").style().pointer_events(pointer_events_all);  //<-- Using local style has the highest priority
+		background_.class_("background").style().pointer_events(pointer_events_all);  //<-- Using local style has the highest priority
 		area_.transform({scale(std::get<0>(size)/bb.width(),std::get<1>(size)/bb.height()),translate(-std::get<0>(bb.min()),-std::get<1>(bb.min()))});
 		area_.clip_path().add(border()).transform({translate(std::get<0>(bb.min()),std::get<1>(bb.min())),scale(bb.width()/std::get<0>(size),bb.height()/std::get<1>(size))});
+		
 		graph_style(svg_cpp_plot::graph_style::Default());
 	}
 
 
 	Graph2D& axis(float x = 0.0f, float y = 0.0f) {
-		Group g;
-		g.add(Line(x,-2.e10,x,2.e10));
-		g.add(Line(-2.e10,y,2.e10,y));
-		area().add(g).class_("axis");
+		area().add(Line(x,-2.e10,x,2.e10)).class_("axis");
+		area().add(Line(-2.e10,y,2.e10,y)).class_("axis");
 		return (*this);
 	}
 
@@ -96,7 +97,7 @@ public:
 		float dx = (std::get<0>(bb.max())-std::get<0>(bb.min()))/float(count - 1);
 		for (int i = 0;i<count;++i) {
 			std::stringstream stext;	stext<<(std::get<0>(bb.min())+i*dx);
-			add(Text(i*dxlocal,std::get<1>(size) - ylocal,stext.str())).class_("label").style().text_anchor(text_anchor_middle).dominant_baseline(dominant_baseline_hanging);
+			add(Text(i*dxlocal,std::get<1>(size) - ylocal,stext.str())).class_({"label","xlabel"}).style().text_anchor(text_anchor_middle).dominant_baseline(dominant_baseline_hanging);
 		}
 		return (*this);
 	}
@@ -106,7 +107,7 @@ public:
 		float dy = (std::get<1>(bb.max())-std::get<1>(bb.min()))/float(count - 1);
 		for (int i = 0;i<count;++i) {
 			std::stringstream stext;	stext<<(std::get<1>(bb.min())+i*dy);
-			add(Text(xlocal, std::get<1>(size) - i*dylocal,stext.str())).class_("label").style().text_anchor(text_anchor_end).dominant_baseline(dominant_baseline_middle);
+			add(Text(xlocal, std::get<1>(size) - i*dylocal,stext.str())).class_({"label","ylabel"}).style().text_anchor(text_anchor_end).dominant_baseline(dominant_baseline_middle);
 		}
 		return (*this);
 	}

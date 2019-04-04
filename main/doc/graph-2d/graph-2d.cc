@@ -10,14 +10,11 @@ int main(int argc, char** argv) {
 	//Anything can be added to the graph itself (it is a group).
 	graph.add(Rect(-10,-10,110,110)).stroke(black).stroke_width(0.5).fill(none);
 	//Besides that, there are specialized methods for most things that take care of everything, including plotting functions, axis, automatic styling, cutting of borders...
-	graph.add_plot(plot_function([] (float x) { return sin(x); },-10,10))
-	     .add_plot(plot_function([] (float x) { return 1.3*cos(x+0.3); },-10,10))
-	     .add_plot(plot_function_derivative([] (float x) { return 0.5f*x*cos(x); },[] (float x) { return 0.5f*cos(x) - 0.5f*x*sin(x); },-10,10))
-	     .add_plot(plot_function([] (float x) { return 0.2f*cos(11.0f*x); },-10,10,1000))
-	     .axis().
-	     ticks(5,5).
-	     xlabels().
-	     ylabels();
+	graph.add_plot(plot_function([] (float x) { return sin(x); },-10,10));
+	graph.add_plot(plot_function([] (float x) { return 1.3*cos(x+0.3); },-10,10));
+	graph.add_plot(plot_function_derivative([] (float x) { return 0.5f*x*cos(x); },[] (float x) { return 0.5f*cos(x) - 0.5f*x*sin(x); },-10,10));
+	graph.add_plot(plot_function([] (float x) { return 0.2f*cos(11.0f*x); },-10,10,1000));
+	graph.axis().ticks(2,2).xlabels().ylabels();
 	
 	//Styling can also be done (plot represents all the plots)
 	graph.graph_style().add_class("plot").hover().stroke_width(10);
@@ -25,6 +22,7 @@ int main(int argc, char** argv) {
 	std::ofstream f(std::string(argv[0])+".svg");
 	f<<svg.viewBox(BoundingBox(-11,-11,111,111)); //BoundingBox does not understand transforms
 
+	//Styling can also be done with pre-defined graph styles.
 	graph.graph_style(graph_style::GrayScale());
 	std::ofstream fg(std::string(argv[0])+"-bw.svg");
 	fg<<svg;

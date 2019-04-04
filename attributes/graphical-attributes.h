@@ -85,6 +85,11 @@ std::shared_ptr<Transform> rotate(float a, float x, float y) { return std::make_
 
 
 ENUM_TYPE(VectorEffect) vector_effect_default("default"), non_scaling_stroke("non-scaling-stroke");
+ENUM_TYPE(PointerEvents) pointer_events_auto("auto"), pointer_events_none("none"), pointer_events_visible_painted("visiblePainted"), pointer_events_visible_fill("visibleFill"), pointer_events_visible_stroke("visibleStroke"), pointer_events_painted("painted"), pointer_events_fill("fill"), pointer_events_stroke("stroke"), pointer_events_all("all");  
+
+
+
+
 
 
 
@@ -125,6 +130,10 @@ public:
 
 	T& vector_effect(const VectorEffect& ve) noexcept {
 		return t()->set("vector-effect",ve);
+	}
+
+	T& pointer_events(const PointerEvents& pe) noexcept {
+		return t()->set("pointer-events",pe);
 	}
 };
 
