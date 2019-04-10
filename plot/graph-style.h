@@ -25,6 +25,17 @@ public:
 		plot.nth_of_type(6,7).stroke(orange);
 		plot.nth_of_type(7,7).stroke(blue);
 
+		auto& points = s.add_class("points");
+		points.nest("*").stroke_width(float(std::get<1>(size))/float(10)).stroke_linecap(stroke_linecap_round);
+		points.nth_of_type(1,7).nest("*").stroke(red);
+		points.nth_of_type(2,7).nest("*").stroke(yellow);
+		points.nth_of_type(3,7).nest("*").stroke(pink);
+		points.nth_of_type(4,7).nest("*").stroke(green);
+		points.nth_of_type(5,7).nest("*").stroke(purple);
+		points.nth_of_type(6,7).nest("*").stroke(orange);
+		points.nth_of_type(7,7).nest("*").stroke(blue);
+
+
 		s.add_class("plotarea").stroke_width(0).fill(none);
 
 		s.add_class("axis").stroke_linecap(stroke_linecap_round).stroke_width(float(std::get<1>(size))/float(40)).stroke(black);

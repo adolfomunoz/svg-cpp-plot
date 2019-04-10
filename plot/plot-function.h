@@ -17,10 +17,12 @@ Path plot_function_derivative(const F& f, const DF& df, float xmin, float xmax, 
 		xmin, xmax, nsamples);
 }
 
+/**
 template<typename F, typename DF>
 Path plot_function_derivative_area(const F& f, const DF& df, float xmin, float xmax, unsigned int nsamples = 100) {
 	return plot_function_derivative(f,df,xmin,xmax,nsamples).line_to(xmax,0).line_to(xmin,0).close();
 }
+**/
 
 template<typename F>
 auto plot_function(const F& f, float xmin, float xmax, unsigned int nsamples = 100) {
@@ -28,11 +30,13 @@ auto plot_function(const F& f, float xmin, float xmax, unsigned int nsamples = 1
 	return plot_function_derivative(f,[&f,dx] (float x) { return (f(x+0.05f*dx)-f(x))/(0.05f*dx); },xmin, xmax, nsamples);
 }
 
+/**
 template<typename F>
 auto plot_function_area(const F& f, float xmin, float xmax, unsigned int nsamples = 100) {
 	float dx = (xmax - xmin)/float(nsamples-1);
 	return plot_function_derivative_area(f,[&f,dx] (float x) { return (f(x+0.05f*dx)-f(x))/(0.05f*dx); },xmin, xmax, nsamples);
 }
+**/
 
 
 /*

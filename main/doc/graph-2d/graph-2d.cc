@@ -14,6 +14,10 @@ int main(int argc, char** argv) {
 	graph.add_plot(plot_function([] (float x) { return 1.3*cos(x+0.3); },-10,10));
 	graph.add_plot(plot_function_derivative([] (float x) { return 0.5f*x*cos(x); },[] (float x) { return 0.5f*cos(x) - 0.5f*x*sin(x); },-10,10));
 	graph.add_plot(plot_function([] (float x) { return 0.2f*cos(11.0f*x); },-10,10,1000));
+	Points& ps = graph.add_points(Points());
+	for (float x = -10.0; x<=10.0; x+=0.5) {
+		ps.add_point(x,-0.5*x);
+	}
 	graph.axis().ticks(2,2).xlabels().ylabels();
 	
 	//Styling can also be done (plot represents all the plots)

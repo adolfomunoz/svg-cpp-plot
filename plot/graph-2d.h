@@ -3,6 +3,7 @@
 #include "../primitives/group.h"
 #include "../primitives/rect.h"
 #include "../attributes/style.h"
+#include "plot-points.h"
 #include "graph-style.h"
 #include <cassert>
 
@@ -17,6 +18,7 @@ class Graph2D : public Group {
 	Rect& border_;
 	Group& areaplots_;
 	Group& plots_;
+	Group& points_;
 	Rect& background_;
 
 	auto xtick(float xlocal, float height, float ylocal, const std::string& classname) {
@@ -55,8 +57,12 @@ public:
 		return s;
 	}
 
+	Points& add_points(const Points& g) {
+		return static_cast<Points&>(points_.add(g).class_("points"));
+	}
+
 	Graph2D(const std::tuple<float, float>& size, const BoundingBox& bb):
-	       size(size),bb(bb),style_(Group::add(Style())),area_(Group::add(Group())),border_(Group::add(Rect({0,0},size))),areaplots_(area_.add(Group())),plots_(area_.add(Group())),background_(area_.add(Rect(-2.e10,-2.e10,2.e10,2.e10)))
+	       size(size),bb(bb),style_(Group::add(Style())),area_(Group::add(Group())),border_(Group::add(Rect({0,0},size))),areaplots_(area_.add(Group())),plots_(area_.add(Group())),points_(area_.add(Group())), background_(area_.add(Rect(-2.e10,-2.e10,2.e10,2.e10)))
 	{
 		border_.style().fill(none); //<-- Using local style has the highest priority
 		border_.class_("border");
