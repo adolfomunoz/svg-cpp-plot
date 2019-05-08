@@ -39,10 +39,9 @@ public:
 //	StyleEntry& all_plots() noexcept { return style().add_class("plot"); }
 
 	Graph2D& graph_style(const GraphStyle& s) {
-		this->remove_if([] (const auto& e) { return e.tag()=="style"; });
-		style_ = this->add(s.style(this->size));
+//		this->remove_if([] (const auto& e) { return e.tag()=="style"; });
+		style_ = s.style(this->size);
 		style_.add_id(this->id()).nest("*").vector_effect(non_scaling_stroke).nest("*").vector_effect(non_scaling_stroke).nest("*").vector_effect(non_scaling_stroke);
-		style_.add("*").vector_effect(non_scaling_stroke);
 		return (*this);
 	}
 
