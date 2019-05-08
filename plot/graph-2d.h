@@ -68,7 +68,7 @@ public:
 		border_.class_("border");
 		area_.class_("area").style().pointer_events(pointer_events_all);  //<-- Using local style has the highest priority
 		background_.class_("background").style().pointer_events(pointer_events_all);  //<-- Using local style has the highest priority
-		area_.transform({scale(std::get<0>(size)/bb.width(),std::get<1>(size)/bb.height()),translate(-std::get<0>(bb.min()),-std::get<1>(bb.min()))});
+		area_.transform({scale(std::get<0>(size)/bb.width(),-std::get<1>(size)/bb.height()),translate(-std::get<0>(bb.min()),-std::get<1>(bb.min()))});
 		area_.clip_path().add(border()).transform({translate(std::get<0>(bb.min()),std::get<1>(bb.min())),scale(bb.width()/std::get<0>(size),bb.height()/std::get<1>(size))});
 		
 		graph_style(svg_cpp_plot::graph_style::Default());
