@@ -47,6 +47,26 @@ public:
 	}
 };
 
+class Clean : public GraphStyle {
+public:
+	Style style(const std::tuple<float, float>& size) const override {
+		Style s;
+		s.add_class("plot").stroke_linecap(stroke_linecap_round).stroke_width(float(std::get<1>(size))/float(40)).fill(none);
+		auto& points = s.add_class("points");
+		points.nest("*").stroke_width(float(std::get<1>(size))/float(10)).stroke_linecap(stroke_linecap_round);
+
+		s.add_class("plotarea").stroke_width(0).fill(none);
+
+		s.add_class("axis").stroke_linecap(stroke_linecap_round).stroke_width(float(std::get<1>(size))/float(40)).stroke(black);
+		s.add_class("border").stroke_linecap(stroke_linecap_round).stroke_width(float(std::get<1>(size))/float(40)).stroke(black);
+		s.add_class("tick").stroke_linecap(stroke_linecap_round).stroke_width(float(std::get<1>(size))/float(80)).stroke(black);
+		s.add_class("label").font_size(float(std::get<1>(size))/float(20));
+
+		return s;
+	}
+};
+
+
 class GrayScale : public GraphStyle {
 public:
 	Style style(const std::tuple<float, float>& size) const override {

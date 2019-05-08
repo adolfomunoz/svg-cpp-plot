@@ -42,6 +42,7 @@ public:
 		this->remove_if([] (const auto& e) { return e.tag()=="style"; });
 		style_ = this->add(s.style(this->size));
 		style_.add_id(this->id()).nest("*").vector_effect(non_scaling_stroke).nest("*").vector_effect(non_scaling_stroke).nest("*").vector_effect(non_scaling_stroke);
+		style_.add("*").vector_effect(non_scaling_stroke);
 		return (*this);
 	}
 
@@ -57,19 +58,20 @@ public:
 		return s;
 	}
 
-	Points& add_points(const Points& g) {
+	Points& add_points(const Points& g = Points()) {
 		return static_cast<Points&>(points_.add(g).class_("points"));
 	}
 
 	Graph2D(const std::tuple<float, float>& size, const BoundingBox& bb):
 	       size(size),bb(bb),style_(Group::add(Style())),area_(Group::add(Group())),border_(Group::add(Rect({0,0},size))),areaplots_(area_.add(Group())),plots_(area_.add(Group())),points_(area_.add(Group())), background_(area_.add(Rect(-2.e10,-2.e10,2.e10,2.e10)))
 	{
+		area_.fill(none).vector_effect(non_scaling_stroke); areaplots_.fill(none); plots_.fill(none); points_.fill(none);
 		border_.style().fill(none); //<-- Using local style has the highest priority
-		border_.class_("border");
+		border_.class_("border"); border_.fill(none);
 		area_.class_("area").style().pointer_events(pointer_events_all);  //<-- Using local style has the highest priority
-		background_.class_("background").style().pointer_events(pointer_events_all);  //<-- Using local style has the highest priority
-		area_.transform({scale(std::get<0>(size)/bb.width(),-std::get<1>(size)/bb.height()),translate(-std::get<0>(bb.min()),-std::get<1>(bb.min()))});
-		area_.clip_path().add(border()).transform({translate(std::get<0>(bb.min()),std::get<1>(bb.min())),scale(bb.width()/std::get<0>(size),-bb.height()/std::get<1>(size))});
+		background_.class_("background").style().pointer_events(pointer_events_all).fill(none).stroke_width(0);  //<-- Using local style has the highest priority
+		area_.transform({scale(std::get<0>(size)/bb.width(),-std::get<1>(size)/bb.height()),translate(-std::get<0>(bb.min()),-std::get<1>(bb.max()))});
+		area_.clip_path().add(border()).transform({translate(std::get<0>(bb.min()),std::get<1>(bb.max())),scale(bb.width()/std::get<0>(size),-bb.height()/std::get<1>(size))}).vector_effect(non_scaling_stroke);
 		
 		graph_style(svg_cpp_plot::graph_style::Default());
 	}

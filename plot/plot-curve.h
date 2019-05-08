@@ -6,11 +6,22 @@
 
 namespace svg_cpp_plot {
 
+
+//OK SO THIS WAS NOT WORKING AS EXPECTED BECAUSE MANY NEGATIVE NUMBERS APPEARED AND BECAUSE OFTEN WE WILL USE THIS IN A GRAPH WHERE THE LOWER PART IS 0 AND THE UPPER PART IS NOT
+/*
+ * We eliminate this as it is now and just plot things as is. This means that plotting functions without a graph will look weird (y = 0 will be up)
 template<typename T>
 std::tuple<float, float> point_to_path(const T& t) {
 	static_assert(is_2d_point_v<T>, "Expecting a two dimensional point");
 	return std::tuple<float,float>(std::get<0>(t), -std::get<1>(t));
 }
+*/
+template<typename T>
+std::tuple<float, float> point_to_path(const T& t) {
+	static_assert(is_2d_point_v<T>, "Expecting a two dimensional point");
+	return t; 
+}
+
 
 //Took a while but I have nailed the maths. We need the derivative in this case but it is calculated numerically below 
 //if needed
