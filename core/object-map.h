@@ -79,6 +79,12 @@ public:
 		else return ptr_v->value();
 	}
 
+	void merge_map(const ObjectMap<O>& that) {
+		auto local_copy = object_map;
+		object_map = that.object_map;
+		object_map.insert(local_copy.begin(), local_copy.end());
+	}
+
 
 /*
 	template<typename V>
@@ -190,9 +196,7 @@ public:
 	}
 
 	T& merge_with(const T& that) noexcept {
-		auto local_copy = static_cast<T&>(*this).object_map;
-		static_cast<T&>(*this).object_map = that.object_map;
-		static_cast<T&>(*this).object_map.insert(local_copy.begin(), local_copy.end());
+		static_cast<T&>(*this).merge_map(that);
 		return static_cast<T&>(*this);
 	}
 
