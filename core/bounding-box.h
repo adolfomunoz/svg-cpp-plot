@@ -3,7 +3,6 @@
 #include <limits>
 #include <string>
 #include <type_traits>
-#include "point.h"
 #include "object.h"
 
 namespace svg_cpp_plot {
@@ -58,8 +57,7 @@ public:
 					rate*(std::get<1>(max())-std::get<1>(min())));
 	}
 
-	template<typename P, typename = std::enable_if_t<is_2d_point_v<P>> >
-	bool is_inside(const P& p) noexcept {
+	bool is_inside(const std::tuple<float,float>& p) noexcept {
 		return (std::get<0>(p) >= std::get<0>(min())) &&
 		       (std::get<1>(p) >= std::get<1>(min())) &&
 		       (std::get<0>(p) <= std::get<0>(max())) &&

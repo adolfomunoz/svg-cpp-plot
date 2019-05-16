@@ -1,6 +1,7 @@
 #pragma once 
 
 #include "../core/element.h"
+#include "point.h"
 #include "../attributes/presentation-attributes.h"
 #include "../attributes/style-attributes.h"
 #include "../attributes/graphical-attributes.h"

@@ -25,3 +25,5 @@
 
 #include "utils/browse.h"
 #include "utils/watch.h"
+
+#include "2d/curve.h"

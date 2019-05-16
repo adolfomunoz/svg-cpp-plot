@@ -1,6 +1,7 @@
 #pragma once
 
 #include "units.h"
+#include "../primitives/point.h"
 
 namespace svg_cpp_plot {
 

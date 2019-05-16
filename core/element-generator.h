@@ -6,10 +6,10 @@
 
 namespace svg_cpp_plot {
 
-template<typename T, typename O>
+template<typename T, typename E>
 class ElementGenerator : public Generator<T>, public AttributesBase {
 	static_assert(!std::is_abstract_v<E>,"Element type should not be abstract");
-	static_assert(std::is_base_of<Element,E>,"Element type should inherit from Element");
+	static_assert(std::is_base_of_v<Element,E>,"Element type should inherit from Element");
 public:
 	virtual E element(const T& t) const noexcept = 0;
 	std::string to_string(const T& t) const noexcept override {

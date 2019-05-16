@@ -14,7 +14,7 @@ public:
 template<typename T, typename O>
 class ObjectGenerator : public Generator<T> {
 	static_assert(!std::is_abstract_v<O>,"Object type should not be abstract");
-	static_assert(std::is_base_of<Object,O>,"Object type should inherit from Object");
+	static_assert(std::is_base_of_v<Object,O>,"Object type should inherit from Object");
 public:
 	virtual O object(const T& t) const noexcept = 0;
 	std::string to_string(const T& t) const noexcept override {

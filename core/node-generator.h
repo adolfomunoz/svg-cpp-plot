@@ -1,6 +1,7 @@
 #pragma once
 
 #include "generator.h"
+#include "node.h"
 
 namespace svg_cpp_plot {
 
@@ -21,28 +22,31 @@ public:
 	}
 
 	//Add by copy
-	template<typename T> 
-	T& add(const T& t) {
-		return static_cast<T&>(add_ptr(std::make_shared<std::decay_t<T>>(t)));
+	template<typename U> 
+	U& add(const U& u) {
+		return static_cast<U&>(add_ptr(std::make_shared<std::decay_t<U>>(u)));
 	}
 
 	//Add by move if possible
-	template<typename T> 
-	T& add(T&& t) {
-		return static_cast<T&>(add_ptr(std::make_shared<std::decay_t<T>>(std::forward<T>(t))));
+	template<typename U> 
+	U& add(U&& u) {
+		return static_cast<U&>(add_ptr(std::make_shared<std::decay_t<U>>(std::forward<U>(u))));
 	}
 
 	template<typename P>
 	void remove_if(const P& p) {
-		object_list.remove_if([&p] (const std::shared_ptr<Generator<T>>& o) { return p(*o); });
+		generator_list.remove_if([&p] (const std::shared_ptr<Generator<T>>& o) { return p(*o); });
 	}
 
 	NodeGenerator(const std::string& tag, const T& t) : NotTerminal(tag), t(t) { }
 	void set(const T& t) { this->t = t; }
 	
 	std::string content() const noexcept override {
+		std::cerr<<"GROUP"<<std::endl;
 		std::stringstream sstr;
-		for (auto g : generator_list) sstr<<g->to_string(t)<<std::endl;
+		for (auto g : generator_list) sstr<<g->to_string(this->t)<<std::endl;
+		std::cerr<<sstr.str();
+		return sstr.str();
 	}
 };
 
