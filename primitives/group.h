@@ -16,7 +16,8 @@ public:
 template<typename T>
 class GroupGenerator : public NodeGenerator<T>, public Attributes<GroupGenerator<T>>, public GraphicalAttributes<GroupGenerator<T>>, public StyleAttributes<GroupGenerator<T>>, public PresentationAttributes<GroupGenerator<T>> {
 public:
-	GroupGenerator(const T& t) : NodeGenerator<T>("g",t) { }		
+	GroupGenerator(const T& t) : NodeGenerator<T>("g",t) { }
+		
 };
 
 }

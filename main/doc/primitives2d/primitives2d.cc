@@ -15,9 +15,12 @@ auto lissajous_derivative(float a, float b, float k_a, float k_b) {
 using namespace svg_cpp_plot;
 int main(int argc, char** argv) {
 	SVG svg;
+	svg.viewBox(BoundingBox(-0.1,-0.1,1.1,1.1));
+
 	auto group = svg.add(GroupGenerator<_2d::Matrix>(_2d::identity));
 	group.add(_2d::curve_derivative(lissajous_curve(4,4,1,3), lissajous_derivative(4,4,1,3),0,2*M_PI)).stroke(green).stroke_width(0.1);
+	std::cerr<<svg.to_string()<<std::endl;
+
 	std::ofstream f(std::string(argv[0])+".svg");
-	svg.viewBox(BoundingBox(-0.1,-0.1,1.1,1.1));
 	f<<svg;
 }

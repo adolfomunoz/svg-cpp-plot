@@ -2,6 +2,7 @@
 
 #include "generator.h"
 #include "node.h"
+#include <list>
 
 namespace svg_cpp_plot {
 
@@ -12,7 +13,7 @@ protected:
 	std::list<std::shared_ptr<Generator<T>>> generator_list;
 	
 	Generator<T>& add_ptr(const std::shared_ptr<Generator<T>>& o) {
-		generator_list.push_back(o); 
+		generator_list.push_back(o);
 		return (*generator_list.back());
 	}
 public:
@@ -30,7 +31,7 @@ public:
 	//Add by move if possible
 	template<typename U> 
 	U& add(U&& u) {
-		return static_cast<U&>(add_ptr(std::make_shared<std::decay_t<U>>(std::forward<U>(u))));
+		return static_cast<U&>(this->add_ptr(std::make_shared<std::decay_t<U>>(std::forward<U>(u))));
 	}
 
 	template<typename P>
@@ -43,6 +44,7 @@ public:
 	
 	std::string content() const noexcept override {
 		std::cerr<<"GROUP"<<std::endl;
+		std::cerr<<generator_list.size()<<std::endl;
 		std::stringstream sstr;
 		for (auto g : generator_list) sstr<<g->to_string(this->t)<<std::endl;
 		std::cerr<<sstr.str();
