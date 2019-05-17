@@ -52,6 +52,8 @@ constexpr std::tuple<float, float> transform_direction(const Matrix& m, const P&
 	return std::tuple<float, float>(
 		(std::get<0>(p)*m[0][0] + std::get<1>(p)*m[0][1]),
 		(std::get<0>(p)*m[1][0] + std::get<1>(p)*m[1][1]));
-} 
+}
+
+typedef GroupGenerator<_2d::Matrix> group;
 }
 };

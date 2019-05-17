@@ -15,12 +15,15 @@ auto lissajous_derivative(float a, float b, float k_a, float k_b) {
 using namespace svg_cpp_plot;
 int main(int argc, char** argv) {
 	SVG svg;
-	svg.viewBox(BoundingBox(-0.1,-0.1,1.1,1.1));
-
-	auto group = svg.add(GroupGenerator<_2d::Matrix>(_2d::identity));
-	group.add(_2d::curve_derivative(lissajous_curve(4,4,1,3), lissajous_derivative(4,4,1,3),0,2*M_PI)).stroke(green).stroke_width(0.1);
-	std::cerr<<svg.to_string()<<std::endl;
-
+	auto g = _2d::group();
+	g.add(_2d::line({0,-1},{0,1})).stroke(red).stroke_width(0.025).stroke_dasharray({0.1,0.1});
+	g.add(_2d::rectangle({-3,-1},{3,1})).stroke(red).stroke_width(0.05).fill(none);
+	g.add(_2d::curve_derivative(lissajous_curve(4,4,1,3), lissajous_derivative(4,4,1,3),0,2*M_PI)).stroke(green).stroke_width(0.1);
+	g.add(_2d::points({{-2,0},{2,0}})).fill(black).stroke(black).stroke_width(0.2);
+	svg.viewBox(BoundingBox(-5.1,-5.1,5.1,5.1));
+	svg.add(_2d::group(_2d::identity)).add(g);
+	svg.add(_2d::group(_2d::rotate(M_PI/2))).add(g);
+	svg.add(_2d::group(_2d::scale(0.2,0.2))).add(g);
 	std::ofstream f(std::string(argv[0])+".svg");
 	f<<svg;
 }

@@ -7,7 +7,7 @@
 namespace svg_cpp_plot {
 
 template<typename T>
-class NodeGenerator : public NotTerminal {
+class NodeGenerator : public NotTerminal, public Generator<T> {
 protected:
 	T t;
 	std::list<std::shared_ptr<Generator<T>>> generator_list;
@@ -39,17 +39,19 @@ public:
 		generator_list.remove_if([&p] (const std::shared_ptr<Generator<T>>& o) { return p(*o); });
 	}
 
-	NodeGenerator(const std::string& tag, const T& t) : NotTerminal(tag), t(t) { }
-	void set(const T& t) { this->t = t; }
+	NodeGenerator(const std::string& tag, const T& t = T()) : NotTerminal(tag), t(t) { }
+	void set_parameter(const T& t) { this->t = t; }
 	
-	std::string content() const noexcept override {
-		std::cerr<<"GROUP"<<std::endl;
-		std::cerr<<generator_list.size()<<std::endl;
+	std::string to_string(const T& t) const noexcept override {
 		std::stringstream sstr;
-		for (auto g : generator_list) sstr<<g->to_string(this->t)<<std::endl;
-		std::cerr<<sstr.str();
+		for (auto g : generator_list) sstr<<g->to_string(t)<<std::endl;
 		return sstr.str();
 	}
+	
+	std::string content() const noexcept override {
+		return to_string(this->t);
+	}
+
 };
 
 }

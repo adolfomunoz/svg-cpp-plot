@@ -27,3 +27,7 @@
 #include "utils/watch.h"
 
 #include "2d/curve.h"
+#include "2d/points.h"
+#include "2d/polygon.h"
+#include "2d/polyline.h"
+
