@@ -56,7 +56,9 @@ constexpr std::tuple<float, float> transform_direction(const Matrix& m, const P&
 }
 
 auto group(const Matrix& m = identity) {
-	return GroupGenerator(m, [] (const Matrix& m1, const Matrix& m2) -> Matrix { return m1*m2; });
+	return GroupGenerator(m, [] (const Matrix& m1, const Matrix& m2) -> Matrix { 
+		std::cerr<<m1<<m2<<(m1*m2)<<std::endl;
+		return m1*m2; });
 }
 
 }

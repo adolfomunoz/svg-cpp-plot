@@ -26,6 +26,7 @@
 #include "utils/browse.h"
 #include "utils/watch.h"
 
+#include "2d/transform.h"
 #include "2d/curve.h"
 #include "2d/points.h"
 #include "2d/polygon.h"

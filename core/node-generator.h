@@ -50,7 +50,9 @@ public:
 	}
 	
 	std::string content() const noexcept override {
-		return to_string(this->t);
+		std::stringstream sstr;
+		for (auto g : generator_list) sstr<<g->to_string(this->t)<<std::endl;
+		return sstr.str();
 	}
 
 };
