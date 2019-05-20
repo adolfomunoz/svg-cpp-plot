@@ -13,10 +13,12 @@ public:
 	Group() : NodeBase("g") {}
 };
 
-template<typename T>
-class GroupGenerator : public NodeGenerator<T>, public Attributes<GroupGenerator<T>>, public GraphicalAttributes<GroupGenerator<T>>, public StyleAttributes<GroupGenerator<T>>, public PresentationAttributes<GroupGenerator<T>> {
+template<typename T,typename FCombine>
+class GroupGenerator : public NodeGenerator<T,FCombine>, 
+	public Attributes<GroupGenerator<T,FCombine>>, public GraphicalAttributes<GroupGenerator<T,FCombine>>, 
+	public StyleAttributes<GroupGenerator<T,FCombine>>, public PresentationAttributes<GroupGenerator<T,FCombine>> {
 public:
-	GroupGenerator(const T& t = T()) : NodeGenerator<T>("g",t) { }
+	GroupGenerator(const T& t = T(), const FCombine& combine = FCombine()) : NodeGenerator<T,FCombine>("g",t,combine) { }
 		
 };
 

@@ -5,6 +5,7 @@
 #include <iostream>
 #include <iomanip>
 #include <array>
+#include <functional>
 #include "../primitives/point.h"
 
 namespace svg_cpp_plot {
@@ -54,6 +55,9 @@ constexpr std::tuple<float, float> transform_direction(const Matrix& m, const P&
 		(std::get<0>(p)*m[1][0] + std::get<1>(p)*m[1][1]));
 }
 
-typedef GroupGenerator<_2d::Matrix> group;
+auto group(const Matrix& m = identity) {
+	return GroupGenerator(m, [] (const Matrix& m1, const Matrix& m2) -> Matrix { return m1*m2; });
+}
+
 }
 };
