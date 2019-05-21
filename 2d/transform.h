@@ -7,6 +7,8 @@
 #include <array>
 #include <functional>
 #include "../primitives/point.h"
+#include "../primitives/group.h"
+#include "../primitives/clip-path.h"
 
 namespace svg_cpp_plot {
 namespace _2d {
@@ -56,10 +58,13 @@ constexpr std::tuple<float, float> transform_direction(const Matrix& m, const P&
 }
 
 auto group(const Matrix& m = identity) {
-	return GroupGenerator(m, [] (const Matrix& m1, const Matrix& m2) -> Matrix { 
-		std::cerr<<m1<<m2<<(m1*m2)<<std::endl;
-		return m1*m2; });
+	return GroupGenerator(m, std::multiplies<Matrix>());
 }
+auto clip_path(const Matrix& m = identity) {
+	return ClipPathGenerator(m, std::multiplies<Matrix>());
+}
+
+using Group = decltype(group());
 
 }
 };

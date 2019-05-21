@@ -9,13 +9,12 @@
 #include "primitives/text.h"
 #include "primitives/image.h"
 
-#include "plot/plot-function.h"
-#include "plot/plot-curve.h"
-#include "3d/plot-curve-3d.h"
-#include "3d/graph-3d.h"
+#include "plot/function.h"
 #include "plot/graph-2d.h"
-#include "plot/graph-2d-old.h"
-#include "3d/project.h"
+//#include "3d/plot-curve-3d.h"
+//#include "3d/graph-3d.h"
+//#include "plot/graph-2d.h"
+//#include "3d/project.h"
 
 #include "scripts/window-reload.h"
 #include "scripts/set-timeout.h"
@@ -31,4 +30,5 @@
 #include "2d/points.h"
 #include "2d/polygon.h"
 #include "2d/polyline.h"
+#include "2d/text.h"
 

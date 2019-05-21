@@ -96,6 +96,20 @@ ENUM_TYPE(PointerEvents) pointer_events_auto("auto"), pointer_events_none("none"
 template<typename E>
 UrlOf<E> url_of(E& e) { return UrlOf<E>(e); }
 
+
+template<typename T>
+struct clip_path_obtainer {
+	T& t;
+public:
+	clip_path_obtainer(T& t) : t(t) {}
+	ClipPath& clip_path() {
+		if (!t->parent()) throw unavailable_clip_path();
+		else if (!t->get("clip-path")) return t->get_or_set("clip-path",url_of(t->parent()->add(ClipPath()))).element();
+		else { ClipPath clip_path; // vv This below is just for getting the data type correctly
+		       return t->get_default("clip-path",url_of(clip_path)).element();
+		}
+	}
+};
 //CRTP
 //Style attributes (common to all tags although not used in many of them? I don't know...)
 template<typename T>
@@ -103,14 +117,8 @@ class GraphicalAttributes {
 	constexpr T* t() noexcept { return static_cast<T*>(this); } 
 	constexpr const T* t() const noexcept { return static_cast<const T*>(this); } 
 public:
-	ClipPath& clip_path() {
-		if (!t()->parent()) throw unavailable_clip_path();
-		else if (!t()->get("clip-path")) return t()->get_or_set("clip-path",url_of(t()->parent()->add(ClipPath()))).element();
-		else { ClipPath clip_path; // vv This below is just for getting the data type correctly
-		       return t()->get_default("clip-path",url_of(clip_path)).element();
-		}
-	}
-
+	auto& clip_path() { return clip_path_obtainer(t()).clip_path(); }
+	
 	T& transform(const AttributeList<Transform>& tr) noexcept {
 		return t()->set("transform",tr);
 	}

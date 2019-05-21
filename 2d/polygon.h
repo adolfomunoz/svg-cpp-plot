@@ -21,7 +21,7 @@ public:
 	}
 };
 
-auto rectangle(const std::tuple<float,float>& p1, const std::tuple<float,float>& p2) {
+auto rect(const std::tuple<float,float>& p1, const std::tuple<float,float>& p2) {
 	return polygon({p1,std::tuple(std::get<0>(p1),std::get<1>(p2)),p2,std::tuple(std::get<0>(p2),std::get<1>(p1))});
 }
 
