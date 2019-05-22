@@ -28,24 +28,24 @@ class Graph2D : public _2d::Group {
 public:
 	auto& area() noexcept { return area_; }
 	auto& border() noexcept { 
-		return this->add(_2d::rect({0,0},size)).class_("border");
+		return this->add(_2d::rect({0,0},size)).fill(none).pointer_events(pointer_events_none).class_("border");
 	}
 
 	Graph2D(const std::tuple<float, float>& size, const BoundingBox& bb):
-	    size(size),bb(bb),
-		area_(add(_2d::group(_2d::scale(std::get<0>(size)/bb.width(),-std::get<1>(size)/bb.height())*
+	    _2d::Group(_2d::group(_2d::identity)), size(size),bb(bb),
+		area_(this->add(_2d::group(_2d::scale(std::get<0>(size)/bb.width(),-std::get<1>(size)/bb.height())*
 		    _2d::translate(-std::get<0>(bb.min()),-std::get<1>(bb.max())))))
 	{
-		auto& cp = this->add(_2d::clip_path()).add(_2d::rect({0,0},size));
 		area().fill(none).vector_effect(non_scaling_stroke).class_("area").style().pointer_events(pointer_events_all);
-		area().set("clip-path",url_of(cp));
+		this->add(_2d::clip_path()).id(this->id()+"clipper").add(_2d::rect({0,0},size));
+		area().set("clip-path",std::string("url(#")+this->id()+"clipper)");
 	}
 
 
 	auto& axis(float x = 0.0f, float y = 0.0f) {
 		auto& g = area().add(_2d::group()).class_("axis");
-		g.add(_2d::line({x,-2.e10},{x,2.e10}));
-		g.add(_2d::line({-2.e10,y},{2.e10,y}));
+		g.add(_2d::line({x,-2.e4},{x,2.e4}));
+		g.add(_2d::line({-2.e4,y},{2.e4,y}));
 		return g;
 	}
 
@@ -63,29 +63,31 @@ public:
 		return g;
 	}
 
+/*
 	void ticks(int xs = 2, int ys = 2, float size = 3.0f, float xlocal = 0.0f, float ylocal = 0.0f) {
 		xticks(xs,size,ylocal);
 		yticks(ys,size,xlocal);
 	}
+*/
  
-	auto xlabels(int count = 2, float ylocal = -3.0f) {
+	auto& xlabels(int count = 2, float ylocal = -3.0f) {
 		auto& g = add(_2d::group()).class_("labels");
 		float dxlocal = std::get<0>(size)/float(count - 1);
 		float dx = (std::get<0>(bb.max())-std::get<0>(bb.min()))/float(count - 1);
 		for (int i = 0;i<count;++i) {
 			std::stringstream stext;	stext<<(std::get<0>(bb.min())+i*dx);
-			g.add(_2d::text({i*dxlocal,std::get<1>(size) - ylocal},stext.str())).class_({"label","xlabel"}).style().text_anchor(text_anchor_middle).dominant_baseline(dominant_baseline_hanging);
+			g.add(_2d::text({i*dxlocal,std::get<1>(size) - ylocal},stext.str())).font_size(std::get<0>(size)/20).class_({"label","xlabel"}).style().text_anchor(text_anchor_middle).dominant_baseline(dominant_baseline_hanging);
 		}
 		return g;
 	}
 
-	auto ylabels(int count = 2, float xlocal = -3.0f) {
+	auto& ylabels(int count = 2, float xlocal = -3.0f) {
 		auto& g = add(_2d::group()).class_("labels");
 		float dylocal = std::get<1>(size)/float(count - 1);
 		float dy = (std::get<1>(bb.max())-std::get<1>(bb.min()))/float(count - 1);
 		for (int i = 0;i<count;++i) {
 			std::stringstream stext;	stext<<(std::get<1>(bb.min())+i*dy);
-			g.add(_2d::text({xlocal, std::get<1>(size) - i*dylocal},stext.str())).class_({"label","ylabel"}).style().text_anchor(text_anchor_end).dominant_baseline(dominant_baseline_middle);
+			g.add(_2d::text({xlocal, std::get<1>(size) - i*dylocal},stext.str())).font_size(std::get<0>(size)/20).class_({"label","ylabel"}).style().text_anchor(text_anchor_end).dominant_baseline(dominant_baseline_middle);
 		}
 		return g;
 	}

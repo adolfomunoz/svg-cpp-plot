@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../2d/curve.h"
+#include "curve.h"
 #include <cmath>
 
 namespace svg_cpp_plot {
-namespace plot {
+namespace _2d {
 	
 template<typename F, typename DF>
 auto function_derivative(const F& f, const DF& df, float xmin, float xmax, unsigned int nsamples = 100) {

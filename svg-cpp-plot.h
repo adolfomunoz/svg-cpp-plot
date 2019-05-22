@@ -9,8 +9,6 @@
 #include "primitives/text.h"
 #include "primitives/image.h"
 
-#include "plot/function.h"
-#include "plot/graph-2d.h"
 //#include "3d/plot-curve-3d.h"
 //#include "3d/graph-3d.h"
 //#include "plot/graph-2d.h"
@@ -31,4 +29,7 @@
 #include "2d/polygon.h"
 #include "2d/polyline.h"
 #include "2d/text.h"
+#include "2d/function.h"
+
+#include "plot/graph-2d.h"
 

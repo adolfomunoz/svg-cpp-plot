@@ -11,6 +11,7 @@ class PointList {
 protected:
 	std::list<std::tuple<float,float>> point_list;
 public:
+	PointList() {}
 	template<typename PL>
 	PointList(const PL& pl) : point_list(pl) { }
 	template<typename PL>

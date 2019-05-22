@@ -1,6 +1,6 @@
 #pragma once
 
-#include "generator.h"
+#include "element-generator.h"
 #include "node.h"
 #include <list>
 
@@ -42,10 +42,12 @@ public:
 
 	NodeGenerator(const std::string& tag, const T& t = T(), const FCombine& combine = FCombine()) : NotTerminal(tag), t(t), combine(combine) { }
 	void set_parameter(const T& t) { this->t = t; }
-	
+
 	std::string to_string(const T& t) const noexcept override {
 		std::stringstream sstr;
+		sstr<<"<"<<tag()<<" "<<attributes_to_string()<<">"<<std::endl;
 		for (auto g : generator_list) sstr<<g->to_string(combine(t,this->t))<<std::endl;
+		sstr<<"</"<<tag()<<">"<<std::endl;
 		return sstr.str();
 	}
 	
