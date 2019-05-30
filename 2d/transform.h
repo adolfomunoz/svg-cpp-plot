@@ -18,9 +18,15 @@ constexpr Matrix identity = Matrix{ {{1,0,0},{0,1,0}, {0,0,1}} };
 constexpr Matrix scale(float x, float y) {
 	return Matrix{ {{x,0,0},{0,y,0},{0,0,1}} };
 }
+constexpr Matrix scale(const std::tuple<float,float>& s) {
+	return scale(std::get<0>(s),std::get<1>(s));
+}
 constexpr Matrix translate(float x, float y) {
 	return Matrix{ {{1,0,x},{0,1,y},{0,0,1}} };
 }
+constexpr Matrix translate(const std::tuple<float,float>& t) {
+	return translate(std::get<0>(t),std::get<1>(t));
+}	
 constexpr Matrix rotate(float a) {
 	return Matrix{ {{std::cos(a),std::sin(a),0},{-std::sin(a),std::cos(a),0},{0,0,1}} };
 }

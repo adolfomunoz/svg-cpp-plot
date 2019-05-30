@@ -2,6 +2,7 @@
 
 #include <sstream>
 #include "../core/object.h"
+#include <cmath>
 
 namespace svg_cpp_plot {
 
@@ -14,7 +15,9 @@ public:
 	rgb(float r, float g, float b) : 
 		r(std::max(std::min(r,1.0f),0.0f)), 
 		g(std::max(std::min(g,1.0f),0.0f)),
-	       	b(std::max(std::min(b,1.0f),0.0f)) { }
+	    b(std::max(std::min(b,1.0f),0.0f)) { }
+	rgb(const std::tuple<float,float,float>& c) :
+		rgb(std::get<0>(c),std::get<1>(c),std::get<2>(c)) {}
 
 	std::string to_string() const noexcept override {
 		std::stringstream s;
@@ -22,6 +25,24 @@ public:
 		return s.str();
 	}
 };
+
+rgb hsv(float h, float s, float v) {
+	h*=3.0f/M_PI; //In 6 sectors
+	int i = h; //floor of h;
+	float f = h-i; //Decimals part;
+	float p = v*(1-s);
+	float q = v*(1-s*f);
+	float t = v*(1-s*(1-f));
+	switch (i){
+		case 0: return rgb(v,t,p);
+		case 1: return rgb(q,v,p);
+		case 2: return rgb(p,v,t);
+		case 3: return rgb(p,q,t);
+		case 4: return rgb(t,p,v);
+		default: //5
+			return rgb(v,p,q);
+	}
+}
 
 #define NAMED_COLOR(c)  struct c ## Color : public Color { std::string to_string() const noexcept override { return std::string(#c); } } c;	
 

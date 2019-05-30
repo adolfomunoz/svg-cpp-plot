@@ -30,6 +30,8 @@
 #include "2d/polyline.h"
 #include "2d/text.h"
 #include "2d/function.h"
+#include "2d/function-image.h"
+#include "2d/function-2d.h"
 
 #include "plot/graph-2d.h"
 
