@@ -14,6 +14,11 @@ constexpr std::tuple<float, float> operator*(const std::tuple<float,float>& p0, 
 	return std::tuple<float, float>(std::get<0>(p0)*f, std::get<1>(p0)*f);
 }
 
+std::ostream& operator<<(std::ostream& os, const std::tuple<float,float>& p) {
+	os<<"("<<std::get<0>(p)<<","<<std::get<1>(p)<<")";
+	return os;
+}
+
 
 template<typename F, typename DF>
 class curve_derivative : public ElementGenerator<Matrix, Path>, public Attributes<curve_derivative<F,DF>>, public GraphicalAttributes<curve_derivative<F,DF>>, public StyleAttributes<curve_derivative<F,DF>>, public PresentationAttributes<curve_derivative<F,DF>> {
@@ -43,8 +48,8 @@ public:
 
 template<typename F>
 auto curve(F&& f, float tmin, float tmax, unsigned int nsamples = 100) {
-	float dt = (tmax - tmin)/float(nsamples-1);
-	return curve_derivative(std::forward<F>(f), [&f,dt] (float t) { return (f(t+0.05f*dt)-f(t))/(0.05f*dt); }, tmin, tmax, nsamples);
+	float dt = (tmax - tmin)/float(nsamples-1); 
+	return curve_derivative(std::forward<F>(f), [f,dt] (float t) { return (f(t+0.05f*dt)-f(t))/(0.05f*dt); }, tmin, tmax, nsamples);
 }
 
 auto circle(const std::tuple<float,float>& center, float radius, unsigned int nsamples=16) {

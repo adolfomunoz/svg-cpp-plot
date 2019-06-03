@@ -40,8 +40,8 @@ std::ostream& operator<<(std::ostream& os, const Matrix& m) {
 	return os;
 }
 	
-constexpr Matrix operator*(const Matrix& m1, const Matrix& m2) noexcept {
-	Matrix r{ {{0,0,0},{0,0,0},{0,0,0}} };
+constexpr svg_cpp_plot::_2d::Matrix operator*(const svg_cpp_plot::_2d::Matrix& m1, const svg_cpp_plot::_2d::Matrix& m2) noexcept {
+	svg_cpp_plot::_2d::Matrix r{ {{0,0,0},{0,0,0},{0,0,0}} };
 	for (int f=0;f<3;++f) for (int c=0;c<3;++c) for (int i=0;i<3;++i) r[f][c] += m1[f][i]*m2[i][c];
 	return r;
 }
@@ -63,11 +63,11 @@ constexpr std::tuple<float, float> transform_direction(const Matrix& m, const P&
 		(std::get<0>(p)*m[1][0] + std::get<1>(p)*m[1][1]));
 }
 
-auto group(const Matrix& m = identity) {
-	return GroupGenerator(m, std::multiplies<Matrix>());
+auto group(const svg_cpp_plot::_2d::Matrix& m = identity) {
+	return GroupGenerator(m, [] (const svg_cpp_plot::_2d::Matrix& a, const svg_cpp_plot::_2d::Matrix& b) { return a*b; });
 }
-auto clip_path(const Matrix& m = identity) {
-	return ClipPathGenerator(m, std::multiplies<Matrix>());
+auto clip_path(const svg_cpp_plot::_2d::Matrix& m = identity) {
+	return ClipPathGenerator(m, [] (const svg_cpp_plot::_2d::Matrix& a, const svg_cpp_plot::_2d::Matrix& b) { return a*b; });
 }
 
 using Group = decltype(group());
