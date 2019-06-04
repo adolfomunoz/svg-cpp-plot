@@ -18,7 +18,7 @@ class color_map_red_blue {
 	float tmin, tmax, tmid;
 public:
 	color_map_red_blue(float tmin = -1.0f, float tmax = 1.0f) : 
-	tmin(tmin), tmax(tmax), tmid(tmax+tmin/2.0f) {}
+	tmin(tmin), tmax(tmax), tmid((tmax+tmin)/2.0f) {}
 	
 	std::tuple<float,float,float> operator()(float t) const noexcept {
 		if (t>tmax) return std::tuple(0.0f,0.0f,1.0f);
