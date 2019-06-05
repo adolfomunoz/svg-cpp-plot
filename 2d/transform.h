@@ -63,14 +63,14 @@ constexpr std::tuple<float, float> transform_direction(const Matrix& m, const P&
 		(std::get<0>(p)*m[1][0] + std::get<1>(p)*m[1][1]));
 }
 
-auto group(const svg_cpp_plot::_2d::Matrix& m = identity) {
+inline auto group(const Matrix& m = identity) {
 	return GroupGenerator(m, [] (const svg_cpp_plot::_2d::Matrix& a, const svg_cpp_plot::_2d::Matrix& b) { return a*b; });
 }
-auto clip_path(const svg_cpp_plot::_2d::Matrix& m = identity) {
+inline auto clip_path(const svg_cpp_plot::_2d::Matrix& m = identity) {
 	return ClipPathGenerator(m, [] (const svg_cpp_plot::_2d::Matrix& a, const svg_cpp_plot::_2d::Matrix& b) { return a*b; });
 }
 
 using Group = decltype(group());
 
 }
-};
+}
