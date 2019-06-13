@@ -11,6 +11,8 @@
 namespace svg_cpp_plot {
 namespace _2d {
 
+
+
 class points : public PointList<points>, public ElementGenerator<Matrix, svg_cpp_plot::Group>, public Attributes<points>, public GraphicalAttributes<points>, public StyleAttributes<points>, public PresentationAttributes<points> {
 public:
 	using PointList::PointList;
@@ -23,6 +25,11 @@ public:
 		return g;
 	}
 };
+
+auto point(const std::tuple<float,float>& p) {
+	return points({p}).class_("point");
+}
+
 
 }
 }

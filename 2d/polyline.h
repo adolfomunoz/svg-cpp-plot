@@ -22,7 +22,7 @@ public:
 };
 
 auto line(const std::tuple<float,float>& p1, const std::tuple<float,float>& p2) {
-	return polyline({p1,p2});
+	return polyline({p1,p2}).class_("line");
 }
 
 }

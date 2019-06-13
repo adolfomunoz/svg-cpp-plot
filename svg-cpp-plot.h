@@ -1,4 +1,5 @@
 #include "primitives/group.h"
+#include "primitives/defs.h"
 #include "primitives/group-z-ordered.h"
 #include "primitives/svg.h"
 #include "primitives/circle.h"
@@ -8,6 +9,7 @@
 #include "primitives/path.h"
 #include "primitives/text.h"
 #include "primitives/image.h"
+#include "primitives/linear-gradient.h"
 
 //#include "3d/plot-curve-3d.h"
 //#include "3d/graph-3d.h"

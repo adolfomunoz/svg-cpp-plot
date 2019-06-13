@@ -1,23 +1,13 @@
 #pragma once
 
 #include "../primitives/clip-path.h"
+#include "url.h"
 
 namespace svg_cpp_plot {
 
 class unavailable_clip_path : public std::exception {
 public: 
 	const char* what() const noexcept override { return "Unavailable spot for clip path. Maybe has no parent?"; }
-};
-
-template<typename E>
-class UrlOf : public Object {
-	E& e;
-public:
-	UrlOf(E& e) : e(e) { }
-	std::string to_string() const noexcept override {
-		return std::string("url(#")+e.get_default("id",std::string(""))+")";
-	}
-	E& element() const noexcept { return e; }
 };
 
 class Transform : public Object {};
@@ -91,10 +81,6 @@ ENUM_TYPE(PointerEvents) pointer_events_auto("auto"), pointer_events_none("none"
 
 
 
-
-
-template<typename E>
-UrlOf<E> url_of(E& e) { return UrlOf<E>(e); }
 
 
 template<typename T>

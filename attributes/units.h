@@ -17,11 +17,12 @@ public:
 
 
 class Length : public Object {
-	float quantity;
+	float q;
 	LengthUnit unit;
 public:
-	Length(float quantity, const LengthUnit& unit = px) : quantity(quantity), unit(unit) { }
-	std::string to_string() const noexcept override { return std::to_string(quantity)+unit.name(); }
-	operator float() const noexcept { return quantity*unit.ratio(); }
+	Length(float quantity, const LengthUnit& unit = px) : q(quantity), unit(unit) { }
+	float quantity() const { return q; }
+	std::string to_string() const noexcept override { return std::to_string(quantity())+unit.name(); }
+	operator float() const noexcept { return quantity()*unit.ratio(); }
 };
 }

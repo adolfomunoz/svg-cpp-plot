@@ -39,7 +39,10 @@ int main(int argc, char** argv) {
 		ps.add_point(x,-0.5*x);
 	}
 	//We add points with different color
-	for (float a=0;a<2*M_PI;a+=(0.1*M_PI)) g3.area().add(_2d::points({{5*std::cos(a),5*std::sin(a)}})).stroke_width(3).stroke(hsv(a,0.8,0.8));
+	for (float a=0;a<2*M_PI;a+=(0.1*M_PI)) { 
+//		g3.area().add(_2d::points({{5*std::cos(a),5*std::sin(a)}})).stroke_width(3).stroke(hsv(a,0.8,0.8));
+		g3.area().add(_2d::point({5*std::cos(a),5*std::sin(a)})).stroke_width(3).stroke(hsv(a,0.8,0.8));
+	}
 	
 	
 	g3.border().stroke(black).stroke_width(1);
@@ -50,13 +53,13 @@ int main(int argc, char** argv) {
 	//In this next three graphs we plot 2d functions and images
 	svg.add(_2d::group(_2d::translate(-250,250)))
 	   .add(Graph2D({200,200},BoundingBox(0,0,1,1)))
-	   .area().add(_2d::function_image([] (float x, float y) { return std::tuple(x,y,(1.0f-x-y)); },{0,0},{1,1}));
+	   .area().add(_2d::function_image([] (float x, float y) { return std::tuple(x,y,(1.0f-x-y)); },{0,0},{1,1},{20,20}));
 	svg.add(_2d::group(_2d::translate(0,250)))
 	   .add(Graph2D({200,200},BoundingBox(-1,-1,1,1)))
-	   .area().add(_2d::function_2d([] (float x, float y) { return 1.0-sqrt(x*x+y*y);},{-1,-1},{1,1}));
+	   .area().add(_2d::function_2d([] (float x, float y) { return 1.0-sqrt(x*x+y*y);},{-1,-1},{1,1},{50,50}));
 	svg.add(_2d::group(_2d::translate(250,250)))
 	   .add(Graph2D({200,200},BoundingBox(-4*M_PI,-4*M_PI,4*M_PI,4*M_PI)))
-	   .area().add(_2d::function_2d([] (float x, float y) { return std::cos(x)*std::sin(y);},_2d::color_map_red_blue(-1,1),{-4*M_PI,-4*M_PI},{4*M_PI,4*M_PI},{500,500}));
+	   .area().add(_2d::function_2d([] (float x, float y) { return std::cos(x)*std::sin(y);},_2d::color_map_red_blue(-1,1),{-4*M_PI,-4*M_PI},{4*M_PI,4*M_PI},{100,100}));
 
 	
 	std::ofstream f(std::string(argv[0])+".svg");

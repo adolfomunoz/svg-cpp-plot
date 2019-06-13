@@ -17,7 +17,7 @@ public:
 	text(const std::tuple<float, float>& position, const std::string& str) : position(position), str(str) {}
 	Text element(const Matrix& m) const noexcept override {
 		Text t(std::get<0>(position), std::get<1>(position), str);
-		t.transform({matrix(m[0][0],m[0][1],m[1][0] ,m[1][1],m[2][0],m[2][1])});
+		t.transform({matrix(m[0][0],m[0][1],m[1][0] ,m[1][1],m[0][2],m[1][2])});
 		return t;
 	}
 };
