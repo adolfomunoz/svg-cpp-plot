@@ -10,6 +10,7 @@
 #include "../primitives/group.h"
 #include "../primitives/clip-path.h"
 #include "../primitives/defs.h"
+#include "../primitives/mask.h"
 
 namespace svg_cpp_plot {
 namespace _2d {
@@ -73,6 +74,10 @@ inline auto clip_path(const svg_cpp_plot::_2d::Matrix& m = identity) {
 inline auto defs(const svg_cpp_plot::_2d::Matrix& m = identity) {
 	return DefsGenerator(m, [] (const svg_cpp_plot::_2d::Matrix& a, const svg_cpp_plot::_2d::Matrix& b) { return a*b; });
 }
+inline auto mask(const svg_cpp_plot::_2d::Matrix& m = identity) {
+	return MaskGenerator(m, [] (const svg_cpp_plot::_2d::Matrix& a, const svg_cpp_plot::_2d::Matrix& b) { return a*b; });
+}
+
 
 
 using Group = decltype(group());

@@ -47,6 +47,10 @@ public:
 	T& mask(Mask& m) noexcept {
 		return t()->set("mask",url_of(m));
 	}
+	template<typename G,typename G2>
+	T& mask(MaskGenerator<G,G2>& m) noexcept {
+		return t()->set("mask",url_of(m));
+	}
 
 	T& stroke_linecap(const StrokeLinecap& w) noexcept {
 		return t()->set("stroke-linecap",w); 		
