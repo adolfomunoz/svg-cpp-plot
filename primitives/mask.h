@@ -2,18 +2,20 @@
 
 #include "../core/node.h"
 #include "../core/node-generator.h"
+#include "../attributes/geometry-attributes.h"
 
 namespace svg_cpp_plot {
 
-class ClipPath : public NodeBase, public Attributes<ClipPath> {
+class Mask : public NodeBase, public Attributes<Mask>, public GeometryAttributes<Mask> {
 public:
-	ClipPath() : NodeBase("clipPath") {}
+	Mask() : NodeBase("mask") { GeometryAttributes<Mask>::x(Length(0,percentage)).y(Length(0,percentage)).width(Length(100,percentage)).height(Length(100,percentage)); }
 };
 
 template<typename T,typename FCombine>
-class ClipPathGenerator : public NodeGenerator<T,FCombine>, public Attributes<ClipPathGenerator<T,FCombine>> {
+class MaskGenerator : public NodeGenerator<T,FCombine>, public Attributes<MaskGenerator<T,FCombine>>, public GeometryAttributes<MaskGenerator<T,FCombine>> {
 public:
-	ClipPathGenerator(const T& t = T(), const FCombine& combine = FCombine()) : NodeGenerator<T,FCombine>("clipPath",t,combine) { }		
+	MaskGenerator(const T& t = T(), const FCombine& combine = FCombine()) : NodeGenerator<T,FCombine>("mask",t,combine) 
+	{ GeometryAttributes<MaskGenerator<T,FCombine>>::x(Length(0,percentage)).y(Length(0,percentage)).width(Length(100,percentage)).height(Length(100,percentage)); }		
 };
 
 

@@ -3,6 +3,7 @@
 #include "color.h"
 #include "url.h"
 #include "attribute-list.h"
+#include "../primitives/mask.h"
 #include "../primitives/linear-gradient.h"
 #include <initializer_list>
 
@@ -42,6 +43,9 @@ public:
 	}
 	T& fill(LinearGradient& lg) noexcept {
 		return t()->set("fill",url_of(lg));
+	}
+	T& mask(Mask& m) noexcept {
+		return t()->set("mask",url_of(m));
 	}
 
 	T& stroke_linecap(const StrokeLinecap& w) noexcept {
