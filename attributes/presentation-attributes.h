@@ -1,7 +1,9 @@
 #pragma once
 
 #include "color.h"
+#include "url.h"
 #include "attribute-list.h"
+#include "../primitives/linear-gradient.h"
 #include <initializer_list>
 
 namespace svg_cpp_plot {
@@ -14,7 +16,7 @@ namespace detail {
 
 ENUM_TYPE(StrokeLinecap) stroke_linecap_butt("butt"), stroke_linecap_round("round"), stroke_linecap_square("square");
 
-struct None {} none;
+ENUM_TYPE(None) none("none");
 
 //CRTP
 //Presentation attributes (common to all tags although not used in many of them? I don't know...)
@@ -36,7 +38,10 @@ public:
 		return t()->set("fill",c.to_string()); 
 	}
 	T& fill(const None& n) noexcept {
-		return t()->set("fill","none"); 
+		return t()->set("fill",n); 
+	}
+	T& fill(LinearGradient& lg) noexcept {
+		return t()->set("fill",url_of(lg));
 	}
 
 	T& stroke_linecap(const StrokeLinecap& w) noexcept {
