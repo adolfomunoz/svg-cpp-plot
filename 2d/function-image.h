@@ -15,7 +15,7 @@ class smooth_gradients_and_masks {
 	std::tuple<unsigned int, unsigned int> nsamples;
 	float border_expansion;
 public:
-	smooth_gradients_and_masks(const std::tuple<unsigned int,unsigned int> nsamples = {100,100}, float border_expansion = 0.05) : nsamples(nsamples), border_expansion(border_expansion) {}
+	smooth_gradients_and_masks(const std::tuple<unsigned int,unsigned int>& nsamples = {100,100}, float border_expansion = 0.05) : nsamples(nsamples), border_expansion(border_expansion) {}
 	template<typename F>
 	void fill_image(_2d::Group& s, const F& f, const std::tuple<float,float>& xmin, const std::tuple<float,float>& xmax) const {
 		auto& gradients = s.add(defs());
@@ -68,8 +68,28 @@ public:
 
 		}
 	}
-};	
+};
+	
+class sharp_pixels {
+	std::tuple<unsigned int, unsigned int> nsamples;
+	float border_expansion;
+public:
+	sharp_pixels(const std::tuple<unsigned int,unsigned int>& nsamples = {100,100}, float border_expansion = 0.05) : nsamples(nsamples), border_expansion(border_expansion) {}
+	template<typename F>
+	void fill_image(_2d::Group& s, const F& f, const std::tuple<float,float>& xmin, const std::tuple<float,float>& xmax) const {
+		auto& image = s;
+		image.stroke_width(0);
+		unsigned int i, j;
+		float dx = (std::get<0>(xmax)-std::get<0>(xmin))/float(std::get<0>(nsamples));
+		float dy = (std::get<1>(xmax)-std::get<1>(xmin))/float(std::get<1>(nsamples));
+		float x, y;
+		const float eps = border_expansion*dx;
 
+		for (y=std::get<1>(xmin),j=0;j<std::get<1>(nsamples);y+=dy,++j) 
+			for (x=std::get<0>(xmin),i=0;i<std::get<0>(nsamples);x+=dx,++i)
+				image.add(rect({x-eps,y-eps},{x+dx+eps,y+dy+eps})).stroke_width(0).fill(rgb(f(x+0.5*dx,y+0.5*dy)));
+		}
+};	
 }
 
 template<typename F, typename Strategy>

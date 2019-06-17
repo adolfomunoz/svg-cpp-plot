@@ -5,6 +5,15 @@
 namespace svg_cpp_plot {
 namespace _2d {
 	
+template<typename F, typename C, typename Strategy>
+auto function_2d(const F& f, const C& c, const std::tuple<float,float>& xmin, const std::tuple<float,float>& xmax, const Strategy& strategy) {
+	static_assert(std::is_floating_point_v<decltype(f(std::get<0>(xmin),std::get<1>(xmin)))>, "Function f should return floating point");	
+	static_assert(is_3d_point_v<decltype(c(float(0)))>,
+	       "Function c (color table) should return a color tuple (3d)");	
+
+	return function_image([f,c] (float x, float y) { return c(f(x,y)); },xmin,xmax,strategy);
+}
+
 template<typename F, typename C>
 auto function_2d(const F& f, const C& c, const std::tuple<float,float>& xmin, const std::tuple<float,float>& xmax, const std::tuple<unsigned int,unsigned int> nsamples = {100,100}) {
 	static_assert(std::is_floating_point_v<decltype(f(std::get<0>(xmin),std::get<1>(xmin)))>, "Function f should return floating point");	
