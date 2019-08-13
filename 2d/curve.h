@@ -19,7 +19,10 @@ std::ostream& operator<<(std::ostream& os, const std::tuple<float,float>& p) {
 	return os;
 }
 
+//OK so we are going to store the points of the functions in a list so we don't have to 
+//make sure that the function F can be copied. This is the previous version
 
+/*
 template<typename F, typename DF>
 class curve_derivative : public ElementGenerator<Matrix, Path>, public Attributes<curve_derivative<F,DF>>, public GraphicalAttributes<curve_derivative<F,DF>>, public StyleAttributes<curve_derivative<F,DF>>, public PresentationAttributes<curve_derivative<F,DF>> {
 	F f;
@@ -41,6 +44,42 @@ public:
 			path.curve_to(transform_point(m,f(t)+df(t)*(dt/3.0f)),
 			      transform_point(m,f(t+dt) - df(t+dt)*(dt/3.0f)),
 			      transform_point(m,f(t+dt)));
+		}
+		return path;
+	}
+};
+*/
+
+class curve_derivative : public ElementGenerator<Matrix, Path>, public Attributes<curve_derivative>, public GraphicalAttributes<curve_derivative>, public StyleAttributes<curve_derivative>, public PresentationAttributes<curve_derivative> {
+	std::list<std::tuple<float,float>> f_samples;
+	std::list<std::tuple<float,float>> df_samples;
+	float dt;
+public:
+	template<typename F, typename DF>
+	curve_derivative(const F& f, const DF& df, float tmin, float tmax, unsigned int nsamples = 100) : dt((tmax - tmin)/float(nsamples-1)) {
+			this->stroke_linecap(stroke_linecap_round).stroke_width(1).fill(none);
+			static_assert(is_2d_point_v<decltype(f(tmin))>, "Function f should return a two dimensional point");
+			static_assert(is_2d_point_v<decltype(df(tmin))>, "Derivative df should return a two dimensional point");
+			
+			for (float t=tmin; t<(tmax-0.5*dt); t+=dt) {
+				f_samples.push_back(f(t));
+				df_samples.push_back(df(t));
+			}
+	}
+	
+	Path element(const Matrix& m) const noexcept override {
+		auto it_f = f_samples.begin();
+		auto it_f_prev = it_f;
+		auto it_df = df_samples.begin();
+		auto it_df_prev = it_df;
+
+		Path path(transform_point(m,*it_f));
+		++it_f; ++it_df;
+		while (it_f != f_samples.end()) {//We omit some comprobations here that are redundant
+			path.curve_to(transform_point(m,(*it_f_prev) + (*it_df_prev)*(dt/3.0f)),
+				transform_point(m,(*it_f) - (*it_df)*(dt/3.0f)),
+				transform_point(m,(*it_f)));
+				++it_f; ++it_df; ++it_f_prev; ++it_df_prev;
 		}
 		return path;
 	}
