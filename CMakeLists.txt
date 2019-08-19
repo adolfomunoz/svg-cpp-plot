@@ -50,6 +50,16 @@ set(EXECUTABLE_OUTPUT_PATH "${svg-cpp-plot_SOURCE_DIR}/bin")
 # Base include directory
 include_directories(${svg-cpp-plot_SOURCE_DIR})
 
+##################################################################################
+# LIBPNG
+##################################################################################
+find_package(PNG)
+if(PNG_FOUND)
+	include_directories(${PNG_INCLUDE_DIR})
+	list(APPEND svg_cpp_plot_libs ${PNG_LIBRARY})
+	list(APPEND svg_cpp_plot_defs "USE_PNG")
+endif(PNG_FOUND)
+
 ###################################################################################
 # USEFUL FUNCTIONS
 ###################################################################################
@@ -61,6 +71,8 @@ function(add_subdirectories_and_compile directory)
 		if(IS_DIRECTORY ${fullchild})
 			if (EXISTS ${fullchild}/${child}.cc)
 				add_executable(svg-${dir}-${child} ${fullchild}/${child}.cc)
+				target_compile_definitions(svg-${dir}-${child} PRIVATE ${svg_cpp_plot_defs})
+				target_link_libraries(svg-${dir}-${child} ${svg_cpp_plot_libs})
 			else()
 				add_subdirectory(${fullchild})
 			endif()
