@@ -37,7 +37,11 @@ public:
 		for (const P& p : ps) this->add_point(p);
 		return static_cast<T&>(*this);
 	}
-
+	
+	PointList& add_points(const std::initializer_list<std::tuple<float,float>>& ps) {
+		for (const auto& p : ps) this->add_point(p);
+		return static_cast<T&>(*this);
+	}
 };
 
 }
