@@ -9,18 +9,18 @@ namespace _2d {
 template<typename T>
 class PointList {
 protected:
-	std::list<std::tuple<float,float>> point_list;
+	std::list<std::tuple<float,float>> point_list_;
 public:
 	PointList() {}
 	template<typename PL>
-	PointList(const PL& pl) : point_list(pl) { }
+	PointList(const PL& pl) : point_list_(pl) { }
 	template<typename PL>
-	PointList(PL&& pl) : point_list(std::forward<PL>(pl)) { }
+	PointList(PL&& pl) : point_list_(std::forward<PL>(pl)) { }
 	
-	PointList(std::initializer_list<std::tuple<float,float>>&& pl) :  point_list(std::forward<std::initializer_list<std::tuple<float,float>>>(pl)) { }
+	PointList(std::initializer_list<std::tuple<float,float>>&& pl) :  point_list_(std::forward<std::initializer_list<std::tuple<float,float>>>(pl)) { }
 
 	PointList& add_point(float x, float y) {
-		point_list.push_back(std::tuple<float,float>(x,y)); 
+		point_list_.push_back(std::tuple<float,float>(x,y)); 
 		return static_cast<T&>(*this);
 	}
 
@@ -42,6 +42,8 @@ public:
 		for (const auto& p : ps) this->add_point(p);
 		return static_cast<T&>(*this);
 	}
+
+    const std::list<std::tuple<float,float>>& point_list() const { return point_list_; }
 };
 
 }
