@@ -8,6 +8,7 @@ class SVG : public NodeBase, public Attributes<SVG> {
 public:
 	SVG() : NodeBase("svg") {
 		set("xmlns","http://www.w3.org/2000/svg");
+		set("xmlns:xlink","http://www.w3.org/1999/xlink"); //inkscape compatibility with embedded pngs
 		set("width","100%");
 		set("height","100%");
 	}

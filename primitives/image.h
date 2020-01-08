@@ -10,8 +10,9 @@ namespace svg_cpp_plot {
 class Image : public Terminal, public Attributes<Image>, public GraphicalAttributes<Image>, public StyleAttributes<Image>, public GeometryAttributes<Image> {
 public:
 	std::string href() const noexcept { return get_default("href",std::string("")); }
-	Image& href(const std::string& v) noexcept { return set("href",v).set("data-href",v); }//The second one is for reloading
-
+	Image& href(const std::string& v) noexcept { 
+		return set("href",v).set("data-href",v).set("xlink:href",v); 
+	}  //data-href is for reloading (if needed). xlink:href is for inkscape compatibility
 
 	Image(const std::string& name) : Terminal("image")  {
 		href(name);

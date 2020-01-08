@@ -16,7 +16,7 @@ public:
 	using PointList::PointList;
 	Polygon element(const Matrix& m) const noexcept override {
 		Polygon g;
-		for (auto p : point_list) g.add_point(transform_point(m,p));
+		for (auto p : point_list()) g.add_point(transform_point(m,p));
 		return g;
 	}
 };
