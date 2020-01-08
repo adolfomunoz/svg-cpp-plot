@@ -106,7 +106,7 @@ auto function_image(const F& f, const std::tuple<float,float>& xmin, const std::
 	
 template<typename F>
 auto function_image(const F& f, const std::tuple<float,float>& xmin, const std::tuple<float,float>& xmax, const std::tuple<unsigned int,unsigned int> nsamples = {100,100}, float border = 0.05) {
-	return function_image(f,xmin,xmax,image_strategy::smooth_gradients_and_masks(nsamples,border));
+	return function_image(f,xmin,xmax,image_strategy::sharp_pixels(nsamples,border));
 }
 
 
