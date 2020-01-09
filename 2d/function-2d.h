@@ -57,6 +57,24 @@ public:
 	}
 };
 
+class color_map_heat {
+    float tmin, tmax;
+    float tblue, tcyan, tyellow, tred;
+public:
+    color_map_heat(float tmin = 0.0f, float tmax = 1.0f) :
+        tmin(tmin), tmax(tmax), tblue(0.8*tmin + 0.2*tmax), tcyan(0.6*tmin + 0.4*tmax), tyellow(0.4*tmin + 0.6*tmax), tred(0.2*tmin + 0.8*tmax) { }
+
+	std::tuple<float,float,float> operator()(float t) const noexcept {
+		if (t>tmax) return std::tuple(0.2f,0.0f,0.0f);
+        else if (t>tred) return std::tuple(1.0f - (t-tred)*0.8f/0.2f,0.0f,0.0f);
+        else if (t>tyellow) return std::tuple(1.0f,1.0f - (t-tyellow)/0.2f,0.0f);
+        else if (t>tcyan) return std::tuple((t-tcyan)/0.2f , 1.0f, 1.0f - (t-tcyan)/0.2f);
+        else if (t>tblue) return std::tuple(0.0f, (t-tblue)/0.2f, 1.0f);
+        else if (t>tmin) return std::tuple(0.0f, 0.0f, 1.0f - (t-tmin)*0.8f/0.2f);
+        else return std::tuple(0.0f,0.0f,0.2f);
+	}
+};
+
 template<typename F>
 auto function_2d(const F& f, const std::tuple<float,float>& xmin, const std::tuple<float,float>& xmax, const std::tuple<unsigned int,unsigned int> nsamples = {100,100}) {
 	return function_2d(f,color_map_grayscale(),xmin,xmax,nsamples);
