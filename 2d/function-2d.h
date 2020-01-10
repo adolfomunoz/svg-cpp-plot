@@ -23,57 +23,48 @@ auto function_2d(const F& f, const C& c, const std::tuple<float,float>& xmin, co
 	return function_image([f,c] (float x, float y) { return c(f(x,y)); },xmin,xmax,nsamples);
 }
 
-class color_map_red_blue {
-	float tmin, tmax, tmid;
+
+class color_map {
+	float tmin; float tmax;
+	std::vector<std::tuple<float,float,float>> steps;
 public:
-	color_map_red_blue(float tmin = -1.0f, float tmax = 1.0f) : 
-	tmin(tmin), tmax(tmax), tmid((tmax+tmin)/2.0f) {}
-	
+	color_map(float tmin, float tmax, const std::initializer_list<std::tuple<float,float,float>>& s) :
+		tmin(tmin), tmax(tmax), steps(s) {
+			if (steps.size()<1) steps.push_back(std::tuple(0.0f,0.0f,0.0f));
+			if (steps.size()<2) steps.push_back(std::tuple(1.0f,1.0f,1.0f));
+		}
+		
 	std::tuple<float,float,float> operator()(float t) const noexcept {
-		if (t>tmax) return std::tuple(0.0f,0.0f,1.0f);
-		else if (t<tmin) return std::tuple(1.0f,0.0f,0.0f);
-		else if (t>tmid) {
-			float s = (t-tmid)/(tmax-tmid);
-			return std::tuple(1.0f-s,1.0f-s,1.0f);
-		} else { // tmin < t <= tmid
-			float s = (t - tmin)/(tmid-tmin);
-			return std::tuple(1.0f,s,s);
+		float pos = steps.size()*((t-tmin)/(tmax-tmin));
+		int s = std::floor(pos);
+		if (s < 0) return steps.front();
+		else if (std::size_t(s) >= steps.size()) return steps.back();
+		else {
+			float t = pos - s;
+			return std::tuple<float,float,float>(std::get<0>(steps[s])*(1.0f-t) + std::get<0>(steps[s+1])*t,
+							  std::get<1>(steps[s])*(1.0f-t) + std::get<1>(steps[s+1])*t,
+							  std::get<2>(steps[s])*(1.0f-t) + std::get<2>(steps[s+1])*t);
 		}	
 	}
 };
 
-class color_map_grayscale {
-	float tmin, tmax;
-public:
-	color_map_grayscale(float tmin = 0.0f, float tmax = 1.0f) :
-		tmin(tmin), tmax(tmax) {}
-	std::tuple<float,float,float> operator()(float t) const noexcept {
-		if (t<tmin) return std::tuple(0.0f,0.0f,0.0f);
-		else if (t>tmax) return std::tuple(1.0f,1.0f,1.0f);
-		else {
-			float v = (t-tmin)/(tmax-tmin);
-			return std::tuple(v,v,v);
-		}
-	}
-};
+color_map color_map_red_blue(float tmin = -1.0f, float tmax = 1.0f) {
+	return color_map(tmin,tmax, {{1.0f,0.0f,0.0f},{1.0f,1.0f,1.0f},{0.0f,0.0f,1.0f}});
+}
 
-class color_map_heat {
-    float tmin, tmax;
-    float tblue, tcyan, tyellow, tred;
-public:
-    color_map_heat(float tmin = 0.0f, float tmax = 1.0f) :
-        tmin(tmin), tmax(tmax), tblue(0.8*tmin + 0.2*tmax), tcyan(0.6*tmin + 0.4*tmax), tyellow(0.4*tmin + 0.6*tmax), tred(0.2*tmin + 0.8*tmax) { }
+color_map color_map_grayscale(float tmin = 0.0f, float tmax = 1.0f) {
+	return color_map(tmin,tmax, {{0.0f,0.0f,0.0f},{1.0f,1.0f,1.0f}});
+}
 
-	std::tuple<float,float,float> operator()(float t) const noexcept {
-		if (t>tmax) return std::tuple(0.2f,0.0f,0.0f);
-        else if (t>tred) return std::tuple(1.0f - (t-tred)*0.8f/0.2f,0.0f,0.0f);
-        else if (t>tyellow) return std::tuple(1.0f,1.0f - (t-tyellow)/0.2f,0.0f);
-        else if (t>tcyan) return std::tuple((t-tcyan)/0.2f , 1.0f, 1.0f - (t-tcyan)/0.2f);
-        else if (t>tblue) return std::tuple(0.0f, (t-tblue)/0.2f, 1.0f);
-        else if (t>tmin) return std::tuple(0.0f, 0.0f, 1.0f - (t-tmin)*0.8f/0.2f);
-        else return std::tuple(0.0f,0.0f,0.2f);
-	}
-};
+color_map color_map_heat(float tmin = 0.0f, float tmax = 1.0f) {
+	return color_map(tmin,tmax,
+				{   {0.0f,0.0f,0.2f},
+					{0.0f,0.0f,1.0f},
+					{0.0f,1.0f,1.0f},
+					{1.0f,1.0f,0.0f},
+					{1.0f,0.0f,0.0f},
+					{0.4f,0.0f,0.0f} });
+}
 
 template<typename F>
 auto function_2d(const F& f, const std::tuple<float,float>& xmin, const std::tuple<float,float>& xmax, const std::tuple<unsigned int,unsigned int> nsamples = {100,100}) {
