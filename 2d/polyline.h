@@ -11,7 +11,7 @@
 namespace svg_cpp_plot {
 namespace _2d {
 
-class polyline : public PointList<polyline>, public ElementGenerator<Matrix, Polyline>, public Attributes<polyline>, public GraphicalAttributes<polyline>, public StyleAttributes<polyline>, public PresentationAttributes<polyline> {
+class polyline : public PointList, public ElementGenerator<Matrix, Polyline>, public Attributes<polyline>, public GraphicalAttributes<polyline>, public StyleAttributes<polyline>, public PresentationAttributes<polyline> {
 public:
 	using PointList::PointList;
 	Polyline element(const Matrix& m) const noexcept override {

@@ -6,7 +6,6 @@
 namespace svg_cpp_plot {
 namespace _2d {
 
-template<typename T>
 class PointList {
 protected:
 	std::list<std::tuple<float,float>> point_list_;
@@ -21,26 +20,25 @@ public:
 
 	PointList& add_point(float x, float y) {
 		point_list_.push_back(std::tuple<float,float>(x,y)); 
-		return static_cast<T&>(*this);
+		return *this;
 	}
 
 	template<typename P>
 	PointList& add_point(const P& p) {
 		static_assert(is_2d_point_v<P>, "Requires 2d points");
 		return add_point(std::get<0>(p),std::get<1>(p));
-		return static_cast<T&>(*this);
 	}
 
 	template<typename P>
 	PointList& add_points(const std::initializer_list<P>& ps) {
 		static_assert(is_2d_point_v<P>, "Requires 2d points");
 		for (const P& p : ps) this->add_point(p);
-		return static_cast<T&>(*this);
+		return *this;
 	}
 	
 	PointList& add_points(const std::initializer_list<std::tuple<float,float>>& ps) {
 		for (const auto& p : ps) this->add_point(p);
-		return static_cast<T&>(*this);
+		return *this;
 	}
 
     const std::list<std::tuple<float,float>>& point_list() const { return point_list_; }

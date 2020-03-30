@@ -30,7 +30,7 @@ public:
 	auto& border() noexcept { 
 		return this->add(_2d::rect({0,0},size)).fill(none).pointer_events(pointer_events_none).class_("border");
 	}
-
+	
 	Graph2D(const std::tuple<float, float>& size, const BoundingBox& bb):
 	    _2d::Group(_2d::group(_2d::identity)), size(size),bb(bb),
 		area_(this->add(_2d::group(_2d::scale(std::get<0>(size)/bb.width(),-std::get<1>(size)/bb.height())*

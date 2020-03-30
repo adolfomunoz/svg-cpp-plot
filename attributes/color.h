@@ -26,6 +26,15 @@ public:
 	}
 };
 
+class color_hex : public Color {
+	std::string hex;
+public:
+	color_hex(const std::string& hex) : hex(hex) {}
+	std::string to_string() const noexcept override {
+		return '#'+hex;
+	}
+};
+
 rgb hsv(float h, float s, float v) {
 	h*=3.0f/M_PI; //In 6 sectors
 	int i = h; //floor of h;

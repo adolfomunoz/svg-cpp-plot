@@ -81,6 +81,7 @@ inline auto mask(const svg_cpp_plot::_2d::Matrix& m = identity) {
 
 
 using Group = decltype(group());
+using Element = Generator<svg_cpp_plot::_2d::Matrix>;
 
 }
 }

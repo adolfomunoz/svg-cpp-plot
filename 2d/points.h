@@ -13,7 +13,7 @@ namespace _2d {
 
 
 
-class points : public PointList<points>, public ElementGenerator<Matrix, svg_cpp_plot::Group>, public Attributes<points>, public GraphicalAttributes<points>, public StyleAttributes<points>, public PresentationAttributes<points> {
+class points : public PointList, public ElementGenerator<Matrix, svg_cpp_plot::Group>, public Attributes<points>, public GraphicalAttributes<points>, public StyleAttributes<points>, public PresentationAttributes<points> {
 public:
 	using PointList::PointList;
 	svg_cpp_plot::Group element(const Matrix& m) const noexcept override {

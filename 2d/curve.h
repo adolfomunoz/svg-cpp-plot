@@ -10,13 +10,15 @@
 namespace svg_cpp_plot {
 namespace _2d {
 
+namespace {
 constexpr std::tuple<float, float> operator*(const std::tuple<float,float>& p0, float f) {
 	return std::tuple<float, float>(std::get<0>(p0)*f, std::get<1>(p0)*f);
 }
 
-std::ostream& operator<<(std::ostream& os, const std::tuple<float,float>& p) {
+/*std::ostream& operator<<(std::ostream& os, const std::tuple<float,float>& p) {
 	os<<"("<<std::get<0>(p)<<","<<std::get<1>(p)<<")";
 	return os;
+}*/
 }
 
 //OK so we are going to store the points of the functions in a list so we don't have to 
