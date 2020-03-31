@@ -8,6 +8,44 @@
 #include "../2d/polyline.h"
 
 namespace svg_cpp_plot {
+	
+class arange {
+	float start, stop, step;
+	
+public:
+	arange(float start, float stop, float step) :
+		start(start), stop(stop), step(step) {}
+	
+	using value_type=float;
+	
+	class const_iterator : public std::iterator<std::output_iterator_tag, int>{
+		friend class arange;
+		float x, step;
+		const_iterator(float x , float step) :
+			x(x), step(step) {}
+
+	public:
+		const_iterator() : const_iterator(0,0) {}
+
+		float operator*() const { return x; }
+		const_iterator& operator++() {
+			x+=step; return (*this);
+		}
+		const_iterator operator++(int) {
+			const_iterator i = (*this); ++(*this); return i;
+		}
+		bool operator==(const const_iterator& that) const {
+			return (that.x > (x-0.5f*step)) && (that.x < (x+0.5f*step));
+		}
+		bool operator!=(const const_iterator& that) const {
+			return !((*this)==that);
+		}
+	};
+	
+	const_iterator begin() const { return const_iterator(start,step); }
+	const_iterator end() const { return const_iterator(stop,step); }
+	
+};
 		
 class SVGPlot {
 	class Line {
@@ -72,15 +110,47 @@ public:
 		}
 		
 	template<typename X, typename Y>
-	void plot(const X& x, const Y& y, 
-		typename std::enable_if<std::is_floating_point<typename X::value_type>::value, int>::type = 0) {
-			plot_line(x,y,*cycle[cycle_pos]);
+	void plot(const X& x, const Y& y, std::string_view fmt = "",
+		typename std::enable_if<std::is_floating_point<typename X::value_type>::value && std::is_floating_point<typename Y::value_type>::value, int>::type = 0) {
+			
+			if (fmt.size()>0) {
+				switch (fmt[0]) {
+					case 'r': plot_line(x,y,red); break;
+					case 'g': plot_line(x,y,green); break;
+					case 'b': plot_line(x,y,blue); break;
+					case 'k': plot_line(x,y,black); break;
+					case 'w': plot_line(x,y,white); break;
+					case 'c': plot_line(x,y,rgb(0,1,1)); break;
+					case 'm': plot_line(x,y,rgb(1,0,1)); break;
+					case 'y': plot_line(x,y,yellow); break;
+					default: plot_line(x,y,*cycle[cycle_pos]);
+				}
+			} else plot_line(x,y,*cycle[cycle_pos]);
 			cycle_pos = (cycle_pos + 1) % cycle.size();
 	}
-			
+	
+	template<typename X>
+	void plot(const X& x, const std::initializer_list<float>& y, std::string_view fmt = "") {
+			return plot(x,std::list<float>(y), fmt);
+	}
+	
+	template<typename Y>
 	void plot(const std::initializer_list<float>& x,
-			  const std::initializer_list<float>& y) {	  
-		plot(std::list<float>(x),std::list<float>(y));
+			  const Y& y, std::string_view fmt = "") {
+		plot(std::list<float>(x),y, fmt);
+	}	
+	void plot(const std::initializer_list<float>& x,
+			  const std::initializer_list<float>& y, std::string_view fmt = "") {	  
+		plot(std::list<float>(x),std::list<float>(y),fmt);
+	}
+	
+	template<typename Y>
+	void plot(const Y& y, std::string_view fmt  = "") {	  
+		plot(arange(0,y.size(),1),y,fmt);
+	}
+	
+	void plot(const std::initializer_list<float>& y, std::string_view fmt  = "") {	  
+		plot(arange(0,y.size(),1),std::list<float>(y),fmt);
 	}
 	
 	void savefig(const std::string& name) const {
