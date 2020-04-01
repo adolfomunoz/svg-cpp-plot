@@ -17,8 +17,7 @@ plt.savefig("../doc/example1.svg");
 ```
 generates the following graph:
 
-<img src="./doc/example1.svg" alt="example1"
-	width="50%" />
+<img style="margin:0px auto;display:block"src="./doc/example1.svg" alt="example1" width="50%" />
 	
 You may be wondering why the x-axis ranges from *0-3* and the *y*-axis from *1-4*. If you provide a single list or array to the `plot()` method, it is assumed that it represents a sequence of *y* values, and automatically generates the *x* values for you, starting from *0* (in this case `{0, 1, 2, 3}`).
 
@@ -31,7 +30,8 @@ plt.savefig("../doc/example2.svg");
 ```
 to include also specific values on the *x* axis and therefore generate
 
-![example2](./doc/example2.svg)
+<img style="margin:0px auto;display:block"src="./doc/example2.svg" alt="example2" width="50%" />
+	
 
 Of course the `plot()` method is not limited to bracketed lists. It can also work with any STL linear container of floating point numbers (such as `std::list<float>`). Additionaly, a python-like `arange(<start>,<stop>,<step>)` is provided as a list generator. These are illustrated in the following code:
 
@@ -45,7 +45,7 @@ plt.savefig("../doc/example3.svg");
 ```
 
 that generates 
-![example3](./doc/example3.svg)
+<img style="margin:0px auto;display:block"src="./doc/example3.svg" alt="example3" width="50%" />
 
 Furthermore, it is also possible to use functions as the *y* parameter. In that case, the function is evaluated for all the real numbers in *x* and plotted accordingly, as follows:
 
@@ -59,5 +59,5 @@ plt.savefig("../doc/example4.svg");
  
 generating the following graph:
 
-<img src="./doc/example4.svg" alt="example4"
+<img style="margin:0px auto;display:block" src="./doc/example4.svg" alt="example4"
 	width="50%" />
