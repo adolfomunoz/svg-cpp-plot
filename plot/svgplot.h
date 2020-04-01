@@ -136,6 +136,8 @@ public:
 			cycle.push_back(std::make_unique<color_hex>("17becf"));
 		}
 		
+
+		
 	template<typename X, typename Y>
 	void plot(const X& x, const Y& y, std::string_view fmt = "",
 		typename std::enable_if<std::is_floating_point<typename X::value_type>::value && std::is_floating_point<typename Y::value_type>::value, int>::type = 0) {
@@ -154,6 +156,15 @@ public:
 				}
 			} else plot_line(x,y,*cycle[cycle_pos]);
 			cycle_pos = (cycle_pos + 1) % cycle.size();
+	}
+	
+	template<typename X, typename Y>
+	void plot(const X& x, const Y& y, std::string_view fmt = "",
+		typename std::enable_if<std::is_floating_point<typename X::value_type>::value && std::is_floating_point<decltype(std::declval<Y>()(0.0f))>::value, int>::type = 0) {
+		
+		std::list<float> l;
+		for (float ix : x) l.push_back(y(ix));
+		plot(x,l,fmt);
 	}
 	
 	template<typename X>
