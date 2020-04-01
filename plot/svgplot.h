@@ -110,11 +110,11 @@ private:
 		graph.border().stroke_width(1).stroke(black);
 		
 		if (!xlabel().empty()) {
-			graph.add(_2d::text({0.5*graph_width,graph_height+26},xlabel())).font_size(16).text_anchor(svg_cpp_plot::text_anchor_middle);
+			graph.add(_2d::text({0.5*graph_width,graph_height+26},xlabel())).font_size(14).text_anchor(svg_cpp_plot::text_anchor_middle);
 			bottom_margin+=30;
 		}
 		if (!ylabel().empty()) {
-			graph.add(_2d::group(_2d::translate({-26,0.5*graph_height})*_2d::rotate(0.5*M_PI))).add(_2d::text({0,0},ylabel())).font_size(16).text_anchor(text_anchor_middle);
+			graph.add(_2d::group(_2d::translate({-26,0.5*graph_height})*_2d::rotate(-0.5*M_PI))).add(_2d::text({0,0},ylabel())).font_size(14).text_anchor(text_anchor_middle);
 			left_margin+=40;
 		}
 		s.viewBox(BoundingBox(-left_margin,-top_margin,

@@ -10,7 +10,7 @@
 
 <polygon id="id0000000007" points="0,0 0,300 400,300 400,0 " pointer-events="none" class="border" stroke-width="1.000000" fill="none" stroke="black" />
 <g id="id0000000004" >
-<text y="0.000000" transform="matrix(-4.37114e-08 1 -1 -4.37114e-08 -26 150)" x="0.000000" id="id0000000008" font-size="16.000000px" text-anchor="middle" >
+<text y="0.000000" transform="matrix(-4.37114e-08 -1 1 -4.37114e-08 -26 150)" x="0.000000" id="id0000000008" font-size="14.000000px" text-anchor="middle" >
 some numbers
 </text>
 
