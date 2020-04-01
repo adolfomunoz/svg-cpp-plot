@@ -14,7 +14,7 @@ class text : public ElementGenerator<Matrix, Text>, public Attributes<text>, pub
 	std::tuple<float, float> position;
 	std::string str;
 public:
-	text(const std::tuple<float, float>& position, const std::string& str) : position(position), str(str) {}
+	text(const std::tuple<float, float>& position, std::string_view str) : position(position), str(str) {}
 	Text element(const Matrix& m) const noexcept override {
 		Text t(std::get<0>(position), std::get<1>(position), str);
 		t.transform({matrix(m[0][0],m[0][1],m[1][0] ,m[1][1],m[0][2],m[1][2])});

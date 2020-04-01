@@ -61,10 +61,12 @@ class SVGPlot {
 	std::list<std::shared_ptr<_2d::Element>> plots;
 	
 	
-	std::string ylabel_;
+	std::string ylabel_, xlabel_;
 public:
 	std::string_view ylabel() const { return ylabel_; }
 	void ylabel(std::string_view l) { ylabel_=l; }
+	std::string_view xlabel() const { return xlabel_; }
+	void xlabel(std::string_view l) { xlabel_=l; }
 	
 private:	
 	template<typename X, typename Y>
@@ -84,6 +86,9 @@ private:
 	}
 	
 	SVG svg() const {
+		float graph_width = 400, graph_height = 300;
+		float left_margin = 1, right_margin = 1, top_margin = 1, bottom_margin = 1;
+		
 		SVG s;
 		float minx(0), miny(0), maxx(0), maxy(0); bool first=true;
 		for (const auto& plot : plot_points)
@@ -94,11 +99,26 @@ private:
 				if (first || (maxy<y)) maxy=y;
 				first = false;
 			}
+			
 		
-		auto& graph = s.add(Graph2D({400,300},BoundingBox(minx,miny,maxx,maxy)));
+		
+		float dx = (maxx-minx)/8.0f;
+		float dy = (maxy-miny)/8.0f;
+		
+		auto& graph = s.add(Graph2D({graph_width,graph_height},BoundingBox(minx-dx,miny-dy,maxx+dx,maxy+dy)));
 		for (const auto& plot : plots) graph.area().add(plot);
 		graph.border().stroke_width(1).stroke(black);
-		s.viewBox(BoundingBox(-1,-1,401,301));
+		
+		if (!xlabel().empty()) {
+			graph.add(_2d::text({0.5*graph_width,graph_height+26},xlabel())).font_size(16).text_anchor(svg_cpp_plot::text_anchor_middle);
+			bottom_margin+=30;
+		}
+		if (!ylabel().empty()) {
+			graph.add(_2d::group(_2d::translate({-26,0.5*graph_height})*_2d::rotate(0.5*M_PI))).add(_2d::text({0,0},ylabel())).font_size(16).text_anchor(text_anchor_middle);
+			left_margin+=40;
+		}
+		s.viewBox(BoundingBox(-left_margin,-top_margin,
+					graph_width+right_margin,graph_height+bottom_margin));
 		return s;
 	}
 public:

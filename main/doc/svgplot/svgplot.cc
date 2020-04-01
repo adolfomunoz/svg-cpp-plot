@@ -10,6 +10,21 @@ int main(int argc, char** argv) {
 		plt.ylabel("some numbers");
 		plt.savefig("../doc/example1.svg");
 	}
+
+	{ // Example 2
+		svg_cpp_plot::SVGPlot plt;
+		plt.plot({1, 2, 3, 4}, {1, 4, 9, 16});
+		plt.savefig("../doc/example2.svg");
+	}
+	
+	{ // Example 3
+		svg_cpp_plot::SVGPlot plt;
+		float f=-1.0;
+		std::list<float> l; 
+		for (int i=0; i<100;++i) l.push_back(f*=-1.005);
+		plt.plot(svg_cpp_plot::arange(0,5,0.05),l);
+		plt.savefig("../doc/example3.svg");
+	}
 	
 	svg_cpp_plot::SVGPlot plt;
 	plt.plot({1,-1,1,-1,1,-1});
