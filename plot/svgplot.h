@@ -102,8 +102,8 @@ private:
 			
 		
 		
-		float dx = (maxx-minx)/8.0f;
-		float dy = (maxy-miny)/8.0f;
+		float dx = (maxx-minx)/32.0f;
+		float dy = (maxy-miny)/32.0f;
 		
 		auto& graph = s.add(Graph2D({graph_width,graph_height},BoundingBox(minx-dx,miny-dy,maxx+dx,maxy+dy)));
 		for (const auto& plot : plots) graph.area().add(plot);
