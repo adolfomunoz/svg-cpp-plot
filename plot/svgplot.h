@@ -60,6 +60,13 @@ class SVGPlot {
 	std::list<std::shared_ptr<_2d::PointList>> plot_points;
 	std::list<std::shared_ptr<_2d::Element>> plots;
 	
+	
+	std::string ylabel_;
+public:
+	std::string_view ylabel() const { return ylabel_; }
+	void ylabel(std::string_view l) { ylabel_=l; }
+	
+private:	
 	template<typename X, typename Y>
 	Line plot_line(const X& x, const Y& y,
 					const Color& c) {
@@ -157,6 +164,7 @@ public:
 		std::ofstream f(name);
 		f<<svg();
 	}
+	
 };
 
 }
