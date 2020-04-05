@@ -89,7 +89,7 @@ private:
 	}
 	
 	SVG svg() const {
-		float graph_width = 400, graph_height = 300;
+		float graph_width = 200, graph_height = 150;
 		float left_margin = 1, right_margin = 1, top_margin = 1, bottom_margin = 1;
 		
 		SVG s;
