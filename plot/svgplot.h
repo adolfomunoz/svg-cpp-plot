@@ -62,11 +62,14 @@ class SVGPlot {
 	
 	
 	std::string ylabel_, xlabel_;
+	std::array<float,4> axis_; bool axis_set;
 public:
 	std::string_view ylabel() const { return ylabel_; }
 	void ylabel(std::string_view l) { ylabel_=l; }
 	std::string_view xlabel() const { return xlabel_; }
 	void xlabel(std::string_view l) { xlabel_=l; }
+
+	void axis(const std::array<float,4> a) { axis_=a; }
 	
 private:	
 	template<typename X, typename Y>
@@ -90,22 +93,28 @@ private:
 		float left_margin = 1, right_margin = 1, top_margin = 1, bottom_margin = 1;
 		
 		SVG s;
-		float minx(0), miny(0), maxx(0), maxy(0); bool first=true;
-		for (const auto& plot : plot_points)
-			for (const auto& [x,y] : plot->point_list()) {
-				if (first || (minx>x)) minx=x;
-				if (first || (maxx<x)) maxx=x;
-				if (first || (miny>y)) miny=y;
-				if (first || (maxy<y)) maxy=y;
-				first = false;
-			}
-			
+		std::array<float,4> local_axis;
+		if (axis_set) local_axis=axis_;
+		else {
+			float minx(0), miny(0), maxx(0), maxy(0); bool first=true;
+			for (const auto& plot : plot_points)
+				for (const auto& [x,y] : plot->point_list()) {
+					if (first || (minx>x)) minx=x;
+					if (first || (maxx<x)) maxx=x;
+					if (first || (miny>y)) miny=y;
+					if (first || (maxy<y)) maxy=y;
+					first = false;
+				}
 		
+			float dx = (maxx-minx)/32.0f;
+			float dy = (maxy-miny)/32.0f;
+			local_axis[0]=minx-dx;
+			local_axis[1]=maxx+dx;
+			local_axis[2]=miny-dy;
+			local_axis[3]=maxy+dy;
+		}
 		
-		float dx = (maxx-minx)/32.0f;
-		float dy = (maxy-miny)/32.0f;
-		
-		auto& graph = s.add(Graph2D({graph_width,graph_height},BoundingBox(minx-dx,miny-dy,maxx+dx,maxy+dy)));
+		auto& graph = s.add(Graph2D({graph_width,graph_height},BoundingBox(local_axis[0],local_axis[2],local_axis[1],local_axis[3])));
 		for (const auto& plot : plots) graph.area().add(plot);
 		graph.border().stroke_width(1).stroke(black);
 		
@@ -117,13 +126,53 @@ private:
 			graph.add(_2d::group(_2d::translate({-26,0.5*graph_height})*_2d::rotate(-0.5*M_PI))).add(_2d::text({0,0},ylabel())).font_size(14).text_anchor(text_anchor_middle);
 			left_margin+=40;
 		}
+		
+		//Hacemos los ticks buscando un redondeo molón (X)
+		float tick_step = std::floor((local_axis[1] - local_axis[0])/6.0f);
+		int factor = 2;
+		while (tick_step<=0.0f) {
+			tick_step=std::floor(factor*(local_axis[1] - local_axis[0])/6.0f)/float(factor);
+			if ((factor % 4) == 0) factor = (factor*10)/4;
+			else factor*=2;
+		}
+		float first_tick = std::ceil(local_axis[0]/tick_step)*tick_step;
+		for (float x = first_tick; x <= local_axis[1]; x+=tick_step) {
+			float global_x = graph_width*(x - local_axis[0])/
+						(local_axis[1]-local_axis[0]);
+			graph.add(_2d::line({global_x,graph_height},{global_x, graph_height+3}))
+				.stroke(black).stroke_width(1);
+						
+			std::stringstream label_x; label_x<<((x==0)?0:x);
+			graph.add(_2d::text({global_x,graph_height+5},label_x.str())).font_size(10).text_anchor(text_anchor_middle).dominant_baseline(dominant_baseline_hanging);
+		}
+		bottom_margin+=15;
+		
+		tick_step = std::floor((local_axis[3] - local_axis[2])/6.0f);
+		factor = 2;
+		while (tick_step<=0.0f) {
+			tick_step=std::floor(factor*(local_axis[3] - local_axis[2])/6.0f)/float(factor);
+			if ((factor % 4) == 0) factor = (factor*10)/4;
+			else factor*=2;
+		}
+		first_tick = std::ceil(local_axis[2]/tick_step)*tick_step;
+		for (float y = first_tick; y <= local_axis[3]; y+=tick_step) {
+			float global_y = graph_height - graph_height*(y - local_axis[2])/
+						(local_axis[3]-local_axis[2]);
+			graph.add(_2d::line({-3,global_y},{0,global_y}))
+				.stroke(black).stroke_width(1);
+						
+			std::stringstream label_y; label_y<<((y==0)?0:y);
+			graph.add(_2d::text({-5,global_y},label_y.str())).font_size(10).text_anchor(text_anchor_end).dominant_baseline(dominant_baseline_middle);
+		}
+		left_margin+=25;
+		
 		s.viewBox(BoundingBox(-left_margin,-top_margin,
 					graph_width+right_margin,graph_height+bottom_margin));
 		return s;
 	}
 public:
 	SVGPlot() :
-		cycle_pos(0)	{
+		cycle_pos(0), axis_set(false)	{
 			cycle.push_back(std::make_unique<color_hex>("1f77b4"));
 			cycle.push_back(std::make_unique<color_hex>("ff7f0e"));
 			cycle.push_back(std::make_unique<color_hex>("2ca02c"));
