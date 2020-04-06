@@ -44,44 +44,29 @@
 4
 </text>
 
-<polyline points="-3,136.176 0,136.176 " id="id0000000058" fill="none" stroke="black" class="line" stroke-width="1.000000" />
-<text transform="matrix(1 0 0 1 0 0)" x="-5.000000" y="136.176468" id="id0000000059" text-anchor="end" font-size="10.000000px" dominant-baseline="middle" >
-2
+<polyline points="-3,126.765 0,126.765 " id="id0000000058" fill="none" stroke="black" class="line" stroke-width="1.000000" />
+<text transform="matrix(1 0 0 1 0 0)" x="-5.000000" y="126.764709" id="id0000000059" text-anchor="end" font-size="10.000000px" dominant-baseline="middle" >
+3
 </text>
 
-<polyline points="-3,117.353 0,117.353 " id="id0000000060" fill="none" stroke="black" class="line" stroke-width="1.000000" />
-<text transform="matrix(1 0 0 1 0 0)" x="-5.000000" y="117.352936" id="id0000000061" text-anchor="end" font-size="10.000000px" dominant-baseline="middle" >
-4
-</text>
-
-<polyline points="-3,98.5294 0,98.5294 " id="id0000000062" fill="none" stroke="black" class="line" stroke-width="1.000000" />
-<text transform="matrix(1 0 0 1 0 0)" x="-5.000000" y="98.529411" id="id0000000063" text-anchor="end" font-size="10.000000px" dominant-baseline="middle" >
+<polyline points="-3,98.5294 0,98.5294 " id="id0000000060" fill="none" stroke="black" class="line" stroke-width="1.000000" />
+<text transform="matrix(1 0 0 1 0 0)" x="-5.000000" y="98.529411" id="id0000000061" text-anchor="end" font-size="10.000000px" dominant-baseline="middle" >
 6
 </text>
 
-<polyline points="-3,79.7059 0,79.7059 " id="id0000000064" fill="none" stroke="black" class="line" stroke-width="1.000000" />
-<text transform="matrix(1 0 0 1 0 0)" x="-5.000000" y="79.705879" id="id0000000065" text-anchor="end" font-size="10.000000px" dominant-baseline="middle" >
-8
+<polyline points="-3,70.2941 0,70.2941 " id="id0000000062" fill="none" stroke="black" class="line" stroke-width="1.000000" />
+<text transform="matrix(1 0 0 1 0 0)" x="-5.000000" y="70.294121" id="id0000000063" text-anchor="end" font-size="10.000000px" dominant-baseline="middle" >
+9
 </text>
 
-<polyline points="-3,60.8824 0,60.8824 " id="id0000000066" fill="none" stroke="black" class="line" stroke-width="1.000000" />
-<text transform="matrix(1 0 0 1 0 0)" x="-5.000000" y="60.882355" id="id0000000067" text-anchor="end" font-size="10.000000px" dominant-baseline="middle" >
-10
-</text>
-
-<polyline points="-3,42.0588 0,42.0588 " id="id0000000068" fill="none" stroke="black" class="line" stroke-width="1.000000" />
-<text transform="matrix(1 0 0 1 0 0)" x="-5.000000" y="42.058823" id="id0000000069" text-anchor="end" font-size="10.000000px" dominant-baseline="middle" >
+<polyline points="-3,42.0588 0,42.0588 " id="id0000000064" fill="none" stroke="black" class="line" stroke-width="1.000000" />
+<text transform="matrix(1 0 0 1 0 0)" x="-5.000000" y="42.058823" id="id0000000065" text-anchor="end" font-size="10.000000px" dominant-baseline="middle" >
 12
 </text>
 
-<polyline points="-3,23.2353 0,23.2353 " id="id0000000070" fill="none" stroke="black" class="line" stroke-width="1.000000" />
-<text transform="matrix(1 0 0 1 0 0)" x="-5.000000" y="23.235291" id="id0000000071" text-anchor="end" font-size="10.000000px" dominant-baseline="middle" >
-14
-</text>
-
-<polyline points="-3,4.41176 0,4.41176 " id="id0000000072" fill="none" stroke="black" class="line" stroke-width="1.000000" />
-<text transform="matrix(1 0 0 1 0 0)" x="-5.000000" y="4.411758" id="id0000000073" text-anchor="end" font-size="10.000000px" dominant-baseline="middle" >
-16
+<polyline points="-3,13.8235 0,13.8235 " id="id0000000066" fill="none" stroke="black" class="line" stroke-width="1.000000" />
+<text transform="matrix(1 0 0 1 0 0)" x="-5.000000" y="13.823532" id="id0000000067" text-anchor="end" font-size="10.000000px" dominant-baseline="middle" >
+15
 </text>
 
 

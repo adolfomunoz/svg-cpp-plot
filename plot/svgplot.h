@@ -9,6 +9,14 @@
 
 namespace svg_cpp_plot {
 	
+namespace { //Anonymous namespace, only visible from this .h
+	template<std::size_t N>
+	std::array<float,N>& operator+=(std::array<float,N>& a, const std::array<float,N>& b) {
+		for (std::size_t i = 0; i<N; ++i) a[i]+=b[i];
+		return a;
+	}
+}
+	
 class arange {
 	float start, stop, step;
 	
@@ -70,8 +78,27 @@ public:
 	void xlabel(std::string_view l) { xlabel_=l; }
 
 	void axis(const std::array<float,4> a) { axis_=a; }
+	std::array<float,4> axis() const {
+		if (axis_set) return axis_;
+		else {
+			float minx(0), miny(0), maxx(0), maxy(0); bool first=true;
+			for (const auto& plot : plot_points)
+				for (const auto& [x,y] : plot->point_list()) {
+					if (first || (minx>x)) minx=x;
+					if (first || (maxx<x)) maxx=x;
+					if (first || (miny>y)) miny=y;
+					if (first || (maxy<y)) maxy=y;
+					first = false;
+				}
+		
+			float dx = (maxx-minx)/32.0f;
+			float dy = (maxy-miny)/32.0f;
+			return std::array<float,4>{minx-dx,maxx+dx,miny-dy,maxy+dy};
+		}
+	}
 	
-private:	
+private:
+
 	template<typename X, typename Y>
 	Line plot_line(const X& x, const Y& y,
 					const Color& c) {
@@ -88,75 +115,69 @@ private:
 		return Line(p);
 	}
 	
+	void add_xlabel(Graph2D& graph, const std::array<float,2> graph_size, std::array<float,4>& margin) const {
+		if (!xlabel().empty()) {
+			graph.add(
+				_2d::text({0.5*graph_size[0],graph_size[1]+26},xlabel()))
+					.font_size(14)
+					.text_anchor(svg_cpp_plot::text_anchor_middle);
+			margin[3]+=30;
+		}
+	}
+	
+	void add_ylabel(Graph2D& graph, const std::array<float,2> graph_size, std::array<float,4>& margin) const {
+		if (!ylabel().empty()) {
+			graph.add(_2d::group(_2d::translate({-26,0.5*graph_size[1]})*_2d::rotate(-0.5*M_PI))).add(_2d::text({0,0},ylabel())).font_size(14).text_anchor(text_anchor_middle);
+			margin[0]+=40;
+		}
+	}
+	
 	SVG svg() const {
-		float graph_width = 200, graph_height = 150;
-		float left_margin = 1, right_margin = 1, top_margin = 1, bottom_margin = 1;
+		std::array<float,2> graph_size{200,150};
+		std::array<float,4> margin{1,1,1,1};
+		const int target_ticks = 5;
 		
 		SVG s;
-		std::array<float,4> local_axis;
-		if (axis_set) local_axis=axis_;
-		else {
-			float minx(0), miny(0), maxx(0), maxy(0); bool first=true;
-			for (const auto& plot : plot_points)
-				for (const auto& [x,y] : plot->point_list()) {
-					if (first || (minx>x)) minx=x;
-					if (first || (maxx<x)) maxx=x;
-					if (first || (miny>y)) miny=y;
-					if (first || (maxy<y)) maxy=y;
-					first = false;
-				}
-		
-			float dx = (maxx-minx)/32.0f;
-			float dy = (maxy-miny)/32.0f;
-			local_axis[0]=minx-dx;
-			local_axis[1]=maxx+dx;
-			local_axis[2]=miny-dy;
-			local_axis[3]=maxy+dy;
-		}
-		
-		auto& graph = s.add(Graph2D({graph_width,graph_height},BoundingBox(local_axis[0],local_axis[2],local_axis[1],local_axis[3])));
+		std::array<float,4> local_axis = axis();
+
+		auto& graph = s.add(Graph2D({graph_size[0],graph_size[1]},BoundingBox(local_axis[0],local_axis[2],local_axis[1],local_axis[3])));
 		for (const auto& plot : plots) graph.area().add(plot);
 		graph.border().stroke_width(1).stroke(black);
 		
-		if (!xlabel().empty()) {
-			graph.add(_2d::text({0.5*graph_width,graph_height+26},xlabel())).font_size(14).text_anchor(svg_cpp_plot::text_anchor_middle);
-			bottom_margin+=30;
-		}
-		if (!ylabel().empty()) {
-			graph.add(_2d::group(_2d::translate({-26,0.5*graph_height})*_2d::rotate(-0.5*M_PI))).add(_2d::text({0,0},ylabel())).font_size(14).text_anchor(text_anchor_middle);
-			left_margin+=40;
-		}
+		add_xlabel(graph, graph_size, margin);
+		add_ylabel(graph, graph_size, margin);
+
 		
 		//Hacemos los ticks buscando un redondeo molón (X)
-		float tick_step = std::floor((local_axis[1] - local_axis[0])/6.0f);
+		float tick_step = std::floor((local_axis[1] - local_axis[0])/float(target_ticks));
 		int factor = 2;
 		while (tick_step<=0.0f) {
-			tick_step=std::floor(factor*(local_axis[1] - local_axis[0])/6.0f)/float(factor);
+			tick_step=std::floor(factor*(local_axis[1] - local_axis[0])/float(target_ticks))/float(factor);
 			if ((factor % 4) == 0) factor = (factor*10)/4;
 			else factor*=2;
 		}
 		float first_tick = std::ceil(local_axis[0]/tick_step)*tick_step;
 		for (float x = first_tick; x <= local_axis[1]; x+=tick_step) {
-			float global_x = graph_width*(x - local_axis[0])/
+			float global_x = graph_size[0]*(x - local_axis[0])/
 						(local_axis[1]-local_axis[0]);
-			graph.add(_2d::line({global_x,graph_height},{global_x, graph_height+3}))
+			graph.add(_2d::line({global_x,graph_size[1]},{global_x, graph_size[1]+3}))
 				.stroke(black).stroke_width(1);
 						
 			std::stringstream label_x; label_x<<((x==0)?0:x);
-			graph.add(_2d::text({global_x,graph_height+5},label_x.str())).font_size(10).text_anchor(text_anchor_middle).dominant_baseline(dominant_baseline_hanging);
+			graph.add(_2d::text({global_x,graph_size[1]+5},label_x.str())).font_size(10).text_anchor(text_anchor_middle).dominant_baseline(dominant_baseline_hanging);
 		}
-		bottom_margin+=15;
+		margin[3]+=15;
 		
-		tick_step = std::floor((local_axis[3] - local_axis[2])/6.0f);
+		tick_step = std::floor((local_axis[3] - local_axis[2])/float(target_ticks));
 		factor = 2;
 		while (tick_step<=0.0f) {
-			tick_step=std::floor(factor*(local_axis[3] - local_axis[2])/6.0f)/float(factor);
+			tick_step=std::floor(factor*(local_axis[3] - local_axis[2])/float(target_ticks))/float(factor);
 			if ((factor % 4) == 0) factor = (factor*10)/4;
 			else factor*=2;
 		}
 		first_tick = std::ceil(local_axis[2]/tick_step)*tick_step;
 		for (float y = first_tick; y <= local_axis[3]; y+=tick_step) {
-			float global_y = graph_height - graph_height*(y - local_axis[2])/
+			float global_y = graph_size[1] - graph_size[1]*(y - local_axis[2])/
 						(local_axis[3]-local_axis[2]);
 			graph.add(_2d::line({-3,global_y},{0,global_y}))
 				.stroke(black).stroke_width(1);
@@ -164,10 +185,11 @@ private:
 			std::stringstream label_y; label_y<<((y==0)?0:y);
 			graph.add(_2d::text({-5,global_y},label_y.str())).font_size(10).text_anchor(text_anchor_end).dominant_baseline(dominant_baseline_middle);
 		}
-		left_margin+=25;
+		margin[0]+=25;
 		
-		s.viewBox(BoundingBox(-left_margin,-top_margin,
-					graph_width+right_margin,graph_height+bottom_margin));
+		s.viewBox(BoundingBox(
+			-margin[0],-margin[2],
+			graph_size[0]+margin[1],graph_size[1]+margin[3]));
 		return s;
 	}
 public:
