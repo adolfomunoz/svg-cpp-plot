@@ -34,6 +34,18 @@ int main(int argc, char** argv) {
 		plt.savefig("../doc/example4.svg");
 	}
 	
+	{ // Example 5
+		svg_cpp_plot::SVGPlot plt;
+		plt.plot(svg_cpp_plot::arange(0,20,0.05),
+				[] (float x) { return x*std::sin(x);},"g-");
+		plt.plot(svg_cpp_plot::arange(0,20,0.05),
+				[] (float x) { return x*std::sin(x+0.5*M_PI);},"r--");
+		plt.plot(svg_cpp_plot::arange(0,20,0.05),
+				[] (float x) { return x*std::sin(x+M_PI);},"b-")
+					.linewidth(0.5);
+		plt.savefig("../doc/example5.svg");
+	}
+	
 	svg_cpp_plot::SVGPlot plt;
 	plt.plot({1,-1,1,-1,1,-1});
 	plt.plot({1,2,3,4},{0.1,.4,0.9,1.6});

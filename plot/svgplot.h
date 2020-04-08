@@ -56,12 +56,27 @@ public:
 };
 		
 class SVGPlot {
-	class Line {
-		std::shared_ptr<_2d::polyline> pl;
+	class Config {
+		std::list<std::shared_ptr<_2d::polyline>> polylines;
+		std::list<std::shared_ptr<_2d::points>>   points;
 	public:
-		Line(const std::shared_ptr<_2d::polyline>& l) : pl(l) {}
-		
-		Line& linewidth(int lw) { pl->stroke_width(lw); return *this; }
+		Config(const std::shared_ptr<_2d::polyline>& l) {
+			polylines.push_back(l);
+		}
+		Config(const std::shared_ptr<_2d::points>& l) {
+			points.push_back(l);
+		}
+		Config(const std::shared_ptr<_2d::polyline>& l, const Config& config) : polylines(config.polylines), points(config.points) {
+			polylines.push_back(l);
+		}
+		Config(const std::shared_ptr<_2d::points>& l, const Config& config) : polylines(config.polylines), points(config.points) {
+			points.push_back(l);
+		}
+
+		Config& linewidth(float lw) { 
+			for (auto pl : polylines) pl->stroke_width(lw); 
+			return *this; 
+		}
 	};
 	
 	std::vector<std::unique_ptr<Color>> cycle; std::size_t cycle_pos;	
@@ -98,9 +113,8 @@ public:
 	}
 	
 private:
-
 	template<typename X, typename Y>
-	Line plot_line(const X& x, const Y& y,
+	Config plot_line(const X& x, const Y& y,
 					const Color& c) {
 		auto p = std::make_shared<_2d::polyline>();
 		typename X::const_iterator ix; 
@@ -112,7 +126,7 @@ private:
 		p->stroke_linecap(stroke_linecap_round).stroke_width(1).fill(none).stroke(c);
 		plots.push_back(p);
 		plot_points.push_back(p);
-		return Line(p);
+		return Config(p);
 	}
 	
 	void add_xlabel(Graph2D& graph, const std::array<float,2> graph_size, std::array<float,4>& margin) const {
@@ -132,22 +146,7 @@ private:
 		}
 	}
 	
-	SVG svg() const {
-		std::array<float,2> graph_size{200,150};
-		std::array<float,4> margin{1,1,1,1};
-		const int target_ticks = 5;
-		
-		SVG s;
-		std::array<float,4> local_axis = axis();
-
-		auto& graph = s.add(Graph2D({graph_size[0],graph_size[1]},BoundingBox(local_axis[0],local_axis[2],local_axis[1],local_axis[3])));
-		for (const auto& plot : plots) graph.area().add(plot);
-		graph.border().stroke_width(1).stroke(black);
-		
-		add_xlabel(graph, graph_size, margin);
-		add_ylabel(graph, graph_size, margin);
-
-		
+	void add_xticks(Graph2D& graph, const std::array<float,2> graph_size, std::array<float,4>& margin, const std::array<float,4>& local_axis, float target_ticks) const {
 		//Hacemos los ticks buscando un redondeo molón (X)
 		float tick_step = std::floor((local_axis[1] - local_axis[0])/float(target_ticks));
 		int factor = 2;
@@ -166,16 +165,19 @@ private:
 			std::stringstream label_x; label_x<<((x==0)?0:x);
 			graph.add(_2d::text({global_x,graph_size[1]+5},label_x.str())).font_size(10).text_anchor(text_anchor_middle).dominant_baseline(dominant_baseline_hanging);
 		}
-		margin[3]+=15;
-		
-		tick_step = std::floor((local_axis[3] - local_axis[2])/float(target_ticks));
-		factor = 2;
+		margin[3]+=15;		
+	}
+	
+	void add_yticks(Graph2D& graph, const std::array<float,2> graph_size, std::array<float,4>& margin, const std::array<float,4>& local_axis, float target_ticks) const {
+		//Hacemos los ticks buscando un redondeo molón (X)
+		float tick_step = std::floor((local_axis[3] - local_axis[2])/float(target_ticks));
+		int factor = 2;
 		while (tick_step<=0.0f) {
 			tick_step=std::floor(factor*(local_axis[3] - local_axis[2])/float(target_ticks))/float(factor);
 			if ((factor % 4) == 0) factor = (factor*10)/4;
 			else factor*=2;
 		}
-		first_tick = std::ceil(local_axis[2]/tick_step)*tick_step;
+		float first_tick = std::ceil(local_axis[2]/tick_step)*tick_step;
 		for (float y = first_tick; y <= local_axis[3]; y+=tick_step) {
 			float global_y = graph_size[1] - graph_size[1]*(y - local_axis[2])/
 						(local_axis[3]-local_axis[2]);
@@ -185,7 +187,27 @@ private:
 			std::stringstream label_y; label_y<<((y==0)?0:y);
 			graph.add(_2d::text({-5,global_y},label_y.str())).font_size(10).text_anchor(text_anchor_end).dominant_baseline(dominant_baseline_middle);
 		}
-		margin[0]+=25;
+		margin[0]+=25;	
+	}
+	
+	
+	SVG svg() const {
+		std::array<float,2> graph_size{200,150};
+		std::array<float,4> margin{1,1,1,1};
+		
+		SVG s;
+		std::array<float,4> local_axis = axis();
+
+		auto& graph = s.add(Graph2D({graph_size[0],graph_size[1]},BoundingBox(local_axis[0],local_axis[2],local_axis[1],local_axis[3])));
+		for (const auto& plot : plots) graph.area().add(plot);
+		graph.border().stroke_width(1).stroke(black);
+		
+		add_xticks(graph, graph_size, margin, local_axis, 5);
+		add_yticks(graph, graph_size, margin, local_axis, 5);
+		add_xlabel(graph, graph_size, margin);
+		add_ylabel(graph, graph_size, margin);
+		
+
 		
 		s.viewBox(BoundingBox(
 			-margin[0],-margin[2],
@@ -210,56 +232,57 @@ public:
 
 		
 	template<typename X, typename Y>
-	void plot(const X& x, const Y& y, std::string_view fmt = "",
+	Config plot(const X& x, const Y& y, std::string_view fmt = "",
 		typename std::enable_if<std::is_floating_point<typename X::value_type>::value && std::is_floating_point<typename Y::value_type>::value, int>::type = 0) {
 			
 			if (fmt.size()>0) {
 				switch (fmt[0]) {
-					case 'r': plot_line(x,y,red); break;
-					case 'g': plot_line(x,y,green); break;
-					case 'b': plot_line(x,y,blue); break;
-					case 'k': plot_line(x,y,black); break;
-					case 'w': plot_line(x,y,white); break;
-					case 'c': plot_line(x,y,rgb(0,1,1)); break;
-					case 'm': plot_line(x,y,rgb(1,0,1)); break;
-					case 'y': plot_line(x,y,yellow); break;
-					default: plot_line(x,y,*cycle[cycle_pos]);
+					case 'r': return plot_line(x,y,red);
+					case 'g': return plot_line(x,y,green); break;
+					case 'b': return plot_line(x,y,blue); break;
+					case 'k': return plot_line(x,y,black); break;
+					case 'w': return plot_line(x,y,white); break;
+					case 'c': return plot_line(x,y,rgb(0,1,1)); break;
+					case 'm': return plot_line(x,y,rgb(1,0,1)); break;
+					case 'y': return plot_line(x,y,yellow); break;
+					default: return plot_line(x,y,*cycle[cycle_pos]);
 				}
-			} else plot_line(x,y,*cycle[cycle_pos]);
+			} else return plot_line(x,y,*cycle[cycle_pos]);
 			cycle_pos = (cycle_pos + 1) % cycle.size();
 	}
 	
 	template<typename X, typename Y>
-	void plot(const X& x, const Y& y, std::string_view fmt = "",
+	Config plot(const X& x, const Y& y, std::string_view fmt = "",
 		typename std::enable_if<std::is_floating_point<typename X::value_type>::value && std::is_floating_point<decltype(std::declval<Y>()(0.0f))>::value, int>::type = 0) {
 		
 		std::list<float> l;
 		for (float ix : x) l.push_back(y(ix));
-		plot(x,l,fmt);
+		return plot(x,l,fmt);
 	}
 	
 	template<typename X>
-	void plot(const X& x, const std::initializer_list<float>& y, std::string_view fmt = "") {
-			return plot(x,std::list<float>(y), fmt);
+	Config plot(const X& x, const std::initializer_list<float>& y, std::string_view fmt = "") {
+		return plot(x,std::list<float>(y), fmt);
 	}
 	
 	template<typename Y>
-	void plot(const std::initializer_list<float>& x,
+	Config plot(const std::initializer_list<float>& x,
 			  const Y& y, std::string_view fmt = "") {
-		plot(std::list<float>(x),y, fmt);
-	}	
-	void plot(const std::initializer_list<float>& x,
+		return plot(std::list<float>(x),y, fmt);
+	}
+	
+	Config plot(const std::initializer_list<float>& x,
 			  const std::initializer_list<float>& y, std::string_view fmt = "") {	  
-		plot(std::list<float>(x),std::list<float>(y),fmt);
+		return plot(std::list<float>(x),std::list<float>(y),fmt);
 	}
 	
 	template<typename Y>
-	void plot(const Y& y, std::string_view fmt  = "") {	  
-		plot(arange(0,y.size(),1),y,fmt);
+	Config plot(const Y& y, std::string_view fmt  = "") {	  
+		return plot(arange(0,y.size(),1),y,fmt);
 	}
 	
-	void plot(const std::initializer_list<float>& y, std::string_view fmt  = "") {	  
-		plot(arange(0,y.size(),1),std::list<float>(y),fmt);
+	Config plot(const std::initializer_list<float>& y, std::string_view fmt  = "") {	  
+		return plot(arange(0,y.size(),1),std::list<float>(y),fmt);
 	}
 	
 	void savefig(const std::string& name) const {
