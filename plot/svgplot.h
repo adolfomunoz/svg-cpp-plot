@@ -57,8 +57,13 @@ public:
 		
 class SVGPlot {
 	class Config {
+		friend class SVGPlot;
 		std::list<std::shared_ptr<_2d::polyline>> polylines;
 		std::list<std::shared_ptr<_2d::points>>   points;
+		Config& stroke_dasharray(const std::initializer_list<float>& l) {
+			for (auto pl : polylines) pl->stroke_dasharray(l);
+			return (*this);
+		}
 	public:
 		Config(const std::shared_ptr<_2d::polyline>& l) {
 			polylines.push_back(l);
@@ -74,7 +79,8 @@ class SVGPlot {
 		}
 
 		Config& linewidth(float lw) { 
-			for (auto pl : polylines) pl->stroke_width(lw); 
+			for (auto pl : polylines) pl->stroke_width(lw);
+			for (auto pt : points) pt->stroke_width(lw);			
 			return *this; 
 		}
 	};
@@ -234,21 +240,41 @@ public:
 	template<typename X, typename Y>
 	Config plot(const X& x, const Y& y, std::string_view fmt = "",
 		typename std::enable_if<std::is_floating_point<typename X::value_type>::value && std::is_floating_point<typename Y::value_type>::value, int>::type = 0) {
-			
+			Color* color = nullptr;
+			std::string_view dashes = fmt;
 			if (fmt.size()>0) {
+				dashes = fmt.substr(1);
 				switch (fmt[0]) {
-					case 'r': return plot_line(x,y,red);
-					case 'g': return plot_line(x,y,green); break;
-					case 'b': return plot_line(x,y,blue); break;
-					case 'k': return plot_line(x,y,black); break;
-					case 'w': return plot_line(x,y,white); break;
-					case 'c': return plot_line(x,y,rgb(0,1,1)); break;
-					case 'm': return plot_line(x,y,rgb(1,0,1)); break;
-					case 'y': return plot_line(x,y,yellow); break;
-					default: return plot_line(x,y,*cycle[cycle_pos]);
+					case 'r': color = &red;     break;
+					case 'g': color = &green;   break;
+					case 'b': color = &blue;    break;
+					case 'k': color = &black;   break;
+					case 'w': color = &white;   break;
+					case 'c': color = &cyan;    break;
+					case 'm': color = &magenta; break;
+					case 'y': color = &yellow;  break;
+					default: dashes = fmt;
 				}
-			} else return plot_line(x,y,*cycle[cycle_pos]);
-			cycle_pos = (cycle_pos + 1) % cycle.size();
+			}
+			if (!color) {
+				color = cycle[cycle_pos].get();
+				cycle_pos = (cycle_pos + 1) % cycle.size();
+			}
+			if (dashes=="--") {
+				return plot_line(x,y,*color)
+					.stroke_dasharray({3,3});
+			}
+			else if (dashes=="-.") {
+				return plot_line(x,y,*color)
+					.stroke_dasharray({3,2,1,2});
+			}
+			else if (dashes==":") {
+				return plot_line(x,y,*color)
+					.stroke_dasharray({1,2});
+			}
+			else {
+				return plot_line(x,y,*color);
+			}
 	}
 	
 	template<typename X, typename Y>
