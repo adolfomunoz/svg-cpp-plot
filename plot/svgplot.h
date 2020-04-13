@@ -3,7 +3,9 @@
 #include <list>
 #include <tuple>
 #include <memory>
+#include "svgplot/arange.h"
 #include "graph-2d.h"
+#include "svgplot/plot.h"
 #include "../2d/point-list.h"
 #include "../2d/polyline.h"
 
@@ -17,78 +19,12 @@ namespace { //Anonymous namespace, only visible from this .h
 	}
 }
 	
-class arange {
-	float start, stop, step;
-	
-public:
-	arange(float start, float stop, float step) :
-		start(start), stop(stop), step(step) {}
-	
-	using value_type=float;
-	
-	class const_iterator : public std::iterator<std::output_iterator_tag, int>{
-		friend class arange;
-		float x, step;
-		const_iterator(float x , float step) :
-			x(x), step(step) {}
 
-	public:
-		const_iterator() : const_iterator(0,0) {}
-
-		float operator*() const { return x; }
-		const_iterator& operator++() {
-			x+=step; return (*this);
-		}
-		const_iterator operator++(int) {
-			const_iterator i = (*this); ++(*this); return i;
-		}
-		bool operator==(const const_iterator& that) const {
-			return (that.x > (x-0.5f*step)) && (that.x < (x+0.5f*step));
-		}
-		bool operator!=(const const_iterator& that) const {
-			return !((*this)==that);
-		}
-	};
-	
-	const_iterator begin() const { return const_iterator(start,step); }
-	const_iterator end() const { return const_iterator(stop,step); }
-	
-};
 		
 class SVGPlot {
-	class Config {
-		friend class SVGPlot;
-		std::list<std::shared_ptr<_2d::polyline>> polylines;
-		std::list<std::shared_ptr<_2d::points>>   points;
-		Config& stroke_dasharray(const std::initializer_list<float>& l) {
-			for (auto pl : polylines) pl->stroke_dasharray(l);
-			return (*this);
-		}
-	public:
-		Config(const std::shared_ptr<_2d::polyline>& l) {
-			polylines.push_back(l);
-		}
-		Config(const std::shared_ptr<_2d::points>& l) {
-			points.push_back(l);
-		}
-		Config(const std::shared_ptr<_2d::polyline>& l, const Config& config) : polylines(config.polylines), points(config.points) {
-			polylines.push_back(l);
-		}
-		Config(const std::shared_ptr<_2d::points>& l, const Config& config) : polylines(config.polylines), points(config.points) {
-			points.push_back(l);
-		}
+	std::vector<std::unique_ptr<Color>> cycle; std::size_t cycle_pos;
 
-		Config& linewidth(float lw) { 
-			for (auto pl : polylines) pl->stroke_width(lw);
-			for (auto pt : points) pt->stroke_width(lw);			
-			return *this; 
-		}
-	};
-	
-	std::vector<std::unique_ptr<Color>> cycle; std::size_t cycle_pos;	
-	std::list<std::shared_ptr<_2d::PointList>> plot_points;
-	std::list<std::shared_ptr<_2d::Element>> plots;
-	
+	PlotGroup plots;
 	
 	std::string ylabel_, xlabel_;
 	std::array<float,4> axis_; bool axis_set;
@@ -103,8 +39,8 @@ public:
 		if (axis_set) return axis_;
 		else {
 			float minx(0), miny(0), maxx(0), maxy(0); bool first=true;
-			for (const auto& plot : plot_points)
-				for (const auto& [x,y] : plot->point_list()) {
+			for (const auto& plot : plots)
+				for (const auto& [x,y] : plot) {
 					if (first || (minx>x)) minx=x;
 					if (first || (maxx<x)) maxx=x;
 					if (first || (miny>y)) miny=y;
@@ -119,22 +55,6 @@ public:
 	}
 	
 private:
-	template<typename X, typename Y>
-	Config plot_line(const X& x, const Y& y,
-					const Color& c) {
-		auto p = std::make_shared<_2d::polyline>();
-		typename X::const_iterator ix; 
-		typename Y::const_iterator iy;
-		for (ix=x.begin(),iy=y.begin(); 
-		    (ix!=x.end()) && (iy!=y.end());
-			++ix, ++iy) p->add_point(*ix,*iy);
-		
-		p->stroke_linecap(stroke_linecap_round).stroke_width(1).fill(none).stroke(c);
-		plots.push_back(p);
-		plot_points.push_back(p);
-		return Config(p);
-	}
-	
 	void add_xlabel(Graph2D& graph, const std::array<float,2> graph_size, std::array<float,4>& margin) const {
 		if (!xlabel().empty()) {
 			graph.add(
@@ -205,8 +125,7 @@ private:
 		std::array<float,4> local_axis = axis();
 
 		auto& graph = s.add(Graph2D({graph_size[0],graph_size[1]},BoundingBox(local_axis[0],local_axis[2],local_axis[1],local_axis[3])));
-		for (const auto& plot : plots) graph.area().add(plot);
-		graph.border().stroke_width(1).stroke(black);
+		for (auto p : plots) graph.area().add(p);
 		
 		add_xticks(graph, graph_size, margin, local_axis, 5);
 		add_yticks(graph, graph_size, margin, local_axis, 5);
@@ -214,7 +133,7 @@ private:
 		add_ylabel(graph, graph_size, margin);
 		
 
-		
+		graph.border().stroke_width(1).stroke(black);
 		s.viewBox(BoundingBox(
 			-margin[0],-margin[2],
 			graph_size[0]+margin[1],graph_size[1]+margin[3]));
@@ -238,7 +157,7 @@ public:
 
 		
 	template<typename X, typename Y>
-	Config plot(const X& x, const Y& y, std::string_view fmt = "",
+	Plot& plot(const X& x, const Y& y, std::string_view fmt = "",
 		typename std::enable_if<std::is_floating_point<typename X::value_type>::value && std::is_floating_point<typename Y::value_type>::value, int>::type = 0) {
 			Color* color = nullptr;
 			std::string_view dashes = fmt;
@@ -260,25 +179,11 @@ public:
 				color = cycle[cycle_pos].get();
 				cycle_pos = (cycle_pos + 1) % cycle.size();
 			}
-			if (dashes=="--") {
-				return plot_line(x,y,*color)
-					.stroke_dasharray({3,3});
-			}
-			else if (dashes=="-.") {
-				return plot_line(x,y,*color)
-					.stroke_dasharray({3,2,1,2});
-			}
-			else if (dashes==":") {
-				return plot_line(x,y,*color)
-					.stroke_dasharray({1,2});
-			}
-			else {
-				return plot_line(x,y,*color);
-			}
+			return plots.add(Plot(x,y).color(*color).format(dashes));
 	}
 	
 	template<typename X, typename Y>
-	Config plot(const X& x, const Y& y, std::string_view fmt = "",
+	Plot&  plot(const X& x, const Y& y, std::string_view fmt = "",
 		typename std::enable_if<std::is_floating_point<typename X::value_type>::value && std::is_floating_point<decltype(std::declval<Y>()(0.0f))>::value, int>::type = 0) {
 		
 		std::list<float> l;
@@ -287,35 +192,34 @@ public:
 	}
 	
 	template<typename X>
-	Config plot(const X& x, const std::initializer_list<float>& y, std::string_view fmt = "") {
+	Plot&  plot(const X& x, const std::initializer_list<float>& y, std::string_view fmt = "") {
 		return plot(x,std::list<float>(y), fmt);
 	}
 	
 	template<typename Y>
-	Config plot(const std::initializer_list<float>& x,
+	Plot&  plot(const std::initializer_list<float>& x,
 			  const Y& y, std::string_view fmt = "") {
 		return plot(std::list<float>(x),y, fmt);
 	}
 	
-	Config plot(const std::initializer_list<float>& x,
+	Plot&  plot(const std::initializer_list<float>& x,
 			  const std::initializer_list<float>& y, std::string_view fmt = "") {	  
 		return plot(std::list<float>(x),std::list<float>(y),fmt);
 	}
 	
 	template<typename Y>
-	Config plot(const Y& y, std::string_view fmt  = "") {	  
+	Plot&  plot(const Y& y, std::string_view fmt  = "") {	  
 		return plot(arange(0,y.size(),1),y,fmt);
 	}
 	
-	Config plot(const std::initializer_list<float>& y, std::string_view fmt  = "") {	  
+	Plot&  plot(const std::initializer_list<float>& y, std::string_view fmt  = "") {	  
 		return plot(arange(0,y.size(),1),std::list<float>(y),fmt);
 	}
 	
 	void savefig(const std::string& name) const {
 		std::ofstream f(name);
 		f<<svg();
-	}
-	
+	}	
 };
 
 }
