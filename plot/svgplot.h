@@ -179,7 +179,7 @@ public:
 				color = cycle[cycle_pos].get();
 				cycle_pos = (cycle_pos + 1) % cycle.size();
 			}
-			return plots.add(Plot(x,y).color(*color).format(dashes));
+			return plots.add(Plot(x,y)).color(*color).format(dashes);
 	}
 	
 	template<typename X, typename Y>

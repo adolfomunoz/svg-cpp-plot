@@ -61,7 +61,7 @@ public:
 		
 	Plot& add(const Plot& plot) {
 		this->push_back(plot); 
-		return this->front();
+		return this->back();
 	}
 };
 	
