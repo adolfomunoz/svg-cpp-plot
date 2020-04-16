@@ -5,7 +5,7 @@
 </g>
 
 <clipPath id="id0000000001clipper" >
-<polygon id="id0000000006" points="0,0 0,150 200,150 200,0 " />
+<polygon id="id0000000006" points="0,0 0,150 200,150 200,0 " class="rectangle" />
 </clipPath>
 
 <polyline points="5.88235,150 5.88235,153 " id="id0000000007" fill="none" stroke="black" class="line" stroke-width="1.000000" />
@@ -85,7 +85,7 @@ some numbers
 
 </g>
 
-<polygon id="id0000000036" points="0,0 0,150 200,150 200,0 " pointer-events="none" class="border" stroke-width="1.000000" fill="none" stroke="black" />
+<polygon id="id0000000036" points="0,0 0,150 200,150 200,0 " class="border" pointer-events="none" stroke-width="1.000000" fill="none" stroke="black" />
 
 </g>
 

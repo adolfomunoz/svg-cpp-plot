@@ -65,7 +65,7 @@ public:
 class Polyline : public Poly {
 public:
 	template<typename PointList>
-	Polyline(const PointList& pl) : Poly("polyline",pl) { fill(none).stroke(black); }
+	Polyline(const PointList& pl) : Poly("polyline",pl) { fill(none); }
 	Polyline(std::initializer_list<std::tuple<float,float>> pl) : Poly("polyline",pl) { fill(none).stroke(black); }
 	Polyline() : Polyline(std::list<std::tuple<float,float>>()) { }
 };

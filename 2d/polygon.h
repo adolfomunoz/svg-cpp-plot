@@ -22,7 +22,13 @@ public:
 };
 
 auto rect(const std::tuple<float,float>& p1, const std::tuple<float,float>& p2) {
-	return polygon({p1,std::tuple(std::get<0>(p1),std::get<1>(p2)),p2,std::tuple(std::get<0>(p2),std::get<1>(p1))});
+	return polygon({p1,std::tuple(std::get<0>(p1),std::get<1>(p2)),p2,std::tuple(std::get<0>(p2),std::get<1>(p1))}).class_("rectangle");
+}
+
+auto triangle(const std::tuple<float,float>& p1, 
+			  const std::tuple<float,float>& p2, 
+			  const std::tuple<float,float>& p3) {
+	return polygon({p1,p2,p3}).class_("triangle");
 }
 
 }

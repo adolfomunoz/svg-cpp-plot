@@ -47,6 +47,17 @@ int main(int argc, char** argv) {
 		plt.plot(svg_cpp_plot::arange(0,20,0.05),
 				[] (float x) { return x*std::sin(x+1.6*M_PI);},"k")
 					.linewidth(0.5);
+		plt.plot(svg_cpp_plot::arange(0,20,0.25),
+				[] (float x) { return 50+x*std::sin(x);},"go");
+		plt.plot(svg_cpp_plot::arange(0,20,0.25),
+				[] (float x) { return 50+x*std::sin(x+0.4*M_PI);},"r^");
+		plt.plot(svg_cpp_plot::arange(0,20,0.25),
+				[] (float x) { return 50+x*std::sin(x+0.8*M_PI);},"bs");
+		plt.plot(svg_cpp_plot::arange(0,20,0.25),
+				[] (float x) { return 50+x*std::sin(x+1.2*M_PI);},"y+");
+		plt.plot(svg_cpp_plot::arange(0,20,0.25),
+				[] (float x) { return 50+x*std::sin(x+1.6*M_PI);},"k.");
+
 		plt.savefig("../doc/example5.svg");
 	}
 	

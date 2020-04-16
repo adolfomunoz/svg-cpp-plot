@@ -19,4 +19,23 @@ public:
 	}
 };
 
+template<typename T>
+class FixedGenerator : public Element {
+	T t;
+	std::shared_ptr<Generator<T>> gen;
+
+public:
+	template<typename E>
+	FixedGenerator(const T& t, const E& e) :
+		Element("notused"), t(t), gen(std::make_shared<E>(e)) {}
+
+	FixedGenerator(const T& t, const std::shared_ptr<Generator<T>>& g) :
+		Element("notused"), t(t), gen(g) {}
+	
+	std::string to_string() const noexcept override {
+		return gen->to_string(t);
+	}
+};
+
+
 }

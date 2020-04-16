@@ -25,5 +25,25 @@ auto line(const std::tuple<float,float>& p1, const std::tuple<float,float>& p2) 
 	return polyline({p1,p2}).class_("line");
 }
 
+auto plus(const std::tuple<float,float>& c, float size = 1) {
+	auto g = _2d::group();
+	g.add(line({std::get<0>(c),std::get<1>(c)+0.5*size},
+	           {std::get<0>(c),std::get<1>(c)-0.5*size}));
+	g.add(line({std::get<0>(c)+0.5*size,std::get<1>(c)},
+	           {std::get<0>(c)-0.5*size,std::get<1>(c)}));
+	return g.class_("plus");
+}
+
+auto times(const std::tuple<float,float>& c, float size = 1) {
+	auto g = _2d::group();
+	g.add(line({std::get<0>(c)+0.5*size,std::get<1>(c)+0.5*size},
+	           {std::get<0>(c)-0.5*size,std::get<1>(c)-0.5*size}));
+	g.add(line({std::get<0>(c)+0.5*size,std::get<1>(c)-0.5*size},
+	           {std::get<0>(c)-0.5*size,std::get<1>(c)+0.5*size}));
+	return g.class_("times");
+}
+
+
+
 }
 }

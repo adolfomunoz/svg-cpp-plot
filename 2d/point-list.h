@@ -15,6 +15,10 @@ public:
 	PointList(const PL& pl) : point_list_(pl) { }
 	template<typename PL>
 	PointList(PL&& pl) : point_list_(std::forward<PL>(pl)) { }
+
+	PointList(const PointList& pl) : point_list_(pl.point_list_) { }
+	PointList(PointList&& pl) : point_list_(std::move(pl.point_list_)) { }
+	
 	
 	PointList(std::initializer_list<std::tuple<float,float>>&& pl) :  point_list_(std::forward<std::initializer_list<std::tuple<float,float>>>(pl)) { }
 
