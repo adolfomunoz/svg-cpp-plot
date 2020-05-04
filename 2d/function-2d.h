@@ -35,12 +35,12 @@ public:
 		}
 		
 	std::tuple<float,float,float> operator()(float t) const noexcept {
-		float pos = steps.size()*((t-tmin)/(tmax-tmin));
+		float pos = (steps.size()-1)*((t-tmin)/(tmax-tmin));
 		int s = std::floor(pos);
 		if (s < 0) return steps.front();
-		else if (std::size_t(s) >= steps.size()) return steps.back();
+		else if (std::size_t(s) >= (steps.size()-1)) return steps.back();
 		else {
-			float t = pos - s;
+			float t = pos - s; 
 			return std::tuple<float,float,float>(std::get<0>(steps[s])*(1.0f-t) + std::get<0>(steps[s+1])*t,
 							  std::get<1>(steps[s])*(1.0f-t) + std::get<1>(steps[s+1])*t,
 							  std::get<2>(steps[s])*(1.0f-t) + std::get<2>(steps[s+1])*t);
