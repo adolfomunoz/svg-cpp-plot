@@ -6,6 +6,7 @@
 #include "svgplot/arange.h"
 #include "graph-2d.h"
 #include "svgplot/plot.h"
+#include "svgplot/imshow.h"
 #include "../2d/point-list.h"
 #include "../2d/polyline.h"
 
@@ -22,21 +23,38 @@ namespace { //Anonymous namespace, only visible from this .h
 
 		
 class SVGPlot {
+	std::array<float,2> figsize_;
 	std::vector<std::unique_ptr<Color>> cycle; std::size_t cycle_pos;
 
 	PlotGroup plots;
 	
 	std::string ylabel_, xlabel_;
 	std::array<float,4> axis_; bool axis_set;
+	
+	std::unique_ptr<ImShow> imshow_;
+	
+	
+	std::list<std::unique_ptr<SVGPlot>> subplots_;
+	SVGPlot* parent; int nrows, ncols, index;
 public:
-	std::string_view ylabel() const { return ylabel_; }
-	void ylabel(std::string_view l) { ylabel_=l; }
-	std::string_view xlabel() const { return xlabel_; }
-	void xlabel(std::string_view l) { xlabel_=l; }
 
-	void axis(const std::array<float,4> a) { axis_=a; }
+	std::array<float,2> figsize() const { 
+		if (parent) return std::array<float,2>{
+			parent->figsize()[0]/float(nrows),
+			parent->figsize()[1]/float(ncols)};	
+		else return figsize_; }
+	
+	SVGPlot& figsize(const std::array<float,2>& v) { figsize_=v; return (*this);}
+	
+	std::string_view ylabel() const { return ylabel_; }
+	SVGPlot& ylabel(std::string_view l) { ylabel_=l; return (*this); }
+	std::string_view xlabel() const { return xlabel_; }
+	SVGPlot& xlabel(std::string_view l) { xlabel_=l; return (*this); }
+
+	SVGPlot& axis(const std::array<float,4> a) { axis_set=true; axis_=a; return (*this); }
 	std::array<float,4> axis() const {
 		if (axis_set) return axis_;
+		else if (imshow_) return imshow_->axis();
 		else {
 			float minx(0), miny(0), maxx(0), maxy(0); bool first=true;
 			for (const auto& plot : plots)
@@ -116,16 +134,15 @@ private:
 		margin[0]+=25;	
 	}
 	
-	
-	SVG svg() const {
-		std::array<float,2> graph_size{200,150};
-		std::array<float,4> margin{1,1,1,1};
-		
-		SVG s;
+public:
+	Graph2D graph(std::array<float,4>& margin) const {
+		std::array<float,2> graph_size = figsize();
+		margin = std::array<float,4>{1,1,1,1};
 		std::array<float,4> local_axis = axis();
-
-		auto& graph = s.add(Graph2D({graph_size[0],graph_size[1]},BoundingBox(local_axis[0],local_axis[2],local_axis[1],local_axis[3])));
+		Graph2D graph({graph_size[0],graph_size[1]},BoundingBox(local_axis[0],local_axis[2],local_axis[1],local_axis[3]));
+		
 		for (auto p : plots) graph.area().add(p);
+		if (imshow_) graph.area().add(*imshow_);
 		
 		add_xticks(graph, graph_size, margin, local_axis, 5);
 		add_yticks(graph, graph_size, margin, local_axis, 5);
@@ -134,6 +151,15 @@ private:
 		
 
 		graph.border().stroke_width(1).stroke(black);
+		return graph;
+	}
+
+protected:		
+	SVG svg() const {
+		std::array<float,2> graph_size = figsize();
+		std::array<float,4> margin{1,1,1,1};
+		SVG s;
+		s.add(graph(margin));
 		s.viewBox(BoundingBox(
 			-margin[0],-margin[2],
 			graph_size[0]+margin[1],graph_size[1]+margin[3]));
@@ -141,7 +167,7 @@ private:
 	}
 public:
 	SVGPlot() :
-		cycle_pos(0), axis_set(false)	{
+		figsize_{200,150}, cycle_pos(0), axis_set(false), parent(nullptr) {
 			cycle.push_back(std::make_unique<color_hex>("1f77b4"));
 			cycle.push_back(std::make_unique<color_hex>("ff7f0e"));
 			cycle.push_back(std::make_unique<color_hex>("2ca02c"));
@@ -154,7 +180,10 @@ public:
 			cycle.push_back(std::make_unique<color_hex>("17becf"));
 		}
 		
-
+	ImShow& imshow(const std::vector<std::vector<float>>& data) {
+		imshow_=std::make_unique<ImShow>(data);
+		return *imshow_;
+	}
 		
 	template<typename X, typename Y>
 	Plot& plot(const X& x, const Y& y, std::string_view fmt = "",

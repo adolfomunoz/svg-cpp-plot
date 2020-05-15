@@ -1,0 +1,96 @@
+<svg viewBox="-26 -1 227 167" height="100%" width="100%" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" id="id0000001056" >
+<g id="id0000001057" >
+<g clip-path="url(#id0000001057clipper)" style="pointer-events: all; " vector-effect="non-scaling-stroke" fill="none" class="area" id="id0000001058" >
+<g stroke-width="0.000000" id="id0000001060" >
+<polygon points="0,150 0,100 66.6667,100 66.6667,150 " fill="rgb( 68, 1, 84 )" stroke-width="0.000000" id="id0000001061" class="rectangle" />
+<polygon points="66.6667,150 66.6667,100 133.333,100 133.333,150 " fill="rgb( 66, 42, 115 )" stroke-width="0.000000" id="id0000001062" class="rectangle" />
+<polygon points="133.333,150 133.333,100 200,100 200,150 " fill="rgb( 59, 81, 136 )" stroke-width="0.000000" id="id0000001063" class="rectangle" />
+<polygon points="0,100 0,50 66.6667,50 66.6667,100 " fill="rgb( 44, 113, 141 )" stroke-width="0.000000" id="id0000001064" class="rectangle" />
+<polygon points="66.6667,100 66.6667,50 133.333,50 133.333,100 " fill="rgb( 38, 144, 137 )" stroke-width="0.000000" id="id0000001065" class="rectangle" />
+<polygon points="133.333,100 133.333,50 200,50 200,100 " fill="rgb( 45, 173, 125 )" stroke-width="0.000000" id="id0000001066" class="rectangle" />
+<polygon points="0,50 0,0 66.6667,0 66.6667,50 " fill="rgb( 100, 198, 93 )" stroke-width="0.000000" id="id0000001067" class="rectangle" />
+<polygon points="66.6667,50 66.6667,0 133.333,0 133.333,50 " fill="rgb( 171, 217, 64 )" stroke-width="0.000000" id="id0000001068" class="rectangle" />
+<polygon points="133.333,50 133.333,0 200,0 200,50 " fill="rgb( 253, 231, 37 )" stroke-width="0.000000" id="id0000001069" class="rectangle" />
+</g>
+
+</g>
+
+<clipPath id="id0000001057clipper" >
+<polygon points="0,0 0,150 200,150 200,0 " id="id0000001070" class="rectangle" />
+</clipPath>
+
+<polyline points="0,150 0,153 " fill="none" stroke-width="1.000000" stroke="black" id="id0000001071" class="line" />
+<text id="id0000001072" transform="matrix(1 0 0 1 0 0)" x="0.000000" y="155.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+-0.5
+</text>
+
+<polyline points="33.3333,150 33.3333,153 " fill="none" stroke-width="1.000000" stroke="black" id="id0000001073" class="line" />
+<text id="id0000001074" transform="matrix(1 0 0 1 0 0)" x="33.333332" y="155.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+0
+</text>
+
+<polyline points="66.6667,150 66.6667,153 " fill="none" stroke-width="1.000000" stroke="black" id="id0000001075" class="line" />
+<text id="id0000001076" transform="matrix(1 0 0 1 0 0)" x="66.666664" y="155.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+0.5
+</text>
+
+<polyline points="100,150 100,153 " fill="none" stroke-width="1.000000" stroke="black" id="id0000001077" class="line" />
+<text id="id0000001078" transform="matrix(1 0 0 1 0 0)" x="100.000000" y="155.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+1
+</text>
+
+<polyline points="133.333,150 133.333,153 " fill="none" stroke-width="1.000000" stroke="black" id="id0000001079" class="line" />
+<text id="id0000001080" transform="matrix(1 0 0 1 0 0)" x="133.333328" y="155.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+1.5
+</text>
+
+<polyline points="166.667,150 166.667,153 " fill="none" stroke-width="1.000000" stroke="black" id="id0000001081" class="line" />
+<text id="id0000001082" transform="matrix(1 0 0 1 0 0)" x="166.666672" y="155.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+2
+</text>
+
+<polyline points="200,150 200,153 " fill="none" stroke-width="1.000000" stroke="black" id="id0000001083" class="line" />
+<text id="id0000001084" transform="matrix(1 0 0 1 0 0)" x="200.000000" y="155.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+2.5
+</text>
+
+<polyline points="-3,150 0,150 " fill="none" stroke-width="1.000000" stroke="black" id="id0000001085" class="line" />
+<text id="id0000001086" transform="matrix(1 0 0 1 0 0)" x="-5.000000" y="150.000000" dominant-baseline="middle" text-anchor="end" font-size="10.000000px" >
+-0.5
+</text>
+
+<polyline points="-3,125 0,125 " fill="none" stroke-width="1.000000" stroke="black" id="id0000001087" class="line" />
+<text id="id0000001088" transform="matrix(1 0 0 1 0 0)" x="-5.000000" y="125.000000" dominant-baseline="middle" text-anchor="end" font-size="10.000000px" >
+0
+</text>
+
+<polyline points="-3,100 0,100 " fill="none" stroke-width="1.000000" stroke="black" id="id0000001089" class="line" />
+<text id="id0000001090" transform="matrix(1 0 0 1 0 0)" x="-5.000000" y="100.000000" dominant-baseline="middle" text-anchor="end" font-size="10.000000px" >
+0.5
+</text>
+
+<polyline points="-3,75 0,75 " fill="none" stroke-width="1.000000" stroke="black" id="id0000001091" class="line" />
+<text id="id0000001092" transform="matrix(1 0 0 1 0 0)" x="-5.000000" y="75.000000" dominant-baseline="middle" text-anchor="end" font-size="10.000000px" >
+1
+</text>
+
+<polyline points="-3,50 0,50 " fill="none" stroke-width="1.000000" stroke="black" id="id0000001093" class="line" />
+<text id="id0000001094" transform="matrix(1 0 0 1 0 0)" x="-5.000000" y="50.000000" dominant-baseline="middle" text-anchor="end" font-size="10.000000px" >
+1.5
+</text>
+
+<polyline points="-3,25 0,25 " fill="none" stroke-width="1.000000" stroke="black" id="id0000001095" class="line" />
+<text id="id0000001096" transform="matrix(1 0 0 1 0 0)" x="-5.000000" y="25.000000" dominant-baseline="middle" text-anchor="end" font-size="10.000000px" >
+2
+</text>
+
+<polyline points="-3,0 0,0 " fill="none" stroke-width="1.000000" stroke="black" id="id0000001097" class="line" />
+<text id="id0000001098" transform="matrix(1 0 0 1 0 0)" x="-5.000000" y="0.000000" dominant-baseline="middle" text-anchor="end" font-size="10.000000px" >
+2.5
+</text>
+
+<polygon points="0,0 0,150 200,150 200,0 " stroke="black" stroke-width="1.000000" fill="none" id="id0000001099" pointer-events="none" class="border" />
+
+</g>
+
+</svg>

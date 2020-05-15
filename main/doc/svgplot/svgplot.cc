@@ -61,6 +61,14 @@ int main(int argc, char** argv) {
 		plt.savefig("../doc/example5.svg");
 	}
 	
+	{ // Example 6
+		svg_cpp_plot::SVGPlot plt;
+		plt.imshow({{0.0,0.1,0.2},
+					{0.3,0.4,0.5},
+					{0.6,0.7,0.8}});
+		plt.savefig("../doc/example6.svg");
+	}
+	
 	svg_cpp_plot::SVGPlot plt;
 	plt.plot({1,-1,1,-1,1,-1});
 	plt.plot({1,2,3,4},{0.1,.4,0.9,1.6});

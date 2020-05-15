@@ -66,6 +66,26 @@ color_map color_map_heat(float tmin = 0.0f, float tmax = 1.0f) {
 					{0.4f,0.0f,0.0f} });
 }
 
+color_map color_map_viridis(float tmin = 0.0f, float tmax = 1.0f) {
+	return color_map(tmin,tmax,
+				{   {68.0f/255.0f,1.0f/255.0f,84.0f/255.0f},
+					{65.0f/255.0f,68.0f/255.0f,135.0f/255.0f},
+					{42.0f/255.0f,120.0f/255.0f,142.0f/255.0f},
+					{34.0f/255.0f,168.0f/255.0f,132.0f/255.0f},
+					{122.0f/255.0f,209.0f/255.0f,81.0f/255.0f},
+					{253.0f/255.0f,231.0f/255.0f,37.0f/255.0f} });
+}
+color_map color_map_magma(float tmin = 0.0f, float tmax = 1.0f) {
+	return color_map(tmin,tmax,
+				{   {0.000f,0.000f,0.016f},
+					{0.173f,0.067f,0.373f},
+					{0.447f,0.122f,0.506f},
+					{0.718f,0.216f,0.475f},
+					{0.945f,0.376f,0.365f},
+					{0.996f,0.682f,0.467f},
+					{0.988f,0.992f,0.749f} });
+}
+
 template<typename F>
 auto function_2d(const F& f, const std::tuple<float,float>& xmin, const std::tuple<float,float>& xmax, const std::tuple<unsigned int,unsigned int> nsamples = {100,100}) {
 	return function_2d(f,color_map_grayscale(),xmin,xmax,nsamples);
