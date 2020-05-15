@@ -134,7 +134,6 @@ private:
 		margin[0]+=25;	
 	}
 	
-public:
 	Graph2D graph(std::array<float,4>& margin) const {
 		std::array<float,2> graph_size = figsize();
 		margin = std::array<float,4>{1,1,1,1};
@@ -153,7 +152,11 @@ public:
 		graph.border().stroke_width(1).stroke(black);
 		return graph;
 	}
-
+public:
+	Graph2D graph() const {
+		std::array<float,4> margin;
+		return graph(margin);
+	}
 protected:		
 	SVG svg() const {
 		std::array<float,2> graph_size = figsize();
