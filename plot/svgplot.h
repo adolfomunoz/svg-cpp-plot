@@ -28,8 +28,14 @@ class SVGPlot {
 
 	PlotGroup plots;
 	
-	std::string ylabel_, xlabel_;
+	std::string ylabel_, xlabel_, title_;
 	std::array<float,4> axis_; bool axis_set;
+	
+	std::vector<std::string> xticklabels_; bool xticklabels_set;
+	std::vector<float> xticks_; bool xticks_set;
+	std::vector<std::string> yticklabels_; bool yticklabels_set;
+	std::vector<float> yticks_; bool yticks_set;
+	
 	
 	std::unique_ptr<ImShow> imshow_;
 	
@@ -37,7 +43,6 @@ class SVGPlot {
 	std::list<std::unique_ptr<SVGPlot>> subplots_;
 	SVGPlot* parent; int nrows, ncols, index;
 public:
-
 	std::array<float,2> figsize() const { 
 		if (parent) return std::array<float,2>{
 			parent->figsize()[0]/float(nrows),
@@ -45,11 +50,41 @@ public:
 		else return figsize_; }
 	
 	SVGPlot& figsize(const std::array<float,2>& v) { figsize_=v; return (*this);}
-	
+
+	std::string_view title() const { return title_; }
+	SVGPlot& title(std::string_view l) { title_=l; return (*this); }
+	void set_title(std::string_view l) { title(l); }
 	std::string_view ylabel() const { return ylabel_; }
 	SVGPlot& ylabel(std::string_view l) { ylabel_=l; return (*this); }
+	void set_ylabel(std::string_view l) { ylabel(l); }
 	std::string_view xlabel() const { return xlabel_; }
 	SVGPlot& xlabel(std::string_view l) { xlabel_=l; return (*this); }
+	void set_xlabel(std::string_view l) { xlabel(l); }
+	
+	SVGPlot& xticks(const std::vector<float>& v) {
+		xticks_ = v; xticks_set=true; return (*this);
+	}
+	void set_xticks(const std::vector<float>& v) {
+		xticks(v);
+	}
+	SVGPlot& yticks(const std::vector<float>& v) {
+		yticks_ = v; yticks_set=true; return (*this);
+	}
+	void set_yticks(const std::vector<float>& v) {
+		yticks(v);
+	}
+	SVGPlot& xticklabels(const std::vector<std::string>& v) {
+		xticklabels_ = v; xticklabels_set=true; return (*this);
+	}
+	void set_xticklabels(const std::vector<std::string>& v) {
+		xticklabels(v);
+	}
+	SVGPlot& yticklabels(const std::vector<std::string>& v) {
+		yticklabels_ = v; yticklabels_set=true; return (*this);
+	}
+	void set_yticklabels(const std::vector<std::string>& v) {
+		yticklabels(v);
+	}
 
 	SVGPlot& axis(const std::array<float,4> a) { axis_set=true; axis_=a; return (*this); }
 	std::array<float,4> axis() const {
@@ -72,7 +107,99 @@ public:
 		}
 	}
 	
+	std::vector<float> xticks() const {
+		if (xticks_set) return xticks_;
+		else if (xticklabels_set) {
+			auto [xmin,xmax,d1,d2] = axis();
+			std::vector<float> sol(xticklabels_.size());
+			float dx = (xmax-xmin)/xticklabels_.size();
+			for (std::size_t i = 0;i<xticklabels_.size();++i)
+				sol[i]=xmin + float(0.5+i)*dx;
+			return sol;
+		} else {
+			const float target_ticks = 5;
+			auto [xmin,xmax,d1,d2] = axis();
+			float tick_step = std::floor((xmax - xmin)/float(target_ticks));
+			int factor = 2;
+			while (tick_step<=0.0f) {
+				tick_step=std::floor(factor*(xmax - xmin)/float(target_ticks))/float(factor);
+				if ((factor % 4) == 0) factor = (factor*10)/4;
+				else factor*=2;
+			}
+			float first_tick = std::ceil(xmin/tick_step)*tick_step;
+			std::vector<float> sol;
+			for (float x = first_tick; x <= xmax; x+=tick_step)
+				sol.push_back(x);
+			return sol;
+		}
+	}
+	
+	std::vector<float> yticks() const {
+		if (yticks_set) return yticks_;
+		else if (yticklabels_set) {
+			auto [d1,d2,ymin,ymax] = axis();
+			std::vector<float> sol(yticklabels_.size());
+			float dy = (ymax-ymin)/yticklabels_.size();
+			for (std::size_t i = 0;i<yticklabels_.size();++i)
+				sol[i]=ymin + float(0.5+i)*dy;
+			return sol;
+		} else {
+			const float target_ticks = 5;
+			auto [d1,d2,ymin,ymax] = axis();
+			float tick_step = std::floor((ymax - ymin)/float(target_ticks));
+			int factor = 2;
+			while (tick_step<=0.0f) {
+				tick_step=std::floor(factor*(ymax - ymin)/float(target_ticks))/float(factor);
+				if ((factor % 4) == 0) factor = (factor*10)/4;
+				else factor*=2;
+			}
+			float first_tick = std::ceil(ymin/tick_step)*tick_step;
+			std::vector<float> sol;
+			for (float y = first_tick; y <= ymax; y+=tick_step)
+				sol.push_back(y);
+			return sol;
+		}
+	}
+	
+	std::vector<std::string> xticklabels() const {
+		if (xticklabels_set) return xticklabels_;
+		else {
+			std::vector<float> x = xticks();
+			std::vector<std::string> sol(x.size());
+			for (std::size_t i = 0; i<x.size(); ++i) {
+				std::stringstream s; 
+				s<<((x[i]==0)?0:x[i]);
+				sol[i]=s.str();
+			}
+			return sol;
+		}
+	}
+	
+	std::vector<std::string> yticklabels() const {
+		if (yticklabels_set) return yticklabels_;
+		else {
+			std::vector<float> y = yticks();
+			std::vector<std::string> sol(y.size());
+			for (std::size_t i = 0; i<y.size(); ++i) {
+				std::stringstream s; 
+				s<<((y[i]==0)?0:y[i]);
+				sol[i]=s.str();
+			}
+			return sol;
+		}
+	}
+	
 private:
+	void add_title(Graph2D& graph, const std::array<float,2> graph_size, std::array<float,4>& margin) const {
+		if (!title().empty()) {
+			graph.add(
+				_2d::text({0.5*graph_size[0],-10},title()))
+					.font_size(16)
+					.text_anchor(svg_cpp_plot::text_anchor_middle);
+			margin[2]+=30;
+		}
+	}
+
 	void add_xlabel(Graph2D& graph, const std::array<float,2> graph_size, std::array<float,4>& margin) const {
 		if (!xlabel().empty()) {
 			graph.add(
@@ -90,48 +217,41 @@ private:
 		}
 	}
 	
-	void add_xticks(Graph2D& graph, const std::array<float,2> graph_size, std::array<float,4>& margin, const std::array<float,4>& local_axis, float target_ticks) const {
-		//Hacemos los ticks buscando un redondeo molón (X)
-		float tick_step = std::floor((local_axis[1] - local_axis[0])/float(target_ticks));
-		int factor = 2;
-		while (tick_step<=0.0f) {
-			tick_step=std::floor(factor*(local_axis[1] - local_axis[0])/float(target_ticks))/float(factor);
-			if ((factor % 4) == 0) factor = (factor*10)/4;
-			else factor*=2;
-		}
-		float first_tick = std::ceil(local_axis[0]/tick_step)*tick_step;
-		for (float x = first_tick; x <= local_axis[1]; x+=tick_step) {
-			float global_x = graph_size[0]*(x - local_axis[0])/
+	void add_xticks(Graph2D& graph, const std::array<float,2> graph_size, std::array<float,4>& margin, const std::array<float,4>& local_axis) const {
+		auto x = xticks();
+		auto labels = xticklabels();
+		for (std::size_t i=0;i<x.size();++i) {
+			float global_x = graph_size[0]*(x[i] - local_axis[0])/
 						(local_axis[1]-local_axis[0]);
-			graph.add(_2d::line({global_x,graph_size[1]},{global_x, graph_size[1]+3}))
+			graph.add(_2d::line(
+				{global_x,graph_size[1]},
+				{global_x, graph_size[1]+3}))
 				.stroke(black).stroke_width(1);
-						
-			std::stringstream label_x; label_x<<((x==0)?0:x);
-			graph.add(_2d::text({global_x,graph_size[1]+5},label_x.str())).font_size(10).text_anchor(text_anchor_middle).dominant_baseline(dominant_baseline_hanging);
+			if (i<labels.size()) {
+				graph.add(
+					_2d::text({global_x,graph_size[1]+5},labels[i]))
+						.font_size(10)
+						.text_anchor(text_anchor_middle)
+						.dominant_baseline(dominant_baseline_hanging);
+			}
 		}
-		margin[3]+=15;		
+		if (!labels.empty()) margin[3]+=15;
+		else if (!x.empty()) margin[3]+=3;
 	}
 	
-	void add_yticks(Graph2D& graph, const std::array<float,2> graph_size, std::array<float,4>& margin, const std::array<float,4>& local_axis, float target_ticks) const {
-		//Hacemos los ticks buscando un redondeo molón (X)
-		float tick_step = std::floor((local_axis[3] - local_axis[2])/float(target_ticks));
-		int factor = 2;
-		while (tick_step<=0.0f) {
-			tick_step=std::floor(factor*(local_axis[3] - local_axis[2])/float(target_ticks))/float(factor);
-			if ((factor % 4) == 0) factor = (factor*10)/4;
-			else factor*=2;
-		}
-		float first_tick = std::ceil(local_axis[2]/tick_step)*tick_step;
-		for (float y = first_tick; y <= local_axis[3]; y+=tick_step) {
-			float global_y = graph_size[1] - graph_size[1]*(y - local_axis[2])/
-						(local_axis[3]-local_axis[2]);
+	void add_yticks(Graph2D& graph, const std::array<float,2> graph_size, std::array<float,4>& margin, const std::array<float,4>& local_axis) const {
+		auto y = yticks();
+		auto labels = yticklabels();
+		for (std::size_t i=0;i<y.size();++i) {
+			float global_y = graph_size[1] - graph_size[1]*(y[i] - local_axis[2])/(local_axis[3]-local_axis[2]);
 			graph.add(_2d::line({-3,global_y},{0,global_y}))
 				.stroke(black).stroke_width(1);
-						
-			std::stringstream label_y; label_y<<((y==0)?0:y);
-			graph.add(_2d::text({-5,global_y},label_y.str())).font_size(10).text_anchor(text_anchor_end).dominant_baseline(dominant_baseline_middle);
+			if (i<labels.size()) {		
+				graph.add(_2d::text({-5,global_y},labels[i])).font_size(10).text_anchor(text_anchor_end).dominant_baseline(dominant_baseline_middle);
+			}
 		}
-		margin[0]+=25;	
+		if (!labels.empty()) margin[0]+=25;
+		else if (!y.empty()) margin[0]+=3;		
 	}
 	
 	Graph2D graph(std::array<float,4>& margin) const {
@@ -143,10 +263,11 @@ private:
 		for (auto p : plots) graph.area().add(p);
 		if (imshow_) graph.area().add(*imshow_);
 		
-		add_xticks(graph, graph_size, margin, local_axis, 5);
-		add_yticks(graph, graph_size, margin, local_axis, 5);
+		add_xticks(graph, graph_size, margin, local_axis);
+		add_yticks(graph, graph_size, margin, local_axis);
 		add_xlabel(graph, graph_size, margin);
 		add_ylabel(graph, graph_size, margin);
+		add_title( graph, graph_size, margin);
 		
 
 		graph.border().stroke_width(1).stroke(black);
@@ -170,7 +291,7 @@ protected:
 	}
 public:
 	SVGPlot() :
-		figsize_{200,150}, cycle_pos(0), axis_set(false), parent(nullptr) {
+		figsize_{200,150}, cycle_pos(0), axis_set(false),xticklabels_set(false), xticks_set(false), yticklabels_set(false), yticks_set(false), parent(nullptr) {
 			cycle.push_back(std::make_unique<color_hex>("1f77b4"));
 			cycle.push_back(std::make_unique<color_hex>("ff7f0e"));
 			cycle.push_back(std::make_unique<color_hex>("2ca02c"));

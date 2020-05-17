@@ -41,9 +41,9 @@ public:
 	std::string_view cmap() const { return cmap_; }
 	
 	std::tuple<std::size_t,std::size_t> size() const {
-		std::size_t y(0);
-		for (const auto& r : data) if (r.size()>y) y=r.size();
-		return std::tuple<std::size_t,std::size_t>(data.size(),y);
+		std::size_t x(0);
+		for (const auto& r : data) if (r.size()>x) x=r.size();
+		return std::tuple<std::size_t,std::size_t>(x,data.size());
 	}
 	
 	std::array<float,4> axis() const {
@@ -61,7 +61,7 @@ public:
 
 		return _2d::function_2d([&] (float x, float y) {
 			if ((x<0) || (y<0) || (data.size()<y) || (data[std::floor(y+0.5f)].size() < x)) return 0.0f;
-			else return data[std::floor(y+0.5f)][std::floor(x+0.5f)]; },
+			else return data[std::floor(y+0.49f)][std::floor(x+0.5f)]; },
 			cm, {axis()[0],axis()[2]}, {axis()[1],axis()[3]}, _2d::image_strategy::sharp_pixels(size(),0)).to_string(m);
 	}
 };
