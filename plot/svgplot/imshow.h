@@ -10,7 +10,8 @@ namespace svg_cpp_plot {
 class ImShow : public Generator<_2d::Matrix> {
 	std::vector<std::vector<float>> data;
 	std::string cmap_;
-	float vmin_, vmax_; bool vmin_set, vmax_set; 
+	float vmin_, vmax_; bool vmin_set, vmax_set;
+    std::string interpolation_;
 public:
 	ImShow(const std::vector<std::vector<float>>& data) : data(data), vmin_set(false), vmax_set(false) {}
 	
@@ -39,6 +40,8 @@ public:
 	
 	ImShow& cmap(std::string_view s) { cmap_=s; return *this; }
 	std::string_view cmap() const { return cmap_; }
+	ImShow& interpolation(std::string_view s) { interpolation_=s; return *this; }
+	std::string_view interpolation() const { return interpolation_; }
 	
 	std::tuple<std::size_t,std::size_t> size() const {
 		std::size_t x(0);
@@ -59,10 +62,14 @@ public:
 		else if (cmap() == "grayscale") 
 			cm = _2d::color_map_grayscale(vmin(),vmax());
 
-		return _2d::function_2d([&] (float x, float y) {
+        auto f = [&] (float x, float y) {
 			if ((x<0) || (y<0) || (data.size()<y) || (data[std::floor(y+0.5f)].size() < x)) return 0.0f;
-			else return data[std::floor(y+0.49f)][std::floor(x+0.5f)]; },
-			cm, {axis()[0],axis()[2]}, {axis()[1],axis()[3]}, _2d::image_strategy::sharp_pixels(size(),0)).to_string(m);
+			else return data[std::floor(y+0.49f)][std::floor(x+0.5f)]; };
+        if ((interpolation()=="") || (interpolation()=="nearest") ||(interpolation()=="none")) {
+            return _2d::function_2d(f,cm, {axis()[0],axis()[2]}, {axis()[1],axis()[3]}, _2d::image_strategy::sharp_pixels(size(),0)).to_string(m);
+        } else {
+            return _2d::function_2d(f,cm, {axis()[0],axis()[2]}, {axis()[1],axis()[3]}, _2d::image_strategy::embedded_png(size())).to_string(m);
+        }
 	}
 };
 	
