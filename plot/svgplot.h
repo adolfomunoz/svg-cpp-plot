@@ -308,6 +308,16 @@ public:
 		imshow_=std::make_unique<ImShow>(data);
 		return *imshow_;
 	}
+    
+    template<typename XRange, typename YRange, typename F>
+    ImShow& imshow(const XRange& xrange, const YRange& yrange, const F& f) {
+        std::vector<std::vector<float>> data;
+        for (auto y : yrange) {  
+            data.push_back(std::vector<float>());
+            for (auto x : xrange) data.back().push_back(f(x,y)); 
+        }
+        return imshow(data);
+	}
 		
 	template<typename X, typename Y>
 	Plot& plot(const X& x, const Y& y, std::string_view fmt = "",

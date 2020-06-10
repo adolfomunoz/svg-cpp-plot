@@ -48,7 +48,7 @@ public:
 		for (const auto& r : data) if (r.size()>x) x=r.size();
 		return std::tuple<std::size_t,std::size_t>(x,data.size());
 	}
-	
+    
 	std::array<float,4> axis() const {
 		return std::array<float,4>{
 				-0.5f,float(std::get<0>(size()))-0.5f,
