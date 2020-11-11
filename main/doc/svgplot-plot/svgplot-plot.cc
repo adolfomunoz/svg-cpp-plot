@@ -8,13 +8,13 @@ int main(int argc, char** argv) {
 		svg_cpp_plot::SVGPlot plt;
 		plt.plot({1,2,3,4});
 		plt.ylabel("some numbers");
-		plt.savefig("../doc/example1.svg");
+		plt.savefig("../doc/svgplot/plot/example1.svg");
 	}
 
 	{ // Example 2
 		svg_cpp_plot::SVGPlot plt;
 		plt.plot({1, 2, 3, 4}, {1, 4, 9, 16});
-		plt.savefig("../doc/example2.svg");
+		plt.savefig("../doc/svgplot/plot/example2.svg");
 	}
 	
 	{ // Example 3
@@ -23,7 +23,7 @@ int main(int argc, char** argv) {
 		std::list<float> l; 
 		for (int i=0; i<100;++i) l.push_back(f*=-1.005);
 		plt.plot(svg_cpp_plot::arange(0,5,0.05),l);
-		plt.savefig("../doc/example3.svg");
+		plt.savefig("../doc/svgplot/plot/example3.svg");
 	}
 	
 	{ // Example 4
@@ -31,7 +31,7 @@ int main(int argc, char** argv) {
 		plt.plot(svg_cpp_plot::arange(0,5,0.05),
 					[] (float x) { return x*std::sin(x);});
 		plt.plot(svg_cpp_plot::arange(0,5,0.05),sqrtf);
-		plt.savefig("../doc/example4.svg");
+		plt.savefig("../doc/svgplot/plot/example4.svg");
 	}
 	
 	{ // Example 5
@@ -45,8 +45,7 @@ int main(int argc, char** argv) {
 		plt.plot(svg_cpp_plot::arange(0,20,0.05),
 				[] (float x) { return x*std::sin(x+1.2*M_PI);},"y:");
 		plt.plot(svg_cpp_plot::arange(0,20,0.05),
-				[] (float x) { return x*std::sin(x+1.6*M_PI);},"k")
-					.linewidth(0.5);
+				[] (float x) { return x*std::sin(x+1.6*M_PI);},"k");
 		plt.plot(svg_cpp_plot::arange(0,20,0.25),
 				[] (float x) { return 50+x*std::sin(x);},"go");
 		plt.plot(svg_cpp_plot::arange(0,20,0.25),
@@ -58,15 +57,16 @@ int main(int argc, char** argv) {
 		plt.plot(svg_cpp_plot::arange(0,20,0.25),
 				[] (float x) { return 50+x*std::sin(x+1.6*M_PI);},"k.");
 
-		plt.savefig("../doc/example5.svg");
+		plt.savefig("../doc/svgplot/plot/example5.svg");
 	}
-	
-	{ // Example 6
+    
+    { // Example 6
 		svg_cpp_plot::SVGPlot plt;
-		plt.imshow({{0.0,0.1,0.2},
-					{0.3,0.4,0.5},
-					{0.6,0.7,0.8}});
-		plt.savefig("../doc/example6.svg");
+		plt.plot(svg_cpp_plot::arange(0,7,0.05),[] (float x) { return std::sin(x); })
+			.linestyle("-.").color( svg_cpp_plot::hsv(160,1,1)).linewidth(1);
+		plt.plot(svg_cpp_plot::arange(0,7,0.5),[] (float x) { return std::sin(x); })
+			.marker("s").color(svg_cpp_plot::rgb(0.2,0.8,0.2)).markersize(2);
+ 		plt.savefig("../doc/svgplot/plot/example6.svg");
 	}
 	
 	svg_cpp_plot::SVGPlot plt;
