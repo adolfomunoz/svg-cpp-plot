@@ -36,6 +36,8 @@ public:
 	
 	const_iterator begin() const { return const_iterator(start,step); }
 	const_iterator end() const { return const_iterator(stop,step); }
-	
+    
+    float front() const { return start; }
+¡	
 };
 }

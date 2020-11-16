@@ -37,7 +37,7 @@ class SVGPlot {
 	std::vector<float> yticks_; bool yticks_set;
 	
 	
-	std::unique_ptr<ImShow> imshow_;
+	std::shared_ptr<ImShow> imshow_;
 	
 	
 	std::list<std::unique_ptr<SVGPlot>> subplots_;
@@ -260,8 +260,8 @@ private:
 		std::array<float,4> local_axis = axis();
 		Graph2D graph({graph_size[0],graph_size[1]},BoundingBox(local_axis[0],local_axis[2],local_axis[1],local_axis[3]));
 		
+		if (imshow_) graph.area().add_ptr(imshow_);
 		for (auto p : plots) graph.area().add(p);
-		if (imshow_) graph.area().add(*imshow_);
 		
 		add_xticks(graph, graph_size, margin, local_axis);
 		add_yticks(graph, graph_size, margin, local_axis);
@@ -303,21 +303,79 @@ public:
 			cycle.push_back(std::make_unique<color_hex>("bcbd22"));
 			cycle.push_back(std::make_unique<color_hex>("17becf"));
 		}
+        
+    /*******************************************************
+     * IMSHOW VERSIONS
+     *******************************************************/
 		
+    
 	ImShow& imshow(const std::vector<std::vector<float>>& data) {
-		imshow_=std::make_unique<ImShow>(data);
+		imshow_=std::make_shared<ImShowType<float>>(data);
 		return *imshow_;
 	}
     
+    ImShow& imshow(const std::vector<std::vector<std::tuple<float,float,float>>>& data) {
+		imshow_=std::make_shared<ImShowType<std::tuple<float,float,float>>>(data);
+		return *imshow_;
+	}
+    
+    ImShow& imshow(const std::vector<std::vector<std::tuple<float,float,float,float>>>& data) {
+		imshow_=std::make_shared<ImShowType<std::tuple<float,float,float,float>>>(data);
+		return *imshow_;
+	}
+private:
+    template<typename V>
+    float imshow_convert(const V& v) const {
+        return float(v);
+    }
+    
+    template<typename V1,typename V2, typename V3>
+    std::tuple<float,float,float> imshow_convert(const std::tuple<V1,V2,V3>& v) const {
+        return std::tuple<float,float,float>(imshow_convert(std::get<0>(v)),imshow_convert(std::get<1>(v)),imshow_convert(std::get<2>(v)));
+    }
+    
+    template<typename V1,typename V2, typename V3, typename V4>
+    std::tuple<float,float,float,float> imshow_convert(const std::tuple<V1,V2,V3,V4>& v) const {
+        return std::tuple<float,float,float,float>(imshow_convert(std::get<0>(v)),imshow_convert(std::get<1>(v)),
+                    imshow_convert(std::get<2>(v)),imshow_convert(std::get<3>(v)));
+    }
+   
+    template<typename V>
+    std::tuple<float,float,float> imshow_convert(const std::array<V,3>& a) const {
+        return std::tuple<float,float,float>(imshow_convert(a[0]),imshow_convert(a[1]),imshow_convert(a[2]));
+    }
+    
+    template<typename V>
+    std::tuple<float,float,float,float> imshow_convert(const std::array<V,4>& a) const {
+        return std::tuple<float,float,float,float>(imshow_convert(a[0]),imshow_convert(a[1]),imshow_convert(a[2]),imshow_convert(a[3]));
+    }
+
+public:    
+    template<typename Collection>
+    ImShow& imshow(const Collection& data) {
+        using T = typename std::decay<decltype(imshow_convert(data.front().front()))>::type;
+        std::vector<std::vector<T>> d;
+        for (const auto& row : data) {
+            d.push_back(std::vector<T>());
+            for (const auto& f : row) d.back().push_back(imshow_convert(f));
+        }
+        return imshow(d);
+    }
+    
     template<typename XRange, typename YRange, typename F>
     ImShow& imshow(const XRange& xrange, const YRange& yrange, const F& f) {
-        std::vector<std::vector<float>> data;
+        using T = typename std::decay<decltype(imshow_convert(f(xrange.front(),yrange.front())))>::type;
+        std::vector<std::vector<T>> data;
         for (auto y : yrange) {  
-            data.push_back(std::vector<float>());
+            data.push_back(std::vector<T>());
             for (auto x : xrange) data.back().push_back(f(x,y)); 
         }
         return imshow(data);
 	}
+    
+    /*******************************************************
+     * PLOT VERSIONS
+     *******************************************************/
 		
 	template<typename X, typename Y>
 	Plot& plot(const X& x, const Y& y, std::string_view fmt = "",

@@ -12,12 +12,12 @@ protected:
 	T t;
 	FCombine combine;
 	std::list<std::shared_ptr<Generator<T>>> generator_list;
-	
+
+public:	//This is public because sometimes it is not propperly identified as a pointer and it misses the call below
 	Generator<T>& add_ptr(const std::shared_ptr<Generator<T>>& o) {
 		generator_list.push_back(o);
 		return (*generator_list.back());
 	}
-public:
 	//Add directly the pointer (instancing?)
 	Generator<T>& add(const std::shared_ptr<Generator<T>>& o) {
 		return add_ptr(o);
