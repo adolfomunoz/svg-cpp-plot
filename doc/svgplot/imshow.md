@@ -93,9 +93,9 @@ that generates
  src="./imshow/example5.svg" alt="example5" width="50%" /></div>
 
 
-##Formatting
+## Formatting
 
-###Interpolation
+### Interpolation
 
 It is possible to define different strategies for interpolation. By default the interpolation is `"nearest"` (used in all the examples above), which means that there is no interpolation between the values. This library offers another interpolation option, `"bicubic"`, but with two limitations:
 - RGBA values are not supported in bicubuc interpolation.
