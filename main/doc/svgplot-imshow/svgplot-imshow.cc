@@ -5,6 +5,7 @@
 int main(int argc, char** argv) {
 	{ // Example 1
 		svg_cpp_plot::SVGPlot plt;
+        plt.figsize({200,200});
 		plt.imshow({{0.0,0.1,0.2},
 					{0.3,0.4,0.5},
 					{0.6,0.7,0.8}});
@@ -17,6 +18,7 @@ int main(int argc, char** argv) {
         auto green = std::tuple(0.0f,1.0f,0.0f);
         auto blue = std::tuple(0.0f,0.0f,1.0f);
 		svg_cpp_plot::SVGPlot plt;
+        plt.figsize({200,200});
 		plt.imshow({{red,green,blue},
 					{green,blue,red},
 					{blue,red,green}});
@@ -29,6 +31,7 @@ int main(int argc, char** argv) {
 //        auto blue = std::tuple(0.0f,0.0f,1.0f,1.0f);
         auto black_transparent = std::tuple(0.0f,0.0f,0.0f,0.5f);
 		svg_cpp_plot::SVGPlot plt;
+        plt.figsize({200,200});
 		plt.imshow({{black_transparent,green,black_transparent},
 					{green,black_transparent,red},
 					{black_transparent,red,black_transparent}});
@@ -37,6 +40,7 @@ int main(int argc, char** argv) {
     
     { // Example 4
 		svg_cpp_plot::SVGPlot plt;
+        plt.figsize({200,200});
         std::list<std::list<float>> data;
         for (float f = 0.0f; f<=1.0f; f+=0.1f) {
             data.push_back(std::list<float>());
@@ -49,6 +53,7 @@ int main(int argc, char** argv) {
     
     { // Example 5
     	svg_cpp_plot::SVGPlot plt;
+        plt.figsize({200,200});
         auto f = [] (float x, float y) {
             float r = 0.5f+0.5f*std::sin(x);
             float g = 0.5f+0.5f*std::sin(y);
@@ -59,5 +64,17 @@ int main(int argc, char** argv) {
 		plt.savefig("../doc/svgplot/imshow/example5.svg");
     }
     
+    { // Example 6
+    	svg_cpp_plot::SVGPlot plt;
+        plt.figsize({200,200});
+        auto f = [] (float x, float y) {
+            float r = 0.5f+0.5f*std::sin(x);
+            float g = 0.5f+0.5f*std::sin(y);
+            float b = std::max(0.0f,1.0f-(r+g));
+            return std::tuple(r,g,b);
+        };
+        plt.imshow(svg_cpp_plot::arange(0,10,0.25),svg_cpp_plot::arange(0,10,0.25),f).interpolation("bicubic");
+		plt.savefig("../doc/svgplot/imshow/example6.svg");
+    }  
 
 }

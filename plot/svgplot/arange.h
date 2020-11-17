@@ -38,6 +38,6 @@ public:
 	const_iterator end() const { return const_iterator(stop,step); }
     
     float front() const { return start; }
-¡	
+	
 };
 }
