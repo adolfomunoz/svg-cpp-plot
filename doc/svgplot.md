@@ -5,9 +5,17 @@ Plotting with svg-cpp-plot is designed to be similar to (or more accurately, a s
 - [`plot`](./svgplot/plot.md): plots *x,y* scatter plots or lines with different styles and configuration options. 
 - [`imshow`](./svgplot/imshow.md): plots two-dimensional data.
 
-Finally, the method `savefig("file.svg")` enables the saving of the corresponding plot into the *file.svg* file. The format of this svg is designed so that it holds reasonably well when converting it to pdf, for instance with the vector drawing software [Inkscape](https://inkscape.org/). In fact, with Inkscape it is possible to convert svg to pdf using the command line:
+Finally, the method `savefig("file.svg")` enables the saving of the corresponding plot into the *file.svg* file. The format of this svg is designed so that it holds reasonably well when converting it to pdf, for instance with the vector drawing software [Inkscape](https://inkscape.org/). 
+
+In fact, with Inkscape it is possible to convert svg to pdf using the command line. With Inkscape <= 0.91
 
 ```
 inkscape file.svg --export-pdf=file.pdf
+```
+
+and with Inkscape >= 1.0
+
+```
+inkscape file.svg --export-type=pdf --export-filename=file.pdf
 ```
 

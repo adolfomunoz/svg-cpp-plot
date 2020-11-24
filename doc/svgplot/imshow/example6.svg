@@ -1,64 +1,34 @@
-<svg viewBox="-26 -1 227 217" height="100%" width="100%" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" id="id0000001841" >
-<g id="id0000001842" >
-<g clip-path="url(#id0000001842clipper)" style="pointer-events: all; " vector-effect="non-scaling-stroke" fill="none" class="area" id="id0000001843" >
-<image id="id0000001845" transform="matrix(5 0 0 -5 2.5 197.5)" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAADOUlEQVRYhaXXe1MaSxAF8B8wigoxkUuU+Ah+03xVkSSUCT4iKAQF7h9bu3eXh+7uneqyhpnuc+zpeZytfPvmkgtOaXPILgsm3HPDD3pc+dDT/e78RudO68nBQm3HS9OobfjF4EL/Uq/r9StnfOYjdZZMeeDXf1D7Pd3gUr42osecKY80qPLCiFsG9HnNBzWhF1zkJI64r5kxpkEtJh4yYJ4fiElwWsTfEz+ZcpAivi3ICkG7aMiE33HGUfaLohAIDktEzZjHGS9LxCPYLRc4L7G8WeIy6xS1Sul0EUzKBe7FSz0rS3xfIuowe5yeSxHfFA1pc5Ta1QcMGRUn/lHIv8MJrew53mPAQ0HiXn7nU87prBE32KGiQNmOg6sP+RbqjG5MfJStcZM6NSrc5YA6oRv0uvTe4z6lu4k4ubd3qbJk+V7exxFU8P2cOdc8bXHtcJ6y9Yyjo7WMb5UFf7ZAtROc4KbDlBk/bTjUbU7opCzaXMmz2CCw5IVpDDVnvAb1KQ0V3LV4ZMyU39kL4ZAjWrQ4iq2V3Vw7LJgy5pFHRkyYZ9NoruAETwc0aBB1kkt4LzWe+KQ9oxpHaiU9noS88gLq6yDBokaVWsrmVLIjaatmO9Uts1EflY0hwc4Lic3i/3GZHdnYr6V+pmfTbmmojAXNEYmNUw/OjBEH2dnkuljEm2ucnR2nRpKH75UR+2nPoD3klujvyhv5zDAudpMGe4S4rmnNNYwRks6K8PvLbRoq+DJgsF2tjRiwQ53d+LxON4m9tG18K5/TUMFFn/6bcuIh3mvVuGDj7M01jOXtNX3+boca04+ggsteDj18H+uNRFevqMwB1/SYvgc14opl0M2pwu+yxI3U5koyfpc14e4FX/M5wz2LeLevL/UbK7yBOzgr4u9PfBeuLHVh5RV8LhoyZp4lzlmsFeKPJaImvMY1LimPg3q5wJdyYSni8pr8fwr6nEdgtdXjpS5TYISCqjRqzezmKnSQEuJfRUM+ZRXIPrclPiaKCvr2muZKBP26yHqbuICgP96iMqMXul/kQ6YVXO1vEpfr7WRNVyd3dSLor/Jx/5MW9G9zH28R9EnGiaB/99ugFUH9C4q2doXvj9lnAAAAAElFTkSuQmCC" data-href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAADOUlEQVRYhaXXe1MaSxAF8B8wigoxkUuU+Ah+03xVkSSUCT4iKAQF7h9bu3eXh+7uneqyhpnuc+zpeZytfPvmkgtOaXPILgsm3HPDD3pc+dDT/e78RudO68nBQm3HS9OobfjF4EL/Uq/r9StnfOYjdZZMeeDXf1D7Pd3gUr42osecKY80qPLCiFsG9HnNBzWhF1zkJI64r5kxpkEtJh4yYJ4fiElwWsTfEz+ZcpAivi3ICkG7aMiE33HGUfaLohAIDktEzZjHGS9LxCPYLRc4L7G8WeIy6xS1Sul0EUzKBe7FSz0rS3xfIuowe5yeSxHfFA1pc5Ta1QcMGRUn/lHIv8MJrew53mPAQ0HiXn7nU87prBE32KGiQNmOg6sP+RbqjG5MfJStcZM6NSrc5YA6oRv0uvTe4z6lu4k4ubd3qbJk+V7exxFU8P2cOdc8bXHtcJ6y9Yyjo7WMb5UFf7ZAtROc4KbDlBk/bTjUbU7opCzaXMmz2CCw5IVpDDVnvAb1KQ0V3LV4ZMyU39kL4ZAjWrQ4iq2V3Vw7LJgy5pFHRkyYZ9NoruAETwc0aBB1kkt4LzWe+KQ9oxpHaiU9noS88gLq6yDBokaVWsrmVLIjaatmO9Uts1EflY0hwc4Lic3i/3GZHdnYr6V+pmfTbmmojAXNEYmNUw/OjBEH2dnkuljEm2ucnR2nRpKH75UR+2nPoD3klujvyhv5zDAudpMGe4S4rmnNNYwRks6K8PvLbRoq+DJgsF2tjRiwQ53d+LxON4m9tG18K5/TUMFFn/6bcuIh3mvVuGDj7M01jOXtNX3+boca04+ggsteDj18H+uNRFevqMwB1/SYvgc14opl0M2pwu+yxI3U5koyfpc14e4FX/M5wz2LeLevL/UbK7yBOzgr4u9PfBeuLHVh5RV8LhoyZp4lzlmsFeKPJaImvMY1LimPg3q5wJdyYSni8pr8fwr6nEdgtdXjpS5TYISCqjRqzezmKnSQEuJfRUM+ZRXIPrclPiaKCvr2muZKBP26yHqbuICgP96iMqMXul/kQ6YVXO1vEpfr7WRNVyd3dSLor/Jx/5MW9G9zH28R9EnGiaB/99ugFUH9C4q2doXvj9lnAAAAAElFTkSuQmCC" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAADOUlEQVRYhaXXe1MaSxAF8B8wigoxkUuU+Ah+03xVkSSUCT4iKAQF7h9bu3eXh+7uneqyhpnuc+zpeZytfPvmkgtOaXPILgsm3HPDD3pc+dDT/e78RudO68nBQm3HS9OobfjF4EL/Uq/r9StnfOYjdZZMeeDXf1D7Pd3gUr42osecKY80qPLCiFsG9HnNBzWhF1zkJI64r5kxpkEtJh4yYJ4fiElwWsTfEz+ZcpAivi3ICkG7aMiE33HGUfaLohAIDktEzZjHGS9LxCPYLRc4L7G8WeIy6xS1Sul0EUzKBe7FSz0rS3xfIuowe5yeSxHfFA1pc5Ta1QcMGRUn/lHIv8MJrew53mPAQ0HiXn7nU87prBE32KGiQNmOg6sP+RbqjG5MfJStcZM6NSrc5YA6oRv0uvTe4z6lu4k4ubd3qbJk+V7exxFU8P2cOdc8bXHtcJ6y9Yyjo7WMb5UFf7ZAtROc4KbDlBk/bTjUbU7opCzaXMmz2CCw5IVpDDVnvAb1KQ0V3LV4ZMyU39kL4ZAjWrQ4iq2V3Vw7LJgy5pFHRkyYZ9NoruAETwc0aBB1kkt4LzWe+KQ9oxpHaiU9noS88gLq6yDBokaVWsrmVLIjaatmO9Uts1EflY0hwc4Lic3i/3GZHdnYr6V+pmfTbmmojAXNEYmNUw/OjBEH2dnkuljEm2ucnR2nRpKH75UR+2nPoD3klujvyhv5zDAudpMGe4S4rmnNNYwRks6K8PvLbRoq+DJgsF2tjRiwQ53d+LxON4m9tG18K5/TUMFFn/6bcuIh3mvVuGDj7M01jOXtNX3+boca04+ggsteDj18H+uNRFevqMwB1/SYvgc14opl0M2pwu+yxI3U5koyfpc14e4FX/M5wz2LeLevL/UbK7yBOzgr4u9PfBeuLHVh5RV8LhoyZp4lzlmsFeKPJaImvMY1LimPg3q5wJdyYSni8pr8fwr6nEdgtdXjpS5TYISCqjRqzezmKnSQEuJfRUM+ZRXIPrclPiaKCvr2muZKBP26yHqbuICgP96iMqMXul/kQ6YVXO1vEpfr7WRNVyd3dSLor/Jx/5MW9G9zH28R9EnGiaB/99ugFUH9C4q2doXvj9lnAAAAAElFTkSuQmCC" x="-0.500000px" y="-0.500000px" width="40.000000px" height="40.000000px" />
+<svg viewBox="-26 -1 227 217" height="100%" width="100%" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" id="id0000001781" >
+<g id="id0000001782" >
+<g clip-path="url(#id0000001782clipper)" style="pointer-events: all; " vector-effect="non-scaling-stroke" fill="none" class="area" id="id0000001783" >
+<image id="id0000001785" transform="matrix(19.5122 0 0 -19.5122 2.43902 197.561)" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAADOUlEQVRYhaXXe1MaSxAF8B8wigoxkUuU+Ah+03xVkSSUCT4iKAQF7h9bu3eXh+7uneqyhpnuc+zpeZytfPvmkgtOaXPILgsm3HPDD3pc+dDT/e78RudO68nBQm3HS9OobfjF4EL/Uq/r9StnfOYjdZZMeeDXf1D7Pd3gUr42osecKY80qPLCiFsG9HnNBzWhF1zkJI64r5kxpkEtJh4yYJ4fiElwWsTfEz+ZcpAivi3ICkG7aMiE33HGUfaLohAIDktEzZjHGS9LxCPYLRc4L7G8WeIy6xS1Sul0EUzKBe7FSz0rS3xfIuowe5yeSxHfFA1pc5Ta1QcMGRUn/lHIv8MJrew53mPAQ0HiXn7nU87prBE32KGiQNmOg6sP+RbqjG5MfJStcZM6NSrc5YA6oRv0uvTe4z6lu4k4ubd3qbJk+V7exxFU8P2cOdc8bXHtcJ6y9Yyjo7WMb5UFf7ZAtROc4KbDlBk/bTjUbU7opCzaXMmz2CCw5IVpDDVnvAb1KQ0V3LV4ZMyU39kL4ZAjWrQ4iq2V3Vw7LJgy5pFHRkyYZ9NoruAETwc0aBB1kkt4LzWe+KQ9oxpHaiU9noS88gLq6yDBokaVWsrmVLIjaatmO9Uts1EflY0hwc4Lic3i/3GZHdnYr6V+pmfTbmmojAXNEYmNUw/OjBEH2dnkuljEm2ucnR2nRpKH75UR+2nPoD3klujvyhv5zDAudpMGe4S4rmnNNYwRks6K8PvLbRoq+DJgsF2tjRiwQ53d+LxON4m9tG18K5/TUMFFn/6bcuIh3mvVuGDj7M01jOXtNX3+boca04+ggsteDj18H+uNRFevqMwB1/SYvgc14opl0M2pwu+yxI3U5koyfpc14e4FX/M5wz2LeLevL/UbK7yBOzgr4u9PfBeuLHVh5RV8LhoyZp4lzlmsFeKPJaImvMY1LimPg3q5wJdyYSni8pr8fwr6nEdgtdXjpS5TYISCqjRqzezmKnSQEuJfRUM+ZRXIPrclPiaKCvr2muZKBP26yHqbuICgP96iMqMXul/kQ6YVXO1vEpfr7WRNVyd3dSLor/Jx/5MW9G9zH28R9EnGiaB/99ugFUH9C4q2doXvj9lnAAAAAElFTkSuQmCC" data-href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAADOUlEQVRYhaXXe1MaSxAF8B8wigoxkUuU+Ah+03xVkSSUCT4iKAQF7h9bu3eXh+7uneqyhpnuc+zpeZytfPvmkgtOaXPILgsm3HPDD3pc+dDT/e78RudO68nBQm3HS9OobfjF4EL/Uq/r9StnfOYjdZZMeeDXf1D7Pd3gUr42osecKY80qPLCiFsG9HnNBzWhF1zkJI64r5kxpkEtJh4yYJ4fiElwWsTfEz+ZcpAivi3ICkG7aMiE33HGUfaLohAIDktEzZjHGS9LxCPYLRc4L7G8WeIy6xS1Sul0EUzKBe7FSz0rS3xfIuowe5yeSxHfFA1pc5Ta1QcMGRUn/lHIv8MJrew53mPAQ0HiXn7nU87prBE32KGiQNmOg6sP+RbqjG5MfJStcZM6NSrc5YA6oRv0uvTe4z6lu4k4ubd3qbJk+V7exxFU8P2cOdc8bXHtcJ6y9Yyjo7WMb5UFf7ZAtROc4KbDlBk/bTjUbU7opCzaXMmz2CCw5IVpDDVnvAb1KQ0V3LV4ZMyU39kL4ZAjWrQ4iq2V3Vw7LJgy5pFHRkyYZ9NoruAETwc0aBB1kkt4LzWe+KQ9oxpHaiU9noS88gLq6yDBokaVWsrmVLIjaatmO9Uts1EflY0hwc4Lic3i/3GZHdnYr6V+pmfTbmmojAXNEYmNUw/OjBEH2dnkuljEm2ucnR2nRpKH75UR+2nPoD3klujvyhv5zDAudpMGe4S4rmnNNYwRks6K8PvLbRoq+DJgsF2tjRiwQ53d+LxON4m9tG18K5/TUMFFn/6bcuIh3mvVuGDj7M01jOXtNX3+boca04+ggsteDj18H+uNRFevqMwB1/SYvgc14opl0M2pwu+yxI3U5koyfpc14e4FX/M5wz2LeLevL/UbK7yBOzgr4u9PfBeuLHVh5RV8LhoyZp4lzlmsFeKPJaImvMY1LimPg3q5wJdyYSni8pr8fwr6nEdgtdXjpS5TYISCqjRqzezmKnSQEuJfRUM+ZRXIPrclPiaKCvr2muZKBP26yHqbuICgP96iMqMXul/kQ6YVXO1vEpfr7WRNVyd3dSLor/Jx/5MW9G9zH28R9EnGiaB/99ugFUH9C4q2doXvj9lnAAAAAElFTkSuQmCC" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAADOUlEQVRYhaXXe1MaSxAF8B8wigoxkUuU+Ah+03xVkSSUCT4iKAQF7h9bu3eXh+7uneqyhpnuc+zpeZytfPvmkgtOaXPILgsm3HPDD3pc+dDT/e78RudO68nBQm3HS9OobfjF4EL/Uq/r9StnfOYjdZZMeeDXf1D7Pd3gUr42osecKY80qPLCiFsG9HnNBzWhF1zkJI64r5kxpkEtJh4yYJ4fiElwWsTfEz+ZcpAivi3ICkG7aMiE33HGUfaLohAIDktEzZjHGS9LxCPYLRc4L7G8WeIy6xS1Sul0EUzKBe7FSz0rS3xfIuowe5yeSxHfFA1pc5Ta1QcMGRUn/lHIv8MJrew53mPAQ0HiXn7nU87prBE32KGiQNmOg6sP+RbqjG5MfJStcZM6NSrc5YA6oRv0uvTe4z6lu4k4ubd3qbJk+V7exxFU8P2cOdc8bXHtcJ6y9Yyjo7WMb5UFf7ZAtROc4KbDlBk/bTjUbU7opCzaXMmz2CCw5IVpDDVnvAb1KQ0V3LV4ZMyU39kL4ZAjWrQ4iq2V3Vw7LJgy5pFHRkyYZ9NoruAETwc0aBB1kkt4LzWe+KQ9oxpHaiU9noS88gLq6yDBokaVWsrmVLIjaatmO9Uts1EflY0hwc4Lic3i/3GZHdnYr6V+pmfTbmmojAXNEYmNUw/OjBEH2dnkuljEm2ucnR2nRpKH75UR+2nPoD3klujvyhv5zDAudpMGe4S4rmnNNYwRks6K8PvLbRoq+DJgsF2tjRiwQ53d+LxON4m9tG18K5/TUMFFn/6bcuIh3mvVuGDj7M01jOXtNX3+boca04+ggsteDj18H+uNRFevqMwB1/SYvgc14opl0M2pwu+yxI3U5koyfpc14e4FX/M5wz2LeLevL/UbK7yBOzgr4u9PfBeuLHVh5RV8LhoyZp4lzlmsFeKPJaImvMY1LimPg3q5wJdyYSni8pr8fwr6nEdgtdXjpS5TYISCqjRqzezmKnSQEuJfRUM+ZRXIPrclPiaKCvr2muZKBP26yHqbuICgP96iMqMXul/kQ6YVXO1vEpfr7WRNVyd3dSLor/Jx/5MW9G9zH28R9EnGiaB/99ugFUH9C4q2doXvj9lnAAAAAElFTkSuQmCC" x="-0.125000px" y="-0.125000px" width="10.250000px" height="10.250000px" />
 </g>
 
-<clipPath id="id0000001842clipper" >
-<polygon points="0,0 0,200 200,200 200,0 " id="id0000001846" class="rectangle" />
+<clipPath id="id0000001782clipper" >
+<polygon points="0,0 0,200 200,200 200,0 " id="id0000001786" class="rectangle" />
 </clipPath>
 
-<polyline points="2.5,200 2.5,203 " fill="none" stroke-width="1.000000" stroke="black" id="id0000001847" class="line" />
-<text id="id0000001848" transform="matrix(1 0 0 1 0 0)" x="2.500000" y="205.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+<polyline points="2.43902,200 2.43902,203 " fill="none" stroke-width="1.000000" stroke="black" id="id0000001787" class="line" />
+<text id="id0000001788" transform="matrix(1 0 0 1 0 0)" x="2.439024" y="205.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
 0
 </text>
 
-<polyline points="42.5,200 42.5,203 " fill="none" stroke-width="1.000000" stroke="black" id="id0000001849" class="line" />
-<text id="id0000001850" transform="matrix(1 0 0 1 0 0)" x="42.500000" y="205.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
-8
+<polyline points="197.561,200 197.561,203 " fill="none" stroke-width="1.000000" stroke="black" id="id0000001789" class="line" />
+<text id="id0000001790" transform="matrix(1 0 0 1 0 0)" x="197.560974" y="205.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+10
 </text>
 
-<polyline points="82.5,200 82.5,203 " fill="none" stroke-width="1.000000" stroke="black" id="id0000001851" class="line" />
-<text id="id0000001852" transform="matrix(1 0 0 1 0 0)" x="82.500000" y="205.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
-16
-</text>
-
-<polyline points="122.5,200 122.5,203 " fill="none" stroke-width="1.000000" stroke="black" id="id0000001853" class="line" />
-<text id="id0000001854" transform="matrix(1 0 0 1 0 0)" x="122.500000" y="205.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
-24
-</text>
-
-<polyline points="162.5,200 162.5,203 " fill="none" stroke-width="1.000000" stroke="black" id="id0000001855" class="line" />
-<text id="id0000001856" transform="matrix(1 0 0 1 0 0)" x="162.500000" y="205.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
-32
-</text>
-
-<polyline points="-3,197.5 0,197.5 " fill="none" stroke-width="1.000000" stroke="black" id="id0000001857" class="line" />
-<text id="id0000001858" transform="matrix(1 0 0 1 0 0)" x="-5.000000" y="197.500000" dominant-baseline="middle" text-anchor="end" font-size="10.000000px" >
+<polyline points="-3,197.561 0,197.561 " fill="none" stroke-width="1.000000" stroke="black" id="id0000001791" class="line" />
+<text id="id0000001792" transform="matrix(1 0 0 1 0 0)" x="-5.000000" y="197.560974" dominant-baseline="middle" text-anchor="end" font-size="10.000000px" >
 0
 </text>
 
-<polyline points="-3,157.5 0,157.5 " fill="none" stroke-width="1.000000" stroke="black" id="id0000001859" class="line" />
-<text id="id0000001860" transform="matrix(1 0 0 1 0 0)" x="-5.000000" y="157.500000" dominant-baseline="middle" text-anchor="end" font-size="10.000000px" >
-8
+<polyline points="-3,2.43903 0,2.43903 " fill="none" stroke-width="1.000000" stroke="black" id="id0000001793" class="line" />
+<text id="id0000001794" transform="matrix(1 0 0 1 0 0)" x="-5.000000" y="2.439026" dominant-baseline="middle" text-anchor="end" font-size="10.000000px" >
+10
 </text>
 
-<polyline points="-3,117.5 0,117.5 " fill="none" stroke-width="1.000000" stroke="black" id="id0000001861" class="line" />
-<text id="id0000001862" transform="matrix(1 0 0 1 0 0)" x="-5.000000" y="117.500000" dominant-baseline="middle" text-anchor="end" font-size="10.000000px" >
-16
-</text>
-
-<polyline points="-3,77.5 0,77.5 " fill="none" stroke-width="1.000000" stroke="black" id="id0000001863" class="line" />
-<text id="id0000001864" transform="matrix(1 0 0 1 0 0)" x="-5.000000" y="77.500000" dominant-baseline="middle" text-anchor="end" font-size="10.000000px" >
-24
-</text>
-
-<polyline points="-3,37.5 0,37.5 " fill="none" stroke-width="1.000000" stroke="black" id="id0000001865" class="line" />
-<text id="id0000001866" transform="matrix(1 0 0 1 0 0)" x="-5.000000" y="37.500000" dominant-baseline="middle" text-anchor="end" font-size="10.000000px" >
-32
-</text>
-
-<polygon points="0,0 0,200 200,200 200,0 " stroke="black" stroke-width="1.000000" fill="none" id="id0000001867" pointer-events="none" class="border" />
+<polygon points="0,0 0,200 200,200 200,0 " stroke="black" stroke-width="1.000000" fill="none" id="id0000001795" pointer-events="none" class="border" />
 
 </g>
 

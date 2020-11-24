@@ -10,7 +10,7 @@ public:
 	
 	using value_type=float;
 	
-	class const_iterator : public std::iterator<std::output_iterator_tag, int>{
+	class const_iterator : public std::iterator<std::input_iterator_tag, float>{
 		friend class arange;
 		float x, step;
 		const_iterator(float x , float step) :
@@ -38,6 +38,6 @@ public:
 	const_iterator end() const { return const_iterator(stop,step); }
     
     float front() const { return start; }
-	
+    float back() const { unsigned long n = (stop-start)/step; return start+n*step; }
 };
 }

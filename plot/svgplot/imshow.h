@@ -11,11 +11,13 @@ class ImShow : public Generator<_2d::Matrix> {
 	std::string cmap_;
 	float vmin_, vmax_; bool vmin_set, vmax_set;
     std::string interpolation_;
+    std::array<float,4>  extent_; bool extent_set;
     
 public:
-    ImShow() : vmin_set(false), vmax_set(false) {}
+    ImShow() : vmin_set(false), vmax_set(false), extent_set(false) {}
 	ImShow& vmin(float f) { vmin_=f; vmin_set=true; return (*this);}
 	ImShow& vmax(float f) { vmax_=f; vmax_set=true; return (*this);}
+    ImShow& extent(const std::array<float,4> & e) { extent_=e; extent_set=true; return (*this); }
     
 protected:
     virtual float calculated_vmin() const = 0;
@@ -43,10 +45,17 @@ public:
 	virtual std::tuple<std::size_t,std::size_t> size() const = 0;
     
 	std::array<float,4> axis() const {
-		return std::array<float,4>{
+        if (extent_set) return extent_;
+        else return std::array<float,4>{
 				-0.5f,float(std::get<0>(size()))-0.5f,
 				-0.5f,float(std::get<1>(size()))-0.5f};
 	}
+    
+    std::array<float,4> extent() const {
+        return axis();
+    }
+    
+    
 protected:
     _2d::color_map colormap() const {
         _2d::color_map cm = _2d::color_map_viridis(vmin(),vmax());

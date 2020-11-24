@@ -42,6 +42,8 @@ class SVGPlot {
 	
 	std::list<std::unique_ptr<SVGPlot>> subplots_;
 	SVGPlot* parent; int nrows, ncols, index;
+    
+    unsigned long target_xticks, target_yticks;
 public:
 	std::array<float,2> figsize() const { 
 		if (parent) return std::array<float,2>{
@@ -117,7 +119,7 @@ public:
 				sol[i]=xmin + float(0.5+i)*dx;
 			return sol;
 		} else {
-			const float target_ticks = 5;
+			const float target_ticks = float(target_xticks);
 			auto [xmin,xmax,d1,d2] = axis();
 			float tick_step = std::floor((xmax - xmin)/float(target_ticks));
 			int factor = 2;
@@ -144,7 +146,7 @@ public:
 				sol[i]=ymin + float(0.5+i)*dy;
 			return sol;
 		} else {
-			const float target_ticks = 5;
+			const float target_ticks = float(target_yticks);
 			auto [d1,d2,ymin,ymax] = axis();
 			float tick_step = std::floor((ymax - ymin)/float(target_ticks));
 			int factor = 2;
@@ -291,7 +293,7 @@ protected:
 	}
 public:
 	SVGPlot() :
-		figsize_{200,150}, cycle_pos(0), axis_set(false),xticklabels_set(false), xticks_set(false), yticklabels_set(false), yticks_set(false), parent(nullptr) {
+		figsize_{200,150}, cycle_pos(0), axis_set(false),xticklabels_set(false), xticks_set(false), yticklabels_set(false), yticks_set(false), parent(nullptr), target_xticks(5), target_yticks(5) {
 			cycle.push_back(std::make_unique<color_hex>("1f77b4"));
 			cycle.push_back(std::make_unique<color_hex>("ff7f0e"));
 			cycle.push_back(std::make_unique<color_hex>("2ca02c"));
@@ -307,20 +309,30 @@ public:
     /*******************************************************
      * IMSHOW VERSIONS
      *******************************************************/
-		
+	
+    protected:
+    void imshow_autoticks() {
+        auto [width,height] = imshow_->size();
+        if (width < target_xticks) { target_xticks = width - 1; }
+        if (height < target_yticks) { target_yticks = height - 1; }
+    }
     
+    public:
 	ImShow& imshow(const std::vector<std::vector<float>>& data) {
 		imshow_=std::make_shared<ImShowType<float>>(data);
+        imshow_autoticks();
 		return *imshow_;
 	}
     
     ImShow& imshow(const std::vector<std::vector<std::tuple<float,float,float>>>& data) {
 		imshow_=std::make_shared<ImShowType<std::tuple<float,float,float>>>(data);
+        imshow_autoticks();
 		return *imshow_;
 	}
     
     ImShow& imshow(const std::vector<std::vector<std::tuple<float,float,float,float>>>& data) {
 		imshow_=std::make_shared<ImShowType<std::tuple<float,float,float,float>>>(data);
+        imshow_autoticks();
 		return *imshow_;
 	}
 private:
@@ -364,13 +376,19 @@ public:
     
     template<typename XRange, typename YRange, typename F>
     ImShow& imshow(const XRange& xrange, const YRange& yrange, const F& f) {
+        if (!xticks_set) xticks({xrange.front(),xrange.back()});
+        if (!yticks_set) yticks({yrange.front(),yrange.back()});
         using T = typename std::decay<decltype(imshow_convert(f(xrange.front(),yrange.front())))>::type;
         std::vector<std::vector<T>> data;
         for (auto y : yrange) {  
             data.push_back(std::vector<T>());
             for (auto x : xrange) data.back().push_back(f(x,y)); 
         }
-        return imshow(data);
+        ImShow& is = imshow(data);
+        auto [width,height] = is.size();
+        float dx = (xrange.back()-xrange.front())/float(width);
+        float dy = (yrange.back()-yrange.front())/float(height);
+        return is.extent({xrange.front()-0.5f*dx,xrange.back()+0.5f*dx,yrange.front()-0.5f*dy,yrange.back()+0.5f*dy});
 	}
     
     /*******************************************************
