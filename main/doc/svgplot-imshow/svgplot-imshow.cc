@@ -21,7 +21,7 @@ int main(int argc, char** argv) {
         plt.figsize({200,200});
 		plt.imshow({{red,green,blue},
 					{green,blue,red},
-					{blue,red,green}}).extent({-1,1,-1,1});
+					{blue,red,green}});
 		plt.savefig("../doc/svgplot/imshow/example2.svg");
 	}
     
