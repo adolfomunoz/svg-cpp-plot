@@ -138,7 +138,7 @@ plt.savefig("../doc/svgplot/imshow/example7.svg");
 yields the following graph
 
 <div style="text-align:center"><img 
- src="./imshow/example6.svg" alt="example7" width="50%" /></div>
+ src="./imshow/example7.svg" alt="example7" width="50%" /></div>
 
 Note how the range of the data defined by the list covers the \[0..1\] range in the horizontal axis (instead of the \[0..10\] which would be setup according to the number of data points). 
 
@@ -159,7 +159,7 @@ plt.savefig("../doc/svgplot/imshow/example8.svg");
 that results into 
 
 <div style="text-align:center"><img 
- src="./imshow/example6.svg" alt="example8" width="50%" /></div>
+ src="./imshow/example8.svg" alt="example8" width="50%" /></div>
  
 Note how the RGB data is centered and flipped on the vertical axis.
 
