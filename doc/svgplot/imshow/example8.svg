@@ -1,0 +1,56 @@
+<svg viewBox="-26 -1 227 217" height="100%" width="100%" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" id="id0000001815" >
+<g id="id0000001816" >
+<g clip-path="url(#id0000001816clipper)" style="pointer-events: all; " vector-effect="non-scaling-stroke" fill="none" class="area" id="id0000001817" >
+<g stroke-width="0.000000" id="id0000001819" >
+<polygon points="80,80 80,93.3333 93.3333,93.3333 93.3333,80 " fill="rgb( 255, 0, 0 )" stroke-width="0.000000" id="id0000001820" class="rectangle" />
+<polygon points="93.3333,80 93.3333,93.3333 106.667,93.3333 106.667,80 " fill="rgb( 0, 255, 0 )" stroke-width="0.000000" id="id0000001821" class="rectangle" />
+<polygon points="106.667,80 106.667,93.3333 120,93.3333 120,80 " fill="rgb( 0, 0, 255 )" stroke-width="0.000000" id="id0000001822" class="rectangle" />
+<polygon points="80,93.3333 80,106.667 93.3333,106.667 93.3333,93.3333 " fill="rgb( 0, 255, 0 )" stroke-width="0.000000" id="id0000001823" class="rectangle" />
+<polygon points="93.3333,93.3333 93.3333,106.667 106.667,106.667 106.667,93.3333 " fill="rgb( 0, 0, 255 )" stroke-width="0.000000" id="id0000001824" class="rectangle" />
+<polygon points="106.667,93.3333 106.667,106.667 120,106.667 120,93.3333 " fill="rgb( 255, 0, 0 )" stroke-width="0.000000" id="id0000001825" class="rectangle" />
+<polygon points="80,106.667 80,120 93.3333,120 93.3333,106.667 " fill="rgb( 0, 0, 255 )" stroke-width="0.000000" id="id0000001826" class="rectangle" />
+<polygon points="93.3333,106.667 93.3333,120 106.667,120 106.667,106.667 " fill="rgb( 255, 0, 0 )" stroke-width="0.000000" id="id0000001827" class="rectangle" />
+<polygon points="106.667,106.667 106.667,120 120,120 120,106.667 " fill="rgb( 0, 255, 0 )" stroke-width="0.000000" id="id0000001828" class="rectangle" />
+</g>
+
+</g>
+
+<clipPath id="id0000001816clipper" >
+<polygon points="0,0 0,200 200,200 200,0 " id="id0000001829" class="rectangle" />
+</clipPath>
+
+<polyline points="0,200 0,203 " fill="none" stroke-width="1.000000" stroke="black" id="id0000001830" class="line" />
+<text id="id0000001831" transform="matrix(1 0 0 1 0 0)" x="0.000000" y="205.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+-5
+</text>
+
+<polyline points="100,200 100,203 " fill="none" stroke-width="1.000000" stroke="black" id="id0000001832" class="line" />
+<text id="id0000001833" transform="matrix(1 0 0 1 0 0)" x="100.000000" y="205.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+0
+</text>
+
+<polyline points="200,200 200,203 " fill="none" stroke-width="1.000000" stroke="black" id="id0000001834" class="line" />
+<text id="id0000001835" transform="matrix(1 0 0 1 0 0)" x="200.000000" y="205.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+5
+</text>
+
+<polyline points="-3,200 0,200 " fill="none" stroke-width="1.000000" stroke="black" id="id0000001836" class="line" />
+<text id="id0000001837" transform="matrix(1 0 0 1 0 0)" x="-5.000000" y="200.000000" dominant-baseline="middle" text-anchor="end" font-size="10.000000px" >
+-5
+</text>
+
+<polyline points="-3,100 0,100 " fill="none" stroke-width="1.000000" stroke="black" id="id0000001838" class="line" />
+<text id="id0000001839" transform="matrix(1 0 0 1 0 0)" x="-5.000000" y="100.000000" dominant-baseline="middle" text-anchor="end" font-size="10.000000px" >
+0
+</text>
+
+<polyline points="-3,0 0,0 " fill="none" stroke-width="1.000000" stroke="black" id="id0000001840" class="line" />
+<text id="id0000001841" transform="matrix(1 0 0 1 0 0)" x="-5.000000" y="0.000000" dominant-baseline="middle" text-anchor="end" font-size="10.000000px" >
+5
+</text>
+
+<polygon points="0,0 0,200 200,200 200,0 " stroke="black" stroke-width="1.000000" fill="none" id="id0000001842" pointer-events="none" class="border" />
+
+</g>
+
+</svg>

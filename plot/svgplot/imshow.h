@@ -185,7 +185,7 @@ private:
 		ss << "data:image/png;base64,"<<base64_encode(contents.data(),contents.size());
         std::tuple<float,float> xmin{axis()[0],axis()[2]};
         std::tuple<float,float> xmax{axis()[1],axis()[3]};
-		Image image(ss.str()); image.rect(xmin,xmax);
+		Image image(ss.str()); image.rect(xmin,xmax).preserveAspectRatio(preserve_aspect_ratio_none);
         return _2d::primitive(image);
     }
     

@@ -72,8 +72,6 @@ public:
 std::shared_ptr<Transform> rotate(float a) { return std::make_shared<Rotate>(a); }
 std::shared_ptr<Transform> rotate(float a, float x, float y) { return std::make_shared<Rotate>(a,x,y); }
 
-
-
 ENUM_TYPE(VectorEffect) vector_effect_default("default"), non_scaling_stroke("non-scaling-stroke");
 ENUM_TYPE(PointerEvents) pointer_events_auto("auto"), pointer_events_none("none"), pointer_events_visible_painted("visiblePainted"), pointer_events_visible_fill("visibleFill"), pointer_events_visible_stroke("visibleStroke"), pointer_events_painted("painted"), pointer_events_fill("fill"), pointer_events_stroke("stroke"), pointer_events_all("all");  
 

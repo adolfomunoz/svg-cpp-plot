@@ -18,7 +18,7 @@ public:
 	P element(const Matrix& m) const noexcept override {
 		P prim = p;
 		if constexpr(std::is_base_of<GraphicalAttributes<P>,P>::value)
-			prim.transform({matrix(m[0][0],m[0][1],m[1][0] ,m[1][1],m[0][2],m[1][2])});
+			prim.transform({matrix(m[0][0],m[0][1],m[1][0],m[1][1],m[0][2],m[1][2])});
 		return prim;
 	}
 	

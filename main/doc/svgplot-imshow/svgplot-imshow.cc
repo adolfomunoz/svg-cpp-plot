@@ -75,6 +75,28 @@ int main(int argc, char** argv) {
         };
         plt.imshow(svg_cpp_plot::arange(0,10,0.25),svg_cpp_plot::arange(0,10,0.25),f).interpolation("bicubic");
 		plt.savefig("../doc/svgplot/imshow/example6.svg");
+    } 
+
+    { // Example 7
+    	svg_cpp_plot::SVGPlot plt;
+        plt.figsize({200,20}).yticks({});
+        std::list<std::list<float>> data; 
+        data.push_back(std::list<float>()); 
+        for (float f = 0.0f; f<=1.0f; f+=0.1f) data.back().push_back(f);
+        plt.imshow(data).interpolation("bicubic").extent({0,1,0,1});
+		plt.savefig("../doc/svgplot/imshow/example7.svg");   
     }  
+
+    { // Example 8
+        auto red = std::tuple(1.0f,0.0f,0.0f);
+        auto green = std::tuple(0.0f,1.0f,0.0f);
+        auto blue = std::tuple(0.0f,0.0f,1.0f);
+		svg_cpp_plot::SVGPlot plt;
+        plt.figsize({200,200}).axis({-5,5,-5,5});
+		plt.imshow({{red,green,blue},
+					{green,blue,red},
+					{blue,red,green}}).extent({-1,1,1,-1});
+		plt.savefig("../doc/svgplot/imshow/example8.svg");
+	}    
 
 }

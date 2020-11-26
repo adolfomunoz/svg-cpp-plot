@@ -22,7 +22,7 @@ public:
 		return viewBox(bounding_box().expand(0.1f));
 	}
 
-	BoundingBox& viewBox() {
+	BoundingBox viewBox() {
 		return get_or_set("viewBox",BoundingBox());
 	}
 };
