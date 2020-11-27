@@ -40,7 +40,7 @@ class SVGPlot {
 	std::shared_ptr<ImShow> imshow_;
 	
 	
-	std::list<std::unique_ptr<SVGPlot>> subplots_;
+	std::vector<std::unique_ptr<SVGPlot>> subplots_;
 	SVGPlot* parent; int nrows, ncols, index;
     
     unsigned long target_xticks, target_yticks;
@@ -258,7 +258,7 @@ private:
 	
 	Graph2D graph(std::array<float,4>& margin) const {
 		std::array<float,2> graph_size = figsize();
-		margin = std::array<float,4>{1,1,1,1};
+		margin = std::array<float,4>{5,5,5,5};
 		std::array<float,4> local_axis = axis();
 		Graph2D graph({graph_size[0],graph_size[1]},BoundingBox(local_axis[0],local_axis[2],local_axis[1],local_axis[3]));
 		
