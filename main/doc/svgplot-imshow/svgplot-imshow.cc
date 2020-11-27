@@ -79,7 +79,7 @@ int main(int argc, char** argv) {
 
     { // Example 7
     	svg_cpp_plot::SVGPlot plt;
-        plt.figsize({200,20}).yticks({});
+        plt.figsize({200,50}).yticks({});
         std::list<std::list<float>> data; 
         data.push_back(std::list<float>()); 
         for (float f = 0.0f; f<=1.0f; f+=0.1f) data.back().push_back(f);

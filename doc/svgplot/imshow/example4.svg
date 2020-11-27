@@ -1,121 +1,124 @@
-<svg viewBox="-30 -5 235 225" height="100%" width="100%" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" id="id0000000084" >
-<g id="id0000000085" >
-<g clip-path="url(#id0000000085clipper)" style="pointer-events: all; " vector-effect="non-scaling-stroke" fill="none" class="area" id="id0000000086" >
-<g stroke-width="0.000000" id="id0000000088" >
-<polygon points="0,200 0,180 20,180 20,200 " fill="rgb( 68, 1, 84 )" stroke-width="0.000000" id="id0000000089" class="rectangle" />
-<polygon points="20,200 20,180 40,180 40,200 " fill="rgb( 67, 19, 98 )" stroke-width="0.000000" id="id0000000090" class="rectangle" />
-<polygon points="40,200 40,180 60,180 60,200 " fill="rgb( 66, 38, 112 )" stroke-width="0.000000" id="id0000000091" class="rectangle" />
-<polygon points="60,200 60,180 80,180 80,200 " fill="rgb( 65, 56, 126 )" stroke-width="0.000000" id="id0000000092" class="rectangle" />
-<polygon points="80,200 80,180 100,180 100,200 " fill="rgb( 62, 73, 135 )" stroke-width="0.000000" id="id0000000093" class="rectangle" />
-<polygon points="100,200 100,180 120,180 120,200 " fill="rgb( 56, 88, 137 )" stroke-width="0.000000" id="id0000000094" class="rectangle" />
-<polygon points="120,200 120,180 140,180 140,200 " fill="rgb( 49, 102, 139 )" stroke-width="0.000000" id="id0000000095" class="rectangle" />
-<polygon points="140,200 140,180 160,180 160,200 " fill="rgb( 43, 117, 141 )" stroke-width="0.000000" id="id0000000096" class="rectangle" />
-<polygon points="160,200 160,180 180,180 180,200 " fill="rgb( 40, 130, 139 )" stroke-width="0.000000" id="id0000000097" class="rectangle" />
-<polygon points="180,200 180,180 200,180 200,200 " fill="rgb( 38, 144, 137 )" stroke-width="0.000000" id="id0000000098" class="rectangle" />
-<polygon points="0,180 0,160 20,160 20,180 " fill="rgb( 66, 38, 112 )" stroke-width="0.000000" id="id0000000099" class="rectangle" />
-<polygon points="20,180 20,160 40,160 40,180 " fill="rgb( 65, 56, 126 )" stroke-width="0.000000" id="id0000000100" class="rectangle" />
-<polygon points="40,180 40,160 60,160 60,180 " fill="rgb( 62, 73, 135 )" stroke-width="0.000000" id="id0000000101" class="rectangle" />
-<polygon points="60,180 60,160 80,160 80,180 " fill="rgb( 56, 88, 137 )" stroke-width="0.000000" id="id0000000102" class="rectangle" />
-<polygon points="80,180 80,160 100,160 100,180 " fill="rgb( 49, 102, 139 )" stroke-width="0.000000" id="id0000000103" class="rectangle" />
-<polygon points="100,180 100,160 120,160 120,180 " fill="rgb( 43, 117, 141 )" stroke-width="0.000000" id="id0000000104" class="rectangle" />
-<polygon points="120,180 120,160 140,160 140,180 " fill="rgb( 40, 130, 139 )" stroke-width="0.000000" id="id0000000105" class="rectangle" />
-<polygon points="140,180 140,160 160,160 160,180 " fill="rgb( 38, 144, 137 )" stroke-width="0.000000" id="id0000000106" class="rectangle" />
-<polygon points="160,180 160,160 180,160 180,180 " fill="rgb( 35, 157, 134 )" stroke-width="0.000000" id="id0000000107" class="rectangle" />
-<polygon points="0,160 0,140 20,140 20,160 " fill="rgb( 62, 73, 135 )" stroke-width="0.000000" id="id0000000108" class="rectangle" />
-<polygon points="20,160 20,140 40,140 40,160 " fill="rgb( 56, 88, 137 )" stroke-width="0.000000" id="id0000000109" class="rectangle" />
-<polygon points="40,160 40,140 60,140 60,160 " fill="rgb( 49, 102, 139 )" stroke-width="0.000000" id="id0000000110" class="rectangle" />
-<polygon points="60,160 60,140 80,140 80,160 " fill="rgb( 43, 117, 141 )" stroke-width="0.000000" id="id0000000111" class="rectangle" />
-<polygon points="80,160 80,140 100,140 100,160 " fill="rgb( 40, 130, 139 )" stroke-width="0.000000" id="id0000000112" class="rectangle" />
-<polygon points="100,160 100,140 120,140 120,160 " fill="rgb( 38, 143, 137 )" stroke-width="0.000000" id="id0000000113" class="rectangle" />
-<polygon points="120,160 120,140 140,140 140,160 " fill="rgb( 35, 157, 134 )" stroke-width="0.000000" id="id0000000114" class="rectangle" />
-<polygon points="140,160 140,140 160,140 160,160 " fill="rgb( 38, 170, 129 )" stroke-width="0.000000" id="id0000000115" class="rectangle" />
-<polygon points="0,140 0,120 20,120 20,140 " fill="rgb( 49, 102, 139 )" stroke-width="0.000000" id="id0000000116" class="rectangle" />
-<polygon points="20,140 20,120 40,120 40,140 " fill="rgb( 43, 117, 141 )" stroke-width="0.000000" id="id0000000117" class="rectangle" />
-<polygon points="40,140 40,120 60,120 60,140 " fill="rgb( 40, 130, 139 )" stroke-width="0.000000" id="id0000000118" class="rectangle" />
-<polygon points="60,140 60,120 80,120 80,140 " fill="rgb( 38, 143, 137 )" stroke-width="0.000000" id="id0000000119" class="rectangle" />
-<polygon points="80,140 80,120 100,120 100,140 " fill="rgb( 35, 157, 134 )" stroke-width="0.000000" id="id0000000120" class="rectangle" />
-<polygon points="100,140 100,120 120,120 120,140 " fill="rgb( 38, 170, 129 )" stroke-width="0.000000" id="id0000000121" class="rectangle" />
-<polygon points="120,140 120,120 140,120 140,140 " fill="rgb( 63, 181, 115 )" stroke-width="0.000000" id="id0000000122" class="rectangle" />
-<polygon points="0,120 0,100 20,100 20,120 " fill="rgb( 40, 130, 139 )" stroke-width="0.000000" id="id0000000123" class="rectangle" />
-<polygon points="20,120 20,100 40,100 40,120 " fill="rgb( 38, 143, 137 )" stroke-width="0.000000" id="id0000000124" class="rectangle" />
-<polygon points="40,120 40,100 60,100 60,120 " fill="rgb( 35, 157, 134 )" stroke-width="0.000000" id="id0000000125" class="rectangle" />
-<polygon points="60,120 60,100 80,100 80,120 " fill="rgb( 38, 170, 129 )" stroke-width="0.000000" id="id0000000126" class="rectangle" />
-<polygon points="80,120 80,100 100,100 100,120 " fill="rgb( 63, 181, 115 )" stroke-width="0.000000" id="id0000000127" class="rectangle" />
-<polygon points="100,120 100,100 120,100 120,120 " fill="rgb( 87, 193, 100 )" stroke-width="0.000000" id="id0000000128" class="rectangle" />
-<polygon points="0,100 0,80 20,80 20,100 " fill="rgb( 35, 157, 134 )" stroke-width="0.000000" id="id0000000129" class="rectangle" />
-<polygon points="20,100 20,80 40,80 40,100 " fill="rgb( 38, 170, 129 )" stroke-width="0.000000" id="id0000000130" class="rectangle" />
-<polygon points="40,100 40,80 60,80 60,100 " fill="rgb( 63, 181, 115 )" stroke-width="0.000000" id="id0000000131" class="rectangle" />
-<polygon points="60,100 60,80 80,80 80,100 " fill="rgb( 87, 193, 100 )" stroke-width="0.000000" id="id0000000132" class="rectangle" />
-<polygon points="80,100 80,80 100,80 100,100 " fill="rgb( 112, 204, 86 )" stroke-width="0.000000" id="id0000000133" class="rectangle" />
-<polygon points="0,80 0,60 20,60 20,80 " fill="rgb( 63, 181, 115 )" stroke-width="0.000000" id="id0000000134" class="rectangle" />
-<polygon points="20,80 20,60 40,60 40,80 " fill="rgb( 87, 193, 100 )" stroke-width="0.000000" id="id0000000135" class="rectangle" />
-<polygon points="40,80 40,60 60,60 60,80 " fill="rgb( 112, 204, 86 )" stroke-width="0.000000" id="id0000000136" class="rectangle" />
-<polygon points="60,80 60,60 80,60 80,80 " fill="rgb( 143, 212, 73 )" stroke-width="0.000000" id="id0000000137" class="rectangle" />
-<polygon points="0,60 0,40 20,40 20,60 " fill="rgb( 112, 204, 86 )" stroke-width="0.000000" id="id0000000138" class="rectangle" />
-<polygon points="20,60 20,40 40,40 40,60 " fill="rgb( 143, 212, 73 )" stroke-width="0.000000" id="id0000000139" class="rectangle" />
-<polygon points="40,60 40,40 60,40 60,60 " fill="rgb( 180, 218, 61 )" stroke-width="0.000000" id="id0000000140" class="rectangle" />
-<polygon points="0,40 0,20 20,20 20,40 " fill="rgb( 180, 218, 61 )" stroke-width="0.000000" id="id0000000141" class="rectangle" />
-<polygon points="20,40 20,20 40,20 40,40 " fill="rgb( 216, 224, 49 )" stroke-width="0.000000" id="id0000000142" class="rectangle" />
-<polygon points="0,20 0,0 20,0 20,20 " fill="rgb( 253, 231, 37 )" stroke-width="0.000000" id="id0000000143" class="rectangle" />
+<svg viewBox="0 0 200 200" height="100%" width="100%" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" id="id0000000087" >
+<g id="id0000000091" >
+<g id="id0000000088" >
+<g clip-path="url(#id0000000088clipper)" style="pointer-events: all; " vector-effect="non-scaling-stroke" fill="none" class="area" id="id0000000089" >
+<g stroke-width="0.000000" id="id0000000092" >
+<polygon points="30,180 30,162.5 46.5,162.5 46.5,180 " fill="rgb( 68, 1, 84 )" stroke-width="0.000000" id="id0000000093" class="rectangle" />
+<polygon points="46.5,180 46.5,162.5 63,162.5 63,180 " fill="rgb( 67, 19, 98 )" stroke-width="0.000000" id="id0000000094" class="rectangle" />
+<polygon points="63,180 63,162.5 79.5,162.5 79.5,180 " fill="rgb( 66, 38, 112 )" stroke-width="0.000000" id="id0000000095" class="rectangle" />
+<polygon points="79.5,180 79.5,162.5 96,162.5 96,180 " fill="rgb( 65, 56, 126 )" stroke-width="0.000000" id="id0000000096" class="rectangle" />
+<polygon points="96,180 96,162.5 112.5,162.5 112.5,180 " fill="rgb( 62, 73, 135 )" stroke-width="0.000000" id="id0000000097" class="rectangle" />
+<polygon points="112.5,180 112.5,162.5 129,162.5 129,180 " fill="rgb( 56, 88, 137 )" stroke-width="0.000000" id="id0000000098" class="rectangle" />
+<polygon points="129,180 129,162.5 145.5,162.5 145.5,180 " fill="rgb( 49, 102, 139 )" stroke-width="0.000000" id="id0000000099" class="rectangle" />
+<polygon points="145.5,180 145.5,162.5 162,162.5 162,180 " fill="rgb( 43, 117, 141 )" stroke-width="0.000000" id="id0000000100" class="rectangle" />
+<polygon points="162,180 162,162.5 178.5,162.5 178.5,180 " fill="rgb( 40, 130, 139 )" stroke-width="0.000000" id="id0000000101" class="rectangle" />
+<polygon points="178.5,180 178.5,162.5 195,162.5 195,180 " fill="rgb( 38, 144, 137 )" stroke-width="0.000000" id="id0000000102" class="rectangle" />
+<polygon points="30,162.5 30,145 46.5,145 46.5,162.5 " fill="rgb( 66, 38, 112 )" stroke-width="0.000000" id="id0000000103" class="rectangle" />
+<polygon points="46.5,162.5 46.5,145 63,145 63,162.5 " fill="rgb( 65, 56, 126 )" stroke-width="0.000000" id="id0000000104" class="rectangle" />
+<polygon points="63,162.5 63,145 79.5,145 79.5,162.5 " fill="rgb( 62, 73, 135 )" stroke-width="0.000000" id="id0000000105" class="rectangle" />
+<polygon points="79.5,162.5 79.5,145 96,145 96,162.5 " fill="rgb( 56, 88, 137 )" stroke-width="0.000000" id="id0000000106" class="rectangle" />
+<polygon points="96,162.5 96,145 112.5,145 112.5,162.5 " fill="rgb( 49, 102, 139 )" stroke-width="0.000000" id="id0000000107" class="rectangle" />
+<polygon points="112.5,162.5 112.5,145 129,145 129,162.5 " fill="rgb( 43, 117, 141 )" stroke-width="0.000000" id="id0000000108" class="rectangle" />
+<polygon points="129,162.5 129,145 145.5,145 145.5,162.5 " fill="rgb( 40, 130, 139 )" stroke-width="0.000000" id="id0000000109" class="rectangle" />
+<polygon points="145.5,162.5 145.5,145 162,145 162,162.5 " fill="rgb( 38, 144, 137 )" stroke-width="0.000000" id="id0000000110" class="rectangle" />
+<polygon points="162,162.5 162,145 178.5,145 178.5,162.5 " fill="rgb( 35, 157, 134 )" stroke-width="0.000000" id="id0000000111" class="rectangle" />
+<polygon points="30,145 30,127.5 46.5,127.5 46.5,145 " fill="rgb( 62, 73, 135 )" stroke-width="0.000000" id="id0000000112" class="rectangle" />
+<polygon points="46.5,145 46.5,127.5 63,127.5 63,145 " fill="rgb( 56, 88, 137 )" stroke-width="0.000000" id="id0000000113" class="rectangle" />
+<polygon points="63,145 63,127.5 79.5,127.5 79.5,145 " fill="rgb( 49, 102, 139 )" stroke-width="0.000000" id="id0000000114" class="rectangle" />
+<polygon points="79.5,145 79.5,127.5 96,127.5 96,145 " fill="rgb( 43, 117, 141 )" stroke-width="0.000000" id="id0000000115" class="rectangle" />
+<polygon points="96,145 96,127.5 112.5,127.5 112.5,145 " fill="rgb( 40, 130, 139 )" stroke-width="0.000000" id="id0000000116" class="rectangle" />
+<polygon points="112.5,145 112.5,127.5 129,127.5 129,145 " fill="rgb( 38, 143, 137 )" stroke-width="0.000000" id="id0000000117" class="rectangle" />
+<polygon points="129,145 129,127.5 145.5,127.5 145.5,145 " fill="rgb( 35, 157, 134 )" stroke-width="0.000000" id="id0000000118" class="rectangle" />
+<polygon points="145.5,145 145.5,127.5 162,127.5 162,145 " fill="rgb( 38, 170, 129 )" stroke-width="0.000000" id="id0000000119" class="rectangle" />
+<polygon points="30,127.5 30,110 46.5,110 46.5,127.5 " fill="rgb( 49, 102, 139 )" stroke-width="0.000000" id="id0000000120" class="rectangle" />
+<polygon points="46.5,127.5 46.5,110 63,110 63,127.5 " fill="rgb( 43, 117, 141 )" stroke-width="0.000000" id="id0000000121" class="rectangle" />
+<polygon points="63,127.5 63,110 79.5,110 79.5,127.5 " fill="rgb( 40, 130, 139 )" stroke-width="0.000000" id="id0000000122" class="rectangle" />
+<polygon points="79.5,127.5 79.5,110 96,110 96,127.5 " fill="rgb( 38, 143, 137 )" stroke-width="0.000000" id="id0000000123" class="rectangle" />
+<polygon points="96,127.5 96,110 112.5,110 112.5,127.5 " fill="rgb( 35, 157, 134 )" stroke-width="0.000000" id="id0000000124" class="rectangle" />
+<polygon points="112.5,127.5 112.5,110 129,110 129,127.5 " fill="rgb( 38, 170, 129 )" stroke-width="0.000000" id="id0000000125" class="rectangle" />
+<polygon points="129,127.5 129,110 145.5,110 145.5,127.5 " fill="rgb( 63, 181, 115 )" stroke-width="0.000000" id="id0000000126" class="rectangle" />
+<polygon points="30,110 30,92.5 46.5,92.5 46.5,110 " fill="rgb( 40, 130, 139 )" stroke-width="0.000000" id="id0000000127" class="rectangle" />
+<polygon points="46.5,110 46.5,92.5 63,92.5 63,110 " fill="rgb( 38, 143, 137 )" stroke-width="0.000000" id="id0000000128" class="rectangle" />
+<polygon points="63,110 63,92.5 79.5,92.5 79.5,110 " fill="rgb( 35, 157, 134 )" stroke-width="0.000000" id="id0000000129" class="rectangle" />
+<polygon points="79.5,110 79.5,92.5 96,92.5 96,110 " fill="rgb( 38, 170, 129 )" stroke-width="0.000000" id="id0000000130" class="rectangle" />
+<polygon points="96,110 96,92.5 112.5,92.5 112.5,110 " fill="rgb( 63, 181, 115 )" stroke-width="0.000000" id="id0000000131" class="rectangle" />
+<polygon points="112.5,110 112.5,92.5 129,92.5 129,110 " fill="rgb( 87, 193, 100 )" stroke-width="0.000000" id="id0000000132" class="rectangle" />
+<polygon points="30,92.5 30,75 46.5,75 46.5,92.5 " fill="rgb( 35, 157, 134 )" stroke-width="0.000000" id="id0000000133" class="rectangle" />
+<polygon points="46.5,92.5 46.5,75 63,75 63,92.5 " fill="rgb( 38, 170, 129 )" stroke-width="0.000000" id="id0000000134" class="rectangle" />
+<polygon points="63,92.5 63,75 79.5,75 79.5,92.5 " fill="rgb( 63, 181, 115 )" stroke-width="0.000000" id="id0000000135" class="rectangle" />
+<polygon points="79.5,92.5 79.5,75 96,75 96,92.5 " fill="rgb( 87, 193, 100 )" stroke-width="0.000000" id="id0000000136" class="rectangle" />
+<polygon points="96,92.5 96,75 112.5,75 112.5,92.5 " fill="rgb( 112, 204, 86 )" stroke-width="0.000000" id="id0000000137" class="rectangle" />
+<polygon points="30,75 30,57.5 46.5,57.5 46.5,75 " fill="rgb( 63, 181, 115 )" stroke-width="0.000000" id="id0000000138" class="rectangle" />
+<polygon points="46.5,75 46.5,57.5 63,57.5 63,75 " fill="rgb( 87, 193, 100 )" stroke-width="0.000000" id="id0000000139" class="rectangle" />
+<polygon points="63,75 63,57.5 79.5,57.5 79.5,75 " fill="rgb( 112, 204, 86 )" stroke-width="0.000000" id="id0000000140" class="rectangle" />
+<polygon points="79.5,75 79.5,57.5 96,57.5 96,75 " fill="rgb( 143, 212, 73 )" stroke-width="0.000000" id="id0000000141" class="rectangle" />
+<polygon points="30,57.5 30,40 46.5,40 46.5,57.5 " fill="rgb( 112, 204, 86 )" stroke-width="0.000000" id="id0000000142" class="rectangle" />
+<polygon points="46.5,57.5 46.5,40 63,40 63,57.5 " fill="rgb( 143, 212, 73 )" stroke-width="0.000000" id="id0000000143" class="rectangle" />
+<polygon points="63,57.5 63,40 79.5,40 79.5,57.5 " fill="rgb( 180, 218, 61 )" stroke-width="0.000000" id="id0000000144" class="rectangle" />
+<polygon points="30,40 30,22.5 46.5,22.5 46.5,40 " fill="rgb( 180, 218, 61 )" stroke-width="0.000000" id="id0000000145" class="rectangle" />
+<polygon points="46.5,40 46.5,22.5 63,22.5 63,40 " fill="rgb( 216, 224, 49 )" stroke-width="0.000000" id="id0000000146" class="rectangle" />
+<polygon points="30,22.5 30,5 46.5,5 46.5,22.5 " fill="rgb( 253, 231, 37 )" stroke-width="0.000000" id="id0000000147" class="rectangle" />
 </g>
 
 </g>
 
-<clipPath id="id0000000085clipper" >
-<polygon points="0,0 0,200 200,200 200,0 " id="id0000000144" class="rectangle" />
+<clipPath id="id0000000088clipper" >
+<polygon points="30,5 30,180 195,180 195,5 " id="id0000000148" class="rectangle" />
 </clipPath>
 
-<polyline points="10,200 10,203 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000145" class="line" />
-<text id="id0000000146" transform="matrix(1 0 0 1 0 0)" x="10.000000" y="205.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+<polyline points="38.25,180 38.25,183 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000149" class="line" />
+<text id="id0000000150" transform="matrix(1 0 0 1 30 5)" x="8.250000" y="180.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
 0
 </text>
 
-<polyline points="50,200 50,203 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000147" class="line" />
-<text id="id0000000148" transform="matrix(1 0 0 1 0 0)" x="50.000000" y="205.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+<polyline points="71.25,180 71.25,183 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000151" class="line" />
+<text id="id0000000152" transform="matrix(1 0 0 1 30 5)" x="41.250000" y="180.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
 2
 </text>
 
-<polyline points="90,200 90,203 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000149" class="line" />
-<text id="id0000000150" transform="matrix(1 0 0 1 0 0)" x="90.000000" y="205.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+<polyline points="104.25,180 104.25,183 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000153" class="line" />
+<text id="id0000000154" transform="matrix(1 0 0 1 30 5)" x="74.250000" y="180.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
 4
 </text>
 
-<polyline points="130,200 130,203 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000151" class="line" />
-<text id="id0000000152" transform="matrix(1 0 0 1 0 0)" x="130.000000" y="205.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+<polyline points="137.25,180 137.25,183 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000155" class="line" />
+<text id="id0000000156" transform="matrix(1 0 0 1 30 5)" x="107.250000" y="180.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
 6
 </text>
 
-<polyline points="170,200 170,203 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000153" class="line" />
-<text id="id0000000154" transform="matrix(1 0 0 1 0 0)" x="170.000000" y="205.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+<polyline points="170.25,180 170.25,183 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000157" class="line" />
+<text id="id0000000158" transform="matrix(1 0 0 1 30 5)" x="140.250000" y="180.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
 8
 </text>
 
-<polyline points="-3,190 0,190 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000155" class="line" />
-<text id="id0000000156" transform="matrix(1 0 0 1 0 0)" x="-5.000000" y="190.000000" dominant-baseline="middle" text-anchor="end" font-size="10.000000px" >
+<polyline points="27,171.25 30,171.25 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000159" class="line" />
+<text id="id0000000160" transform="matrix(1 0 0 1 30 5)" x="-5.000000" y="166.250000" dominant-baseline="middle" text-anchor="end" font-size="10.000000px" >
 0
 </text>
 
-<polyline points="-3,150 0,150 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000157" class="line" />
-<text id="id0000000158" transform="matrix(1 0 0 1 0 0)" x="-5.000000" y="150.000000" dominant-baseline="middle" text-anchor="end" font-size="10.000000px" >
+<polyline points="27,136.25 30,136.25 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000161" class="line" />
+<text id="id0000000162" transform="matrix(1 0 0 1 30 5)" x="-5.000000" y="131.250000" dominant-baseline="middle" text-anchor="end" font-size="10.000000px" >
 2
 </text>
 
-<polyline points="-3,110 0,110 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000159" class="line" />
-<text id="id0000000160" transform="matrix(1 0 0 1 0 0)" x="-5.000000" y="110.000000" dominant-baseline="middle" text-anchor="end" font-size="10.000000px" >
+<polyline points="27,101.25 30,101.25 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000163" class="line" />
+<text id="id0000000164" transform="matrix(1 0 0 1 30 5)" x="-5.000000" y="96.250000" dominant-baseline="middle" text-anchor="end" font-size="10.000000px" >
 4
 </text>
 
-<polyline points="-3,70 0,70 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000161" class="line" />
-<text id="id0000000162" transform="matrix(1 0 0 1 0 0)" x="-5.000000" y="70.000000" dominant-baseline="middle" text-anchor="end" font-size="10.000000px" >
+<polyline points="27,66.25 30,66.25 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000165" class="line" />
+<text id="id0000000166" transform="matrix(1 0 0 1 30 5)" x="-5.000000" y="61.250000" dominant-baseline="middle" text-anchor="end" font-size="10.000000px" >
 6
 </text>
 
-<polyline points="-3,30 0,30 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000163" class="line" />
-<text id="id0000000164" transform="matrix(1 0 0 1 0 0)" x="-5.000000" y="30.000000" dominant-baseline="middle" text-anchor="end" font-size="10.000000px" >
+<polyline points="27,31.25 30,31.25 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000167" class="line" />
+<text id="id0000000168" transform="matrix(1 0 0 1 30 5)" x="-5.000000" y="26.250000" dominant-baseline="middle" text-anchor="end" font-size="10.000000px" >
 8
 </text>
 
-<polygon points="0,0 0,200 200,200 200,0 " stroke="black" stroke-width="1.000000" fill="none" id="id0000000165" pointer-events="none" class="border" />
+<polygon points="30,5 30,180 195,180 195,5 " stroke="black" stroke-width="1.000000" fill="none" id="id0000000169" pointer-events="none" class="border" />
+</g>
+
 
 </g>
 

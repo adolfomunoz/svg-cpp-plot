@@ -18,6 +18,13 @@ namespace { //Anonymous namespace, only visible from this .h
 		for (std::size_t i = 0; i<N; ++i) a[i]+=b[i];
 		return a;
 	}
+    
+ 	template<std::size_t N>
+    std::array<float,N> operator+(const std::array<float,N>& x, const std::array<float,N>& y) {
+        std::array<float,N> sol = x;
+        return sol+=y;
+    }
+    
 }
 	
 
@@ -41,14 +48,15 @@ class SVGPlot {
 	
 	
 	std::vector<std::unique_ptr<SVGPlot>> subplots_;
-	SVGPlot* parent; int nrows, ncols, index;
+    int nrows, ncols;
+	SVGPlot* parent; 
     
     unsigned long target_xticks, target_yticks;
 public:
 	std::array<float,2> figsize() const { 
 		if (parent) return std::array<float,2>{
-			parent->figsize()[0]/float(nrows),
-			parent->figsize()[1]/float(ncols)};	
+			parent->figsize()[0]/float(parent->nrows),
+			parent->figsize()[1]/float(parent->ncols)};	
 		else return figsize_; }
 	
 	SVGPlot& figsize(const std::array<float,2>& v) { figsize_=v; return (*this);}
@@ -192,108 +200,134 @@ public:
 	}
 	
 private:
-	void add_title(Graph2D& graph, const std::array<float,2> graph_size, std::array<float,4>& margin) const {
+
+    std::array<float,4> yticks_margin() const {
+        return (!yticklabels().empty())?
+                    std::array<float,4>{25,0,0,0}:
+                    ((!yticks().empty())?
+                        std::array<float,4>{3,0,0,0}:
+                        std::array<float,4>{0,0,0,0});
+    }
+    
+    std::array<float,4> xticks_margin() const {
+        return (!xticklabels().empty())?
+                    std::array<float,4>{0,0,0,15}:
+                    ((!xticks().empty())?
+                        std::array<float,4>{0,0,0,3}:
+                        std::array<float,4>{0,0,0,0});
+    }
+    
+    std::array<float,4> ymargin() const {
+        return yticks_margin() +
+            (ylabel().empty()?std::array<float,4>{0,0,0,0}:std::array<float,4>{40,0,0,0});
+    }
+	
+    std::array<float,4> xmargin() const {
+        return xticks_margin() +
+            (xlabel().empty()?std::array<float,4>{0,0,0,0}:std::array<float,4>{0,0,0,30});
+    }
+    
+    std::array<float,4> margin() const {
+        return xmargin() + ymargin() +
+            (title().empty()?std::array<float,4>{5,5,5,5}:std::array<float,4>{5,5,35,5});
+    }
+	
+    
+	void add_title(Graph2D& graph, const std::array<float,2> graph_size) const {
 		if (!title().empty()) {
 			graph.add(
 				_2d::text({0.5*graph_size[0],-10},title()))
 					.font_size(16)
 					.text_anchor(svg_cpp_plot::text_anchor_middle);
-			margin[2]+=30;
 		}
 	}
 
-	void add_xlabel(Graph2D& graph, const std::array<float,2> graph_size, std::array<float,4>& margin) const {
+	void add_xlabel(Graph2D& graph, const std::array<float,2> graph_size) const {
 		if (!xlabel().empty()) {
 			graph.add(
 				_2d::text({0.5*graph_size[0],graph_size[1]+26},xlabel()))
 					.font_size(14)
 					.text_anchor(svg_cpp_plot::text_anchor_middle);
-			margin[3]+=30;
 		}
 	}
 	
-	void add_ylabel(Graph2D& graph, const std::array<float,2> graph_size, std::array<float,4>& margin) const {
+	void add_ylabel(Graph2D& graph, const std::array<float,2> graph_size) const {
 		if (!ylabel().empty()) {
 			graph.add(_2d::group(_2d::translate({-26,0.5*graph_size[1]})*_2d::rotate(-0.5*M_PI))).add(_2d::text({0,0},ylabel())).font_size(14).text_anchor(text_anchor_middle);
-			margin[0]+=40;
 		}
 	}
 	
-	void add_xticks(Graph2D& graph, const std::array<float,2> graph_size, std::array<float,4>& margin, const std::array<float,4>& local_axis) const {
+	void add_xticks(Graph2D& graph, const std::array<float,2> graph_size, const std::array<float,4>& local_axis) const {
+        auto marg = margin();
 		auto x = xticks();
 		auto labels = xticklabels();
 		for (std::size_t i=0;i<x.size();++i) {
-			float global_x = graph_size[0]*(x[i] - local_axis[0])/
+			float global_x = (graph_size[0] - (marg[0]+marg[1]))*(x[i] - local_axis[0])/
 						(local_axis[1]-local_axis[0]);
 			graph.add(_2d::line(
-				{global_x,graph_size[1]},
-				{global_x, graph_size[1]+3}))
+				{global_x,graph_size[1]-(marg[2]+marg[3])},
+				{global_x,graph_size[1]-(marg[2]+marg[3])+3}))
 				.stroke(black).stroke_width(1);
 			if (i<labels.size()) {
 				graph.add(
-					_2d::text({global_x,graph_size[1]+5},labels[i]))
+					_2d::text({global_x,graph_size[1]-(marg[2]+marg[3])+5},labels[i]))
 						.font_size(10)
 						.text_anchor(text_anchor_middle)
 						.dominant_baseline(dominant_baseline_hanging);
 			}
 		}
-		if (!labels.empty()) margin[3]+=15;
-		else if (!x.empty()) margin[3]+=3;
 	}
 	
-	void add_yticks(Graph2D& graph, const std::array<float,2> graph_size, std::array<float,4>& margin, const std::array<float,4>& local_axis) const {
+	void add_yticks(Graph2D& graph, const std::array<float,2> graph_size, const std::array<float,4>& local_axis) const {
+        auto marg = margin();
 		auto y = yticks();
 		auto labels = yticklabels();
 		for (std::size_t i=0;i<y.size();++i) {
-			float global_y = graph_size[1] - graph_size[1]*(y[i] - local_axis[2])/(local_axis[3]-local_axis[2]);
+			float global_y = graph_size[1] - (marg[2]+marg[3]) - (graph_size[1]-marg[2]-marg[3])*(y[i] - local_axis[2])/(local_axis[3]-local_axis[2]);
 			graph.add(_2d::line({-3,global_y},{0,global_y}))
 				.stroke(black).stroke_width(1);
 			if (i<labels.size()) {		
 				graph.add(_2d::text({-5,global_y},labels[i])).font_size(10).text_anchor(text_anchor_end).dominant_baseline(dominant_baseline_middle);
 			}
 		}
-		if (!labels.empty()) margin[0]+=25;
-		else if (!y.empty()) margin[0]+=3;		
 	}
-	
-	Graph2D graph(std::array<float,4>& margin) const {
+    
+
+ 
+public: 
+	auto graph() const {
 		std::array<float,2> graph_size = figsize();
-		margin = std::array<float,4>{5,5,5,5};
+		auto marg = margin();
 		std::array<float,4> local_axis = axis();
-		Graph2D graph({graph_size[0],graph_size[1]},BoundingBox(local_axis[0],local_axis[2],local_axis[1],local_axis[3]));
+		Graph2D graph({graph_size[0] - (marg[1]+marg[0]),graph_size[1] -(marg[3]+marg[2])},BoundingBox(local_axis[0],local_axis[2],local_axis[1],local_axis[3]));
 		
 		if (imshow_) graph.area().add_ptr(imshow_);
 		for (auto p : plots) graph.area().add(p);
 		
-		add_xticks(graph, graph_size, margin, local_axis);
-		add_yticks(graph, graph_size, margin, local_axis);
-		add_xlabel(graph, graph_size, margin);
-		add_ylabel(graph, graph_size, margin);
-		add_title( graph, graph_size, margin);
+		add_xticks(graph, graph_size, local_axis);
+		add_yticks(graph, graph_size, local_axis);
+		add_xlabel(graph, graph_size);
+		add_ylabel(graph, graph_size);
+		add_title( graph, graph_size);
 		
+        auto group = _2d::group(_2d::translate({marg[0],marg[2]}));
 
 		graph.border().stroke_width(1).stroke(black);
-		return graph;
+        group.add(graph);
+		return group;
 	}
-public:
-	Graph2D graph() const {
-		std::array<float,4> margin;
-		return graph(margin);
-	}
+
 protected:		
 	SVG svg() const {
 		std::array<float,2> graph_size = figsize();
-		std::array<float,4> margin{1,1,1,1};
 		SVG s;
-		s.add(graph(margin));
-		s.viewBox(BoundingBox(
-			-margin[0],-margin[2],
-			graph_size[0]+margin[1],graph_size[1]+margin[3]));
+		s.add(graph());
+		s.viewBox(BoundingBox(0,0,graph_size[0],graph_size[1]));
 		return s;
 	}
 public:
 	SVGPlot() :
-		figsize_{200,150}, cycle_pos(0), axis_set(false),xticklabels_set(false), xticks_set(false), yticklabels_set(false), yticks_set(false), parent(nullptr), target_xticks(5), target_yticks(5) {
+		figsize_{200,150}, cycle_pos(0), axis_set(false),xticklabels_set(false), xticks_set(false), yticklabels_set(false), yticks_set(false), nrows(-1), ncols(-1), parent(nullptr), target_xticks(5), target_yticks(5) {
 			cycle.push_back(std::make_unique<color_hex>("1f77b4"));
 			cycle.push_back(std::make_unique<color_hex>("ff7f0e"));
 			cycle.push_back(std::make_unique<color_hex>("2ca02c"));
@@ -306,6 +340,22 @@ public:
 			cycle.push_back(std::make_unique<color_hex>("17becf"));
 		}
         
+    /*******************************************************
+     * SUBPLOT
+     *******************************************************/
+    SVGPlot& subplot(int nrows_, int ncols_, std::size_t index) {
+        if ((nrows_!=nrows) && (ncols_!=ncols)) {
+            nrows=nrows_; 
+            ncols=ncols_;
+            subplots_.resize(nrows*ncols);
+        }
+        if (!subplots_[index]) {
+            subplots_[index] = std::make_unique<SVGPlot>();
+            subplots_[index]->parent = this;
+        }
+        return *subplots_[index];
+    }
+    
     /*******************************************************
      * IMSHOW VERSIONS
      *******************************************************/
