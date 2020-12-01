@@ -63,6 +63,20 @@ protected:
 			cm = _2d::color_map_magma(vmin(),vmax());
 		else if (cmap() == "grayscale") 
 			cm = _2d::color_map_grayscale(vmin(),vmax());
+		else if (cmap() == "inferno") 
+			cm = _2d::color_map_inferno(vmin(),vmax());
+		else if (cmap() == "plasma") 
+			cm = _2d::color_map_plasma(vmin(),vmax());
+		else if (cmap() == "bwr") 
+			cm = _2d::color_map_bwr(vmin(),vmax());
+		else if (cmap() == "seismic") 
+			cm = _2d::color_map_seismic(vmin(),vmax());
+		else if (cmap() == "coolwarm") 
+			cm = _2d::color_map_coolwarm(vmin(),vmax());
+		else if (cmap() == "Spectral") 
+			cm = _2d::color_map_spectral(vmin(),vmax());
+		else if (cmap() == "PiYG") 
+			cm = _2d::color_map_piyg(vmin(),vmax());
         return cm;
     }
 };

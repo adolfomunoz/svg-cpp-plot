@@ -1,7 +1,7 @@
 <svg viewBox="0 0 200 200" height="100%" width="100%" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" id="id0000000000" >
-<g id="id0000000004" >
 <g id="id0000000001" >
-<g clip-path="url(#id0000000001clipper)" style="pointer-events: all; " vector-effect="non-scaling-stroke" fill="none" class="area" id="id0000000002" >
+<g id="id0000000002" >
+<g clip-path="url(#id0000000002clipper)" style="pointer-events: all; " vector-effect="non-scaling-stroke" fill="none" class="area" id="id0000000003" >
 <g stroke-width="0.000000" id="id0000000005" >
 <polygon points="30,180 30,121.667 85,121.667 85,180 " fill="rgb( 68, 1, 84 )" stroke-width="0.000000" id="id0000000006" class="rectangle" />
 <polygon points="85,180 85,121.667 140,121.667 140,180 " fill="rgb( 66, 42, 115 )" stroke-width="0.000000" id="id0000000007" class="rectangle" />
@@ -16,7 +16,7 @@
 
 </g>
 
-<clipPath id="id0000000001clipper" >
+<clipPath id="id0000000002clipper" >
 <polygon points="30,5 30,180 195,180 195,5 " id="id0000000015" class="rectangle" />
 </clipPath>
 

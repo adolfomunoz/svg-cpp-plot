@@ -98,5 +98,31 @@ int main(int argc, char** argv) {
 					{blue,red,green}}).extent({-1,1,1,-1});
 		plt.savefig("../doc/svgplot/imshow/example8.svg");
 	}    
+    
+    { // Example 9
+        auto x = svg_cpp_plot::arange(-5,5,0.2);
+        auto y = svg_cpp_plot::arange(-5,5,0.2);
+        auto himmelblau = [] (float x, float y) {
+            return (x*x + y - 11.0f)*(x*x + y - 11.0f) + (x + y*y -7)*(x + y*y -7);
+         };
+		svg_cpp_plot::SVGPlot plt;
+        plt.subplot(1,4,0).figsize({200,200}).title("Default").imshow(x,y,himmelblau);
+        plt.subplot(1,4,1).figsize({200,200}).title("vmax to 100").imshow(x,y,himmelblau).vmax(100);
+        plt.subplot(1,4,2).figsize({200,200}).title("vmin to 100").imshow(x,y,himmelblau).vmin(100);
+        plt.subplot(1,4,3).figsize({200,200}).title("Reverse").imshow(x,y,himmelblau).vmin(1000).vmax(0);
+		plt.savefig("../doc/svgplot/imshow/example9.svg");
+    }   
+    
+    { // Example 10
+        auto x = svg_cpp_plot::arange(0,1,0.01);
+        auto y = svg_cpp_plot::arange(0,1,1);
+        auto f = [] (float x, float y) { return x; };
+		svg_cpp_plot::SVGPlot plt;
+        int i = 0;
+        for (auto cmap : {"grayscale","viridis","plasma","magma","inferno","bwr","seismic","coolwarm","Spectral","PiYG"}) {
+            plt.subplot(2,5,i++).figsize({200,75}).yticks({}).title(cmap).imshow(x,y,f).interpolation("bicubic").cmap(cmap);
+        }
+		plt.savefig("../doc/svgplot/imshow/example10.svg");
+    }
 
 }

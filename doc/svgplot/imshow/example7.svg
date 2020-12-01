@@ -1,11 +1,11 @@
 <svg viewBox="0 0 200 50" height="100%" width="100%" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" id="id0000001802" >
-<g id="id0000001806" >
 <g id="id0000001803" >
-<g clip-path="url(#id0000001803clipper)" style="pointer-events: all; " vector-effect="non-scaling-stroke" fill="none" class="area" id="id0000001804" >
+<g id="id0000001804" >
+<g clip-path="url(#id0000001804clipper)" style="pointer-events: all; " vector-effect="non-scaling-stroke" fill="none" class="area" id="id0000001805" >
 <image id="id0000001807" transform="matrix(190 0 0 -25 5 30)" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAABCAIAAABol6gpAAAAKElEQVQImWN0YQz5pyrzR1n8syzLdxmG39K/ZSTeGoo/duF77sn7AgCxyAwL8mpFNwAAAABJRU5ErkJggg==" data-href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAABCAIAAABol6gpAAAAKElEQVQImWN0YQz5pyrzR1n8syzLdxmG39K/ZSTeGoo/duF77sn7AgCxyAwL8mpFNwAAAABJRU5ErkJggg==" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAABCAIAAABol6gpAAAAKElEQVQImWN0YQz5pyrzR1n8syzLdxmG39K/ZSTeGoo/duF77sn7AgCxyAwL8mpFNwAAAABJRU5ErkJggg==" x="0.000000px" y="0.000000px" width="1.000000px" height="1.000000px" preserveAspectRatio="none" />
 </g>
 
-<clipPath id="id0000001803clipper" >
+<clipPath id="id0000001804clipper" >
 <polygon points="5,5 5,30 195,30 195,5 " id="id0000001808" class="rectangle" />
 </clipPath>
 

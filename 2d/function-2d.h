@@ -52,6 +52,26 @@ color_map color_map_red_blue(float tmin = -1.0f, float tmax = 1.0f) {
 	return color_map(tmin,tmax, {{1.0f,0.0f,0.0f},{1.0f,1.0f,1.0f},{0.0f,0.0f,1.0f}});
 }
 
+color_map color_map_bwr(float tmin = -1.0f, float tmax = 1.0f) {
+	return color_map(tmin,tmax, {{0.0f,0.0f,1.0f},{1.0f,1.0f,1.0f},{1.0f,0.0f,0.0f}});
+}
+
+color_map color_map_coolwarm(float tmin = -1.0f, float tmax = 1.0f) {
+	return color_map(tmin,tmax, {{0.230f, 0.299f, 0.754f},{0.865f, 0.865f, 0.865f},{0.706f, 0.016f, 0.150f}});
+}
+
+color_map color_map_seismic(float tmin = -1.0f, float tmax = 1.0f) {
+	return color_map(tmin,tmax, {{0.0f,0.0f,0.1f},{0.0f,0.0f,1.0f},{1.0f,1.0f,1.0f},{1.0f,0.0f,0.0f},{0.1f,0.0f,0.0f}});
+}
+
+color_map color_map_spectral(float tmin = -1.0f, float tmax = 1.0f) {
+	return color_map(tmin,tmax, {{1.0f,0.25f,0.25f},{1.0f,0.75f,0.25f},{1.0f,1.0f,0.75f},{0.25f,0.75f,0.5f},{0.5f,0.25f,0.75f}});
+}
+
+color_map color_map_piyg(float tmin = -1.0f, float tmax = 1.0f) {
+	return color_map(tmin,tmax, {{0.8f,0.3f,0.6f},{0.9f,0.5f,0.9f},{1.0f,1.0f,1.0f},{0.5f,0.75f,0.0f},{0.0f,0.5f,0.0f}});
+}
+
 color_map color_map_grayscale(float tmin = 0.0f, float tmax = 1.0f) {
 	return color_map(tmin,tmax, {{0.0f,0.0f,0.0f},{1.0f,1.0f,1.0f}});
 }
@@ -84,6 +104,31 @@ color_map color_map_magma(float tmin = 0.0f, float tmax = 1.0f) {
 					{0.945f,0.376f,0.365f},
 					{0.996f,0.682f,0.467f},
 					{0.988f,0.992f,0.749f} });
+}
+
+color_map color_map_inferno(float tmin = 0.0f, float tmax = 1.0f) {
+	return color_map(tmin,tmax,
+                {   {0.003921568627451,0,0.015686274509804},
+                    {0.188235294117647,0.027450980392157,0.329411764705882},
+                    {0.411764705882353,0.058823529411765,0.435294117647059},
+                    {0.619607843137255,0.156862745098039,0.392156862745098},
+                    {0.815686274509804,0.282352941176471,0.262745098039216},
+                    {0.937254901960784,0.490196078431373,0.082352941176471},
+                    {0.949019607843137,0.76078431372549,0.137254901960784},
+                    {0.96078431372549,1,0.63921568627451} });
+
+}
+
+color_map color_map_plasma(float tmin = 0.0f, float tmax = 1.0f) {
+	return color_map(tmin,tmax,
+                {   {0.184313725490196,0,0.529411764705882},
+                    {0.384313725490196,0,0.643137254901961},
+                    {0.572549019607843,0,0.650980392156863},
+                    {0.729411764705882,0.184313725490196,0.541176470588235},
+                    {0.847058823529412,0.356862745098039,0.411764705882353},
+                    {0.933333333333333,0.537254901960784,0.286274509803922},
+                    {0.964705882352941,0.741176470588235,0.152941176470588},
+                    {0.894117647058824,0.980392156862745,0.082352941176471} });
 }
 
 template<typename F>
