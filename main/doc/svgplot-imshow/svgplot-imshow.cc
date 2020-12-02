@@ -119,9 +119,10 @@ int main(int argc, char** argv) {
         auto f = [] (float x, float y) { return x; };
 		svg_cpp_plot::SVGPlot plt;
         int i = 0;
-        for (auto cmap : {"grayscale","viridis","plasma","magma","inferno","bwr","seismic","coolwarm","Spectral","PiYG"}) {
-            plt.subplot(2,5,i++).figsize({200,75}).yticks({}).title(cmap).imshow(x,y,f).interpolation("bicubic").cmap(cmap);
-        }
+        for (auto cmap : {"grayscale","viridis","plasma","magma","inferno","bwr","seismic","coolwarm","Spectral","PiYG"}) 
+            plt.subplot(2,5,i++).figsize({200,75}).yticks({}).xticks({0,1},{"vmin","vmax"}).title(cmap)
+                .imshow(x,y,f).interpolation("bicubic").cmap(cmap);
+        
 		plt.savefig("../doc/svgplot/imshow/example10.svg");
     }
 

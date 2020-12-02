@@ -164,3 +164,53 @@ that results into
 Note how the RGB data is centered and flipped on the vertical axis.
 
 In the case of data defined by a 2D function (see examples 4 and 5 above) the extent of the data is already defined as the boundaries of the function.
+
+### Colormaps and limits for values
+
+In the case of arrays of values, the mapping to RGB values is done (like in Matplotlib) through a color map, where the maximum and minimum labeled values are calculated automatically from the data so there is no clamping.
+
+It is possible, however, to specifically set those clamping values through the `vmin` and `vmax` named parameters (represented in C++ as methods). Those parameters can even be inverted (`vmin` being greater than `vmax`) so that the colormap is inverted as well. These options are illustrated in the following example, where several options regarding `vmin` and `vmax` are compared.
+
+```cpp
+auto x = svg_cpp_plot::arange(-5,5,0.2);
+auto y = svg_cpp_plot::arange(-5,5,0.2);
+auto himmelblau = [] (float x, float y) {
+    return (x*x + y - 11.0f)*(x*x + y - 11.0f) + (x + y*y -7)*(x + y*y -7);
+ };
+svg_cpp_plot::SVGPlot plt;
+plt.subplot(1,4,0).figsize({200,200}).title("Default").imshow(x,y,himmelblau);
+plt.subplot(1,4,1).figsize({200,200}).title("vmax to 100").imshow(x,y,himmelblau).vmax(100);
+plt.subplot(1,4,2).figsize({200,200}).title("vmin to 100").imshow(x,y,himmelblau).vmin(100);
+plt.subplot(1,4,3).figsize({200,200}).title("Reverse").imshow(x,y,himmelblau).vmin(1000).vmax(0);
+plt.savefig("../doc/svgplot/imshow/example9.svg");
+```
+
+This example yields the following result:
+
+<div style="text-align:center"><img 
+ src="./imshow/example9.svg" alt="example9" width="100%" /></div>
+ 
+It is also possible to change the color map through the `cmap` attribute: a string that defines the mapping from the values to a color that represents them. The usage is illustrated in the following example:
+
+```cpp
+auto x = svg_cpp_plot::arange(0,1,0.01);
+auto y = svg_cpp_plot::arange(0,1,1);
+auto f = [] (float x, float y) { return x; };
+svg_cpp_plot::SVGPlot plt;
+int i = 0;
+for (auto cmap : {"grayscale","viridis","plasma","magma","inferno","bwr","seismic","coolwarm","Spectral","PiYG"}) 
+    plt.subplot(2,5,i++).figsize({200,75}).yticks({}).xticks({0,1}).xticklabels({"vmin","vmax"}).title(cmap)
+        .imshow(x,y,f).interpolation("bicubic").cmap(cmap);
+
+plt.savefig("../doc/svgplot/imshow/example10.svg");
+```
+
+There are several color maps available, all of them inspired by Matplotlib, and illustrated in the outcome of the source code above.
+
+<div style="text-align:center"><img 
+ src="./imshow/example10.svg" alt="example10" width="100%" /></div>
+ 
+Right now, only perceptually uniform (top row) and divergent (bottom row) color maps are available. More color maps might be added in the future.
+
+The `vmin`, `vmax` and `cmap` named attributes have no effect on RGB or RGBA `imshow` input data.
+

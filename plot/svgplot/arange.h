@@ -7,8 +7,23 @@ class arange {
 public:
 	arange(float start, float stop, float step) :
 		start(start), stop(stop), step(step) {}
+	arange(int n) :
+		start(0), stop(n-1), step(1) {}
 	
 	using value_type=float;
+    
+    arange operator+(float v) const {
+        return arange(start+v,stop+v,step);
+    }
+    arange operator-(float v) const {
+        return arange(start-v,stop-v,step);
+    }
+    arange operator*(float v) const {
+        return arange(start*v,stop*v,step*v);
+    }
+    arange operator/(float v) const {
+        return arange(start/v,stop/v,step/v);
+    }
 	
 	class const_iterator : public std::iterator<std::input_iterator_tag, float>{
 		friend class arange;

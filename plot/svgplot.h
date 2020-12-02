@@ -135,27 +135,82 @@ public:
 	SVGPlot& xticks(const std::vector<float>& v) {
 		xticks_ = v; xticks_set=true; return (*this);
 	}
+    template<typename Collection>
+    SVGPlot& xticks(const Collection& c) {
+        std::vector<float> v;
+        for (float f:c) v.push_back(f);
+        return xticks(v);
+    }
 	void set_xticks(const std::vector<float>& v) {
 		xticks(v);
 	}
 	SVGPlot& yticks(const std::vector<float>& v) {
 		yticks_ = v; yticks_set=true; return (*this);
 	}
+    template<typename Collection>
+    SVGPlot& yticks(const Collection& c) {
+        std::vector<float> v;
+        for (float f:c) v.push_back(f);
+        return yticks(v);
+    }
 	void set_yticks(const std::vector<float>& v) {
 		yticks(v);
 	}
 	SVGPlot& xticklabels(const std::vector<std::string>& v) {
 		xticklabels_ = v; xticklabels_set=true; return (*this);
 	}
+    template<typename Collection>
+    SVGPlot& xticklabels(const Collection& c) {
+        std::vector<std::string> v;
+        for (const auto& f:c) v.push_back(f);
+        return xticklabels(v);
+    }
 	void set_xticklabels(const std::vector<std::string>& v) {
 		xticklabels(v);
 	}
 	SVGPlot& yticklabels(const std::vector<std::string>& v) {
 		yticklabels_ = v; yticklabels_set=true; return (*this);
 	}
-	void set_yticklabels(const std::vector<std::string>& v) {
+    template<typename Collection>
+    SVGPlot& yticklabels(const Collection& c) {
+        std::vector<std::string> v;
+        for (const auto& f:c) v.push_back(f);
+        return yticklabels(v);
+    }	
+    void set_yticklabels(const std::vector<std::string>& v) {
 		yticklabels(v);
 	}
+    template<typename C1, typename C2>
+    SVGPlot& xticks(const C1& c1, const C2& c2) {
+        return xticks(c1).xticklabels(c2);
+    }	    
+    template<typename C1>
+    SVGPlot& xticks(const C1& c1, const std::vector<std::string>& c2) {
+        return xticks(c1).xticklabels(c2);
+    }	    
+    template<typename C2>
+    SVGPlot& xticks(const std::vector<float>& c1, const C2& c2) {
+        return xticks(c1).xticklabels(c2);
+    }	    
+    SVGPlot& xticks(const std::vector<float>& c1, const std::vector<std::string>& c2) {
+        return xticks(c1).xticklabels(c2);
+    }	    
+    template<typename C1, typename C2>
+    SVGPlot& yticks(const C1& c1, const C2& c2) {
+        return yticks(c1).yticklabels(c2);
+    }	    
+    template<typename C1>
+    SVGPlot& yticks(const C1& c1, const std::vector<std::string>& c2) {
+        return yticks(c1).yticklabels(c2);
+    }	    
+    template<typename C2>
+    SVGPlot& yticks(const std::vector<float>& c1, const C2& c2) {
+        return yticks(c1).yticklabels(c2);
+    }	    
+    SVGPlot& yticks(const std::vector<float>& c1, const std::vector<std::string>& c2) {
+        return yticks(c1).yticklabels(c2);
+    }	    
+
 
 	SVGPlot& axis(const std::array<float,4> a) { axis_set=true; axis_=a; return (*this); }
 	std::array<float,4> axis() const {
