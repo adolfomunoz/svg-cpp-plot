@@ -61,7 +61,7 @@ public:
 
     template<typename Collection>
     Bar& width(const Collection& c) {
-        return width(std::vector<float>(c));
+        return width(std::vector<float>(c.begin(),c.end()));
     }
     
     Bar& bottom(const std::vector<float>& w) {
@@ -74,7 +74,7 @@ public:
 
     template<typename Collection>
     Bar& bottom(const Collection& c) {
-        return bottom(std::vector<float>(c));
+        return bottom(std::vector<float>(c.begin(),c.end()));
     }
 
 	Bar& color(const Color& c) { color_=&c; return *this; }
@@ -82,10 +82,10 @@ public:
 	
 	std::string to_string(const _2d::Matrix& m) const noexcept override {
         auto g = _2d::group();
-        for (std::size_t i = 0; i<x().size(); ++i) {
+        for (std::size_t i = 0; i<x().size(); ++i) 
             g.add(_2d::rect({x(i)-0.5f*width(i),bottom(i)},{x(i)+0.5f*width(i),bottom(i)+height(i)})).stroke_width(0).fill(color());
-        }
-        return g.to_string(m);;   
+        
+        return g.to_string(m);   
 	}
 
 	std::array<float,4> axis() const override {
@@ -96,6 +96,7 @@ public:
             if (bottom(i)<ax[2]) ax[2] = bottom(i);
             if ((bottom(i)+1.1*height(i))>ax[3]) ax[3] = bottom(i)+1.1f*height(i);
         }
+
         return ax;
 	}
 

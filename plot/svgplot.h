@@ -34,8 +34,6 @@ class SVGPlot {
 	std::array<float,2> figsize_; bool figsize_set;
 	std::vector<std::unique_ptr<Color>> cycle; std::size_t cycle_pos;
 
-	PlotGroup plots;
-	
 	std::string ylabel_, xlabel_, title_;
 	std::array<float,4> axis_; bool axis_set;
 	
@@ -45,13 +43,28 @@ class SVGPlot {
 	std::vector<float> yticks_; bool yticks_set;
 	
 	
-	std::shared_ptr<ImShow> imshow_;
-
-    std::list<std::unique_ptr<Plottable>> plottables;
+    std::list<std::shared_ptr<Plottable>> plottables;
 	
 	
 	std::vector<std::unique_ptr<SVGPlot>> subplots_;
     int nrows, ncols;
+    class SubplotsAdjust {
+        float left_, right_, bottom_, top_, wspace_, hspace_;
+    public:
+        SubplotsAdjust() : left_(0), right_(0), bottom_(0), top_(0), wspace_(0), hspace_(0) {}
+        SubplotsAdjust& left(float v) { left_=v; return *this; }
+        SubplotsAdjust& right(float v) { right_=v; return *this; }
+        SubplotsAdjust& top(float v) { top_=v; return *this; }
+        SubplotsAdjust& bottom(float v) { bottom_=v; return *this; }
+        SubplotsAdjust& wspace(float v) { wspace_=v; return *this; }
+        SubplotsAdjust& hspace(float v) { wspace_=v; return *this; }
+        float left() const { return left_; }       
+        float right() const { return right_; }       
+        float top() const { return top_; }       
+        float bottom() const { return bottom_; }       
+        float wspace() const { return wspace_; }       
+        float hspace() const { return hspace_; }       
+    } subplots_adjust_;
 	SVGPlot* parent; 
     
     unsigned long target_xticks, target_yticks;
@@ -87,8 +100,13 @@ private:
             (xlabel().empty()?std::array<float,4>{0,0,0,0}:std::array<float,4>{0,0,0,30});
     }
     
+    std::array<float,4> subplots_margin() const {
+         if (subplots_.empty()) return std::array<float,4>{0,0,0,0};
+         else return std::array<float,4>{subplots_adjust_.left(),subplots_adjust_.right(),subplots_adjust_.top(),subplots_adjust_.bottom()};
+    }
+    
     std::array<float,4> margin() const {
-        return xmargin() + ymargin() +
+        return xmargin() + ymargin() + subplots_margin() + 
             (title().empty()?std::array<float,4>{5,5,5,5}:std::array<float,4>{5,5,35,5});
     }
     
@@ -110,6 +128,8 @@ private:
  
     
 public:
+    SubplotsAdjust& subplots_adjust() { return subplots_adjust_; }
+    
 	std::array<float,2> figsize() const { 
         if (figsize_set) return figsize_;
         else if ((nrows > 0) && (ncols > 0)) {
@@ -117,7 +137,8 @@ public:
             float width = 0, height = 0;
             for (int r = 0; r<nrows; ++r) height += subplots_ymax(r);
             for (int c = 0; c<ncols; ++c) width += subplots_xmax(c);
-            return std::array<float,2>{width+marg[0]+marg[1],height+marg[2]+marg[3]};
+            return std::array<float,2>{width+marg[0]+marg[1]+ncols*subplots_adjust_.wspace(),
+                                       height+marg[2]+marg[3]+nrows*subplots_adjust_.hspace()};
             
         }
 		else return std::array<float,2>{200.0f,150.0f}; 
@@ -213,26 +234,22 @@ public:
     SVGPlot& yticks(const std::vector<float>& c1, const std::vector<std::string>& c2) {
         return yticks(c1).yticklabels(c2);
     }	    
-
-
-	SVGPlot& axis(const std::array<float,4> a) { axis_set=true; axis_=a; return (*this); }
+private:
+    static void axis_include(std::array<float,4>& a, const std::array<float,4>& b) {
+        if (a[0]>b[0]) a[0]=b[0];
+        if (a[1]<b[1]) a[1]=b[1];
+        if (a[2]>b[2]) a[2]=b[2];
+        if (a[3]<b[3]) a[3]=b[3];
+    }        
+public:
+	SVGPlot& axis(const std::array<float,4>& a) { axis_set=true; axis_=a; return (*this); }
 	std::array<float,4> axis() const {
 		if (axis_set) return axis_;
-		else if (imshow_) return imshow_->axis();
-		else {
-			float minx(0), miny(0), maxx(0), maxy(0); bool first=true;
-			for (const auto& plot : plots)
-				for (const auto& [x,y] : plot) {
-					if (first || (minx>x)) minx=x;
-					if (first || (maxx<x)) maxx=x;
-					if (first || (miny>y)) miny=y;
-					if (first || (maxy<y)) maxy=y;
-					first = false;
-				}
-		
-			float dx = (maxx-minx)/32.0f;
-			float dy = (maxy-miny)/32.0f;
-			return std::array<float,4>{minx-dx,maxx+dx,miny-dy,maxy+dy};
+		else if (plottables.empty()) return std::array<float,4>{0,0,0,0};
+        else {
+            std::array<float,4> a = plottables.front()->axis();
+            for (const auto& plottable : plottables) axis_include(a,plottable->axis());
+            return a;
 		}
 	}
 	
@@ -397,14 +414,13 @@ public:
                         auto subplot = _2d::group(_2d::translate({xpos,ypos}));
                         subplot.add(subplots_[r*ncols+c]->graph());
                         group.add(subplot);
-                        xpos += subplots_xmax(c);
+                        xpos += subplots_xmax(c)+subplots_adjust_.wspace();
                     }
-                ypos+=subplots_ymax(r);    
+                ypos+=subplots_ymax(r)+subplots_adjust_.hspace();    
             }
         } else {
             Graph2D graph({graph_size[0] - (marg[1]+marg[0]),graph_size[1] -(marg[3]+marg[2])},BoundingBox(local_axis[0],local_axis[2],local_axis[1],local_axis[3]));
-            if (imshow_) graph.area().add_ptr(imshow_);
-            for (auto p : plots) graph.area().add(p);
+            for (const auto& p : plottables) graph.area().add_ptr(p);
 		
             add_xticks(graph, graph_size, local_axis);
             add_yticks(graph, graph_size, local_axis);
@@ -463,29 +479,32 @@ public:
      *******************************************************/
 	
     protected:
-    void imshow_autoticks() {
-        auto [width,height] = imshow_->size();
+    void imshow_autoticks(const ImShow& imshow) {
+        auto [width,height] = imshow.size();
         if (width < target_xticks) { target_xticks = width - 1; }
         if (height < target_yticks) { target_yticks = height - 1; }
     }
     
     public:
-	ImShow& imshow(const std::vector<std::vector<float>>& data) {
-		imshow_=std::make_shared<ImShowType<float>>(data);
-        imshow_autoticks();
-		return *imshow_;
+	ImShow& imshow(const std::vector<std::vector<float>>& data) {      
+		plottables.push_back(std::make_shared<ImShowType<float>>(data));
+        ImShow& is =  static_cast<ImShow&>(*plottables.back());
+        imshow_autoticks(is);
+		return is;
 	}
     
     ImShow& imshow(const std::vector<std::vector<std::tuple<float,float,float>>>& data) {
-		imshow_=std::make_shared<ImShowType<std::tuple<float,float,float>>>(data);
-        imshow_autoticks();
-		return *imshow_;
+		plottables.push_back(std::make_shared<ImShowType<std::tuple<float,float,float>>>(data));
+        ImShow& is =  static_cast<ImShow&>(*plottables.back());
+        imshow_autoticks(is);
+		return is;
 	}
     
     ImShow& imshow(const std::vector<std::vector<std::tuple<float,float,float,float>>>& data) {
-		imshow_=std::make_shared<ImShowType<std::tuple<float,float,float,float>>>(data);
-        imshow_autoticks();
-		return *imshow_;
+		plottables.push_back(std::make_shared<ImShowType<std::tuple<float,float,float,float>>>(data));
+        ImShow& is =  static_cast<ImShow&>(*plottables.back());
+        imshow_autoticks(is);
+		return is;
 	}
 private:
     template<typename V>
@@ -570,7 +589,8 @@ public:
 				color = cycle[cycle_pos].get();
 				cycle_pos = (cycle_pos + 1) % cycle.size();
 			}
-			return plots.add(Plot(x,y)).color(*color).format(dashes);
+            plottables.push_back(std::make_shared<Plot>(x,y));
+            return static_cast<Plot&>(*plottables.back()).color(*color).format(dashes);
 	}
 	
 	template<typename X, typename Y>
@@ -614,10 +634,25 @@ public:
     Bar& bar(const std::vector<float>& x, const std::vector<float>& height) {
 		auto color = cycle[cycle_pos].get();
 		cycle_pos = (cycle_pos + 1) % cycle.size();
-        plottables.push_back(std::make_unique<Bar>(x,height));
+        plottables.push_back(std::make_shared<Bar>(x,height));
         return static_cast<Bar&>(*plottables.back()).color(*color);
     }
+    
+    template<typename C1>
+    Bar& bar(const C1& x, const std::vector<float>& height) {
+        return bar(std::vector<float>(x.begin(),x.end()),height);
+    }
+    
+    template<typename C2>
+    Bar& bar(const std::vector<float>& x, const C2& height) {
+        return bar(x,std::vector<float>(height.begin(),height.end()));
+    }
 	
+    template<typename C1,typename C2>
+    Bar& bar(const C1& x, const C2& height) {
+        return bar(std::vector<float>(x.begin(),x.end()),std::vector<float>(height.begin(),height.end()));
+    }
+    
 	void savefig(const std::string& name) const {
 		std::ofstream f(name);
 		f<<svg();

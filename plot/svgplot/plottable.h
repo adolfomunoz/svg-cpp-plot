@@ -6,8 +6,8 @@
 namespace svg_cpp_plot {
 	
 class Plottable : public Generator<_2d::Matrix>  {
+public:
     virtual std::array<float,4> axis() const = 0;
-
 };
 	
 } // namespace svg_cpp_plot

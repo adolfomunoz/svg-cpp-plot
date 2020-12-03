@@ -8,7 +8,7 @@ public:
 	arange(float start, float stop, float step) :
 		start(start), stop(stop), step(step) {}
 	arange(int n) :
-		start(0), stop(n-1), step(1) {}
+		start(0), stop(n), step(1) {}
 	
 	using value_type=float;
     

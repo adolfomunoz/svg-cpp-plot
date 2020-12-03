@@ -3,11 +3,12 @@
 #include <list>
 #include <tuple>
 #include <string>
+#include "plottable.h"
 #include "../../2d/function-2d.h"
 
 namespace svg_cpp_plot {
     
-class ImShow : public Generator<_2d::Matrix> {
+class ImShow : public Plottable {
 	std::string cmap_;
 	float vmin_, vmax_; bool vmin_set, vmax_set;
     std::string interpolation_;
@@ -44,7 +45,7 @@ public:
     
 	virtual std::tuple<std::size_t,std::size_t> size() const = 0;
     
-	std::array<float,4> axis() const {
+	std::array<float,4> axis() const override {
         if (extent_set) return extent_;
         else return std::array<float,4>{
 				-0.5f,float(std::get<0>(size()))-0.5f,
