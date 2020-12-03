@@ -7,6 +7,7 @@
 #include "graph-2d.h"
 #include "svgplot/plot.h"
 #include "svgplot/imshow.h"
+#include "svgplot/bar.h"
 #include "../2d/point-list.h"
 #include "../2d/polyline.h"
 
@@ -26,7 +27,7 @@ namespace { //Anonymous namespace, only visible from this .h
     }
     
 }
-	
+
 
 		
 class SVGPlot {
@@ -45,6 +46,8 @@ class SVGPlot {
 	
 	
 	std::shared_ptr<ImShow> imshow_;
+
+    std::list<std::unique_ptr<Plottable>> plottables;
 	
 	
 	std::vector<std::unique_ptr<SVGPlot>> subplots_;
@@ -603,6 +606,17 @@ public:
 	Plot&  plot(const std::initializer_list<float>& y, std::string_view fmt  = "") {	  
 		return plot(arange(0,y.size(),1),std::list<float>(y),fmt);
 	}
+
+    /*****************************************************
+     * BAR
+     *****************************************************/
+
+    Bar& bar(const std::vector<float>& x, const std::vector<float>& height) {
+		auto color = cycle[cycle_pos].get();
+		cycle_pos = (cycle_pos + 1) % cycle.size();
+        plottables.push_back(std::make_unique<Bar>(x,height));
+        return static_cast<Bar&>(*plottables.back()).color(*color);
+    }
 	
 	void savefig(const std::string& name) const {
 		std::ofstream f(name);
