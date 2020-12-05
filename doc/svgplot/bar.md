@@ -77,6 +77,6 @@ plt.savefig("../doc/svgplot/bar/example4.svg");
 generating the following graph:
 
 <div style="text-align:center"><img 
- src="./plot/example4.svg" alt="example4" width="50%" /></div>
+ src="./bar/example4.svg" alt="example4" width="50%" /></div>
 
 
