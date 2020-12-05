@@ -11,7 +11,7 @@ plt.savefig("../doc/svgplot/teaser");
 ```
 
 <div style="text-align:center"><img 
- src="./teaser.svg" alt="teaser" width="100%" /></div>
+ src="./svgplot/teaser.svg" alt="teaser" width="100%" /></div>
 
 
 ## Description
