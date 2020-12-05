@@ -1,9 +1,40 @@
 # SVGPlot
 
-Plotting with svg-cpp-plot is designed to be similar to (or more accurately, a subset of) `matplotlib.pyplot` or `MATLAB` in terms of plotting. Each method makes some change to a figure: e.g., creates a figure, creates a plotting area in a figure, plots some lines in a plotting area, decorates the plot with labels, etc. There is, however, a small difference: all the functions are translated into methods of the class `svg_cpp_plot::SVGPlot`. Each of these methods provides a functionality similar to their `matplotlib.pyplot` counterparts:
+Plotting with svg-cpp-plot is designed to be similar to (or more accurately, a subset of) `matplotlib.pyplot` or `MATLAB` in terms of plotting. Each method makes some change to a figure: e.g., creates a figure, creates a plotting area in a figure, plots some lines in a plotting area, decorates the plot with labels, etc. There is, however, a small difference: all the functions are translated into methods of the class `svg_cpp_plot::SVGPlot`. Each of these methods provides a functionality similar to their `matplotlib.pyplot` counterparts. The result of the diagrams can be saved into an svg file, which is easily converted to other formats. 
+
+The provided functionality is rather small, compared to the well stablished `matplotlib.pyplot`. While I am expanding it to fulfill my own needs, some very niche features will never ever be provided. However, the provided functionality seems to be enough (at least for my needs) given the fact that the resulting diagrams can easily be edited and tweaked afterwards, for instance with the vector drawing software [Inkscape](https://inkscape.org/).  
+
+Also, this is for now a single author project so I am updating the documentation with features which I deem stable but there are some other features that I don't consider ready and usable so they won't be documented (so you don't use them). Also, my documentation style is not very formal and tends to illustrate the functionality through examples (which is what very often works for me when I read documentation). 
+
+## Named parameters
+
+In `matplotlib.pyplot` (as generally in Python) it is actually possible to use any parameter as a **named** parameter, which very often enables functions and methods to have many parameters with default values and only set the values of a few of them as needed. This is specially useful for diagrams in which most of the times you want to have smart default values that affect appearance and only define the ones that matter for the information you aim to convey. 
+
+However, C++ does not have any kind of support for named parameters, so in `svg_cpp_plot::SVGPlot` these are defined as postfix methods that return references to the same class, so they can be concatenated. 
+
+For example, the Python call
+
+```python 
+plt.imshow(data, interpolation = 'bicubic', extent = [0,1,0,1], vmin=0, vmax=1, cmap='inferno')
+```
+
+is emulated as
+
+```cpp
+plt.imshow(data).interpolation("bicubic").extent({0,1,0,1}).vmin(0).vmax(1).cmap("inferno");
+```
+
+which although techically are not named parameters they look similar hence we will call them named parameters throughout the documentation.
+
+
+## Diagrams 
+The provided methods that generate different types of diagrams are:
 
 - [`plot`](./svgplot/plot.md): plots *x,y* scatter plots or lines with different styles and configuration options. 
 - [`imshow`](./svgplot/imshow.md): plots two-dimensional data.
+- [`bar`](./svgplot/bar.md): generates bar graphs.
+
+## Saving
 
 Finally, the method `savefig("file.svg")` enables the saving of the corresponding plot into the *file.svg* file. The format of this svg is designed so that it holds reasonably well when converting it to pdf, for instance with the vector drawing software [Inkscape](https://inkscape.org/). 
 

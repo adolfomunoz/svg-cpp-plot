@@ -6,9 +6,15 @@
 int main(int argc, char** argv) {
 	{ // Example 1
 		svg_cpp_plot::SVGPlot plt;
+        plt.bar({"G1","G2","G3","G4"},{1,2,3,4});
+		plt.savefig("../doc/svgplot/bar/example1.svg");
+	}
+    
+	{ // Example 1b
+		svg_cpp_plot::SVGPlot plt;
         plt.bar(svg_cpp_plot::arange(4),{1,2,3,4});
         plt.xticks(svg_cpp_plot::arange(4),{"G1","G2","G3","G4"});
-		plt.savefig("../doc/svgplot/bar/example1.svg");
+		plt.savefig("../doc/svgplot/bar/example1b.svg");
 	}
     
     { // Example 2

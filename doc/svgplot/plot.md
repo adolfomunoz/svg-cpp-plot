@@ -59,7 +59,7 @@ generating the following graph:
 <div style="text-align:center"><img 
  src="./plot/example4.svg" alt="example4" width="50%" /></div>
 
-##Formattingç
+##Formatting
 
  There is also a great variety of formatting options that can be setup through formatting strings. Such strings are composed of:
 - A color represented by a letter (```r```  red, ```g```  green, ```b```  blue, ```y```  yellow, ```k```  black), although default colors are chosen for each of the plots if no color is specified.

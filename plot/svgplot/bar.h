@@ -24,7 +24,7 @@ public:
     }
 
     float x(std::size_t index) const {
-        return (index>=x().size())?x()[x().size()-1]:x()[index];      
+        return x()[index%x().size()];      
     }
 
     const std::vector<float>& height() const {
@@ -32,7 +32,7 @@ public:
     }
 
     float height(std::size_t index) const {
-        return (index>=height().size())?height()[height().size()-1]:height()[index];      
+        return height()[index%height().size()];      
     }
 
     const std::vector<float>& width() const {
@@ -40,7 +40,7 @@ public:
     }
  
     float width(std::size_t index) const {
-        return (index>=width().size())?width()[width().size()-1]:width()[index];      
+        return width()[index%width().size()];      
     }
     
     const std::vector<float>& bottom() const {
@@ -48,7 +48,7 @@ public:
     }
 
     float bottom(std::size_t index) const {
-        return (index>=bottom().size())?bottom()[bottom().size()-1]:bottom()[index];      
+        return bottom()[index%bottom().size()];      
     }
 
     Bar& width(const std::vector<float>& w) {

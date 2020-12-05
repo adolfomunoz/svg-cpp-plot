@@ -638,9 +638,17 @@ public:
         return static_cast<Bar&>(*plottables.back()).color(*color);
     }
     
+    Bar& bar(const std::vector<std::string>& x, const std::vector<float>& height) {
+        this->xticks(arange(x.size()),x);
+        return this->bar(arange(x.size()),height);
+    }
+    
     template<typename C1>
     Bar& bar(const C1& x, const std::vector<float>& height) {
-        return bar(std::vector<float>(x.begin(),x.end()),height);
+        if constexpr (std::is_arithmetic<typename std::decay<typename C1::value_type>::type>::value)
+            return bar(std::vector<float>(x.begin(),x.end()),height);
+        else
+            return bar(std::vector<std::string>(x.begin(),x.end()),height);
     }
     
     template<typename C2>
@@ -650,7 +658,10 @@ public:
 	
     template<typename C1,typename C2>
     Bar& bar(const C1& x, const C2& height) {
-        return bar(std::vector<float>(x.begin(),x.end()),std::vector<float>(height.begin(),height.end()));
+        if constexpr (std::is_arithmetic<typename std::decay<typename C1::value_type>::type>::value)
+            return bar(std::vector<float>(x.begin(),x.end()),std::vector<float>(height.begin(),height.end()));
+        else
+            return bar(std::vector<std::string>(x.begin(),x.end()),std::vector<float>(height.begin(),height.end()));
     }
     
 	void savefig(const std::string& name) const {
