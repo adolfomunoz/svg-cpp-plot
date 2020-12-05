@@ -1,5 +1,21 @@
 # SVGPlot
 
+## Example teaser
+
+```cpp
+svg_cpp_plot::SVGPlot plt;
+plt.subplot(1,3,0).xlabel("How cool is this?").bar({"Meh","Fine","Awesome"},{0.1,1,6});
+plt.subplot(1,3,1).ylabel("Awesomeness").xlabel("Time").plot(svg_cpp_plot::arange(0.0,10.0,0.2),[] (float x) { return std::exp(x); },"r--");
+plt.subplot(1,3,2).ylabel("Awesomeness").xlabel("Usefulness").imshow(svg_cpp_plot::arange(0.0,10.0,0.2),svg_cpp_plot::arange(0.0,10.0,0.2),[] (float x, float y) { return x+y; }).cmap("inferno");
+plt.savefig("../doc/svgplot/teaser");
+```
+
+<div style="text-align:center"><img 
+ src="./teaser.svg" alt="teaser" width="100%" /></div>
+
+
+## Description
+
 Plotting with svg-cpp-plot is designed to be similar to (or more accurately, a subset of) `matplotlib.pyplot` or `MATLAB` in terms of plotting. Each method makes some change to a figure: e.g., creates a figure, creates a plotting area in a figure, plots some lines in a plotting area, decorates the plot with labels, etc. There is, however, a small difference: all the functions are translated into methods of the class `svg_cpp_plot::SVGPlot`. Each of these methods provides a functionality similar to their `matplotlib.pyplot` counterparts. The result of the diagrams can be saved into an svg file, which is easily converted to other formats. 
 
 The provided functionality is rather small, compared to the well stablished `matplotlib.pyplot`. While I am expanding it to fulfill my own needs, some very niche features will never ever be provided. However, the provided functionality seems to be enough (at least for my needs) given the fact that the resulting diagrams can easily be edited and tweaked afterwards, for instance with the vector drawing software [Inkscape](https://inkscape.org/).  
