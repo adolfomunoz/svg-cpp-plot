@@ -349,8 +349,9 @@ private:
 
 	void add_xlabel(_2d::Group& graph, const std::array<float,2> graph_size) const {
 		if (!xlabel().empty()) {
+            auto marg = margin();
 			graph.add(
-				_2d::text({0.5*graph_size[0],graph_size[1]+26},xlabel()))
+				_2d::text({0.5*(graph_size[0]-marg[0]-marg[1]),graph_size[1]+26-marg[2]-marg[3]},xlabel()))
 					.font_size(14)
 					.text_anchor(svg_cpp_plot::text_anchor_middle);
 		}
@@ -358,7 +359,8 @@ private:
 	
 	void add_ylabel(_2d::Group& graph, const std::array<float,2> graph_size) const {
 		if (!ylabel().empty()) {
-			graph.add(_2d::group(_2d::translate({-26,0.5*graph_size[1]})*_2d::rotate(-0.5*M_PI))).add(_2d::text({0,0},ylabel())).font_size(14).text_anchor(text_anchor_middle);
+            auto marg = margin();
+			graph.add(_2d::group(_2d::translate({-26,0.5*(graph_size[1]-marg[2]-marg[3])})*_2d::rotate(-0.5*M_PI))).add(_2d::text({0,0},ylabel())).font_size(14).text_anchor(text_anchor_middle);
 		}
 	}
 	
