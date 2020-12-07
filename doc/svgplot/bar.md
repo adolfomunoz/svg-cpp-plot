@@ -44,7 +44,7 @@ The code above also ilustrates the named parameter `width` that set ups the widt
 
 ##Combining several bars
 
-There are two main ways of combining different bars in the same diagram. The first option is to have side-by-side bars. In order to do so, the `width` of each of them must be obviosly smaller and you need to put each of them at different *x*-axis positions but at the same interval. For that purpose, the `arange(<start>,<stop>,<step>)` provides operators (`+`, `-`, `*`, `/`) with floating point numbers. All these can be seen in the following example: 
+There are several ways of combining different bars in the same diagram. The first option is to have side-by-side bars. In order to do so, the `width` of each of them must be obviosly smaller and you need to put each of them at different *x*-axis positions but at the same interval. For that purpose, the `arange(<start>,<stop>,<step>)` provides operators (`+`, `-`, `*`, `/`) with floating point numbers. All these can be seen in the following example: 
 
 ```cpp
 svg_cpp_plot::SVGPlot plt;
@@ -62,7 +62,7 @@ that generates
 <div style="text-align:center"><img 
  src="./bar/example3.svg" alt="example3" width="50%" /></div>
 
-The other option is to have *cumulative* bars. For that, the `bottom` named parameter (which in C++ is modeled as a method) can set different *y*-axis positions for the bottom of each bar, and hence can also be used to define where one of the bar stops and the other starts:
+Another option is to have *cumulative* bars. For that, the `bottom` named parameter (which in C++ is modeled as a method) can set different *y*-axis positions for the bottom of each bar, and hence can also be used to define where one of the bar stops and the other starts:
 
 ```cpp
 svg_cpp_plot::SVGPlot plt;
@@ -78,5 +78,47 @@ generating the following graph:
 
 <div style="text-align:center"><img 
  src="./bar/example4.svg" alt="example4" width="50%" /></div>
+ 
+The last proposed option is to used transparency, modeled by the named attribute `alpha`, which is used as follows:
+```cpp
+svg_cpp_plot::SVGPlot plt;
+std::list<float> v1,v2;;
+for (auto i : svg_cpp_plot::arange(50)) {
+    v1.push_back(std::exp(-(float(i)-12.5f)*(float(i)-12.5f)/100.0f));
+    v2.push_back(0.7*std::exp(-(float(i)-37.5f)*(float(i)-37.5f)/100.0f));            
+}
+plt.bar(svg_cpp_plot::arange(50),v1).width(1.0f).alpha(0.5f);
+plt.bar(svg_cpp_plot::arange(50),v2).width(1.0f).alpha(0.5f);
+plt.savefig("../doc/svgplot/bar/example5.svg");
+```
 
+and obtains 
+
+<div style="text-align:center"><img 
+ src="./bar/example5.svg" alt="example5" width="50%" /></div>
+ 
+##Formatting
+
+Bars can be formatted with different colors, taking advantage of the `color` named attribute (represented as a method). Colors are strings:
+- Single character strings represent basic colors (```r```  red, ```g```  green, ```b```  blue, ```c``` cyan, ```m``` magenta, ```y```  yellow, ```k```  black, ```w``` white)
+- Strings that start with a '#' symbol are considered to be hexadecimal url defined colors.
+- Otherwise, the color is considered to be one of the [SVG named colors](https://www.december.com/html/spec/colorsvgsvg.html).
+
+If only one color is set, then it affects all the bars, but also a single color can be applied to every single bar by passing a linear container of colors. If several colors are setup but there are more data bars, then it cycles through all the colors. All these options are illustrated in the following example:
+
+```cpp
+svg_cpp_plot::SVGPlot plt;
+std::vector<std::string> labels{"G1","G2","G3","G4"};
+std::vector<float> values{1,2,3,4};
+plt.subplot(1,4,0).bar(labels,values).color("#FF0000");
+plt.subplot(1,4,1).bar(labels,values).color({"r","b","y","g"});
+plt.subplot(1,4,2).bar(labels,values).color({"blue","magenta"});
+plt.savefig("../doc/svgplot/bar/example6.svg");
+```
+
+that yields the same bars with different coloring strategies:
+
+<div style="text-align:center"><img 
+ src="./bar/example6.svg" alt="example6" width="100%" /></div>
+ 
 

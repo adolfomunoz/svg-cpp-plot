@@ -46,4 +46,29 @@ int main(int argc, char** argv) {
         plt.xticks(svg_cpp_plot::arange(5));
 		plt.savefig("../doc/svgplot/bar/example4.svg");
 	}
+    
+    { // Example 5
+		svg_cpp_plot::SVGPlot plt;
+        std::list<float> v1,v2;;
+        for (auto i : svg_cpp_plot::arange(50)) {
+            v1.push_back(std::exp(-(float(i)-12.5f)*(float(i)-12.5f)/100.0f));
+            v2.push_back(0.7*std::exp(-(float(i)-37.5f)*(float(i)-37.5f)/100.0f));            
+        }
+        plt.bar(svg_cpp_plot::arange(50),v1).width(1.0f).alpha(0.5f);
+        plt.bar(svg_cpp_plot::arange(50),v2).width(1.0f).alpha(0.5f);
+		plt.savefig("../doc/svgplot/bar/example5.svg");
+	}
+    
+	{ // Example 6
+		svg_cpp_plot::SVGPlot plt;
+        std::vector<std::string> labels{"G1","G2","G3","G4"};
+        std::vector<float> values{1,2,3,4};
+        plt.subplot(1,4,0).bar(labels,values).color("#FF0000");
+        plt.subplot(1,4,1).bar(labels,values).color({"r","b","y","g"});
+        plt.subplot(1,4,2).bar(labels,values).color({"blue","magenta"});
+//        plt.subplot(1,4,3).bar(labels,values).color({svg_cpp_plot::hsv(0,1,1),svg_cpp_plot::hsv(0.5*M_PI,1,1),svg_cpp_plot::hsv(M_PI,1,1),svg_cpp_plot::hsv(1.5*M_PI,1,1)});
+		plt.savefig("../doc/svgplot/bar/example6.svg");
+	} 
+    
+
 }

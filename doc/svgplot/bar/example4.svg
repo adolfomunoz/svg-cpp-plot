@@ -3,19 +3,19 @@
 <g id="id0000000176" >
 <g clip-path="url(#id0000000176clipper)" style="pointer-events: all; " vector-effect="non-scaling-stroke" fill="none" class="area" id="id0000000177" >
 <g id="id0000000179" >
-<polygon points="36.3462,130 36.3462,105.962 61.7308,105.962 61.7308,130 " fill="#1f77b4" stroke-width="0.000000" id="id0000000180" class="rectangle" />
-<polygon points="68.0769,130 68.0769,81.9231 93.4615,81.9231 93.4615,130 " fill="#1f77b4" stroke-width="0.000000" id="id0000000181" class="rectangle" />
-<polygon points="99.8077,130 99.8077,57.8846 125.192,57.8846 125.192,130 " fill="#1f77b4" stroke-width="0.000000" id="id0000000182" class="rectangle" />
-<polygon points="131.538,130 131.538,81.9231 156.923,81.9231 156.923,130 " fill="#1f77b4" stroke-width="0.000000" id="id0000000183" class="rectangle" />
-<polygon points="163.269,130 163.269,105.962 188.654,105.962 188.654,130 " fill="#1f77b4" stroke-width="0.000000" id="id0000000184" class="rectangle" />
+<polygon points="36.3462,130 36.3462,105.962 61.7308,105.962 61.7308,130 " fill="#1f77b4" stroke-width="0.000000" id="id0000000180" fill-opacity="1.000000" class="rectangle" />
+<polygon points="68.0769,130 68.0769,81.9231 93.4615,81.9231 93.4615,130 " fill="#1f77b4" stroke-width="0.000000" id="id0000000181" fill-opacity="1.000000" class="rectangle" />
+<polygon points="99.8077,130 99.8077,57.8846 125.192,57.8846 125.192,130 " fill="#1f77b4" stroke-width="0.000000" id="id0000000182" fill-opacity="1.000000" class="rectangle" />
+<polygon points="131.538,130 131.538,81.9231 156.923,81.9231 156.923,130 " fill="#1f77b4" stroke-width="0.000000" id="id0000000183" fill-opacity="1.000000" class="rectangle" />
+<polygon points="163.269,130 163.269,105.962 188.654,105.962 188.654,130 " fill="#1f77b4" stroke-width="0.000000" id="id0000000184" fill-opacity="1.000000" class="rectangle" />
 </g>
 
 <g id="id0000000185" >
-<polygon points="36.3462,105.962 36.3462,57.8846 61.7308,57.8846 61.7308,105.962 " fill="#ff7f0e" stroke-width="0.000000" id="id0000000186" class="rectangle" />
-<polygon points="68.0769,81.9231 68.0769,57.8846 93.4615,57.8846 93.4615,81.9231 " fill="#ff7f0e" stroke-width="0.000000" id="id0000000187" class="rectangle" />
-<polygon points="99.8077,57.8846 99.8077,9.80769 125.192,9.80769 125.192,57.8846 " fill="#ff7f0e" stroke-width="0.000000" id="id0000000188" class="rectangle" />
-<polygon points="131.538,81.9231 131.538,57.8846 156.923,57.8846 156.923,81.9231 " fill="#ff7f0e" stroke-width="0.000000" id="id0000000189" class="rectangle" />
-<polygon points="163.269,105.962 163.269,57.8846 188.654,57.8846 188.654,105.962 " fill="#ff7f0e" stroke-width="0.000000" id="id0000000190" class="rectangle" />
+<polygon points="36.3462,105.962 36.3462,57.8846 61.7308,57.8846 61.7308,105.962 " fill="#ff7f0e" stroke-width="0.000000" id="id0000000186" fill-opacity="1.000000" class="rectangle" />
+<polygon points="68.0769,81.9231 68.0769,57.8846 93.4615,57.8846 93.4615,81.9231 " fill="#ff7f0e" stroke-width="0.000000" id="id0000000187" fill-opacity="1.000000" class="rectangle" />
+<polygon points="99.8077,57.8846 99.8077,9.80769 125.192,9.80769 125.192,57.8846 " fill="#ff7f0e" stroke-width="0.000000" id="id0000000188" fill-opacity="1.000000" class="rectangle" />
+<polygon points="131.538,81.9231 131.538,57.8846 156.923,57.8846 156.923,81.9231 " fill="#ff7f0e" stroke-width="0.000000" id="id0000000189" fill-opacity="1.000000" class="rectangle" />
+<polygon points="163.269,105.962 163.269,57.8846 188.654,57.8846 188.654,105.962 " fill="#ff7f0e" stroke-width="0.000000" id="id0000000190" fill-opacity="1.000000" class="rectangle" />
 </g>
 
 </g>

@@ -7,6 +7,7 @@
 #include "../../2d/transform.h"
 #include "../../2d/points.h"
 #include "../../2d/polyline.h"
+#include "color.h"
 
 namespace svg_cpp_plot {
 
@@ -15,9 +16,10 @@ class Bar : public Plottable  {
     std::vector<float> height_;
     std::vector<float> width_;
     std::vector<float> bottom_;
-	const Color* color_;
+    std::vector<std::shared_ptr<Color>> color_;
+    float alpha_;
 public:
-	Bar(const std::vector<float>& x, const std::vector<float>& height) : x_(x), height_(height), width_(1,0.8f), bottom_(1,0.0f), color_(nullptr) {}
+	Bar(const std::vector<float>& x, const std::vector<float>& height) : x_(x), height_(height), width_(1,0.8f), bottom_(1,0.0f), color_(1),alpha_(1) {}
 
     const std::vector<float>& x() const {
         return x_;
@@ -76,14 +78,24 @@ public:
     Bar& bottom(const Collection& c) {
         return bottom(std::vector<float>(c.begin(),c.end()));
     }
+    
+    Bar& alpha(float f) { alpha_=f; return *this; }
+    float alpha() const { return alpha_; }
 
-	Bar& color(const Color& c) { color_=&c; return *this; }
-	const Color& color() const { return color_?*color_:black; }
+
+    template<typename C>
+	Bar& color(const C& c) { color_=detail::color_vector(c); return *this; }
+	Bar& color(const std::vector<std::string>& c) { color_=detail::color_vector(c); return *this; }
+//	Bar& color(const std::vector<rgb>& c) { color_=detail::color_vector(c); return *this; }
+    
+	const Color& color(std::size_t index) const { 
+        return color_[index % color_.size()]?*color_[index % color_.size()]:black; 
+    }
 	
 	std::string to_string(const _2d::Matrix& m) const noexcept override {
         auto g = _2d::group();
         for (std::size_t i = 0; i<x().size(); ++i) 
-            g.add(_2d::rect({x(i)-0.5f*width(i),bottom(i)},{x(i)+0.5f*width(i),bottom(i)+height(i)})).stroke_width(0).fill(color());
+            g.add(_2d::rect({x(i)-0.5f*width(i),bottom(i)},{x(i)+0.5f*width(i),bottom(i)+height(i)})).stroke_width(0).fill(color(i)).fill_opacity(alpha());
         
         return g.to_string(m);   
 	}

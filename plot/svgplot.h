@@ -32,7 +32,7 @@ namespace { //Anonymous namespace, only visible from this .h
 		
 class SVGPlot {
 	std::array<float,2> figsize_; bool figsize_set;
-	std::vector<std::unique_ptr<Color>> cycle; std::size_t cycle_pos;
+	std::vector<std::shared_ptr<Color>> cycle; std::size_t cycle_pos;
 
 	std::string ylabel_, xlabel_, title_;
 	std::array<float,4> axis_; bool axis_set;
@@ -447,18 +447,7 @@ protected:
 	}
 public:
 	SVGPlot() :
-		figsize_set(false), cycle_pos(0), axis_set(false),xticklabels_set(false), xticks_set(false), yticklabels_set(false), yticks_set(false), nrows(-1), ncols(-1), parent(nullptr), target_xticks(5), target_yticks(5) {
-			cycle.push_back(std::make_unique<color_hex>("1f77b4"));
-			cycle.push_back(std::make_unique<color_hex>("ff7f0e"));
-			cycle.push_back(std::make_unique<color_hex>("2ca02c"));
-			cycle.push_back(std::make_unique<color_hex>("d62728"));
-			cycle.push_back(std::make_unique<color_hex>("9467bd"));
-			cycle.push_back(std::make_unique<color_hex>("8c564b"));
-			cycle.push_back(std::make_unique<color_hex>("e377c2"));
-			cycle.push_back(std::make_unique<color_hex>("7f7f7f"));
-			cycle.push_back(std::make_unique<color_hex>("bcbd22"));
-			cycle.push_back(std::make_unique<color_hex>("17becf"));
-		}
+		figsize_set(false), cycle(detail::color_vector({"#1f77b4","#ff7f0e","#2ca02c","#d62728","#9467bd","#8c564b","#e377c2","#7f7f7f","#bcbd22","#17becf"})), cycle_pos(0), axis_set(false),xticklabels_set(false), xticks_set(false), yticklabels_set(false), yticks_set(false), nrows(-1), ncols(-1), parent(nullptr), target_xticks(5), target_yticks(5) {	}
         
     /*******************************************************
      * SUBPLOT
@@ -571,28 +560,28 @@ public:
 	template<typename X, typename Y>
 	Plot& plot(const X& x, const Y& y, std::string_view fmt = "",
 		typename std::enable_if<std::is_floating_point<typename X::value_type>::value && std::is_floating_point<typename Y::value_type>::value, int>::type = 0) {
-			Color* color = nullptr;
+			std::shared_ptr<Color> color = nullptr;
 			std::string_view dashes = fmt;
 			if (fmt.size()>0) {
 				dashes = fmt.substr(1);
 				switch (fmt[0]) {
-					case 'r': color = &red;     break;
-					case 'g': color = &green;   break;
-					case 'b': color = &blue;    break;
-					case 'k': color = &black;   break;
-					case 'w': color = &white;   break;
-					case 'c': color = &cyan;    break;
-					case 'm': color = &magenta; break;
-					case 'y': color = &yellow;  break;
+					case 'r': color = std::make_shared<redColor>();     break;
+					case 'g': color = std::make_shared<greenColor>();   break;
+					case 'b': color = std::make_shared<blueColor>();    break;
+					case 'k': color = std::make_shared<blackColor>();   break;
+					case 'w': color = std::make_shared<whiteColor>();   break;
+					case 'c': color = std::make_shared<cyanColor>();    break;
+					case 'm': color = std::make_shared<magentaColor>(); break;
+					case 'y': color = std::make_shared<yellowColor>();  break;
 					default: dashes = fmt;
 				}
 			}
 			if (!color) {
-				color = cycle[cycle_pos].get();
+				color = cycle[cycle_pos];
 				cycle_pos = (cycle_pos + 1) % cycle.size();
 			}
             plottables.push_back(std::make_shared<Plot>(x,y));
-            return static_cast<Plot&>(*plottables.back()).color(*color).format(dashes);
+            return static_cast<Plot&>(*plottables.back()).color(color).format(dashes);
 	}
 	
 	template<typename X, typename Y>
@@ -634,10 +623,10 @@ public:
      *****************************************************/
 
     Bar& bar(const std::vector<float>& x, const std::vector<float>& height) {
-		auto color = cycle[cycle_pos].get();
+		auto color = cycle[cycle_pos];
 		cycle_pos = (cycle_pos + 1) % cycle.size();
         plottables.push_back(std::make_shared<Bar>(x,height));
-        return static_cast<Bar&>(*plottables.back()).color(*color);
+        return static_cast<Bar&>(*plottables.back()).color(color);
     }
     
     Bar& bar(const std::vector<std::string>& x, const std::vector<float>& height) {

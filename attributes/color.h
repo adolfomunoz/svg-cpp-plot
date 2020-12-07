@@ -53,6 +53,14 @@ rgb hsv(float h, float s, float v) {
 	}
 }
 
+//For weird names you only use ocassionaly
+class NamedColor : public Color {
+    std::string name;
+public:
+    NamedColor(const std::string_view& s) : name(s) {}
+    std::string to_string() const noexcept override { return name; }
+};
+
 #define NAMED_COLOR(c)  struct c ## Color : public Color { std::string to_string() const noexcept override { return std::string(#c); } } c;	
 
 NAMED_COLOR(red)

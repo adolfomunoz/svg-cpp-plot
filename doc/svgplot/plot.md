@@ -62,7 +62,7 @@ generating the following graph:
 ##Formatting
 
  There is also a great variety of formatting options that can be setup through formatting strings. Such strings are composed of:
-- A color represented by a letter (```r```  red, ```g```  green, ```b```  blue, ```y```  yellow, ```k```  black), although default colors are chosen for each of the plots if no color is specified.
+- A color represented by a letter (```r```  red, ```g```  green, ```b```  blue, ```c``` cyan, ```m``` magenta, ```y```  yellow, ```k```  black, ```w``` white), although default colors are chosen for each of the plots if no color is specified.
 - A style representation for lines and points (```-``` full line, ```--``` dashed line, ```-.``` chain line, ```..``` small dashed line,  ```o``` cicle marker, ```^``` triangle marker, ```s``` square marker, ```+``` sum marker, ```.``` point marker). By default plots are drawn with lines. 
  
 ```cpp

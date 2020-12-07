@@ -7,18 +7,20 @@
 #include "../../2d/transform.h"
 #include "../../2d/points.h"
 #include "../../2d/polyline.h"
+#include "color.h"
 
 namespace svg_cpp_plot {
 
 class Plot : public Plottable  {
     std::list<std::tuple<float,float>> data;
 	std::string format_; 
-	const Color* color_;
+	std::shared_ptr<Color> color_;
 	float linewidth_;
 	float markersize_;
+    float alpha_;
 public:
 	template<typename X, typename Y>
-	Plot(const X& x, const Y& y) : color_(nullptr),linewidth_(1),markersize_(1) {
+	Plot(const X& x, const Y& y) : color_(nullptr),linewidth_(1),markersize_(1),alpha_(1) {
 		auto ix = x.begin(); auto iy = y.begin();
 		for (;(ix != x.end()) && (iy != y.end());++ix,++iy)
 			data.push_back({*ix,*iy});
@@ -35,43 +37,46 @@ public:
 	float linewidth() const { return linewidth_; }
 	Plot& markersize(float f) { markersize_=f; return *this; }
 	float markersize() const { return markersize_; }
+    Plot& alpha(float f) { alpha_=f; return *this; }
+    float alpha() const { return alpha_; }
 
-	Plot& color(const Color& c) { color_=&c; return *this; }
+    template<typename C>
+	Plot& color(const C& c) { color_=detail::color(c); return *this; }
 	const Color& color() const { return color_?*color_:black; }
 	
 	std::string to_string(const _2d::Matrix& m) const noexcept override {
 		if (format() == "o")
 			return _2d::points(data).
-				set_symbol(_2d::circle({0,0},1.2*markersize()).stroke_width(0).fill(color())).to_string(m);
+				set_symbol(_2d::circle({0,0},1.2*markersize()).stroke_width(0).fill(color())).fill_opacity(alpha()).to_string(m);
 		else if (format() == ".")
 			return _2d::points(data).
-				set_symbol(_2d::circle({0,0},0.6*markersize()).stroke_width(0).fill(color())).to_string(m);
+				set_symbol(_2d::circle({0,0},0.6*markersize()).stroke_width(0).fill(color())).fill_opacity(alpha()).to_string(m);
 		else if (format() == ",")
 			return _2d::points(data).
-				set_symbol(_2d::circle({0,0},0.2*markersize()).stroke_width(0).fill(color())).to_string(m);
+				set_symbol(_2d::circle({0,0},0.2*markersize()).stroke_width(0).fill(color())).fill_opacity(alpha()).to_string(m);
 		else if (format() == "v")
 			return _2d::points(data).
-				set_symbol(_2d::triangle({0,1*markersize()},{1*markersize(),-1*markersize()},{-1*markersize(),-1*markersize()}).stroke_width(0).fill(color())).to_string(m);
+				set_symbol(_2d::triangle({0,1*markersize()},{1*markersize(),-1*markersize()},{-1*markersize(),-1*markersize()}).stroke_width(0).fill(color())).fill_opacity(alpha()).to_string(m);
 		else if (format() == "^")
 			return _2d::points(data).
-				set_symbol(_2d::triangle({0,-1*markersize()},{1*markersize(),1*markersize()},{-1*markersize(),1*markersize()}).stroke_width(0).fill(color())).to_string(m);
+				set_symbol(_2d::triangle({0,-1*markersize()},{1*markersize(),1*markersize()},{-1*markersize(),1*markersize()}).stroke_width(0).fill(color())).fill_opacity(alpha()).to_string(m);
 		else if (format() == "s")
 			return _2d::points(data).
-				set_symbol(_2d::rect({-1*markersize(),-1*markersize()},{1*markersize(),1*markersize()}).stroke_width(0).fill(color())).to_string(m);
+				set_symbol(_2d::rect({-1*markersize(),-1*markersize()},{1*markersize(),1*markersize()}).stroke_width(0).fill(color())).fill_opacity(alpha()).to_string(m);
 		else if (format() == "+")
 			return _2d::points(data).
-				set_symbol(_2d::plus({0,0},2*markersize()).stroke_width(0.5*markersize()).stroke(color())).to_string(m);
+				set_symbol(_2d::plus({0,0},2*markersize()).stroke_width(0.5*markersize()).stroke(color())).stroke_opacity(alpha()).to_string(m);
 		else if (format() == "P")
 			return _2d::points(data).
-				set_symbol(_2d::plus({0,0},2*markersize()).stroke_width(1*markersize()).stroke(color())).to_string(m);
+				set_symbol(_2d::plus({0,0},2*markersize()).stroke_width(1*markersize()).stroke(color())).stroke_opacity(alpha()).to_string(m);
 		else if (format() == "x")
 			return _2d::points(data).
-				set_symbol(_2d::times({0,0},2*markersize()).stroke_width(0.5*markersize()).stroke(color())).to_string(m);
+				set_symbol(_2d::times({0,0},2*markersize()).stroke_width(0.5*markersize()).stroke(color())).stroke_opacity(alpha()).to_string(m);
 		else if (format() == "X")
 			return _2d::points(data).
-				set_symbol(_2d::times({0,0},2*markersize()).stroke_width(1*markersize()).stroke(color())).to_string(m);
+				set_symbol(_2d::times({0,0},2*markersize()).stroke_width(1*markersize()).stroke(color())).stroke_opacity(alpha()).to_string(m);
 		else {
-			auto pl = _2d::polyline(data).stroke_width(this->linewidth()).stroke(this->color()).stroke_linecap(stroke_linecap_round);
+			auto pl = _2d::polyline(data).stroke_width(this->linewidth()).stroke(this->color()).stroke_linecap(stroke_linecap_round).stroke_opacity(alpha());
 			if (format() == "--") pl.stroke_dasharray({3,3});
 			else if	(format() == "-.") pl.stroke_dasharray({3,2,1,2});
 			else if (format()==":") pl.stroke_dasharray({1,2});
@@ -110,7 +115,8 @@ public:
 		for (Plot& p : (*this)) p.linewidth(f); 
 		return *this;
 	}
-	PlotGroup& color(const Color& c) {
+    template<typename C>
+	PlotGroup& color(const C& c) {
 		for (Plot& p : (*this)) p.color(c);  
 		return *this; 
 	}
