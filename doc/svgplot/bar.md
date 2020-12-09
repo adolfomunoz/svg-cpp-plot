@@ -110,9 +110,9 @@ If only one color is set, then it affects all the bars, but also a single color 
 svg_cpp_plot::SVGPlot plt;
 std::vector<std::string> labels{"G1","G2","G3","G4"};
 std::vector<float> values{1,2,3,4};
-plt.subplot(1,4,0).bar(labels,values).color("#FF0000");
-plt.subplot(1,4,1).bar(labels,values).color({"r","b","y","g"});
-plt.subplot(1,4,2).bar(labels,values).color({"blue","magenta"});
+plt.subplot(1,3,0).bar(labels,values).color("#FF0000");
+plt.subplot(1,3,1).bar(labels,values).color({"r","b","y","g"});
+plt.subplot(1,3,2).bar(labels,values).color({"blue","magenta"});
 plt.savefig("../doc/svgplot/bar/example6.svg");
 ```
 
@@ -121,4 +121,46 @@ that yields the same bars with different coloring strategies:
 <div style="text-align:center"><img 
  src="./bar/example6.svg" alt="example6" width="100%" /></div>
  
+##Horizontal bars
+
+In the same way that the `bar` method provides a way to generate **vertical** bar graphs, the `barh` method provides a way to generate **horizontal** graph bars, which works very similarly with minor changes:
+- The parameters correspond to the *y* positions and widths as opposed to *x* positions and heights (but in practice they are set up similarly.
+- The named parameter `height` becomes `width`, with a similar behavior.
+- The named parameter `bottom` becomes `left`, with a similar behavior.
+- The rest of named parameters is unchanged.
+
+The following example reproduces most of the above examples but with horizontal graph bars:
+
+```cpp
+svg_cpp_plot::SVGPlot plt;
+float height = 0.3;
+std::vector<float> a{1,2,3,2,1};
+std::vector<float> b{2,1,2,1,2};
+plt.subplot(2,3,0).barh(svg_cpp_plot::arange(5)-0.5*height,a).height(height);
+plt.subplot(2,3,0).barh(svg_cpp_plot::arange(5)+0.5*height,b).height(height);
+plt.subplot(2,3,0).yticks(svg_cpp_plot::arange(5));
+plt.subplot(2,3,1).barh(svg_cpp_plot::arange(5),a);
+plt.subplot(2,3,1).barh(svg_cpp_plot::arange(5),b).left(a);
+plt.subplot(2,3,1).yticks(svg_cpp_plot::arange(5));
+std::list<float> v1,v2;
+for (auto i : svg_cpp_plot::arange(50)) {
+    v1.push_back(std::exp(-(float(i)-12.5f)*(float(i)-12.5f)/100.0f));
+    v2.push_back(0.7*std::exp(-(float(i)-37.5f)*(float(i)-37.5f)/100.0f));            
+}
+plt.subplot(2,3,2).barh(svg_cpp_plot::arange(50),v1).height(1.0f).alpha(0.5f);
+plt.subplot(2,3,2).barh(svg_cpp_plot::arange(50),v2).height(1.0f).alpha(0.5f);
+
+std::vector<std::string> labels{"G1","G2","G3","G4"};
+std::vector<float> values{1,2,3,4};
+plt.subplot(2,3,3).barh(labels,values).color("#FF0000");
+plt.subplot(2,3,4).barh(labels,values).color({"r","b","y","g"});
+plt.subplot(2,3,5).barh(labels,values).color({"blue","magenta"});
+plt.savefig("../doc/svgplot/bar/example10.svg");
+```
+
+leading to the following output:
+
+<div style="text-align:center"><img 
+ src="./bar/example10.svg" alt="example10" width="100%" /></div>
+
 

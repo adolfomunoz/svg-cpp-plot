@@ -8,6 +8,7 @@
 #include "svgplot/plot.h"
 #include "svgplot/imshow.h"
 #include "svgplot/bar.h"
+#include "svgplot/barh.h"
 #include "../2d/point-list.h"
 #include "../2d/polyline.h"
 
@@ -654,6 +655,44 @@ public:
         else
             return bar(std::vector<std::string>(x.begin(),x.end()),std::vector<float>(height.begin(),height.end()));
     }
+    
+    /*****************************************************
+     * BARH
+     *****************************************************/
+    
+    BarH& barh(const std::vector<float>& y, const std::vector<float>& width) {
+		auto color = cycle[cycle_pos];
+		cycle_pos = (cycle_pos + 1) % cycle.size();
+        plottables.push_back(std::make_shared<BarH>(y,width));
+        return static_cast<BarH&>(*plottables.back()).color(color);
+    }
+    
+    BarH& barh(const std::vector<std::string>& y, const std::vector<float>& height) {
+        this->yticks(arange(y.size()),y);
+        return this->barh(arange(y.size()),height);
+    }
+    
+    template<typename C1>
+    BarH& barh(const C1& y, const std::vector<float>& width) {
+        if constexpr (std::is_arithmetic<typename std::decay<typename C1::value_type>::type>::value)
+            return barh(std::vector<float>(y.begin(),y.end()),width);
+        else
+            return barh(std::vector<std::string>(y.begin(),y.end()),width);
+    }
+    
+    template<typename C2>
+    BarH& barh(const std::vector<float>& y, const C2& width) {
+        return barh(y,std::vector<float>(width.begin(),width.end()));
+    }
+	
+    template<typename C1,typename C2>
+    BarH& barh(const C1& y, const C2& width) {
+        if constexpr (std::is_arithmetic<typename std::decay<typename C1::value_type>::type>::value)
+            return barh(std::vector<float>(y.begin(),y.end()),std::vector<float>(width.begin(),width.end()));
+        else
+            return barh(std::vector<std::string>(y.begin(),y.end()),std::vector<float>(width.begin(),width.end()));
+    }
+    
     
 	void savefig(const std::string& name) const {
 		std::ofstream f(name);

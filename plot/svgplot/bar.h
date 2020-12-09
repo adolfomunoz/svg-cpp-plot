@@ -101,7 +101,7 @@ public:
 	}
 
 	std::array<float,4> axis() const override {
-        std::array<float,4> ax{x(0)-0.75f*width(0),x(0)+0.75f*width(0),bottom(0)+1.1f*height(0)};
+        std::array<float,4> ax{x(0)-0.75f*width(0),x(0)+0.75f*width(0),bottom(0),bottom(0)+1.1f*height(0)};
         for (std::size_t i = 1; i<x().size(); ++i) {
             if ((x(i)-0.75f*width(i))<ax[0]) ax[0] = x(i)-0.75f*width(i);
             if ((x(i)+0.75f*width(i))>ax[1]) ax[1] = x(i)+0.75f*width(i);
