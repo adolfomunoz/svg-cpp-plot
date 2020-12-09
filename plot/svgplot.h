@@ -9,6 +9,7 @@
 #include "svgplot/imshow.h"
 #include "svgplot/bar.h"
 #include "svgplot/barh.h"
+#include "svgplot/hist.h"
 #include "../2d/point-list.h"
 #include "../2d/polyline.h"
 
@@ -70,34 +71,33 @@ class SVGPlot {
     
     unsigned long target_xticks, target_yticks;
 private:
-
-    std::array<float,4> yticks_margin() const {
+    std::array<float,4> yticks_margin(const std::array<float,4>& ax) const {
         if (subplots_.empty())
-            return (!yticklabels().empty())?
+            return (!yticklabels(ax).empty())?
                     std::array<float,4>{25,0,0,0}:
-                    ((!yticks().empty())?
+                    ((!yticks(ax).empty())?
                         std::array<float,4>{3,0,0,0}:
                         std::array<float,4>{0,0,0,0});
         else return std::array<float,4>{0,0,0,0};
     }
     
-    std::array<float,4> xticks_margin() const {
+    std::array<float,4> xticks_margin(const std::array<float,4>& ax) const {
         if (subplots_.empty())
-            return (!xticklabels().empty())?
+            return (!xticklabels(ax).empty())?
                     std::array<float,4>{0,0,0,15}:
-                    ((!xticks().empty())?
+                    ((!xticks(ax).empty())?
                         std::array<float,4>{0,0,0,3}:
                         std::array<float,4>{0,0,0,0});
         else return std::array<float,4>{0,0,0,0};
     }
     
-    std::array<float,4> ymargin() const {
-        return yticks_margin() +
+    std::array<float,4> ymargin(const std::array<float,4>& ax) const {
+        return yticks_margin(ax) +
             (ylabel().empty()?std::array<float,4>{0,0,0,0}:std::array<float,4>{40,0,0,0});
     }
 	
-    std::array<float,4> xmargin() const {
-        return xticks_margin() +
+    std::array<float,4> xmargin(const std::array<float,4>& ax) const {
+        return xticks_margin(ax) +
             (xlabel().empty()?std::array<float,4>{0,0,0,0}:std::array<float,4>{0,0,0,30});
     }
     
@@ -106,10 +106,15 @@ private:
          else return std::array<float,4>{subplots_adjust_.left(),subplots_adjust_.right(),subplots_adjust_.top(),subplots_adjust_.bottom()};
     }
     
-    std::array<float,4> margin() const {
-        return xmargin() + ymargin() + subplots_margin() + 
-            (title().empty()?std::array<float,4>{5,5,5,5}:std::array<float,4>{5,5,35,5});
+    std::array<float,4> title_margin() const {
+        return (title().empty()?std::array<float,4>{5,5,5,5}:std::array<float,4>{5,5,35,5});
+    }  
+    
+    std::array<float,4> margin(const std::array<float,4>& ax) const {
+        return xmargin(ax) + ymargin(ax) + subplots_margin() + title_margin();
     }
+    
+
     
     float subplots_xmax(int c) const {
         float x = 0;
@@ -134,7 +139,7 @@ public:
 	std::array<float,2> figsize() const { 
         if (figsize_set) return figsize_;
         else if ((nrows > 0) && (ncols > 0)) {
-            auto marg = margin();
+            auto marg = subplots_margin()+title_margin();
             float width = 0, height = 0;
             for (int r = 0; r<nrows; ++r) height += subplots_ymax(r);
             for (int c = 0; c<ncols; ++c) width += subplots_xmax(c);
@@ -253,11 +258,12 @@ public:
             return a;
 		}
 	}
-	
-	std::vector<float> xticks() const {
+
+private:	
+	std::vector<float> xticks(const std::array<float,4>& ax) const {
 		if (xticks_set) return xticks_;
 		else if (xticklabels_set) {
-			auto [xmin,xmax,d1,d2] = axis();
+			auto [xmin,xmax,d1,d2] = ax;
 			std::vector<float> sol(xticklabels_.size());
 			float dx = (xmax-xmin)/xticklabels_.size();
 			for (std::size_t i = 0;i<xticklabels_.size();++i)
@@ -265,7 +271,7 @@ public:
 			return sol;
 		} else {
 			const float target_ticks = float(target_xticks);
-			auto [xmin,xmax,d1,d2] = axis();
+			auto [xmin,xmax,d1,d2] = ax;
 			float tick_step = std::floor((xmax - xmin)/float(target_ticks));
 			int factor = 2;
 			while (tick_step<=0.0f) {
@@ -280,11 +286,15 @@ public:
 			return sol;
 		}
 	}
-	
-	std::vector<float> yticks() const {
+    
+public:   
+    std::vector<float> xticks() const { return xticks(axis()); }
+
+private:	
+	std::vector<float> yticks(const std::array<float,4>& ax) const {
 		if (yticks_set) return yticks_;
 		else if (yticklabels_set) {
-			auto [d1,d2,ymin,ymax] = axis();
+			auto [d1,d2,ymin,ymax] = ax;
 			std::vector<float> sol(yticklabels_.size());
 			float dy = (ymax-ymin)/yticklabels_.size();
 			for (std::size_t i = 0;i<yticklabels_.size();++i)
@@ -292,7 +302,7 @@ public:
 			return sol;
 		} else {
 			const float target_ticks = float(target_yticks);
-			auto [d1,d2,ymin,ymax] = axis();
+			auto [d1,d2,ymin,ymax] = ax;
 			float tick_step = std::floor((ymax - ymin)/float(target_ticks));
 			int factor = 2;
 			while (tick_step<=0.0f) {
@@ -307,11 +317,14 @@ public:
 			return sol;
 		}
 	}
+public:
+    std::vector<float> yticks() const { return yticks(axis()); }
 	
-	std::vector<std::string> xticklabels() const {
+private:
+	std::vector<std::string> xticklabels(const std::array<float,4>& ax) const {
 		if (xticklabels_set) return xticklabels_;
 		else {
-			std::vector<float> x = xticks();
+			std::vector<float> x = xticks(ax);
 			std::vector<std::string> sol(x.size());
 			for (std::size_t i = 0; i<x.size(); ++i) {
 				std::stringstream s; 
@@ -321,11 +334,14 @@ public:
 			return sol;
 		}
 	}
-	
-	std::vector<std::string> yticklabels() const {
+public:
+    std::vector<std::string> xticklabels() const { return xticklabels(axis()); }
+    
+private:	
+	std::vector<std::string> yticklabels(const std::array<float,4>& ax) const {
 		if (yticklabels_set) return yticklabels_;
 		else {
-			std::vector<float> y = yticks();
+			std::vector<float> y = yticks(ax);
 			std::vector<std::string> sol(y.size());
 			for (std::size_t i = 0; i<y.size(); ++i) {
 				std::stringstream s; 
@@ -335,12 +351,15 @@ public:
 			return sol;
 		}
 	}
+
+public:
+    std::vector<std::string> yticklabels() const { return yticklabels(axis()); }
 	
 
 private:
-	void add_title(_2d::Group& graph, const std::array<float,2> graph_size) const {
+	void add_title(_2d::Group& graph, const std::array<float,2> graph_size, const std::array<float,4>& local_axis) const {
 		if (!title().empty()) {
-            auto marg = margin();
+            auto marg = margin(local_axis);
 			graph.add(
 				_2d::text({0.5*(graph_size[0]-marg[0]-marg[1]),-10},title()))
 					.font_size(16)
@@ -348,9 +367,9 @@ private:
 		}
 	}
 
-	void add_xlabel(_2d::Group& graph, const std::array<float,2> graph_size) const {
+	void add_xlabel(_2d::Group& graph, const std::array<float,2> graph_size, const std::array<float,4>& local_axis) const {
 		if (!xlabel().empty()) {
-            auto marg = margin();
+            auto marg = margin(local_axis);
 			graph.add(
 				_2d::text({0.5*(graph_size[0]-marg[0]-marg[1]),graph_size[1]+26-marg[2]-marg[3]},xlabel()))
 					.font_size(14)
@@ -358,17 +377,17 @@ private:
 		}
 	}
 	
-	void add_ylabel(_2d::Group& graph, const std::array<float,2> graph_size) const {
+	void add_ylabel(_2d::Group& graph, const std::array<float,2> graph_size, const std::array<float,4>& local_axis) const {
 		if (!ylabel().empty()) {
-            auto marg = margin();
+            auto marg = margin(local_axis);
 			graph.add(_2d::group(_2d::translate({-26,0.5*(graph_size[1]-marg[2]-marg[3])})*_2d::rotate(-0.5*M_PI))).add(_2d::text({0,0},ylabel())).font_size(14).text_anchor(text_anchor_middle);
 		}
 	}
 	
 	void add_xticks(Graph2D& graph, const std::array<float,2> graph_size, const std::array<float,4>& local_axis) const {
-        auto marg = margin();
-		auto x = xticks();
-		auto labels = xticklabels();
+        auto marg = margin(local_axis);
+		auto x = xticks(local_axis);
+		auto labels = xticklabels(local_axis);
 		for (std::size_t i=0;i<x.size();++i) {
 			float global_x = (graph_size[0] - (marg[0]+marg[1]))*(x[i] - local_axis[0])/
 						(local_axis[1]-local_axis[0]);
@@ -387,9 +406,9 @@ private:
 	}
 	
 	void add_yticks(Graph2D& graph, const std::array<float,2> graph_size, const std::array<float,4>& local_axis) const {
-        auto marg = margin();
-		auto y = yticks();
-		auto labels = yticklabels();
+        auto marg = margin(local_axis);
+		auto y = yticks(local_axis);
+		auto labels = yticklabels(local_axis);
 		for (std::size_t i=0;i<y.size();++i) {
 			float global_y = graph_size[1] - (marg[2]+marg[3]) - (graph_size[1]-marg[2]-marg[3])*(y[i] - local_axis[2])/(local_axis[3]-local_axis[2]);
 			graph.add(_2d::line({-3,global_y},{0,global_y}))
@@ -403,8 +422,8 @@ private:
 public: 
 	_2d::Group graph() const {
 		std::array<float,2> graph_size = figsize();
-		auto marg = margin();
 		std::array<float,4> local_axis = axis();
+		auto marg = margin(local_axis);
        
         auto group = _2d::group(_2d::translate({marg[0],marg[2]}));
 		
@@ -430,9 +449,9 @@ public:
             graph.border().stroke_width(1).stroke(black);
             group.add(graph);
         }
-        add_xlabel(group, graph_size);
-        add_ylabel(group, graph_size);
-        add_title(group, graph_size); 
+        add_xlabel(group, graph_size, local_axis);
+        add_ylabel(group, graph_size, local_axis);
+        add_title(group, graph_size, local_axis); 
 		
 
 		return group;
@@ -693,6 +712,20 @@ public:
             return barh(std::vector<std::string>(y.begin(),y.end()),std::vector<float>(width.begin(),width.end()));
     }
     
+    /*****************************************************
+     * HIST
+     *****************************************************/
+    Hist& hist(const std::vector<float>& x) {
+		auto color = cycle[cycle_pos];
+		cycle_pos = (cycle_pos + 1) % cycle.size();
+        plottables.push_back(std::make_shared<Hist>(x));
+        return static_cast<Hist&>(*plottables.back()).color(color);
+    } 
+    
+    template<typename Collection>
+    Hist& hist(const Collection& x) {
+        return hist(std::vector<float>(x.begin(),x.end()));
+    } 
     
 	void savefig(const std::string& name) const {
 		std::ofstream f(name);
