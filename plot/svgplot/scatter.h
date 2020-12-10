@@ -1,0 +1,110 @@
+#pragma once
+
+#include <list>
+#include <tuple>
+#include <string>
+#include "plottable.h"
+#include "../../2d/transform.h"
+#include "../../2d/points.h"
+#include "../../2d/polyline.h"
+#include "color.h"
+
+namespace svg_cpp_plot {
+
+class Scatter : public Plottable  {
+    std::vector<std::tuple<float,float>> data;
+	std::vector<std::shared_ptr<Color>> color_;
+    std::vector<float> markersize_;
+	float linewidth_;
+    float alpha_;
+	std::string marker_; 
+    
+public:
+	template<typename X, typename Y>
+	Scatter(const X& x, const Y& y) : markersize_(1,1),alpha_(1) {
+		auto ix = x.begin(); auto iy = y.begin();
+		for (;(ix != x.end()) && (iy != y.end());++ix,++iy)
+			data.push_back({*ix,*iy});
+	}
+	
+	Scatter& marker(std::string_view f) { marker_=f; return *this; }
+	std::string_view marker() const { return marker_; }
+	Scatter& s(float f) { markersize_=std::vector<float>(1,f); return *this; }
+	Scatter& s(const std::vector<float>& f) { markersize_=f; return *this; }
+    
+    template<typename C>
+	Scatter& c(const C& c) { color_=detail::color_vector(c); return *this; }
+	Scatter& c(const std::vector<std::string>& c) { color_=detail::color_vector(c); return *this; }
+//	Scatter& color(const std::vector<rgb>& c) { color_=detail::color_vector(c); return *this; }
+   
+private:
+	float markersize(int i) const { 
+        return markersize_[i%markersize_.size()]; 
+    }
+    
+public:
+    Scatter& alpha(float f) { alpha_=f; return *this; }
+    float alpha() const { return alpha_; }
+
+    template<typename C>
+	Scatter& color(const C& c) { color_=detail::color(c); return *this; }
+	const Color& color() const { return color_?*color_:black; }
+	
+	std::string to_string(const _2d::Matrix& m) const noexcept override {
+		if (format() == "o")
+			return _2d::points(data).
+				set_symbol(_2d::circle({0,0},1.2*markersize()).stroke_width(0).fill(color())).fill_opacity(alpha()).to_string(m);
+		else if (format() == ".")
+			return _2d::points(data).
+				set_symbol(_2d::circle({0,0},0.6*markersize()).stroke_width(0).fill(color())).fill_opacity(alpha()).to_string(m);
+		else if (format() == ",")
+			return _2d::points(data).
+				set_symbol(_2d::circle({0,0},0.2*markersize()).stroke_width(0).fill(color())).fill_opacity(alpha()).to_string(m);
+		else if (format() == "v")
+			return _2d::points(data).
+				set_symbol(_2d::triangle({0,1*markersize()},{1*markersize(),-1*markersize()},{-1*markersize(),-1*markersize()}).stroke_width(0).fill(color())).fill_opacity(alpha()).to_string(m);
+		else if (format() == "^")
+			return _2d::points(data).
+				set_symbol(_2d::triangle({0,-1*markersize()},{1*markersize(),1*markersize()},{-1*markersize(),1*markersize()}).stroke_width(0).fill(color())).fill_opacity(alpha()).to_string(m);
+		else if (format() == "s")
+			return _2d::points(data).
+				set_symbol(_2d::rect({-1*markersize(),-1*markersize()},{1*markersize(),1*markersize()}).stroke_width(0).fill(color())).fill_opacity(alpha()).to_string(m);
+		else if (format() == "+")
+			return _2d::points(data).
+				set_symbol(_2d::plus({0,0},2*markersize()).stroke_width(0.5*markersize()).stroke(color())).stroke_opacity(alpha()).to_string(m);
+		else if (format() == "P")
+			return _2d::points(data).
+				set_symbol(_2d::plus({0,0},2*markersize()).stroke_width(1*markersize()).stroke(color())).stroke_opacity(alpha()).to_string(m);
+		else if (format() == "x")
+			return _2d::points(data).
+				set_symbol(_2d::times({0,0},2*markersize()).stroke_width(0.5*markersize()).stroke(color())).stroke_opacity(alpha()).to_string(m);
+		else if (format() == "X")
+			return _2d::points(data).
+				set_symbol(_2d::times({0,0},2*markersize()).stroke_width(1*markersize()).stroke(color())).stroke_opacity(alpha()).to_string(m);
+		else {
+			auto pl = _2d::polyline(data).stroke_width(this->linewidth()).stroke(this->color()).stroke_linecap(stroke_linecap_round).stroke_opacity(alpha());
+			if (format() == "--") pl.stroke_dasharray({3,3});
+			else if	(format() == "-.") pl.stroke_dasharray({3,2,1,2});
+			else if (format()==":") pl.stroke_dasharray({1,2});
+			
+			return pl.to_string(m);
+		}
+	}
+    
+    std::array<float,4> axis() const override {
+        std::array<float,4> ax{std::get<0>(data.front()),std::get<0>(data.front()),std::get<1>(data.front()),std::get<1>(data.front())};
+        for (auto [x,y] : data) {
+            if (x < ax[0]) ax[0] = x;
+            if (x > ax[1]) ax[1] = x;
+            if (y < ax[2]) ax[2] = y;
+            if (y > ax[3]) ax[3] = y;
+        }
+		float dx = (ax[1]-ax[0])/32.0f;
+		float dy = (ax[3]-ax[2])/32.0f;
+        ax[0]-=dx; ax[1]+=dx; ax[2]-=dy; ax[3]+=dy;
+
+        return ax;
+	}
+};
+	
+}

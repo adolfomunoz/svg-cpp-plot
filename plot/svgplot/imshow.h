@@ -5,6 +5,7 @@
 #include <string>
 #include "plottable.h"
 #include "../../2d/function-2d.h"
+#include "cmap.h"
 
 namespace svg_cpp_plot {
     
@@ -56,70 +57,9 @@ public:
         return axis();
     }
     
-    
-protected:
-    _2d::color_map colormap() const {
-        _2d::color_map cm = _2d::color_map_viridis(vmin(),vmax());
-		if (cmap() == "magma") 
-			cm = _2d::color_map_magma(vmin(),vmax());
-		else if (cmap() == "grayscale") 
-			cm = _2d::color_map_grayscale(vmin(),vmax());
-		else if (cmap() == "inferno") 
-			cm = _2d::color_map_inferno(vmin(),vmax());
-		else if (cmap() == "plasma") 
-			cm = _2d::color_map_plasma(vmin(),vmax());
-		else if (cmap() == "bwr") 
-			cm = _2d::color_map_bwr(vmin(),vmax());
-		else if (cmap() == "seismic") 
-			cm = _2d::color_map_seismic(vmin(),vmax());
-		else if (cmap() == "coolwarm") 
-			cm = _2d::color_map_coolwarm(vmin(),vmax());
-		else if (cmap() == "Spectral") 
-			cm = _2d::color_map_spectral(vmin(),vmax());
-		else if (cmap() == "PiYG") 
-			cm = _2d::color_map_piyg(vmin(),vmax());
-        return cm;
-    }
 };
 
-namespace {
-    float vmax_element(float f) { return f; }
-    float vmin_element(float f) { return f; }
-    float vmax_element(const std::tuple<float,float,float>& f) { return std::max(std::get<0>(f),std::max(std::get<1>(f),std::get<2>(f))); }
-    float vmin_element(const std::tuple<float,float,float>& f) { return std::min(std::get<0>(f),std::min(std::get<1>(f),std::get<2>(f))); }  
-    float vmax_element(const std::tuple<float,float,float,float>& f) { return std::max(std::get<3>(f),std::max(std::get<0>(f),std::max(std::get<1>(f),std::get<2>(f)))); }
-    float vmin_element(const std::tuple<float,float,float,float>& f) { return std::min(std::get<3>(f),std::min(std::get<0>(f),std::min(std::get<1>(f),std::get<2>(f)))); } 
 
-    template<typename R>
-    void set_rectangle(R& rect, const _2d::color_map& cm, float v) noexcept {
-        rect.fill(rgb(cm(v)));
-    }
-    
-    template<typename R>
-    void set_rectangle(R& rect, const _2d::color_map& cm, const std::tuple<float,float,float>& v) noexcept {
-        rect.fill(rgb(v));
-    }
-   
-    template<typename R>
-    void set_rectangle(R& rect, const _2d::color_map& cm, const std::tuple<float,float,float,float>& v) noexcept {
-        rect.fill(rgb(std::get<0>(v),std::get<1>(v),std::get<2>(v))).opacity(std::get<3>(v));
-    }   
-
-    
-    std::tuple<float,float,float> color_of(float f, const _2d::color_map& cm) noexcept {
-        return cm(f);
-    }
-    
-    std::tuple<float,float,float> color_of(const std::tuple<float,float,float>& f, const _2d::color_map& cm) noexcept {
-        return f;
-    }
-      
-    //TODO: Transparency
-    std::tuple<float,float,float> color_of(const std::tuple<float,float,float,float>& f, const _2d::color_map& cm) noexcept {
-        return std::tuple(std::get<0>(f),std::get<1>(f),std::get<2>(f));
-    }
- 
-};
 
 template<typename T>
 class ImShowType : public ImShow {
@@ -130,18 +70,18 @@ public:
     ImShowType(std::vector<std::vector<T>>& data) : data(std::forward<std::vector<std::vector<T>>>(data)) {}
 protected:
     float calculated_vmin() const override {
-        float temp_vmin = vmin_element(data[0][0]);
+        float temp_vmin = detail::vmin_element(data[0][0]);
         for (const auto& row : data) for (const auto& value : row) {
-            float v = vmin_element(value);
+            float v = detail::vmin_element(value);
             if (v < temp_vmin) temp_vmin = v;
         }
         return temp_vmin;       
     }
     
     float calculated_vmax() const override {
-        float temp_vmax = vmax_element(data[0][0]);
+        float temp_vmax = detail::vmax_element(data[0][0]);
         for (const auto& row : data) for (const auto& value : row) {
-            float v = vmax_element(value);
+            float v = detail::vmax_element(value);
             if (v > temp_vmax) temp_vmax = v;
         }
         return temp_vmax;         
@@ -155,12 +95,13 @@ public:
     
 private:
     _2d::Group nearest() const noexcept {
-        auto cm = this->colormap();
+        auto ax = axis();
+        auto cm = detail::colormap(cmap(),vmin(),vmax());
         auto image = _2d::group();
         const float border_expansion=0;
 		image.stroke_width(0);
-        std::tuple<float,float> xmin{axis()[0],axis()[2]};
-        std::tuple<float,float> xmax{axis()[1],axis()[3]};
+        std::tuple<float,float> xmin{ax[0],ax[2]};
+        std::tuple<float,float> xmax{ax[1],ax[3]};
         auto nsamples = size();
 		float dx = (std::get<0>(xmax)-std::get<0>(xmin))/float(std::get<0>(nsamples));
 		float dy = (std::get<1>(xmax)-std::get<1>(xmin))/float(std::get<1>(nsamples));
@@ -171,7 +112,7 @@ private:
         for (const auto& row : data) {
             x = std::get<0>(xmin);
             for (const auto& v : row) {
-                set_rectangle(image.add(_2d::rect({x-eps,y-eps},{x+dx+eps,y+dy+eps})).stroke_width(0),cm,v);
+                detail::set_color(image.add(_2d::rect({x-eps,y-eps},{x+dx+eps,y+dy+eps})).stroke_width(0),cm,v);
                 x+=dx;
             }
             y+=dy;
@@ -181,14 +122,15 @@ private:
     }
     
     auto interpolated() const noexcept {
-        auto cm = this->colormap();
+        auto ax = axis();
+        auto cm = detail::colormap(cmap(),vmin(),vmax());
         auto nsamples = size();
 		PNG png(std::get<0>(nsamples),std::get<1>(nsamples));
 		unsigned int i, j = 0;
         for (const auto& row : data) {
             i=0;
             for (const auto& v : row) {
-                png.set_pixel(i,j,color_of(v,cm)); ++i; 
+                png.set_pixel(i,j,detail::color_of(v,cm)); ++i; 
             }
             ++j;
         }
@@ -198,8 +140,8 @@ private:
 		std::vector<uint8_t> contents((std::istreambuf_iterator<char>(stream)), std::istreambuf_iterator<char>());
 		std::stringstream ss;
 		ss << "data:image/png;base64,"<<base64_encode(contents.data(),contents.size());
-        std::tuple<float,float> xmin{axis()[0],axis()[2]};
-        std::tuple<float,float> xmax{axis()[1],axis()[3]};
+        std::tuple<float,float> xmin{ax[0],ax[2]};
+        std::tuple<float,float> xmax{ax[1],ax[3]};
 		Image image(ss.str()); image.rect(xmin,xmax).preserveAspectRatio(preserve_aspect_ratio_none);
         return _2d::primitive(image);
     }
