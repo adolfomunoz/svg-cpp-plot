@@ -73,6 +73,17 @@ int main(int argc, char** argv) {
         plt.savefig("../doc/svgplot/hist/example7.svg");
 	}
     
+	{ // Example 8
+        std::random_device rd{};
+        std::mt19937 gen{rd()};
+        std::normal_distribution<> d1{5,2}, d2{-2,4};
+        std::list<float> samples1, samples2;
+        for (int n=0;n<1000;++n) { samples1.push_back(d1(gen)); samples2.push_back(d2(gen)); }
+        svg_cpp_plot::SVGPlot plt;
+        plt.hist(samples1).range({-10,10}).bins(20).color("blue").alpha(0.5);
+        plt.hist(samples2).range({-10,10}).bins(20).color("#CC00AA").alpha(0.5);
+        plt.savefig("../doc/svgplot/hist/example8.svg");
+	}
 
     
 

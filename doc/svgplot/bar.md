@@ -42,7 +42,7 @@ The code above also ilustrates the named parameter `width` that set ups the widt
 <div style="text-align:center"><img 
  src="./bar/example2.svg" alt="example2" width="50%" /></div>
 
-##Combining several bars
+## Combining several bars
 
 There are several ways of combining different bars in the same diagram. The first option is to have side-by-side bars. In order to do so, the `width` of each of them must be obviosly smaller and you need to put each of them at different *x*-axis positions but at the same interval. For that purpose, the `arange(<start>,<stop>,<step>)` provides operators (`+`, `-`, `*`, `/`) with floating point numbers. All these can be seen in the following example: 
 
@@ -97,7 +97,7 @@ and obtains
 <div style="text-align:center"><img 
  src="./bar/example5.svg" alt="example5" width="50%" /></div>
  
-##Formatting
+## Formatting
 
 Bars can be formatted with different colors, taking advantage of the `color` named attribute (represented as a method). Colors are strings:
 - Single character strings represent basic colors (```r```  red, ```g```  green, ```b```  blue, ```c``` cyan, ```m``` magenta, ```y```  yellow, ```k```  black, ```w``` white)
@@ -121,7 +121,7 @@ that yields the same bars with different coloring strategies:
 <div style="text-align:center"><img 
  src="./bar/example6.svg" alt="example6" width="100%" /></div>
  
-##Horizontal bars
+## Horizontal bars
 
 In the same way that the `bar` method provides a way to generate **vertical** bar graphs, the `barh` method provides a way to generate **horizontal** graph bars, which works very similarly with minor changes:
 - The parameters correspond to the *y* positions and widths as opposed to *x* positions and heights (but in practice they are set up similarly.

@@ -85,7 +85,7 @@ public:
     
 private:
     float weight_(int i) const {
-        return weights_[i%weights_.size()];
+        return ((i<0) || (i>=int(weights_.size())))?1.0f:weights_[i];
     }
     
 public:
@@ -110,12 +110,14 @@ public:
             if ((x_[ix] >= bin(bins_size()-1)) && (x_[ix] <= bin(bins_size())))
                     hist[bins_size()-1]+=weight_(ix);
         }
-        if (density_) for (auto& h : hist) h/=w;
+        if (density_) { //We need to account for the size of the bin as well
+            for (std::size_t ib = 0; ib<bins_size(); ++ib) 
+                hist[ib] /= w*(bin(ib+1)-bin(ib));
+        }
         if (cumulative_) {
             float c = 0.0f;
-            for (auto& h : hist) {
-                c += h; h = c;
-            }
+            for (auto& h : hist) { c += h; h = c;  }
+            if (density_) for (auto& h : hist) h /= hist[bins_size()-1]; 
         }
         return hist;
     }
