@@ -31,9 +31,10 @@ class Hist : public Plottable  {
     float alpha_;
 public:
 	Hist(const std::vector<float>& x) : x_(x), bins_value(10), bins_set(false),weights_(1,1.0f), range_set(false),density_(false),cumulative_(false),orientation_(Orientation::vertical),histtype_(HistType::bar),alpha_(1) {}
-
+     
     std::tuple<float,float> range() const {
         if (range_set) return range_;
+        else if (bins_set) return std::tuple<float,float>(bins_.front(),bins_.back());
         else return std::tuple<float,float>(*std::min_element(x_.begin(),x_.end()),*std::max_element(x_.begin(),x_.end()));
     }
     
@@ -41,6 +42,25 @@ public:
         range_=r; range_set=true; return *this;
     }
     
+    Hist& weights(const std::vector<float>& w) { 
+        weights_=w; return *this; 
+    }
+    
+private:       
+    std::size_t bins_size() const {
+        if (bins_set) return bins_.size()-1;
+        else return bins_value;
+    }
+
+    float bin(std::size_t i) const {
+        if (bins_set) return bins_[i];
+        else {
+            auto [xmin,xmax] = range();
+            return xmin+float(i)*(xmax-xmin)/float(bins_size());
+        }
+    }
+    
+public:
     Hist& orientation(const Orientation& o) {
         orientation_ = o; return *this;
     }
@@ -59,27 +79,21 @@ public:
         else return this->histtype(HistType::step);
     }
     
-    std::size_t bins_size() const {
-        if (bins_set) return bins_.size()-1;
-        else return bins_value;
-    }
+
     
-    float bin(std::size_t i) const {
-        if (bins_set) return bins_[i];
-        else {
-            auto [xmin,xmax] = range();
-            return xmin+float(i)*(xmax-xmin)/float(bins_size());
-        }
-    }
     
-    float weight(int i) const {
+    
+private:
+    float weight_(int i) const {
         return weights_[i%weights_.size()];
     }
     
+public:
     Hist& density(bool b = true) { density_ = b; return *this;}
     Hist& cumulative(bool c = true) { cumulative_=c; return *this; }
     
     Hist& bins(std::size_t b) { bins_value=b; return *this;}
+    Hist& bins(int b) { return bins(std::size_t(b)); }
     Hist& bins(const std::vector<float>& b) { bins_=b; bins_set=true; return *this; }
     template<typename Collection>
     Hist& bins(const Collection& c) { return bins(std::vector<float>(c.begin(),c.end())); }
@@ -88,11 +102,13 @@ public:
         std::vector<float> hist(bins_size(),0.0f);
         float w = 0.0f;
         for (std::size_t ix=0; ix<x_.size(); ++ix) {
-            w += weight(ix);
-            for (std::size_t ib = 0; ib<bins_size(); ++ib) {
+            w += weight_(ix);
+            for (std::size_t ib = 0; ib<(bins_size()-1); ++ib) {
                 if ((x_[ix] >= bin(ib)) && (x_[ix] < bin(ib+1)))
-                    hist[ib]+=weight(ix);
+                    hist[ib]+=weight_(ix);
             }
+            if ((x_[ix] >= bin(bins_size()-1)) && (x_[ix] <= bin(bins_size())))
+                    hist[bins_size()-1]+=weight_(ix);
         }
         if (density_) for (auto& h : hist) h/=w;
         if (cumulative_) {
