@@ -36,6 +36,5 @@
 #include "2d/function-2d.h"
 #include "2d/bar-plot.h"
 
-#include "plot/graph-2d.h"
 #include "plot/svgplot.h"
 

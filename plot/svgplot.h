@@ -3,18 +3,22 @@
 #include <list>
 #include <tuple>
 #include <memory>
+#include "../2d/transform.h"
+#include "../2d/polygon.h"
+#include "../2d/point-list.h"
+#include "../2d/polyline.h"
+#include "../2d/text.h"
+#include "../attributes/style.h"
 #include "svgplot/arange.h"
-#include "graph-2d.h"
 #include "svgplot/plot.h"
 #include "svgplot/imshow.h"
 #include "svgplot/bar.h"
 #include "svgplot/barh.h"
 #include "svgplot/hist.h"
-#include "../2d/point-list.h"
-#include "../2d/polyline.h"
 
 namespace svg_cpp_plot {
-	
+    
+using _2d::operator*;
 namespace { //Anonymous namespace, only visible from this .h
 	template<std::size_t N>
 	std::array<float,N>& operator+=(std::array<float,N>& a, const std::array<float,N>& b) {
@@ -384,7 +388,7 @@ private:
 		}
 	}
 	
-	void add_xticks(Graph2D& graph, const std::array<float,2> graph_size, const std::array<float,4>& local_axis) const {
+	void add_xticks(_2d::Group& graph, const std::array<float,2> graph_size, const std::array<float,4>& local_axis) const {
         auto marg = margin(local_axis);
 		auto x = xticks(local_axis);
 		auto labels = xticklabels(local_axis);
@@ -405,7 +409,7 @@ private:
 		}
 	}
 	
-	void add_yticks(Graph2D& graph, const std::array<float,2> graph_size, const std::array<float,4>& local_axis) const {
+	void add_yticks(_2d::Group& graph, const std::array<float,2> graph_size, const std::array<float,4>& local_axis) const {
         auto marg = margin(local_axis);
 		auto y = yticks(local_axis);
 		auto labels = yticklabels(local_axis);
@@ -441,13 +445,17 @@ public:
                 ypos+=subplots_ymax(r)+subplots_adjust_.hspace();    
             }
         } else {
-            Graph2D graph({graph_size[0] - (marg[1]+marg[0]),graph_size[1] -(marg[3]+marg[2])},BoundingBox(local_axis[0],local_axis[2],local_axis[1],local_axis[3]));
-            for (const auto& p : plottables) graph.area().add_ptr(p);
+            std::tuple<float,float> area_size(graph_size[0] - (marg[1]+marg[0]),graph_size[1] - (marg[2]+marg[3]));
+            group.add(_2d::clip_path()).id(group.id()+"clipper").add(_2d::rect({0,0},area_size));
+            auto& area = group.add(_2d::group(
+                _2d::scale(std::get<0>(area_size)/(local_axis[1]-local_axis[0]),-std::get<1>(area_size)/(local_axis[3]-local_axis[2]))*
+                _2d::translate(-local_axis[0],-local_axis[3])));
+            area.set("clip-path",std::string("url(#")+group.id()+"clipper)");
+            group.add(_2d::rect({0,0},area_size)).fill(none).stroke_width(1).stroke(black).pointer_events(pointer_events_none);
+            for (const auto& p : plottables) area.add_ptr(p);
 		
-            add_xticks(graph, graph_size, local_axis);
-            add_yticks(graph, graph_size, local_axis);
-            graph.border().stroke_width(1).stroke(black);
-            group.add(graph);
+            add_xticks(group, graph_size, local_axis);
+            add_yticks(group, graph_size, local_axis);
         }
         add_xlabel(group, graph_size, local_axis);
         add_ylabel(group, graph_size, local_axis);
