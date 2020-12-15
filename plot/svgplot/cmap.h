@@ -38,6 +38,13 @@ namespace detail {
         return std::tuple(std::get<0>(f),std::get<1>(f),std::get<2>(f));
     }
     
+    template<typename T>
+    float opacity_of(const T& t, const _2d::color_map& cm) noexcept { return 1; }
+    
+    float opacity_of(const std::tuple<float,float,float,float>& f, const _2d::color_map& cm) noexcept { 
+        return std::get<3>(f); 
+    }
+    
     _2d::color_map colormap(std::string_view cmap, float vmin, float vmax) {
         _2d::color_map cm = _2d::color_map_viridis(vmin,vmax);
 		if (cmap == "magma") 

@@ -67,7 +67,7 @@ class ImShowType : public ImShow {
 
 public:
     ImShowType(const std::vector<std::vector<T>>& data) : data(data) {}
-    ImShowType(std::vector<std::vector<T>>& data) : data(std::forward<std::vector<std::vector<T>>>(data)) {}
+    ImShowType(std::vector<std::vector<T>>&& data) : data(std::forward<std::vector<std::vector<T>>>(data)) {}
 protected:
     float calculated_vmin() const override {
         float temp_vmin = detail::vmin_element(data[0][0]);

@@ -16,7 +16,7 @@ public:
 		std::stringstream sstr;
 		sstr<<"M "<<x<<" "<<y<<" ";
 		set("d",sstr.str());
-		fill(none); 
+		//fill(none); 
 	}
 
 	std::tuple<float, float> first_point() const {

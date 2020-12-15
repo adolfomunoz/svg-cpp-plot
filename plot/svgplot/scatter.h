@@ -10,32 +10,150 @@
 #include "color.h"
 
 namespace svg_cpp_plot {
+    
+using _2d::operator*;
+    
+class ScatterColor {
+    std::string cmap_;
+	float vmin_, vmax_; bool vmin_set, vmax_set;
+
+protected:
+    virtual float calculated_vmin() const = 0;
+    virtual float calculated_vmax() const = 0;
+
+public:   
+    ScatterColor() : vmin_set(false), vmax_set(false) {}
+	ScatterColor& vmin(float f)  { vmin_=f; vmin_set=true; return (*this);}
+	ScatterColor& vmax(float f)  { vmax_=f; vmax_set=true; return (*this);}
+
+ 	float vmin() const {
+		if (vmin_set) return vmin_;
+        else return calculated_vmin();
+    }
+    
+ 	float vmax() const {
+		if (vmax_set) return vmax_;
+        else return calculated_vmax();
+    }
+   
+	ScatterColor& cmap(std::string_view s) { cmap_=s; return *this; }
+	std::string_view cmap() const { return cmap_; }
+    
+    virtual std::shared_ptr<Color> color(int i) const = 0;
+    virtual float opacity(int i) const = 0;
+};
+
+class ScatterColorConstant : public ScatterColor {
+    std::shared_ptr<Color> color_; 
+public:
+    ScatterColorConstant(const std::shared_ptr<Color>& color) :
+        color_(color) { }
+    float calculated_vmin() const override { return 0; }
+    float calculated_vmax() const override { return 1; }
+    std::shared_ptr<Color> color(int i) const override { return color_; }
+    float opacity(int i) const override { return 1.0f; }
+};
+
+
+template<typename T>
+class ScatterColorType : public ScatterColor {
+    std::vector<T> data;
+
+public:
+    ScatterColorType(const std::vector<T>& data) : data(data) {}
+    ScatterColorType(std::vector<T>&& data) : data(std::forward<std::vector<T>>(data)) {}
+protected:
+    float calculated_vmin() const override {
+        float temp_vmin = detail::vmin_element(data[0]);
+        for (const auto& value : data) {
+            float v = detail::vmin_element(value);
+            if (v < temp_vmin) temp_vmin = v;
+        }
+        return temp_vmin;       
+    }
+    
+    float calculated_vmax() const override {
+        float temp_vmax = detail::vmax_element(data[0]);
+        for (const auto& value : data) {
+            float v = detail::vmax_element(value);
+            if (v > temp_vmax) temp_vmax = v;
+        }
+        return temp_vmax;         
+    }
+public:
+    std::shared_ptr<Color> color(int i) const override {
+        auto [r,g,b] = detail::color_of(data[i%data.size()],detail::colormap(cmap(),vmin(),vmax()));
+        return std::make_shared<rgb>(r,g,b);
+    }
+    
+    float opacity(int i) const override {
+        return detail::opacity_of(data[i%data.size()],detail::colormap(cmap(),vmin(),vmax()));
+    }
+};
 
 class Scatter : public Plottable  {
     std::vector<std::tuple<float,float>> data;
-	std::vector<std::shared_ptr<Color>> color_;
+    std::unique_ptr<ScatterColor> scatter_color;
     std::vector<float> markersize_;
-	float linewidth_;
+    std::shared_ptr<_2d::Element> marker_;
+    bool border_based_marker_;
     float alpha_;
-	std::string marker_; 
+   
     
 public:
+    template<typename T>
+	Scatter& marker(const T& t, bool border_based_marker = false,
+		std::enable_if_t<std::is_base_of_v<_2d::Element,T>,int> dummy = 0) {
+		border_based_marker_ = border_based_marker;
+		marker_ = std::make_shared<T>(t);
+		return (*this);
+	}
+	
+	Scatter& marker(const std::shared_ptr<_2d::Element>& t, bool border_based_marker = false) {
+		marker_ = t;
+		border_based_marker_ = border_based_marker;
+		return (*this);
+	}
+
+	Scatter& marker(std::string_view f) { 
+		if (f == "o") return marker(_2d::circle({0,0},1.2));
+        else if (f == ".") return marker(_2d::circle({0,0},0.6));
+		else if (f == ",") return marker(_2d::circle({0,0},0.2));
+		else if (f == "v") return marker(_2d::triangle({0,1},{1,-1},{-1,-1}));
+		else if (f == ">") return marker(_2d::triangle({1,0},{-1,1},{-1,-1}));
+		else if (f == "^") return marker(_2d::triangle({0,-1},{1,1},{-1,1}));
+		else if (f == "<") return marker(_2d::triangle({-1,0},{1,1},{1,-1}));
+		else if (f == "s") return marker(_2d::rect({-1,-1},{1,1}));
+        //From now on size, color and alpha affect stroke but not fill. We setup the stroke width here
+        else if (f == "+") return marker(_2d::plus({0,0},2).stroke_width(0.3),true); 
+		else if (f == "P") return marker(_2d::plus({0,0},2).stroke_width(0.7),true); 
+		else if (f == "x") return marker(_2d::times({0,0},2).stroke_width(0.3),true);
+		else if (f == "X") return marker(_2d::times({0,0},2).stroke_width(0.7),true);
+		else return marker(_2d::circle({0,0},1.2)); //By default, a circle
+    
+        return *this; 
+    }
+    
 	template<typename X, typename Y>
-	Scatter(const X& x, const Y& y) : markersize_(1,1),alpha_(1) {
+	Scatter(const X& x, const Y& y) : scatter_color(std::make_unique<ScatterColorConstant>(std::make_shared<blackColor>())),markersize_(1,1.0f),alpha_(1) {
+        marker("o");
 		auto ix = x.begin(); auto iy = y.begin();
 		for (;(ix != x.end()) && (iy != y.end());++ix,++iy)
 			data.push_back({*ix,*iy});
 	}
-	
-	Scatter& marker(std::string_view f) { marker_=f; return *this; }
-	std::string_view marker() const { return marker_; }
+
+
+    Scatter& vmin(float f) { scatter_color->vmin(f); return *this; }
+    Scatter& vmax(float f) { scatter_color->vmax(f); return *this; }
+
 	Scatter& s(float f) { markersize_=std::vector<float>(1,f); return *this; }
 	Scatter& s(const std::vector<float>& f) { markersize_=f; return *this; }
     
     template<typename C>
-	Scatter& c(const C& c) { color_=detail::color_vector(c); return *this; }
-	Scatter& c(const std::vector<std::string>& c) { color_=detail::color_vector(c); return *this; }
-//	Scatter& color(const std::vector<rgb>& c) { color_=detail::color_vector(c); return *this; }
+	Scatter& c(const C& col) { scatter_color = std::make_unique<ScatterColorType<typename std::decay<C>::type>>(col); return *this; }
+	Scatter& c(const std::string& col) { scatter_color=std::make_unique<ScatterColorConstant>(detail::color(col)); return *this; }
+	Scatter& c(const char* col) { return c(std::string(col)); return *this; }
+	Scatter& c(const std::shared_ptr<Color>& col) { scatter_color=std::make_unique<ScatterColorConstant>(col); return *this; }
    
 private:
 	float markersize(int i) const { 
@@ -46,61 +164,40 @@ public:
     Scatter& alpha(float f) { alpha_=f; return *this; }
     float alpha() const { return alpha_; }
 
-    template<typename C>
-	Scatter& color(const C& c) { color_=detail::color(c); return *this; }
-	const Color& color() const { return color_?*color_:black; }
-	
 	std::string to_string(const _2d::Matrix& m) const noexcept override {
-		if (format() == "o")
-			return _2d::points(data).
-				set_symbol(_2d::circle({0,0},1.2*markersize()).stroke_width(0).fill(color())).fill_opacity(alpha()).to_string(m);
-		else if (format() == ".")
-			return _2d::points(data).
-				set_symbol(_2d::circle({0,0},0.6*markersize()).stroke_width(0).fill(color())).fill_opacity(alpha()).to_string(m);
-		else if (format() == ",")
-			return _2d::points(data).
-				set_symbol(_2d::circle({0,0},0.2*markersize()).stroke_width(0).fill(color())).fill_opacity(alpha()).to_string(m);
-		else if (format() == "v")
-			return _2d::points(data).
-				set_symbol(_2d::triangle({0,1*markersize()},{1*markersize(),-1*markersize()},{-1*markersize(),-1*markersize()}).stroke_width(0).fill(color())).fill_opacity(alpha()).to_string(m);
-		else if (format() == "^")
-			return _2d::points(data).
-				set_symbol(_2d::triangle({0,-1*markersize()},{1*markersize(),1*markersize()},{-1*markersize(),1*markersize()}).stroke_width(0).fill(color())).fill_opacity(alpha()).to_string(m);
-		else if (format() == "s")
-			return _2d::points(data).
-				set_symbol(_2d::rect({-1*markersize(),-1*markersize()},{1*markersize(),1*markersize()}).stroke_width(0).fill(color())).fill_opacity(alpha()).to_string(m);
-		else if (format() == "+")
-			return _2d::points(data).
-				set_symbol(_2d::plus({0,0},2*markersize()).stroke_width(0.5*markersize()).stroke(color())).stroke_opacity(alpha()).to_string(m);
-		else if (format() == "P")
-			return _2d::points(data).
-				set_symbol(_2d::plus({0,0},2*markersize()).stroke_width(1*markersize()).stroke(color())).stroke_opacity(alpha()).to_string(m);
-		else if (format() == "x")
-			return _2d::points(data).
-				set_symbol(_2d::times({0,0},2*markersize()).stroke_width(0.5*markersize()).stroke(color())).stroke_opacity(alpha()).to_string(m);
-		else if (format() == "X")
-			return _2d::points(data).
-				set_symbol(_2d::times({0,0},2*markersize()).stroke_width(1*markersize()).stroke(color())).stroke_opacity(alpha()).to_string(m);
-		else {
-			auto pl = _2d::polyline(data).stroke_width(this->linewidth()).stroke(this->color()).stroke_linecap(stroke_linecap_round).stroke_opacity(alpha());
-			if (format() == "--") pl.stroke_dasharray({3,3});
-			else if	(format() == "-.") pl.stroke_dasharray({3,2,1,2});
-			else if (format()==":") pl.stroke_dasharray({1,2});
-			
-			return pl.to_string(m);
+        //Maybe this could be sped up with marker beeing a referenzable svg element but that part is not ready yet in the core primitives
+		Group g;
+        
+        //We need this in memory in case we are generating the corresponding color and it gets out of memory
+        std::vector<std::shared_ptr<Color>> colors(data.size()); 
+		for (std::size_t i = 0; i<data.size(); ++i) { colors[i] = scatter_color->color(i); }
+        
+		for (std::size_t i = 0; i<data.size(); ++i) {
+            float size = markersize(i);
+			auto& datapoint = g.add(Group());
+            datapoint.add(FixedGenerator(_2d::translate(_2d::transform_point(m,data[i]))*_2d::scale({size,size}),marker_));
+			if (border_based_marker_)
+                datapoint.fill(none).stroke(*colors[i]).opacity(alpha()*scatter_color->opacity(i));
+            else
+                datapoint.stroke_width(0).fill(*colors[i]).opacity(alpha()*scatter_color->opacity(i));
 		}
+		return g.to_string();
 	}
     
     std::array<float,4> axis() const override {
         std::array<float,4> ax{std::get<0>(data.front()),std::get<0>(data.front()),std::get<1>(data.front()),std::get<1>(data.front())};
-        for (auto [x,y] : data) {
+        float max_size = 0.0f;
+        for (std::size_t i = 0; i<data.size(); ++i) {
+            auto [x,y] = data[i];
             if (x < ax[0]) ax[0] = x;
             if (x > ax[1]) ax[1] = x;
             if (y < ax[2]) ax[2] = y;
             if (y > ax[3]) ax[3] = y;
+            if (markersize(i) > max_size) max_size = markersize(i);
         }
-		float dx = (ax[1]-ax[0])/32.0f;
-		float dy = (ax[3]-ax[2])/32.0f;
+     
+		float dx = std::abs(ax[1]-ax[0])/32.0f + max_size/std::abs(ax[1]-ax[0]);
+		float dy = std::abs(ax[3]-ax[2])/32.0f + max_size/std::abs(ax[3]-ax[2]);
         ax[0]-=dx; ax[1]+=dx; ax[2]-=dy; ax[3]+=dy;
 
         return ax;

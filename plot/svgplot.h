@@ -15,6 +15,7 @@
 #include "svgplot/bar.h"
 #include "svgplot/barh.h"
 #include "svgplot/hist.h"
+#include "svgplot/scatter.h"
 
 namespace svg_cpp_plot {
     
@@ -581,6 +582,35 @@ public:
         return is.extent({xrange.front()-0.5f*dx,xrange.back()+0.5f*dx,yrange.front()-0.5f*dy,yrange.back()+0.5f*dy});
 	}
     
+    /*******************************************************
+     * SCATTER VERSIONS
+     *******************************************************/
+    template<typename X, typename Y>
+	Scatter& scatter(const X& x, const Y& y,
+		typename std::enable_if<std::is_floating_point<typename X::value_type>::value && std::is_floating_point<typename Y::value_type>::value, int>::type = 0) {
+        
+        plottables.push_back(std::make_shared<Scatter>(x,y));
+        auto color = cycle[cycle_pos];
+		cycle_pos = (cycle_pos + 1) % cycle.size();
+        return static_cast<Scatter&>(*plottables.back()).c(color);
+    }
+    
+    template<typename X>
+	Scatter&  scatter(const X& x, const std::initializer_list<float>& y) {
+		return scatter(x,std::list<float>(y));
+	}
+	
+	template<typename Y>
+	Scatter&  scatter(const std::initializer_list<float>& x,
+			  const Y& y) {
+		return scatter(std::list<float>(x),y);
+	}
+	
+	Scatter&  scatter(const std::initializer_list<float>& x,
+			  const std::initializer_list<float>& y) {	  
+		return scatter(std::list<float>(x),std::list<float>(y));
+	}
+
     /*******************************************************
      * PLOT VERSIONS
      *******************************************************/

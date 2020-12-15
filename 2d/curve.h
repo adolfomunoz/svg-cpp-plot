@@ -59,7 +59,7 @@ class curve_derivative : public ElementGenerator<Matrix, Path>, public Attribute
 public:
 	template<typename F, typename DF>
 	curve_derivative(const F& f, const DF& df, float tmin, float tmax, unsigned int nsamples = 100) : dt((tmax - tmin)/float(nsamples-1)) {
-			this->stroke_linecap(stroke_linecap_round).stroke_width(1).fill(none);
+			//this->stroke_linecap(stroke_linecap_round).stroke_width(1).fill(none);
 			static_assert(is_2d_point_v<decltype(f(tmin))>, "Function f should return a two dimensional point");
 			static_assert(is_2d_point_v<decltype(df(tmin))>, "Derivative df should return a two dimensional point");
 			
