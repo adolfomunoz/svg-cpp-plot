@@ -118,12 +118,12 @@ int main(int argc, char** argv) {
         auto y = svg_cpp_plot::arange(0,1,1);
         auto f = [] (float x, float y) { return x; };
 		svg_cpp_plot::SVGPlot plt;
-        plt.subplots_adjust().wspace(15);
+        plt.subplots_adjust().wspace(0.15).left(0.05).right(0.95);
         int i = 0;
         for (auto cmap : {"grayscale","viridis","plasma","magma","inferno","bwr","seismic","coolwarm","Spectral","PiYG"}) 
-            plt.subplot(2,5,i++).figsize({200,75}).yticks({}).xticks({0,1},{"vmin","vmax"}).title(cmap)
+            plt.subplot(2,5,i++).figsize({200,100}).yticks({}).xticks({0,1},{"vmin","vmax"}).title(cmap)
                 .imshow(x,y,f).interpolation("bicubic").cmap(cmap);
-        
+      
 		plt.savefig("../doc/svgplot/imshow/example10.svg");
     }
 

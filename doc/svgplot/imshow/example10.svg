@@ -1,27 +1,27 @@
-<svg viewBox="0 0 1085 160" height="100%" width="100%" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" id="id0000011909" >
+<svg viewBox="0 0 1234 207.02" height="100%" width="100%" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" id="id0000011909" >
 <g id="id0000011910" >
 <g id="id0000011911" >
 <g id="id0000011912" >
 <clipPath id="id0000011912clipper" >
-<polygon points="10,40 10,60 200,60 200,40 " id="id0000011951" class="rectangle" />
+<polygon points="58,40.01 58,81.01 256,81.01 256,40.01 " id="id0000011951" class="rectangle" />
 </clipPath>
 
 <g clip-path="url(#id0000011912clipper)" id="id0000011914" >
-<image id="id0000011952" transform="matrix(188.119 0 0 -10 10.9406 55)" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAHUlEQVQYlWNkYGBgYmJiZmZGJtG4FApS17QBtAIAvfoC/10S/ykAAAAASUVORK5CYII=" data-href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAHUlEQVQYlWNkYGBgYmJiZmZGJtG4FApS17QBtAIAvfoC/10S/ykAAAAASUVORK5CYII=" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAHUlEQVQYlWNkYGBgYmJiZmZGJtG4FApS17QBtAIAvfoC/10S/ykAAAAASUVORK5CYII=" x="-0.005000px" y="-0.500000px" width="1.010000px" height="2.000000px" preserveAspectRatio="none" />
+<image id="id0000011952" transform="matrix(196.04 0 0 -20.5 58.9802 70.76)" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAHUlEQVQYlWNkYGBgYmJiZmZGJtG4FApS17QBtAIAvfoC/10S/ykAAAAASUVORK5CYII=" data-href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAHUlEQVQYlWNkYGBgYmJiZmZGJtG4FApS17QBtAIAvfoC/10S/ykAAAAASUVORK5CYII=" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAHUlEQVQYlWNkYGBgYmJiZmZGJtG4FApS17QBtAIAvfoC/10S/ykAAAAASUVORK5CYII=" x="-0.005000px" y="-0.500000px" width="1.010000px" height="2.000000px" preserveAspectRatio="none" />
 </g>
 
-<polygon points="10,40 10,60 200,60 200,40 " stroke="black" stroke-width="1.000000" fill="none" id="id0000011953" pointer-events="none" class="rectangle" />
-<polyline points="10.9406,60 10.9406,63 " fill="none" stroke-width="1.000000" stroke="black" id="id0000011954" class="line" />
-<text id="id0000011955" transform="matrix(1 0 0 1 10 40)" x="0.940594" y="25.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+<polygon points="58,40.01 58,81.01 256,81.01 256,40.01 " stroke="black" stroke-width="1.000000" fill="none" id="id0000011953" pointer-events="none" class="rectangle" />
+<polyline points="58.9802,81.01 58.9802,84.01 " fill="none" stroke-width="1.000000" stroke="black" id="id0000011954" class="line" />
+<text id="id0000011955" transform="matrix(1 0 0 1 58 40.01)" x="0.980198" y="46.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
 vmin
 </text>
 
-<polyline points="199.059,60 199.059,63 " fill="none" stroke-width="1.000000" stroke="black" id="id0000011956" class="line" />
-<text id="id0000011957" transform="matrix(1 0 0 1 10 40)" x="189.059402" y="25.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+<polyline points="255.02,81.01 255.02,84.01 " fill="none" stroke-width="1.000000" stroke="black" id="id0000011956" class="line" />
+<text id="id0000011957" transform="matrix(1 0 0 1 58 40.01)" x="197.019806" y="46.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
 vmax
 </text>
 
-<text id="id0000011958" transform="matrix(1 0 0 1 10 40)" x="95.000000" y="-10.000000" text-anchor="middle" font-size="16.000000px" >
+<text id="id0000011958" transform="matrix(1 0 0 1 58 40.01)" x="99.000000" y="-12.000000" text-anchor="middle" font-size="24.000000px" >
 grayscale
 </text>
 
@@ -32,25 +32,25 @@ grayscale
 <g id="id0000011915" >
 <g id="id0000011916" >
 <clipPath id="id0000011916clipper" >
-<polygon points="225,40 225,60 415,60 415,40 " id="id0000011959" class="rectangle" />
+<polygon points="291.6,40.01 291.6,81.01 489.6,81.01 489.6,40.01 " id="id0000011959" class="rectangle" />
 </clipPath>
 
 <g clip-path="url(#id0000011916clipper)" id="id0000011918" >
-<image id="id0000011960" transform="matrix(188.119 0 0 -10 225.941 55)" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAbUlEQVQYlV2KyxUDMQgDhYTtxlJC+u8ElIM3+7vMmxHEJ74WISEJCSJSfiZESM5HImnJggkrLPQWwjqkdS7X3lsICKB9IwjrzfePQPZg5Z/JuudgpbY/R/ZgzejJWtEreh68JXtFzeta59ti/wCbxFILoaojNwAAAABJRU5ErkJggg==" data-href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAbUlEQVQYlV2KyxUDMQgDhYTtxlJC+u8ElIM3+7vMmxHEJ74WISEJCSJSfiZESM5HImnJggkrLPQWwjqkdS7X3lsICKB9IwjrzfePQPZg5Z/JuudgpbY/R/ZgzejJWtEreh68JXtFzeta59ti/wCbxFILoaojNwAAAABJRU5ErkJggg==" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAbUlEQVQYlV2KyxUDMQgDhYTtxlJC+u8ElIM3+7vMmxHEJ74WISEJCSJSfiZESM5HImnJggkrLPQWwjqkdS7X3lsICKB9IwjrzfePQPZg5Z/JuudgpbY/R/ZgzejJWtEreh68JXtFzeta59ti/wCbxFILoaojNwAAAABJRU5ErkJggg==" x="-0.005000px" y="-0.500000px" width="1.010000px" height="2.000000px" preserveAspectRatio="none" />
+<image id="id0000011960" transform="matrix(196.04 0 0 -20.5 292.58 70.76)" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAbUlEQVQYlV2KyxUDMQgDhYTtxlJC+u8ElIM3+7vMmxHEJ74WISEJCSJSfiZESM5HImnJggkrLPQWwjqkdS7X3lsICKB9IwjrzfePQPZg5Z/JuudgpbY/R/ZgzejJWtEreh68JXtFzeta59ti/wCbxFILoaojNwAAAABJRU5ErkJggg==" data-href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAbUlEQVQYlV2KyxUDMQgDhYTtxlJC+u8ElIM3+7vMmxHEJ74WISEJCSJSfiZESM5HImnJggkrLPQWwjqkdS7X3lsICKB9IwjrzfePQPZg5Z/JuudgpbY/R/ZgzejJWtEreh68JXtFzeta59ti/wCbxFILoaojNwAAAABJRU5ErkJggg==" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAbUlEQVQYlV2KyxUDMQgDhYTtxlJC+u8ElIM3+7vMmxHEJ74WISEJCSJSfiZESM5HImnJggkrLPQWwjqkdS7X3lsICKB9IwjrzfePQPZg5Z/JuudgpbY/R/ZgzejJWtEreh68JXtFzeta59ti/wCbxFILoaojNwAAAABJRU5ErkJggg==" x="-0.005000px" y="-0.500000px" width="1.010000px" height="2.000000px" preserveAspectRatio="none" />
 </g>
 
-<polygon points="225,40 225,60 415,60 415,40 " stroke="black" stroke-width="1.000000" fill="none" id="id0000011961" pointer-events="none" class="rectangle" />
-<polyline points="225.941,60 225.941,63 " fill="none" stroke-width="1.000000" stroke="black" id="id0000011962" class="line" />
-<text id="id0000011963" transform="matrix(1 0 0 1 225 40)" x="0.940594" y="25.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+<polygon points="291.6,40.01 291.6,81.01 489.6,81.01 489.6,40.01 " stroke="black" stroke-width="1.000000" fill="none" id="id0000011961" pointer-events="none" class="rectangle" />
+<polyline points="292.58,81.01 292.58,84.01 " fill="none" stroke-width="1.000000" stroke="black" id="id0000011962" class="line" />
+<text id="id0000011963" transform="matrix(1 0 0 1 291.6 40.01)" x="0.980198" y="46.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
 vmin
 </text>
 
-<polyline points="414.059,60 414.059,63 " fill="none" stroke-width="1.000000" stroke="black" id="id0000011964" class="line" />
-<text id="id0000011965" transform="matrix(1 0 0 1 225 40)" x="189.059402" y="25.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+<polyline points="488.62,81.01 488.62,84.01 " fill="none" stroke-width="1.000000" stroke="black" id="id0000011964" class="line" />
+<text id="id0000011965" transform="matrix(1 0 0 1 291.6 40.01)" x="197.019806" y="46.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
 vmax
 </text>
 
-<text id="id0000011966" transform="matrix(1 0 0 1 225 40)" x="95.000000" y="-10.000000" text-anchor="middle" font-size="16.000000px" >
+<text id="id0000011966" transform="matrix(1 0 0 1 291.6 40.01)" x="99.000000" y="-12.000000" text-anchor="middle" font-size="24.000000px" >
 viridis
 </text>
 
@@ -61,25 +61,25 @@ viridis
 <g id="id0000011919" >
 <g id="id0000011920" >
 <clipPath id="id0000011920clipper" >
-<polygon points="440,40 440,60 630,60 630,40 " id="id0000011967" class="rectangle" />
+<polygon points="525.2,40.01 525.2,81.01 723.2,81.01 723.2,40.01 " id="id0000011967" class="rectangle" />
 </clipPath>
 
 <g clip-path="url(#id0000011920clipper)" id="id0000011922" >
-<image id="id0000011968" transform="matrix(188.119 0 0 -10 440.941 55)" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAbUlEQVQYlW3J2Q0DQQwCUDBMPSkzVRvnY3Y2hyJZ6IH5wFMoo3be+FsFGhCw84DfFQZUU4oc6bq67d+llHLXhrqu8SzvV0pNpRyeL33GTztQ04FDNRy6qWxAoRsOFbjHM2vGyYWJszGerGzMmhdYnFb1iVFNiQAAAABJRU5ErkJggg==" data-href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAbUlEQVQYlW3J2Q0DQQwCUDBMPSkzVRvnY3Y2hyJZ6IH5wFMoo3be+FsFGhCw84DfFQZUU4oc6bq67d+llHLXhrqu8SzvV0pNpRyeL33GTztQ04FDNRy6qWxAoRsOFbjHM2vGyYWJszGerGzMmhdYnFb1iVFNiQAAAABJRU5ErkJggg==" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAbUlEQVQYlW3J2Q0DQQwCUDBMPSkzVRvnY3Y2hyJZ6IH5wFMoo3be+FsFGhCw84DfFQZUU4oc6bq67d+llHLXhrqu8SzvV0pNpRyeL33GTztQ04FDNRy6qWxAoRsOFbjHM2vGyYWJszGerGzMmhdYnFb1iVFNiQAAAABJRU5ErkJggg==" x="-0.005000px" y="-0.500000px" width="1.010000px" height="2.000000px" preserveAspectRatio="none" />
+<image id="id0000011968" transform="matrix(196.04 0 0 -20.5 526.18 70.76)" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAbUlEQVQYlW3J2Q0DQQwCUDBMPSkzVRvnY3Y2hyJZ6IH5wFMoo3be+FsFGhCw84DfFQZUU4oc6bq67d+llHLXhrqu8SzvV0pNpRyeL33GTztQ04FDNRy6qWxAoRsOFbjHM2vGyYWJszGerGzMmhdYnFb1iVFNiQAAAABJRU5ErkJggg==" data-href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAbUlEQVQYlW3J2Q0DQQwCUDBMPSkzVRvnY3Y2hyJZ6IH5wFMoo3be+FsFGhCw84DfFQZUU4oc6bq67d+llHLXhrqu8SzvV0pNpRyeL33GTztQ04FDNRy6qWxAoRsOFbjHM2vGyYWJszGerGzMmhdYnFb1iVFNiQAAAABJRU5ErkJggg==" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAbUlEQVQYlW3J2Q0DQQwCUDBMPSkzVRvnY3Y2hyJZ6IH5wFMoo3be+FsFGhCw84DfFQZUU4oc6bq67d+llHLXhrqu8SzvV0pNpRyeL33GTztQ04FDNRy6qWxAoRsOFbjHM2vGyYWJszGerGzMmhdYnFb1iVFNiQAAAABJRU5ErkJggg==" x="-0.005000px" y="-0.500000px" width="1.010000px" height="2.000000px" preserveAspectRatio="none" />
 </g>
 
-<polygon points="440,40 440,60 630,60 630,40 " stroke="black" stroke-width="1.000000" fill="none" id="id0000011969" pointer-events="none" class="rectangle" />
-<polyline points="440.941,60 440.941,63 " fill="none" stroke-width="1.000000" stroke="black" id="id0000011970" class="line" />
-<text id="id0000011971" transform="matrix(1 0 0 1 440 40)" x="0.940594" y="25.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+<polygon points="525.2,40.01 525.2,81.01 723.2,81.01 723.2,40.01 " stroke="black" stroke-width="1.000000" fill="none" id="id0000011969" pointer-events="none" class="rectangle" />
+<polyline points="526.18,81.01 526.18,84.01 " fill="none" stroke-width="1.000000" stroke="black" id="id0000011970" class="line" />
+<text id="id0000011971" transform="matrix(1 0 0 1 525.2 40.01)" x="0.980198" y="46.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
 vmin
 </text>
 
-<polyline points="629.059,60 629.059,63 " fill="none" stroke-width="1.000000" stroke="black" id="id0000011972" class="line" />
-<text id="id0000011973" transform="matrix(1 0 0 1 440 40)" x="189.059402" y="25.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+<polyline points="722.22,81.01 722.22,84.01 " fill="none" stroke-width="1.000000" stroke="black" id="id0000011972" class="line" />
+<text id="id0000011973" transform="matrix(1 0 0 1 525.2 40.01)" x="197.019806" y="46.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
 vmax
 </text>
 
-<text id="id0000011974" transform="matrix(1 0 0 1 440 40)" x="95.000000" y="-10.000000" text-anchor="middle" font-size="16.000000px" >
+<text id="id0000011974" transform="matrix(1 0 0 1 525.2 40.01)" x="99.000000" y="-12.000000" text-anchor="middle" font-size="24.000000px" >
 plasma
 </text>
 
@@ -90,25 +90,25 @@ plasma
 <g id="id0000011923" >
 <g id="id0000011924" >
 <clipPath id="id0000011924clipper" >
-<polygon points="655,40 655,60 845,60 845,40 " id="id0000011975" class="rectangle" />
+<polygon points="758.8,40.01 758.8,81.01 956.8,81.01 956.8,40.01 " id="id0000011975" class="rectangle" />
 </clipPath>
 
 <g clip-path="url(#id0000011924clipper)" id="id0000011926" >
-<image id="id0000011976" transform="matrix(188.119 0 0 -10 655.941 55)" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAbklEQVQYlX3KSw4DIQwFwfed+58YZ8FAsoqErHIbAhFrPmbFx6z5/C9hQu1X6OuD4MdU6HIihBMimhLR6xDdvn+EaKJlr2jsFS37lmOteKwVL2tYsmLJCNvRjiivWSE7Gg0StOiZybxr0CK5p0k+bmgdtzCuxR0AAAAASUVORK5CYII=" data-href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAbklEQVQYlX3KSw4DIQwFwfed+58YZ8FAsoqErHIbAhFrPmbFx6z5/C9hQu1X6OuD4MdU6HIihBMimhLR6xDdvn+EaKJlr2jsFS37lmOteKwVL2tYsmLJCNvRjiivWSE7Gg0StOiZybxr0CK5p0k+bmgdtzCuxR0AAAAASUVORK5CYII=" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAbklEQVQYlX3KSw4DIQwFwfed+58YZ8FAsoqErHIbAhFrPmbFx6z5/C9hQu1X6OuD4MdU6HIihBMimhLR6xDdvn+EaKJlr2jsFS37lmOteKwVL2tYsmLJCNvRjiivWSE7Gg0StOiZybxr0CK5p0k+bmgdtzCuxR0AAAAASUVORK5CYII=" x="-0.005000px" y="-0.500000px" width="1.010000px" height="2.000000px" preserveAspectRatio="none" />
+<image id="id0000011976" transform="matrix(196.04 0 0 -20.5 759.78 70.76)" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAbklEQVQYlX3KSw4DIQwFwfed+58YZ8FAsoqErHIbAhFrPmbFx6z5/C9hQu1X6OuD4MdU6HIihBMimhLR6xDdvn+EaKJlr2jsFS37lmOteKwVL2tYsmLJCNvRjiivWSE7Gg0StOiZybxr0CK5p0k+bmgdtzCuxR0AAAAASUVORK5CYII=" data-href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAbklEQVQYlX3KSw4DIQwFwfed+58YZ8FAsoqErHIbAhFrPmbFx6z5/C9hQu1X6OuD4MdU6HIihBMimhLR6xDdvn+EaKJlr2jsFS37lmOteKwVL2tYsmLJCNvRjiivWSE7Gg0StOiZybxr0CK5p0k+bmgdtzCuxR0AAAAASUVORK5CYII=" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAbklEQVQYlX3KSw4DIQwFwfed+58YZ8FAsoqErHIbAhFrPmbFx6z5/C9hQu1X6OuD4MdU6HIihBMimhLR6xDdvn+EaKJlr2jsFS37lmOteKwVL2tYsmLJCNvRjiivWSE7Gg0StOiZybxr0CK5p0k+bmgdtzCuxR0AAAAASUVORK5CYII=" x="-0.005000px" y="-0.500000px" width="1.010000px" height="2.000000px" preserveAspectRatio="none" />
 </g>
 
-<polygon points="655,40 655,60 845,60 845,40 " stroke="black" stroke-width="1.000000" fill="none" id="id0000011977" pointer-events="none" class="rectangle" />
-<polyline points="655.941,60 655.941,63 " fill="none" stroke-width="1.000000" stroke="black" id="id0000011978" class="line" />
-<text id="id0000011979" transform="matrix(1 0 0 1 655 40)" x="0.940594" y="25.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+<polygon points="758.8,40.01 758.8,81.01 956.8,81.01 956.8,40.01 " stroke="black" stroke-width="1.000000" fill="none" id="id0000011977" pointer-events="none" class="rectangle" />
+<polyline points="759.78,81.01 759.78,84.01 " fill="none" stroke-width="1.000000" stroke="black" id="id0000011978" class="line" />
+<text id="id0000011979" transform="matrix(1 0 0 1 758.8 40.01)" x="0.980198" y="46.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
 vmin
 </text>
 
-<polyline points="844.059,60 844.059,63 " fill="none" stroke-width="1.000000" stroke="black" id="id0000011980" class="line" />
-<text id="id0000011981" transform="matrix(1 0 0 1 655 40)" x="189.059402" y="25.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+<polyline points="955.82,81.01 955.82,84.01 " fill="none" stroke-width="1.000000" stroke="black" id="id0000011980" class="line" />
+<text id="id0000011981" transform="matrix(1 0 0 1 758.8 40.01)" x="197.019806" y="46.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
 vmax
 </text>
 
-<text id="id0000011982" transform="matrix(1 0 0 1 655 40)" x="95.000000" y="-10.000000" text-anchor="middle" font-size="16.000000px" >
+<text id="id0000011982" transform="matrix(1 0 0 1 758.8 40.01)" x="99.000000" y="-12.000000" text-anchor="middle" font-size="24.000000px" >
 magma
 </text>
 
@@ -119,25 +119,25 @@ magma
 <g id="id0000011927" >
 <g id="id0000011928" >
 <clipPath id="id0000011928clipper" >
-<polygon points="870,40 870,60 1060,60 1060,40 " id="id0000011983" class="rectangle" />
+<polygon points="992.4,40.01 992.4,81.01 1190.4,81.01 1190.4,40.01 " id="id0000011983" class="rectangle" />
 </clipPath>
 
 <g clip-path="url(#id0000011928clipper)" id="id0000011930" >
-<image id="id0000011984" transform="matrix(188.119 0 0 -10 870.941 55)" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAcklEQVQYlW3KWQ7DMAhFUd6AJXf/yy2kH47TdJAsdLgYCCtSMYR0DGEo0hh/i0GDjp8JfEeGeRiHFk4ft77NFtssqc0Wy2ypzRLbbKnWH6nkoot60kWXbqZLb3ckzmfgciJyr15meEbO8AxPbKyCj9PjBUYGKZnNHhjCAAAAAElFTkSuQmCC" data-href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAcklEQVQYlW3KWQ7DMAhFUd6AJXf/yy2kH47TdJAsdLgYCCtSMYR0DGEo0hh/i0GDjp8JfEeGeRiHFk4ft77NFtssqc0Wy2ypzRLbbKnWH6nkoot60kWXbqZLb3ckzmfgciJyr15meEbO8AxPbKyCj9PjBUYGKZnNHhjCAAAAAElFTkSuQmCC" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAcklEQVQYlW3KWQ7DMAhFUd6AJXf/yy2kH47TdJAsdLgYCCtSMYR0DGEo0hh/i0GDjp8JfEeGeRiHFk4ft77NFtssqc0Wy2ypzRLbbKnWH6nkoot60kWXbqZLb3ckzmfgciJyr15meEbO8AxPbKyCj9PjBUYGKZnNHhjCAAAAAElFTkSuQmCC" x="-0.005000px" y="-0.500000px" width="1.010000px" height="2.000000px" preserveAspectRatio="none" />
+<image id="id0000011984" transform="matrix(196.04 0 0 -20.5 993.38 70.76)" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAcklEQVQYlW3KWQ7DMAhFUd6AJXf/yy2kH47TdJAsdLgYCCtSMYR0DGEo0hh/i0GDjp8JfEeGeRiHFk4ft77NFtssqc0Wy2ypzRLbbKnWH6nkoot60kWXbqZLb3ckzmfgciJyr15meEbO8AxPbKyCj9PjBUYGKZnNHhjCAAAAAElFTkSuQmCC" data-href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAcklEQVQYlW3KWQ7DMAhFUd6AJXf/yy2kH47TdJAsdLgYCCtSMYR0DGEo0hh/i0GDjp8JfEeGeRiHFk4ft77NFtssqc0Wy2ypzRLbbKnWH6nkoot60kWXbqZLb3ckzmfgciJyr15meEbO8AxPbKyCj9PjBUYGKZnNHhjCAAAAAElFTkSuQmCC" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAcklEQVQYlW3KWQ7DMAhFUd6AJXf/yy2kH47TdJAsdLgYCCtSMYR0DGEo0hh/i0GDjp8JfEeGeRiHFk4ft77NFtssqc0Wy2ypzRLbbKnWH6nkoot60kWXbqZLb3ckzmfgciJyr15meEbO8AxPbKyCj9PjBUYGKZnNHhjCAAAAAElFTkSuQmCC" x="-0.005000px" y="-0.500000px" width="1.010000px" height="2.000000px" preserveAspectRatio="none" />
 </g>
 
-<polygon points="870,40 870,60 1060,60 1060,40 " stroke="black" stroke-width="1.000000" fill="none" id="id0000011985" pointer-events="none" class="rectangle" />
-<polyline points="870.941,60 870.941,63 " fill="none" stroke-width="1.000000" stroke="black" id="id0000011986" class="line" />
-<text id="id0000011987" transform="matrix(1 0 0 1 870 40)" x="0.940594" y="25.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+<polygon points="992.4,40.01 992.4,81.01 1190.4,81.01 1190.4,40.01 " stroke="black" stroke-width="1.000000" fill="none" id="id0000011985" pointer-events="none" class="rectangle" />
+<polyline points="993.38,81.01 993.38,84.01 " fill="none" stroke-width="1.000000" stroke="black" id="id0000011986" class="line" />
+<text id="id0000011987" transform="matrix(1 0 0 1 992.4 40.01)" x="0.980198" y="46.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
 vmin
 </text>
 
-<polyline points="1059.06,60 1059.06,63 " fill="none" stroke-width="1.000000" stroke="black" id="id0000011988" class="line" />
-<text id="id0000011989" transform="matrix(1 0 0 1 870 40)" x="189.059402" y="25.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+<polyline points="1189.42,81.01 1189.42,84.01 " fill="none" stroke-width="1.000000" stroke="black" id="id0000011988" class="line" />
+<text id="id0000011989" transform="matrix(1 0 0 1 992.4 40.01)" x="197.019806" y="46.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
 vmax
 </text>
 
-<text id="id0000011990" transform="matrix(1 0 0 1 870 40)" x="95.000000" y="-10.000000" text-anchor="middle" font-size="16.000000px" >
+<text id="id0000011990" transform="matrix(1 0 0 1 992.4 40.01)" x="99.000000" y="-12.000000" text-anchor="middle" font-size="24.000000px" >
 inferno
 </text>
 
@@ -148,25 +148,25 @@ inferno
 <g id="id0000011931" >
 <g id="id0000011932" >
 <clipPath id="id0000011932clipper" >
-<polygon points="10,115 10,135 200,135 200,115 " id="id0000011991" class="rectangle" />
+<polygon points="58,141.015 58,182.015 256,182.015 256,141.015 " id="id0000011991" class="rectangle" />
 </clipPath>
 
 <g clip-path="url(#id0000011932clipper)" id="id0000011934" >
-<image id="id0000011992" transform="matrix(188.119 0 0 -10 10.9406 130)" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAMklEQVQYlWNkYPjPysqAhtjY0EWwClJXGbIgM8Nfht+/GX7/Zvj1C8pARpiCRCqjTC8ADK1kAXl8gZgAAAAASUVORK5CYII=" data-href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAMklEQVQYlWNkYPjPysqAhtjY0EWwClJXGbIgM8Nfht+/GX7/Zvj1C8pARpiCRCqjTC8ADK1kAXl8gZgAAAAASUVORK5CYII=" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAMklEQVQYlWNkYPjPysqAhtjY0EWwClJXGbIgM8Nfht+/GX7/Zvj1C8pARpiCRCqjTC8ADK1kAXl8gZgAAAAASUVORK5CYII=" x="-0.005000px" y="-0.500000px" width="1.010000px" height="2.000000px" preserveAspectRatio="none" />
+<image id="id0000011992" transform="matrix(196.04 0 0 -20.5 58.9802 171.765)" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAMklEQVQYlWNkYPjPysqAhtjY0EWwClJXGbIgM8Nfht+/GX7/Zvj1C8pARpiCRCqjTC8ADK1kAXl8gZgAAAAASUVORK5CYII=" data-href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAMklEQVQYlWNkYPjPysqAhtjY0EWwClJXGbIgM8Nfht+/GX7/Zvj1C8pARpiCRCqjTC8ADK1kAXl8gZgAAAAASUVORK5CYII=" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAMklEQVQYlWNkYPjPysqAhtjY0EWwClJXGbIgM8Nfht+/GX7/Zvj1C8pARpiCRCqjTC8ADK1kAXl8gZgAAAAASUVORK5CYII=" x="-0.005000px" y="-0.500000px" width="1.010000px" height="2.000000px" preserveAspectRatio="none" />
 </g>
 
-<polygon points="10,115 10,135 200,135 200,115 " stroke="black" stroke-width="1.000000" fill="none" id="id0000011993" pointer-events="none" class="rectangle" />
-<polyline points="10.9406,135 10.9406,138 " fill="none" stroke-width="1.000000" stroke="black" id="id0000011994" class="line" />
-<text id="id0000011995" transform="matrix(1 0 0 1 10 115)" x="0.940594" y="25.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+<polygon points="58,141.015 58,182.015 256,182.015 256,141.015 " stroke="black" stroke-width="1.000000" fill="none" id="id0000011993" pointer-events="none" class="rectangle" />
+<polyline points="58.9802,182.015 58.9802,185.015 " fill="none" stroke-width="1.000000" stroke="black" id="id0000011994" class="line" />
+<text id="id0000011995" transform="matrix(1 0 0 1 58 141.015)" x="0.980198" y="46.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
 vmin
 </text>
 
-<polyline points="199.059,135 199.059,138 " fill="none" stroke-width="1.000000" stroke="black" id="id0000011996" class="line" />
-<text id="id0000011997" transform="matrix(1 0 0 1 10 115)" x="189.059402" y="25.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+<polyline points="255.02,182.015 255.02,185.015 " fill="none" stroke-width="1.000000" stroke="black" id="id0000011996" class="line" />
+<text id="id0000011997" transform="matrix(1 0 0 1 58 141.015)" x="197.019806" y="46.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
 vmax
 </text>
 
-<text id="id0000011998" transform="matrix(1 0 0 1 10 115)" x="95.000000" y="-10.000000" text-anchor="middle" font-size="16.000000px" >
+<text id="id0000011998" transform="matrix(1 0 0 1 58 141.015)" x="99.000000" y="-12.000000" text-anchor="middle" font-size="24.000000px" >
 bwr
 </text>
 
@@ -177,25 +177,25 @@ bwr
 <g id="id0000011935" >
 <g id="id0000011936" >
 <clipPath id="id0000011936clipper" >
-<polygon points="225,115 225,135 415,135 415,115 " id="id0000011999" class="rectangle" />
+<polygon points="291.6,141.015 291.6,182.015 489.6,182.015 489.6,141.015 " id="id0000011999" class="rectangle" />
 </clipPath>
 
 <g clip-path="url(#id0000011936clipper)" id="id0000011938" >
-<image id="id0000012000" transform="matrix(188.119 0 0 -10 225.941 130)" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAASklEQVQYlY3KMQqAMABD0W8HpekJvP8Zm6JD6aIiWKuQ4ZFkghUiCOKZrr8PISwSKSHRxf91ZsfGJucDdw/wKLdaDQUKXHjz+NAAQoFMG5nlMN4AAAAASUVORK5CYII=" data-href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAASklEQVQYlY3KMQqAMABD0W8HpekJvP8Zm6JD6aIiWKuQ4ZFkghUiCOKZrr8PISwSKSHRxf91ZsfGJucDdw/wKLdaDQUKXHjz+NAAQoFMG5nlMN4AAAAASUVORK5CYII=" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAASklEQVQYlY3KMQqAMABD0W8HpekJvP8Zm6JD6aIiWKuQ4ZFkghUiCOKZrr8PISwSKSHRxf91ZsfGJucDdw/wKLdaDQUKXHjz+NAAQoFMG5nlMN4AAAAASUVORK5CYII=" x="-0.005000px" y="-0.500000px" width="1.010000px" height="2.000000px" preserveAspectRatio="none" />
+<image id="id0000012000" transform="matrix(196.04 0 0 -20.5 292.58 171.765)" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAASklEQVQYlY3KMQqAMABD0W8HpekJvP8Zm6JD6aIiWKuQ4ZFkghUiCOKZrr8PISwSKSHRxf91ZsfGJucDdw/wKLdaDQUKXHjz+NAAQoFMG5nlMN4AAAAASUVORK5CYII=" data-href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAASklEQVQYlY3KMQqAMABD0W8HpekJvP8Zm6JD6aIiWKuQ4ZFkghUiCOKZrr8PISwSKSHRxf91ZsfGJucDdw/wKLdaDQUKXHjz+NAAQoFMG5nlMN4AAAAASUVORK5CYII=" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAASklEQVQYlY3KMQqAMABD0W8HpekJvP8Zm6JD6aIiWKuQ4ZFkghUiCOKZrr8PISwSKSHRxf91ZsfGJucDdw/wKLdaDQUKXHjz+NAAQoFMG5nlMN4AAAAASUVORK5CYII=" x="-0.005000px" y="-0.500000px" width="1.010000px" height="2.000000px" preserveAspectRatio="none" />
 </g>
 
-<polygon points="225,115 225,135 415,135 415,115 " stroke="black" stroke-width="1.000000" fill="none" id="id0000012001" pointer-events="none" class="rectangle" />
-<polyline points="225.941,135 225.941,138 " fill="none" stroke-width="1.000000" stroke="black" id="id0000012002" class="line" />
-<text id="id0000012003" transform="matrix(1 0 0 1 225 115)" x="0.940594" y="25.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+<polygon points="291.6,141.015 291.6,182.015 489.6,182.015 489.6,141.015 " stroke="black" stroke-width="1.000000" fill="none" id="id0000012001" pointer-events="none" class="rectangle" />
+<polyline points="292.58,182.015 292.58,185.015 " fill="none" stroke-width="1.000000" stroke="black" id="id0000012002" class="line" />
+<text id="id0000012003" transform="matrix(1 0 0 1 291.6 141.015)" x="0.980198" y="46.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
 vmin
 </text>
 
-<polyline points="414.059,135 414.059,138 " fill="none" stroke-width="1.000000" stroke="black" id="id0000012004" class="line" />
-<text id="id0000012005" transform="matrix(1 0 0 1 225 115)" x="189.059402" y="25.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+<polyline points="488.62,182.015 488.62,185.015 " fill="none" stroke-width="1.000000" stroke="black" id="id0000012004" class="line" />
+<text id="id0000012005" transform="matrix(1 0 0 1 291.6 141.015)" x="197.019806" y="46.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
 vmax
 </text>
 
-<text id="id0000012006" transform="matrix(1 0 0 1 225 115)" x="95.000000" y="-10.000000" text-anchor="middle" font-size="16.000000px" >
+<text id="id0000012006" transform="matrix(1 0 0 1 291.6 141.015)" x="99.000000" y="-12.000000" text-anchor="middle" font-size="24.000000px" >
 seismic
 </text>
 
@@ -206,25 +206,25 @@ seismic
 <g id="id0000011939" >
 <g id="id0000011940" >
 <clipPath id="id0000011940clipper" >
-<polygon points="440,115 440,135 630,135 630,115 " id="id0000012007" class="rectangle" />
+<polygon points="525.2,141.015 525.2,182.015 723.2,182.015 723.2,141.015 " id="id0000012007" class="rectangle" />
 </clipPath>
 
 <g clip-path="url(#id0000011940clipper)" id="id0000011942" >
-<image id="id0000012008" transform="matrix(188.119 0 0 -10 440.941 130)" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAYElEQVQYlW2MwRGAMAzDnLpTMQNDs1cdzIOW0oOfTlEc236QqAwWkFEZJMjosnPUG3qzSi6SZT5Ouayhlq9c1opPK91kyU1Q3uABeK5KN2GAJbe0hAG/vfUyP31awqe/AGU2jOBk7bHhAAAAAElFTkSuQmCC" data-href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAYElEQVQYlW2MwRGAMAzDnLpTMQNDs1cdzIOW0oOfTlEc236QqAwWkFEZJMjosnPUG3qzSi6SZT5Ouayhlq9c1opPK91kyU1Q3uABeK5KN2GAJbe0hAG/vfUyP31awqe/AGU2jOBk7bHhAAAAAElFTkSuQmCC" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAYElEQVQYlW2MwRGAMAzDnLpTMQNDs1cdzIOW0oOfTlEc236QqAwWkFEZJMjosnPUG3qzSi6SZT5Ouayhlq9c1opPK91kyU1Q3uABeK5KN2GAJbe0hAG/vfUyP31awqe/AGU2jOBk7bHhAAAAAElFTkSuQmCC" x="-0.005000px" y="-0.500000px" width="1.010000px" height="2.000000px" preserveAspectRatio="none" />
+<image id="id0000012008" transform="matrix(196.04 0 0 -20.5 526.18 171.765)" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAYElEQVQYlW2MwRGAMAzDnLpTMQNDs1cdzIOW0oOfTlEc236QqAwWkFEZJMjosnPUG3qzSi6SZT5Ouayhlq9c1opPK91kyU1Q3uABeK5KN2GAJbe0hAG/vfUyP31awqe/AGU2jOBk7bHhAAAAAElFTkSuQmCC" data-href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAYElEQVQYlW2MwRGAMAzDnLpTMQNDs1cdzIOW0oOfTlEc236QqAwWkFEZJMjosnPUG3qzSi6SZT5Ouayhlq9c1opPK91kyU1Q3uABeK5KN2GAJbe0hAG/vfUyP31awqe/AGU2jOBk7bHhAAAAAElFTkSuQmCC" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAYElEQVQYlW2MwRGAMAzDnLpTMQNDs1cdzIOW0oOfTlEc236QqAwWkFEZJMjosnPUG3qzSi6SZT5Ouayhlq9c1opPK91kyU1Q3uABeK5KN2GAJbe0hAG/vfUyP31awqe/AGU2jOBk7bHhAAAAAElFTkSuQmCC" x="-0.005000px" y="-0.500000px" width="1.010000px" height="2.000000px" preserveAspectRatio="none" />
 </g>
 
-<polygon points="440,115 440,135 630,135 630,115 " stroke="black" stroke-width="1.000000" fill="none" id="id0000012009" pointer-events="none" class="rectangle" />
-<polyline points="440.941,135 440.941,138 " fill="none" stroke-width="1.000000" stroke="black" id="id0000012010" class="line" />
-<text id="id0000012011" transform="matrix(1 0 0 1 440 115)" x="0.940594" y="25.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+<polygon points="525.2,141.015 525.2,182.015 723.2,182.015 723.2,141.015 " stroke="black" stroke-width="1.000000" fill="none" id="id0000012009" pointer-events="none" class="rectangle" />
+<polyline points="526.18,182.015 526.18,185.015 " fill="none" stroke-width="1.000000" stroke="black" id="id0000012010" class="line" />
+<text id="id0000012011" transform="matrix(1 0 0 1 525.2 141.015)" x="0.980198" y="46.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
 vmin
 </text>
 
-<polyline points="629.059,135 629.059,138 " fill="none" stroke-width="1.000000" stroke="black" id="id0000012012" class="line" />
-<text id="id0000012013" transform="matrix(1 0 0 1 440 115)" x="189.059402" y="25.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+<polyline points="722.22,182.015 722.22,185.015 " fill="none" stroke-width="1.000000" stroke="black" id="id0000012012" class="line" />
+<text id="id0000012013" transform="matrix(1 0 0 1 525.2 141.015)" x="197.019806" y="46.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
 vmax
 </text>
 
-<text id="id0000012014" transform="matrix(1 0 0 1 440 115)" x="95.000000" y="-10.000000" text-anchor="middle" font-size="16.000000px" >
+<text id="id0000012014" transform="matrix(1 0 0 1 525.2 141.015)" x="99.000000" y="-12.000000" text-anchor="middle" font-size="24.000000px" >
 coolwarm
 </text>
 
@@ -235,25 +235,25 @@ coolwarm
 <g id="id0000011943" >
 <g id="id0000011944" >
 <clipPath id="id0000011944clipper" >
-<polygon points="655,115 655,135 845,135 845,115 " id="id0000012015" class="rectangle" />
+<polygon points="758.8,141.015 758.8,182.015 956.8,182.015 956.8,141.015 " id="id0000012015" class="rectangle" />
 </clipPath>
 
 <g clip-path="url(#id0000011944clipper)" id="id0000011946" >
-<image id="id0000012016" transform="matrix(188.119 0 0 -10 655.941 130)" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAW0lEQVQYlX3KUQqAMAwD0Kxxu9buf6POmuqPijIUQkkfKXvvqEAD6pQZ/2eLgRWssOdtE7azf+OG4pkuuXKkXOmpIc3o0vhFbIVBC+NKC2OQYRa88XovXJ+bFx7q7GN/KHY2OAAAAABJRU5ErkJggg==" data-href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAW0lEQVQYlX3KUQqAMAwD0Kxxu9buf6POmuqPijIUQkkfKXvvqEAD6pQZ/2eLgRWssOdtE7azf+OG4pkuuXKkXOmpIc3o0vhFbIVBC+NKC2OQYRa88XovXJ+bFx7q7GN/KHY2OAAAAABJRU5ErkJggg==" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAW0lEQVQYlX3KUQqAMAwD0Kxxu9buf6POmuqPijIUQkkfKXvvqEAD6pQZ/2eLgRWssOdtE7azf+OG4pkuuXKkXOmpIc3o0vhFbIVBC+NKC2OQYRa88XovXJ+bFx7q7GN/KHY2OAAAAABJRU5ErkJggg==" x="-0.005000px" y="-0.500000px" width="1.010000px" height="2.000000px" preserveAspectRatio="none" />
+<image id="id0000012016" transform="matrix(196.04 0 0 -20.5 759.78 171.765)" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAW0lEQVQYlX3KUQqAMAwD0Kxxu9buf6POmuqPijIUQkkfKXvvqEAD6pQZ/2eLgRWssOdtE7azf+OG4pkuuXKkXOmpIc3o0vhFbIVBC+NKC2OQYRa88XovXJ+bFx7q7GN/KHY2OAAAAABJRU5ErkJggg==" data-href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAW0lEQVQYlX3KUQqAMAwD0Kxxu9buf6POmuqPijIUQkkfKXvvqEAD6pQZ/2eLgRWssOdtE7azf+OG4pkuuXKkXOmpIc3o0vhFbIVBC+NKC2OQYRa88XovXJ+bFx7q7GN/KHY2OAAAAABJRU5ErkJggg==" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAW0lEQVQYlX3KUQqAMAwD0Kxxu9buf6POmuqPijIUQkkfKXvvqEAD6pQZ/2eLgRWssOdtE7azf+OG4pkuuXKkXOmpIc3o0vhFbIVBC+NKC2OQYRa88XovXJ+bFx7q7GN/KHY2OAAAAABJRU5ErkJggg==" x="-0.005000px" y="-0.500000px" width="1.010000px" height="2.000000px" preserveAspectRatio="none" />
 </g>
 
-<polygon points="655,115 655,135 845,135 845,115 " stroke="black" stroke-width="1.000000" fill="none" id="id0000012017" pointer-events="none" class="rectangle" />
-<polyline points="655.941,135 655.941,138 " fill="none" stroke-width="1.000000" stroke="black" id="id0000012018" class="line" />
-<text id="id0000012019" transform="matrix(1 0 0 1 655 115)" x="0.940594" y="25.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+<polygon points="758.8,141.015 758.8,182.015 956.8,182.015 956.8,141.015 " stroke="black" stroke-width="1.000000" fill="none" id="id0000012017" pointer-events="none" class="rectangle" />
+<polyline points="759.78,182.015 759.78,185.015 " fill="none" stroke-width="1.000000" stroke="black" id="id0000012018" class="line" />
+<text id="id0000012019" transform="matrix(1 0 0 1 758.8 141.015)" x="0.980198" y="46.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
 vmin
 </text>
 
-<polyline points="844.059,135 844.059,138 " fill="none" stroke-width="1.000000" stroke="black" id="id0000012020" class="line" />
-<text id="id0000012021" transform="matrix(1 0 0 1 655 115)" x="189.059402" y="25.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+<polyline points="955.82,182.015 955.82,185.015 " fill="none" stroke-width="1.000000" stroke="black" id="id0000012020" class="line" />
+<text id="id0000012021" transform="matrix(1 0 0 1 758.8 141.015)" x="197.019806" y="46.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
 vmax
 </text>
 
-<text id="id0000012022" transform="matrix(1 0 0 1 655 115)" x="95.000000" y="-10.000000" text-anchor="middle" font-size="16.000000px" >
+<text id="id0000012022" transform="matrix(1 0 0 1 758.8 141.015)" x="99.000000" y="-12.000000" text-anchor="middle" font-size="24.000000px" >
 Spectral
 </text>
 
@@ -264,25 +264,25 @@ Spectral
 <g id="id0000011947" >
 <g id="id0000011948" >
 <clipPath id="id0000011948clipper" >
-<polygon points="870,115 870,135 1060,135 1060,115 " id="id0000012023" class="rectangle" />
+<polygon points="992.4,141.015 992.4,182.015 1190.4,182.015 1190.4,141.015 " id="id0000012023" class="rectangle" />
 </clipPath>
 
 <g clip-path="url(#id0000011948clipper)" id="id0000011950" >
-<image id="id0000012024" transform="matrix(188.119 0 0 -10 870.941 130)" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAW0lEQVQYlX2KUQqAMAxDm855Oi/onbzO9rHQ4kcZbDqFUJLXh+s4oWmdFGX7FHQWkiIDO5Cn6K4PstRG6CC90mqzEoVe2fsAS7yale68odOELnGbyThp0ub5A2+P1X2BjqWbmgAAAABJRU5ErkJggg==" data-href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAW0lEQVQYlX2KUQqAMAxDm855Oi/onbzO9rHQ4kcZbDqFUJLXh+s4oWmdFGX7FHQWkiIDO5Cn6K4PstRG6CC90mqzEoVe2fsAS7yale68odOELnGbyThp0ub5A2+P1X2BjqWbmgAAAABJRU5ErkJggg==" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAW0lEQVQYlX2KUQqAMAxDm855Oi/onbzO9rHQ4kcZbDqFUJLXh+s4oWmdFGX7FHQWkiIDO5Cn6K4PstRG6CC90mqzEoVe2fsAS7yale68odOELnGbyThp0ub5A2+P1X2BjqWbmgAAAABJRU5ErkJggg==" x="-0.005000px" y="-0.500000px" width="1.010000px" height="2.000000px" preserveAspectRatio="none" />
+<image id="id0000012024" transform="matrix(196.04 0 0 -20.5 993.38 171.765)" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAW0lEQVQYlX2KUQqAMAxDm855Oi/onbzO9rHQ4kcZbDqFUJLXh+s4oWmdFGX7FHQWkiIDO5Cn6K4PstRG6CC90mqzEoVe2fsAS7yale68odOELnGbyThp0ub5A2+P1X2BjqWbmgAAAABJRU5ErkJggg==" data-href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAW0lEQVQYlX2KUQqAMAxDm855Oi/onbzO9rHQ4kcZbDqFUJLXh+s4oWmdFGX7FHQWkiIDO5Cn6K4PstRG6CC90mqzEoVe2fsAS7yale68odOELnGbyThp0ub5A2+P1X2BjqWbmgAAAABJRU5ErkJggg==" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAIAAACnuZzqAAAAW0lEQVQYlX2KUQqAMAxDm855Oi/onbzO9rHQ4kcZbDqFUJLXh+s4oWmdFGX7FHQWkiIDO5Cn6K4PstRG6CC90mqzEoVe2fsAS7yale68odOELnGbyThp0ub5A2+P1X2BjqWbmgAAAABJRU5ErkJggg==" x="-0.005000px" y="-0.500000px" width="1.010000px" height="2.000000px" preserveAspectRatio="none" />
 </g>
 
-<polygon points="870,115 870,135 1060,135 1060,115 " stroke="black" stroke-width="1.000000" fill="none" id="id0000012025" pointer-events="none" class="rectangle" />
-<polyline points="870.941,135 870.941,138 " fill="none" stroke-width="1.000000" stroke="black" id="id0000012026" class="line" />
-<text id="id0000012027" transform="matrix(1 0 0 1 870 115)" x="0.940594" y="25.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+<polygon points="992.4,141.015 992.4,182.015 1190.4,182.015 1190.4,141.015 " stroke="black" stroke-width="1.000000" fill="none" id="id0000012025" pointer-events="none" class="rectangle" />
+<polyline points="993.38,182.015 993.38,185.015 " fill="none" stroke-width="1.000000" stroke="black" id="id0000012026" class="line" />
+<text id="id0000012027" transform="matrix(1 0 0 1 992.4 141.015)" x="0.980198" y="46.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
 vmin
 </text>
 
-<polyline points="1059.06,135 1059.06,138 " fill="none" stroke-width="1.000000" stroke="black" id="id0000012028" class="line" />
-<text id="id0000012029" transform="matrix(1 0 0 1 870 115)" x="189.059402" y="25.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+<polyline points="1189.42,182.015 1189.42,185.015 " fill="none" stroke-width="1.000000" stroke="black" id="id0000012028" class="line" />
+<text id="id0000012029" transform="matrix(1 0 0 1 992.4 141.015)" x="197.019806" y="46.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
 vmax
 </text>
 
-<text id="id0000012030" transform="matrix(1 0 0 1 870 115)" x="95.000000" y="-10.000000" text-anchor="middle" font-size="16.000000px" >
+<text id="id0000012030" transform="matrix(1 0 0 1 992.4 141.015)" x="99.000000" y="-12.000000" text-anchor="middle" font-size="24.000000px" >
 PiYG
 </text>
 

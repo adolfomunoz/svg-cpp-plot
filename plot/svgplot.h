@@ -35,6 +35,15 @@ namespace { //Anonymous namespace, only visible from this .h
     
 }
 
+class Font {
+    float size_;
+public:
+    Font(float size = 10) : size_(size) {}
+    Font& fontsize(float size) {
+        size_=size; return (*this);
+    }
+    float fontsize() const { return size_; }
+};
 
 		
 class SVGPlot {
@@ -42,12 +51,15 @@ class SVGPlot {
 	std::vector<std::shared_ptr<Color>> cycle; std::size_t cycle_pos;
 
 	std::string ylabel_, xlabel_, title_;
+    Font ylabel_font, xlabel_font, title_font, xticklabels_font, yticklabels_font;
 	std::array<float,4> axis_; bool axis_set;
 	
 	std::vector<std::string> xticklabels_; bool xticklabels_set;
 	std::vector<float> xticks_; bool xticks_set;
 	std::vector<std::string> yticklabels_; bool yticklabels_set;
 	std::vector<float> yticks_; bool yticks_set;
+    
+    float linewidth_;
 	
 	
     std::list<std::shared_ptr<Plottable>> plottables;
@@ -55,10 +67,11 @@ class SVGPlot {
 	
 	std::vector<std::unique_ptr<SVGPlot>> subplots_;
     int nrows, ncols;
+    
     class SubplotsAdjust {
         float left_, right_, bottom_, top_, wspace_, hspace_;
     public:
-        SubplotsAdjust() : left_(0), right_(0), bottom_(0), top_(0), wspace_(0), hspace_(0) {}
+        SubplotsAdjust() : left_(0.01), right_(0.99), bottom_(0.01), top_(0.99), wspace_(0.01), hspace_(0.01) {}
         SubplotsAdjust& left(float v) { left_=v; return *this; }
         SubplotsAdjust& right(float v) { right_=v; return *this; }
         SubplotsAdjust& top(float v) { top_=v; return *this; }
@@ -76,51 +89,6 @@ class SVGPlot {
     
     unsigned long target_xticks, target_yticks;
 private:
-    std::array<float,4> yticks_margin(const std::array<float,4>& ax) const {
-        if (subplots_.empty())
-            return (!yticklabels(ax).empty())?
-                    std::array<float,4>{25,0,0,0}:
-                    ((!yticks(ax).empty())?
-                        std::array<float,4>{3,0,0,0}:
-                        std::array<float,4>{0,0,0,0});
-        else return std::array<float,4>{0,0,0,0};
-    }
-    
-    std::array<float,4> xticks_margin(const std::array<float,4>& ax) const {
-        if (subplots_.empty())
-            return (!xticklabels(ax).empty())?
-                    std::array<float,4>{0,0,0,15}:
-                    ((!xticks(ax).empty())?
-                        std::array<float,4>{0,0,0,3}:
-                        std::array<float,4>{0,0,0,0});
-        else return std::array<float,4>{0,0,0,0};
-    }
-    
-    std::array<float,4> ymargin(const std::array<float,4>& ax) const {
-        return yticks_margin(ax) +
-            (ylabel().empty()?std::array<float,4>{0,0,0,0}:std::array<float,4>{40,0,0,0});
-    }
-	
-    std::array<float,4> xmargin(const std::array<float,4>& ax) const {
-        return xticks_margin(ax) +
-            (xlabel().empty()?std::array<float,4>{0,0,0,0}:std::array<float,4>{0,0,0,30});
-    }
-    
-    std::array<float,4> subplots_margin() const {
-         if (subplots_.empty()) return std::array<float,4>{0,0,0,0};
-         else return std::array<float,4>{subplots_adjust_.left(),subplots_adjust_.right(),subplots_adjust_.top(),subplots_adjust_.bottom()};
-    }
-    
-    std::array<float,4> title_margin() const {
-        return (title().empty()?std::array<float,4>{5,5,5,5}:std::array<float,4>{5,5,35,5});
-    }  
-    
-    std::array<float,4> margin(const std::array<float,4>& ax) const {
-        return xmargin(ax) + ymargin(ax) + subplots_margin() + title_margin();
-    }
-    
-
-    
     float subplots_xmax(int c) const {
         float x = 0;
         for (int r = 0; r<nrows; ++r)
@@ -136,8 +104,65 @@ private:
                 y = std::max(sp->figsize()[1],y);
         return y;
     }
- 
     
+    std::array<float,2> subplot_size() const {
+        float width = 0, height = 0;
+        for (int r = 0; r<nrows; ++r) height += subplots_ymax(r);
+        for (int c = 0; c<ncols; ++c) width += subplots_xmax(c);
+        return std::array<float,2>{width*(1.0f+(ncols-1)*subplots_adjust_.wspace()/float(ncols)),height*(1.0f+(nrows-1)*subplots_adjust_.hspace()/float(nrows))};
+    }
+    
+    std::array<float,4> yticks_margin(const std::array<float,4>& ax) const {
+        if (subplots_.empty())
+            return (!yticklabels(ax).empty())?
+                    std::array<float,4>{yticklabels_font.fontsize()*2.5f,0,0,0}:
+                    ((!yticks(ax).empty())?
+                        std::array<float,4>{3,0,0,0}:
+                        std::array<float,4>{0,0,0,0});
+        else return std::array<float,4>{0,0,0,0};
+    }
+    
+    std::array<float,4> xticks_margin(const std::array<float,4>& ax) const {
+        if (subplots_.empty())
+            return (!xticklabels(ax).empty())?
+                    std::array<float,4>{0,0,0,xticklabels_font.fontsize()*1.5f}:
+                    ((!xticks(ax).empty())?
+                        std::array<float,4>{0,0,0,3}:
+                        std::array<float,4>{0,0,0,0});
+        else return std::array<float,4>{0,0,0,0};
+    }
+    
+    std::array<float,4> ymargin(const std::array<float,4>& ax) const {
+        return yticks_margin(ax) +
+            (ylabel().empty()?std::array<float,4>{0,0,0,0}:std::array<float,4>{ylabel_font.fontsize()*2,0,0,0});
+    }
+	
+    std::array<float,4> xmargin(const std::array<float,4>& ax) const {
+        return xticks_margin(ax) +
+            (xlabel().empty()?std::array<float,4>{0,0,0,0}:std::array<float,4>{0,0,0,xlabel_font.fontsize()*2});
+    }
+    
+    std::array<float,4> subplots_margin() const {
+        if (subplots_.empty()) return std::array<float,4>{0,0,0,0};
+        else {
+            float w, h;
+            if (figsize_set) { w = this->figsize_[0]; h = this->figsize_[1]; }
+            else { auto [x,y] = subplot_size(); w=x; h=y; }
+            return std::array<float,4>{w*subplots_adjust_.left(),w*(1.0f-subplots_adjust_.right()),h*(1.0f-subplots_adjust_.top()),h*subplots_adjust_.bottom()};
+        }
+    }
+    
+    std::array<float,4> title_margin() const {
+        return (title().empty()?std::array<float,4>{1,1,1,1}:std::array<float,4>{1,1,1+title_font.fontsize()*1.5f,1});
+    }  
+    
+    std::array<float,4> margin(const std::array<float,4>& ax) const {
+        return xmargin(ax) + ymargin(ax) + subplots_margin() + title_margin();
+    }
+    
+
+    
+
 public:
     SubplotsAdjust& subplots_adjust() { return subplots_adjust_; }
     
@@ -145,27 +170,29 @@ public:
         if (figsize_set) return figsize_;
         else if ((nrows > 0) && (ncols > 0)) {
             auto marg = subplots_margin()+title_margin();
-            float width = 0, height = 0;
-            for (int r = 0; r<nrows; ++r) height += subplots_ymax(r);
-            for (int c = 0; c<ncols; ++c) width += subplots_xmax(c);
-            return std::array<float,2>{width+marg[0]+marg[1]+ncols*subplots_adjust_.wspace(),
-                                       height+marg[2]+marg[3]+nrows*subplots_adjust_.hspace()};
+            auto [width,height] = subplot_size();
+            return std::array<float,2>{marg[0]+marg[1]+width,
+                                       marg[2]+marg[3]+height};
             
         }
-		else return std::array<float,2>{200.0f,150.0f}; 
+		else return std::array<float,2>{640.0f,480.0f}; // Default size in matplotlib, although instead of inches we have dots and assume 100 dpi
     }
 	
 	SVGPlot& figsize(const std::array<float,2>& v) { figsize_set=true; figsize_=v; return (*this);}
 
 	std::string_view title() const { return title_; }
 	SVGPlot& title(std::string_view l) { title_=l; return (*this); }
-	void set_title(std::string_view l) { title(l); }
+	Font& set_title(std::string_view l) { title(l); return title_font; }
 	std::string_view ylabel() const { return ylabel_; }
 	SVGPlot& ylabel(std::string_view l) { ylabel_=l; return (*this); }
-	void set_ylabel(std::string_view l) { ylabel(l); }
+	Font& set_ylabel(std::string_view l) { ylabel(l); return ylabel_font; }
 	std::string_view xlabel() const { return xlabel_; }
 	SVGPlot& xlabel(std::string_view l) { xlabel_=l; return (*this); }
-	void set_xlabel(std::string_view l) { xlabel(l); }
+	Font& set_xlabel(std::string_view l) { xlabel(l); return xlabel_font; }
+    
+    float linewidth() const { return linewidth_; }
+    SVGPlot& linewidth(float f) { linewidth_=f; return *this; }
+    void set_linewidth(float f) { linewidth(f); }
 	
 	SVGPlot& xticks(const std::vector<float>& v) {
 		xticks_ = v; xticks_set=true; return (*this);
@@ -366,8 +393,8 @@ private:
 		if (!title().empty()) {
             auto marg = margin(local_axis);
 			graph.add(
-				_2d::text({0.5*(graph_size[0]-marg[0]-marg[1]),-10},title()))
-					.font_size(16)
+				_2d::text({0.5*(graph_size[0]-marg[0]-marg[1]),-0.5*title_font.fontsize()},title()))
+					.font_size(title_font.fontsize())
 					.text_anchor(svg_cpp_plot::text_anchor_middle);
 		}
 	}
@@ -376,8 +403,8 @@ private:
 		if (!xlabel().empty()) {
             auto marg = margin(local_axis);
 			graph.add(
-				_2d::text({0.5*(graph_size[0]-marg[0]-marg[1]),graph_size[1]+26-marg[2]-marg[3]},xlabel()))
-					.font_size(14)
+				_2d::text({0.5*(graph_size[0]-marg[0]-marg[1]),graph_size[1]+10+xlabel_font.fontsize()-marg[2]-marg[3]},xlabel()))
+					.font_size(xlabel_font.fontsize())
 					.text_anchor(svg_cpp_plot::text_anchor_middle);
 		}
 	}
@@ -385,7 +412,7 @@ private:
 	void add_ylabel(_2d::Group& graph, const std::array<float,2> graph_size, const std::array<float,4>& local_axis) const {
 		if (!ylabel().empty()) {
             auto marg = margin(local_axis);
-			graph.add(_2d::group(_2d::translate({-26,0.5*(graph_size[1]-marg[2]-marg[3])})*_2d::rotate(-0.5*M_PI))).add(_2d::text({0,0},ylabel())).font_size(14).text_anchor(text_anchor_middle);
+			graph.add(_2d::group(_2d::translate({-10-ylabel_font.fontsize(),0.5*(graph_size[1]-marg[2]-marg[3])})*_2d::rotate(-0.5*M_PI))).add(_2d::text({0,0},ylabel())).font_size(ylabel_font.fontsize()).text_anchor(text_anchor_middle);
 		}
 	}
 	
@@ -399,11 +426,11 @@ private:
 			graph.add(_2d::line(
 				{global_x,graph_size[1]-(marg[2]+marg[3])},
 				{global_x,graph_size[1]-(marg[2]+marg[3])+3}))
-				.stroke(black).stroke_width(1);
+				.stroke(black).stroke_width(linewidth());
 			if (i<labels.size()) {
 				graph.add(
 					_2d::text({global_x,graph_size[1]-(marg[2]+marg[3])+5},labels[i]))
-						.font_size(10)
+						.font_size(xticklabels_font.fontsize())
 						.text_anchor(text_anchor_middle)
 						.dominant_baseline(dominant_baseline_hanging);
 			}
@@ -417,9 +444,9 @@ private:
 		for (std::size_t i=0;i<y.size();++i) {
 			float global_y = graph_size[1] - (marg[2]+marg[3]) - (graph_size[1]-marg[2]-marg[3])*(y[i] - local_axis[2])/(local_axis[3]-local_axis[2]);
 			graph.add(_2d::line({-3,global_y},{0,global_y}))
-				.stroke(black).stroke_width(1);
+				.stroke(black).stroke_width(linewidth());
 			if (i<labels.size()) {		
-				graph.add(_2d::text({-5,global_y},labels[i])).font_size(10).text_anchor(text_anchor_end).dominant_baseline(dominant_baseline_middle);
+				graph.add(_2d::text({-5,global_y},labels[i])).font_size(yticklabels_font.fontsize()).text_anchor(text_anchor_end).dominant_baseline(dominant_baseline_middle);
 			}
 		}
 	}
@@ -441,9 +468,9 @@ public:
                         auto subplot = _2d::group(_2d::translate({xpos,ypos}));
                         subplot.add(subplots_[r*ncols+c]->graph());
                         group.add(subplot);
-                        xpos += subplots_xmax(c)+subplots_adjust_.wspace();
+                        xpos += subplots_xmax(c)+(graph_size[0]-marg[0]-marg[1])*subplots_adjust_.wspace()/float(ncols);
                     }
-                ypos+=subplots_ymax(r)+subplots_adjust_.hspace();    
+                ypos+=subplots_ymax(r)+(graph_size[1]-marg[2]-marg[3])*subplots_adjust_.hspace()/float(nrows);    
             }
         } else {
             std::tuple<float,float> area_size(graph_size[0] - (marg[1]+marg[0]),graph_size[1] - (marg[2]+marg[3]));
@@ -452,7 +479,7 @@ public:
                 _2d::scale(std::get<0>(area_size)/(local_axis[1]-local_axis[0]),-std::get<1>(area_size)/(local_axis[3]-local_axis[2]))*
                 _2d::translate(-local_axis[0],-local_axis[3])));
             area.set("clip-path",std::string("url(#")+group.id()+"clipper)");
-            group.add(_2d::rect({0,0},area_size)).fill(none).stroke_width(1).stroke(black).pointer_events(pointer_events_none);
+            group.add(_2d::rect({0,0},area_size)).fill(none).stroke_width(linewidth()).stroke(black).pointer_events(pointer_events_none);
             for (const auto& p : plottables) area.add_ptr(p);
 		
             add_xticks(group, graph_size, local_axis);
@@ -476,7 +503,7 @@ protected:
 	}
 public:
 	SVGPlot() :
-		figsize_set(false), cycle(detail::color_vector({"#1f77b4","#ff7f0e","#2ca02c","#d62728","#9467bd","#8c564b","#e377c2","#7f7f7f","#bcbd22","#17becf"})), cycle_pos(0), axis_set(false),xticklabels_set(false), xticks_set(false), yticklabels_set(false), yticks_set(false), nrows(-1), ncols(-1), parent(nullptr), target_xticks(5), target_yticks(5) {	}
+		figsize_set(false), cycle(detail::color_vector({"#1f77b4","#ff7f0e","#2ca02c","#d62728","#9467bd","#8c564b","#e377c2","#7f7f7f","#bcbd22","#17becf"})), cycle_pos(0), ylabel_font(18), xlabel_font(18), title_font(24), xticklabels_font(14), yticklabels_font(14), axis_set(false),xticklabels_set(false), xticks_set(false), yticklabels_set(false), yticks_set(false), linewidth_(1), nrows(-1), ncols(-1), parent(nullptr), target_xticks(5), target_yticks(5) {	}
         
     /*******************************************************
      * SUBPLOT
