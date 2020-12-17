@@ -63,6 +63,8 @@ class ScatterColorType : public ScatterColor {
 public:
     ScatterColorType(const std::vector<T>& data) : data(data) {}
     ScatterColorType(std::vector<T>&& data) : data(std::forward<std::vector<T>>(data)) {}
+    template<typename Collection>
+    ScatterColorType(const Collection& d) : ScatterColorType(std::vector<T>(d.begin(),d.end())) {}
 protected:
     float calculated_vmin() const override {
         float temp_vmin = detail::vmin_element(data[0]);
@@ -117,9 +119,9 @@ public:
 	}
 
 	Scatter& marker(std::string_view f) { 
-		if (f == "o") return marker(_2d::circle({0,0},1.2));
-        else if (f == ".") return marker(_2d::circle({0,0},0.6));
-		else if (f == ",") return marker(_2d::circle({0,0},0.2));
+		if (f == "o") return marker(_2d::circle({0,0},2));
+        else if (f == ".") return marker(_2d::circle({0,0},1));
+		else if (f == ",") return marker(_2d::circle({0,0},0.6));
 		else if (f == "v") return marker(_2d::triangle({0,1},{1,-1},{-1,-1}));
 		else if (f == ">") return marker(_2d::triangle({1,0},{-1,1},{-1,-1}));
 		else if (f == "^") return marker(_2d::triangle({0,-1},{1,1},{-1,1}));
@@ -148,18 +150,21 @@ public:
 
     Scatter& vmin(float f) { scatter_color->vmin(f); return *this; }
     Scatter& vmax(float f) { scatter_color->vmax(f); return *this; }
+    Scatter& cmap(std::string_view s) { scatter_color->cmap(s); return *this; }
 
 	Scatter& s(float f) { markersize_=std::vector<float>(1,f); return *this; }
 	Scatter& s(const std::vector<float>& f) { markersize_=f; return *this; }
     
     template<typename C>
-	Scatter& c(const C& col) { scatter_color = std::make_unique<ScatterColorType<typename std::decay<C>::type>>(col); return *this; }
+	Scatter& c(const C& col) { scatter_color = std::make_unique<ScatterColorType<typename std::decay<C>::type::value_type>>(col); return *this; }
 	Scatter& c(const std::string& col) { scatter_color=std::make_unique<ScatterColorConstant>(detail::color(col)); return *this; }
 	Scatter& c(const char* col) { return c(std::string(col)); return *this; }
 	Scatter& c(const std::shared_ptr<Color>& col) { 
         if (col) scatter_color=std::make_unique<ScatterColorConstant>(col); 
         return *this; 
     }
+    
+    
    
 private:
 	float markersize(int i) const { 

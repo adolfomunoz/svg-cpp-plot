@@ -52,12 +52,17 @@ int main(int argc, char** argv) {
         plt.savefig("../doc/svgplot/scatter/example4.svg");
 	}
     
-/*    { // Example 4
+    { // Example 5
         std::mt19937 gen{1}; //Fixed seed
         std::uniform_real_distribution<float> d(0,1);
-        std::list<float> x,y;
-        for (int i=0;i<10;++i) for (int j=0;j<10;++j) for (int s=0;s<2;++s) {
-            x.push_back(i+d(gen)); y.push_back(j+d(gen)); 
-    } */
+        std::list<float> x,y, value;
+        for (int i=0;i<10;++i) for (int j=0;j<10;++j) for (int s=0;s<3;++s) {
+            x.push_back(i+d(gen)); y.push_back(j+d(gen)); value.push_back(sqrt((x.back()-5.0f)*(x.back()-5.0f)+(y.back()-5.0f)*(y.back()-5.0f)));
+        }
+        svg_cpp_plot::SVGPlot plt; int p = 0;
+        for (auto cmap : {"grayscale","viridis","plasma"})
+            plt.subplot(1,3,p++).figsize({200,200}).scatter(x,y).c(value).cmap(cmap);
+        plt.savefig("../doc/svgplot/scatter/example5.svg");
+    }
 
 }
