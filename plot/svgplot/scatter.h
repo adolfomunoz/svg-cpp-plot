@@ -8,6 +8,7 @@
 #include "../../2d/points.h"
 #include "../../2d/polyline.h"
 #include "color.h"
+#include "cmap.h"
 
 namespace svg_cpp_plot {
     
@@ -133,7 +134,9 @@ public:
     
         return *this; 
     }
-    
+     
+    Scatter(const std::vector<std::tuple<float,float>>& data) : data(data), scatter_color(std::make_unique<ScatterColorConstant>(std::make_shared<blackColor>())),markersize_(1,1.0f),alpha_(1) { marker("o"); }
+   
 	template<typename X, typename Y>
 	Scatter(const X& x, const Y& y) : scatter_color(std::make_unique<ScatterColorConstant>(std::make_shared<blackColor>())),markersize_(1,1.0f),alpha_(1) {
         marker("o");
@@ -153,7 +156,10 @@ public:
 	Scatter& c(const C& col) { scatter_color = std::make_unique<ScatterColorType<typename std::decay<C>::type>>(col); return *this; }
 	Scatter& c(const std::string& col) { scatter_color=std::make_unique<ScatterColorConstant>(detail::color(col)); return *this; }
 	Scatter& c(const char* col) { return c(std::string(col)); return *this; }
-	Scatter& c(const std::shared_ptr<Color>& col) { scatter_color=std::make_unique<ScatterColorConstant>(col); return *this; }
+	Scatter& c(const std::shared_ptr<Color>& col) { 
+        if (col) scatter_color=std::make_unique<ScatterColorConstant>(col); 
+        return *this; 
+    }
    
 private:
 	float markersize(int i) const { 
