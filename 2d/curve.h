@@ -67,6 +67,8 @@ public:
 				f_samples.push_back(f(t));
 				df_samples.push_back(df(t));
 			}
+            f_samples.push_back(f(tmax));
+            df_samples.push_back(df(tmax));
 	}
 	
 	Path element(const Matrix& m) const noexcept override {
@@ -93,7 +95,7 @@ auto curve(F&& f, float tmin, float tmax, unsigned int nsamples = 100) {
 	return curve_derivative(std::forward<F>(f), [f,dt] (float t) { return (f(t+0.05f*dt)-f(t))/(0.05f*dt); }, tmin, tmax, nsamples);
 }
 
-auto circle(const std::tuple<float,float>& center, float radius, unsigned int nsamples=16) {
+auto circle(const std::tuple<float,float>& center, float radius, unsigned int nsamples=8) {
 	return curve_derivative(
 		[center,radius] (float a) { return center + std::tuple<float,float>(radius*std::sin(a),radius*std::cos(a)); },
 		[center,radius] (float a) { return std::tuple<float,float>(radius*std::cos(a),-radius*std::sin(a)); }, 0, 2*M_PI, nsamples);
