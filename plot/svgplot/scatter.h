@@ -157,13 +157,17 @@ public:
     
     template<typename C>
 	Scatter& c(const C& col) { scatter_color = std::make_unique<ScatterColorType<typename std::decay<C>::type::value_type>>(col); return *this; }
+    template<typename C>
+	Scatter& c(std::vector<C>&& col) { scatter_color = std::make_unique<ScatterColorType<C>>(std::forward<std::vector<C>>(col)); return *this; }
+    Scatter& c(const std::initializer_list<float>& l) { return c(std::vector<float>(l)); }
+    Scatter& c(const std::initializer_list<std::tuple<float,float,float>>& l) { return c(std::vector<std::tuple<float,float,float>>(l)); }
+    Scatter& c(const std::initializer_list<std::tuple<float,float,float,float>>& l) { return c(std::vector<std::tuple<float,float,float,float>>(l)); }
 	Scatter& c(const std::string& col) { scatter_color=std::make_unique<ScatterColorConstant>(detail::color(col)); return *this; }
 	Scatter& c(const char* col) { return c(std::string(col)); return *this; }
 	Scatter& c(const std::shared_ptr<Color>& col) { 
         if (col) scatter_color=std::make_unique<ScatterColorConstant>(col); 
         return *this; 
     }
-    
     
    
 private:

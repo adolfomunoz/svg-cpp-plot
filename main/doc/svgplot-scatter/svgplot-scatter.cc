@@ -64,5 +64,12 @@ int main(int argc, char** argv) {
             plt.subplot(1,3,p++).figsize({200,200}).scatter(x,y).c(value).cmap(cmap);
         plt.savefig("../doc/svgplot/scatter/example5.svg");
     }
+        
+    { // Example 6
+        svg_cpp_plot::SVGPlot plt;
+        plt.scatter({0,0,0},{0,2,4}).c({{0,1,0.25},{1.0,0.75,0},{1,0.25,0.25}});
+        plt.figsize({10,25}).axis({-2,2,-2,6}).xticks({}).yticks({}).linewidth(0);
+        plt.savefig("../doc/svgplot/scatter/example6.svg");
+    }
 
 }
