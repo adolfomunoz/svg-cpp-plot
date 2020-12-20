@@ -11,7 +11,7 @@ int main(int argc, char** argv) {
         for (int n=0;n<50;++n) { x.push_back(d(gen)); y.push_back(d(gen)); }
         svg_cpp_plot::SVGPlot plt;
         plt.scatter(x,y);
-        plt.savefig("../doc/svgplot/scatter/example1.svg");
+        plt.figsize({200,200}).savefig("../doc/svgplot/scatter/example1.svg");
 	}
     
 	{ // Example 2
@@ -25,7 +25,7 @@ int main(int argc, char** argv) {
             }            
             plt.scatter(x,y);
         }            
-        plt.savefig("../doc/svgplot/scatter/example2.svg");
+        plt.figsize({200,200}).savefig("../doc/svgplot/scatter/example2.svg");
 	}
     
     { // Example 3
@@ -36,8 +36,8 @@ int main(int argc, char** argv) {
             x.push_back(d(gen)); y.push_back(d(gen)); 
         }
         svg_cpp_plot::SVGPlot plt;
-        plt.scatter(x,y).c("r").alpha(0.5).s(2);
-        plt.savefig("../doc/svgplot/scatter/example3.svg");
+        plt.scatter(x,y).c("r").alpha(0.5).s(2).edgecolors("black").linewidths(0.5);
+        plt.figsize({200,200}).savefig("../doc/svgplot/scatter/example3.svg");
 	}
     
     { // Example 4

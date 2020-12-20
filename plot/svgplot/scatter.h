@@ -108,8 +108,8 @@ public:
 
 class Scatter : public Plottable  {
     std::vector<std::tuple<float,float>> data;
-    std::unique_ptr<ScatterColor> scatter_color;
-    std::vector<float> markersize_;
+    std::unique_ptr<ScatterColor> scatter_color, edgecolors_;
+    std::vector<float> markersize_, linewidths_;
     std::shared_ptr<_2d::Element> marker_;
 //    bool border_based_marker_; <- We cannot have border_based_markers if we have to scale them so it is better that we have a single type of marker that just takes us a little bit longer to define
     float alpha_;
@@ -147,10 +147,10 @@ public:
         return *this; 
     }
      
-    Scatter(const std::vector<std::tuple<float,float>>& data) : data(data), scatter_color(std::make_unique<ScatterColorConstant>(std::make_shared<blackColor>())),markersize_(1,1.0f),alpha_(1) { marker("o"); }
+    Scatter(const std::vector<std::tuple<float,float>>& data) : data(data), scatter_color(std::make_unique<ScatterColorConstant>(std::make_shared<blackColor>())),edgecolors_(std::make_unique<ScatterColorConstant>(std::make_shared<blackColor>())),markersize_(1,1.0f),linewidths_(1,0.0f),alpha_(1) { marker("o"); }
    
 	template<typename X, typename Y>
-	Scatter(const X& x, const Y& y) : scatter_color(std::make_unique<ScatterColorConstant>(std::make_shared<blackColor>())),markersize_(1,1.0f),alpha_(1) {
+	Scatter(const X& x, const Y& y) : scatter_color(std::make_unique<ScatterColorConstant>(std::make_shared<blackColor>())),edgecolors_(std::make_unique<ScatterColorConstant>(std::make_shared<blackColor>())),markersize_(1,1.0f),linewidths_(1,0.0f),alpha_(1) {
         marker("o");
 		auto ix = x.begin(); auto iy = y.begin();
 		for (;(ix != x.end()) && (iy != y.end());++ix,++iy)
@@ -164,6 +164,12 @@ public:
 
 	Scatter& s(float f) { markersize_=std::vector<float>(1,f); return *this; }
 	Scatter& s(const std::vector<float>& f) { markersize_=f; return *this; }
+	Scatter& s(std::vector<float>&& f) { markersize_=std::move(f); return *this; }
+    
+    Scatter& linewidths(float f) { linewidths_=std::vector<float>(1,f); return *this; }
+    Scatter& linewidths(const std::vector<float>& f) { linewidths_=f; return *this; }
+    Scatter& linewidths(std::vector<float>&& f) { linewidths_=std::move(f); return *this; }
+    
     
     template<typename C>
 	Scatter& c(const C& col) { scatter_color = std::make_unique<ScatterColorType<typename std::decay<C>::type::value_type>>(col); return *this; }
@@ -179,10 +185,27 @@ public:
         return *this; 
     }
     
+    template<typename C>
+	Scatter& edgecolors(const C& col) { edgecolors_ = std::make_unique<ScatterColorType<typename std::decay<C>::type::value_type>>(col); return *this; }
+    template<typename C>
+	Scatter& edgecolors(std::vector<C>&& col) { edgecolors_ = std::make_unique<ScatterColorType<C>>(std::forward<std::vector<C>>(col)); return *this; }
+    Scatter& edgecolors(const std::initializer_list<float>& l) { return edgecolors(std::vector<float>(l)); }
+    Scatter& edgecolors(const std::initializer_list<std::tuple<float,float,float>>& l) { return edgecolors(std::vector<std::tuple<float,float,float>>(l)); }
+    Scatter& edgecolors(const std::initializer_list<std::tuple<float,float,float,float>>& l) { return edgecolors(std::vector<std::tuple<float,float,float,float>>(l)); }
+	Scatter& edgecolors(const std::string& col) { edgecolors_=std::make_unique<ScatterColorConstant>(detail::color(col)); return *this; }
+	Scatter& edgecolors(const char* col) { return edgecolors(std::string(col)); return *this; }
+	Scatter& edgecolors(const std::shared_ptr<Color>& col) { 
+        if (col) edgecolors_=std::make_unique<ScatterColorConstant>(col); 
+        return *this; 
+    }
+    
    
 private:
 	float markersize(int i) const { 
         return markersize_[i%markersize_.size()]; 
+    }
+	float linewidth(int i) const { 
+        return linewidths_[i%linewidths_.size()]; 
     }
     
 public:
@@ -196,12 +219,14 @@ public:
         //We need this in memory in case we are generating the corresponding color and it gets out of memory
         std::vector<std::shared_ptr<Color>> colors(data.size()); 
 		for (std::size_t i = 0; i<data.size(); ++i) { colors[i] = scatter_color->color(i); }
+        std::vector<std::shared_ptr<Color>> edgecolors(data.size()); 
+		for (std::size_t i = 0; i<data.size(); ++i) { edgecolors[i] = edgecolors_->color(i); }
         
 		for (std::size_t i = 0; i<data.size(); ++i) {
             float size = markersize(i);
 			auto& datapoint = g.add(Group());
             datapoint.add(FixedGenerator(_2d::translate(_2d::transform_point(m,data[i]))*_2d::scale({size,size}),marker_));
-            datapoint.stroke_width(0).fill(*colors[i]).opacity(alpha()*scatter_color->opacity(i));
+            datapoint.stroke_width(linewidth(i)).stroke(*edgecolors[i]).fill(*colors[i]).opacity(alpha()*scatter_color->opacity(i));
 		}
 		return g.to_string();
 	}
