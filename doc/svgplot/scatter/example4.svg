@@ -1,23 +1,23 @@
-<svg viewBox="0 0 32.855 18.4016" height="100%" width="100%" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" id="id0000000636" >
+<svg viewBox="0 0 32.855 18.4016" height="100%" width="100%" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" id="id0000000634" >
+<g id="id0000000635" >
+<g id="id0000000636" >
 <g id="id0000000637" >
-<g id="id0000000638" >
-<g id="id0000000639" >
-<clipPath id="id0000000639clipper" >
-<polygon points="2.3025,5.1608 2.3025,8.1608 5.3025,8.1608 5.3025,5.1608 " id="id0000000686" class="rectangle" />
+<clipPath id="id0000000637clipper" >
+<polygon points="2.3025,5.1608 2.3025,8.1608 5.3025,8.1608 5.3025,5.1608 " id="id0000000684" class="rectangle" />
 </clipPath>
 
-<g clip-path="url(#id0000000639clipper)" id="id0000000641" >
-<g id="id0000000687" >
-<g opacity="1.000000" fill="#1f77b4" stroke-width="0.000000" id="id0000000688" >
-<path id="id0000000690" d="M 3.8025 8.6608 C 4.4009 8.6608 4.99307 8.37563 5.36616 7.90778 C 5.73926 7.43993 5.88551 6.79915 5.75236 6.21576 C 5.6192 5.63236 5.20941 5.1185 4.67027 4.85886 C 4.13113 4.59923 3.47387 4.59923 2.93473 4.85886 C 2.39559 5.1185 1.9858 5.63236 1.85264 6.21576 C 1.71949 6.79915 1.86574 7.43993 2.23884 7.90778 C 2.61193 8.37563 3.2041 8.6608 3.8025 8.6608 " />
+<g clip-path="url(#id0000000637clipper)" id="id0000000639" >
+<g id="id0000000685" >
+<g opacity="1.000000" fill="#1f77b4" stroke-width="0.000000" id="id0000000686" >
+<path id="id0000000688" d="M 3.8025 7.6608 C 4.1017 7.6608 4.39778 7.51821 4.58433 7.28429 C 4.77088 7.05037 4.84401 6.72998 4.77743 6.43828 C 4.71085 6.14658 4.50595 5.88965 4.23638 5.75983 C 3.96681 5.63001 3.63819 5.63001 3.36862 5.75983 C 3.09905 5.88965 2.89415 6.14658 2.82757 6.43828 C 2.76099 6.72998 2.83412 7.05037 3.02067 7.28429 C 3.20722 7.51821 3.5033 7.6608 3.8025 7.6608 " />
 </g>
 
 </g>
 
 </g>
 
-<polygon points="2.3025,5.1608 2.3025,8.1608 5.3025,8.1608 5.3025,5.1608 " stroke="black" stroke-width="0.010000" fill="none" id="id0000000691" pointer-events="none" class="rectangle" />
-<text id="id0000000692" transform="matrix(1 0 0 1 2.3025 5.1608)" x="1.500000" y="-1.000000" text-anchor="middle" font-size="2.000000px" >
+<polygon points="2.3025,5.1608 2.3025,8.1608 5.3025,8.1608 5.3025,5.1608 " stroke="black" stroke-width="0.010000" fill="none" id="id0000000689" pointer-events="none" class="rectangle" />
+<text id="id0000000690" transform="matrix(1 0 0 1 2.3025 5.1608)" x="1.500000" y="-1.000000" text-anchor="middle" font-size="2.000000px" >
 'o'
 </text>
 
@@ -25,24 +25,24 @@
 
 </g>
 
-<g id="id0000000642" >
-<g id="id0000000643" >
-<clipPath id="id0000000643clipper" >
-<polygon points="7.35292,5.1608 7.35292,8.1608 10.3529,8.1608 10.3529,5.1608 " id="id0000000693" class="rectangle" />
+<g id="id0000000640" >
+<g id="id0000000641" >
+<clipPath id="id0000000641clipper" >
+<polygon points="7.35292,5.1608 7.35292,8.1608 10.3529,8.1608 10.3529,5.1608 " id="id0000000691" class="rectangle" />
 </clipPath>
 
-<g clip-path="url(#id0000000643clipper)" id="id0000000645" >
-<g id="id0000000694" >
-<g opacity="1.000000" fill="#1f77b4" stroke-width="0.000000" id="id0000000695" >
-<path id="id0000000697" d="M 8.85292 7.6608 C 9.15212 7.6608 9.4482 7.51821 9.63475 7.28429 C 9.8213 7.05037 9.89442 6.72998 9.82784 6.43828 C 9.76127 6.14658 9.55637 5.88965 9.2868 5.75983 C 9.01723 5.63001 8.6886 5.63001 8.41903 5.75983 C 8.14946 5.88965 7.94457 6.14658 7.87799 6.43828 C 7.81141 6.72998 7.88454 7.05037 8.07108 7.28429 C 8.25763 7.51821 8.55372 7.6608 8.85292 7.6608 " />
+<g clip-path="url(#id0000000641clipper)" id="id0000000643" >
+<g id="id0000000692" >
+<g opacity="1.000000" fill="#1f77b4" stroke-width="0.000000" id="id0000000693" >
+<path id="id0000000695" d="M 8.85292 7.1608 C 9.00252 7.1608 9.15056 7.08951 9.24383 6.97254 C 9.33711 6.85558 9.37367 6.69539 9.34038 6.54954 C 9.30709 6.40369 9.20464 6.27522 9.06986 6.21032 C 8.93507 6.14541 8.77076 6.14541 8.63597 6.21032 C 8.50119 6.27522 8.39874 6.40369 8.36545 6.54954 C 8.33216 6.69539 8.36873 6.85558 8.462 6.97254 C 8.55527 7.08951 8.70332 7.1608 8.85292 7.1608 " />
 </g>
 
 </g>
 
 </g>
 
-<polygon points="7.35292,5.1608 7.35292,8.1608 10.3529,8.1608 10.3529,5.1608 " stroke="black" stroke-width="0.010000" fill="none" id="id0000000698" pointer-events="none" class="rectangle" />
-<text id="id0000000699" transform="matrix(1 0 0 1 7.35292 5.1608)" x="1.500000" y="-1.000000" text-anchor="middle" font-size="2.000000px" >
+<polygon points="7.35292,5.1608 7.35292,8.1608 10.3529,8.1608 10.3529,5.1608 " stroke="black" stroke-width="0.010000" fill="none" id="id0000000696" pointer-events="none" class="rectangle" />
+<text id="id0000000697" transform="matrix(1 0 0 1 7.35292 5.1608)" x="1.500000" y="-1.000000" text-anchor="middle" font-size="2.000000px" >
 '.'
 </text>
 
@@ -50,24 +50,24 @@
 
 </g>
 
-<g id="id0000000646" >
-<g id="id0000000647" >
-<clipPath id="id0000000647clipper" >
-<polygon points="12.4033,5.1608 12.4033,8.1608 15.4033,8.1608 15.4033,5.1608 " id="id0000000700" class="rectangle" />
+<g id="id0000000644" >
+<g id="id0000000645" >
+<clipPath id="id0000000645clipper" >
+<polygon points="12.4033,5.1608 12.4033,8.1608 15.4033,8.1608 15.4033,5.1608 " id="id0000000698" class="rectangle" />
 </clipPath>
 
-<g clip-path="url(#id0000000647clipper)" id="id0000000649" >
-<g id="id0000000701" >
-<g opacity="1.000000" fill="#1f77b4" stroke-width="0.000000" id="id0000000702" >
-<path id="id0000000704" d="M 13.9033 7.2608 C 14.0829 7.2608 14.2605 7.17525 14.3724 7.03489 C 14.4844 6.89454 14.5282 6.70231 14.4883 6.52729 C 14.4483 6.35227 14.3254 6.19811 14.1637 6.12022 C 14.0019 6.04233 13.8047 6.04233 13.643 6.12022 C 13.4813 6.19811 13.3583 6.35227 13.3184 6.52729 C 13.2784 6.70231 13.3223 6.89454 13.4342 7.03489 C 13.5462 7.17525 13.7238 7.2608 13.9033 7.2608 " />
+<g clip-path="url(#id0000000645clipper)" id="id0000000647" >
+<g id="id0000000699" >
+<g opacity="1.000000" fill="#1f77b4" stroke-width="0.000000" id="id0000000700" >
+<path id="id0000000702" d="M 13.9033 6.8908 C 13.9721 6.8908 14.0402 6.85801 14.0832 6.8042 C 14.1261 6.7504 14.1429 6.67671 14.1276 6.60962 C 14.1123 6.54253 14.0651 6.48344 14.0031 6.45358 C 13.9411 6.42372 13.8655 6.42372 13.8035 6.45358 C 13.7415 6.48344 13.6944 6.54253 13.6791 6.60962 C 13.6638 6.67671 13.6806 6.7504 13.7235 6.8042 C 13.7664 6.85801 13.8345 6.8908 13.9033 6.8908 " />
 </g>
 
 </g>
 
 </g>
 
-<polygon points="12.4033,5.1608 12.4033,8.1608 15.4033,8.1608 15.4033,5.1608 " stroke="black" stroke-width="0.010000" fill="none" id="id0000000705" pointer-events="none" class="rectangle" />
-<text id="id0000000706" transform="matrix(1 0 0 1 12.4033 5.1608)" x="1.500000" y="-1.000000" text-anchor="middle" font-size="2.000000px" >
+<polygon points="12.4033,5.1608 12.4033,8.1608 15.4033,8.1608 15.4033,5.1608 " stroke="black" stroke-width="0.010000" fill="none" id="id0000000703" pointer-events="none" class="rectangle" />
+<text id="id0000000704" transform="matrix(1 0 0 1 12.4033 5.1608)" x="1.500000" y="-1.000000" text-anchor="middle" font-size="2.000000px" >
 ','
 </text>
 
@@ -75,24 +75,24 @@
 
 </g>
 
-<g id="id0000000650" >
-<g id="id0000000651" >
-<clipPath id="id0000000651clipper" >
-<polygon points="17.4537,5.1608 17.4537,8.1608 20.4537,8.1608 20.4537,5.1608 " id="id0000000707" class="rectangle" />
+<g id="id0000000648" >
+<g id="id0000000649" >
+<clipPath id="id0000000649clipper" >
+<polygon points="17.4537,5.1608 17.4537,8.1608 20.4537,8.1608 20.4537,5.1608 " id="id0000000705" class="rectangle" />
 </clipPath>
 
-<g clip-path="url(#id0000000651clipper)" id="id0000000653" >
-<g id="id0000000708" >
-<g opacity="1.000000" fill="#1f77b4" stroke-width="0.000000" id="id0000000709" >
-<polygon points="18.9537,7.6608 19.9537,5.6608 17.9537,5.6608 " id="id0000000711" class="triangle" />
+<g clip-path="url(#id0000000649clipper)" id="id0000000651" >
+<g id="id0000000706" >
+<g opacity="1.000000" fill="#1f77b4" stroke-width="0.000000" id="id0000000707" >
+<polygon points="18.9537,7.6608 19.9537,5.6608 17.9537,5.6608 " id="id0000000709" class="triangle" />
 </g>
 
 </g>
 
 </g>
 
-<polygon points="17.4537,5.1608 17.4537,8.1608 20.4537,8.1608 20.4537,5.1608 " stroke="black" stroke-width="0.010000" fill="none" id="id0000000712" pointer-events="none" class="rectangle" />
-<text id="id0000000713" transform="matrix(1 0 0 1 17.4537 5.1608)" x="1.500000" y="-1.000000" text-anchor="middle" font-size="2.000000px" >
+<polygon points="17.4537,5.1608 17.4537,8.1608 20.4537,8.1608 20.4537,5.1608 " stroke="black" stroke-width="0.010000" fill="none" id="id0000000710" pointer-events="none" class="rectangle" />
+<text id="id0000000711" transform="matrix(1 0 0 1 17.4537 5.1608)" x="1.500000" y="-1.000000" text-anchor="middle" font-size="2.000000px" >
 'v'
 </text>
 
@@ -100,24 +100,24 @@
 
 </g>
 
-<g id="id0000000654" >
-<g id="id0000000655" >
-<clipPath id="id0000000655clipper" >
-<polygon points="22.5042,5.1608 22.5042,8.1608 25.5042,8.1608 25.5042,5.1608 " id="id0000000714" class="rectangle" />
+<g id="id0000000652" >
+<g id="id0000000653" >
+<clipPath id="id0000000653clipper" >
+<polygon points="22.5042,5.1608 22.5042,8.1608 25.5042,8.1608 25.5042,5.1608 " id="id0000000712" class="rectangle" />
 </clipPath>
 
-<g clip-path="url(#id0000000655clipper)" id="id0000000657" >
-<g id="id0000000715" >
-<g opacity="1.000000" fill="#1f77b4" stroke-width="0.000000" id="id0000000716" >
-<polygon points="25.0042,6.6608 23.0042,7.6608 23.0042,5.6608 " id="id0000000718" class="triangle" />
+<g clip-path="url(#id0000000653clipper)" id="id0000000655" >
+<g id="id0000000713" >
+<g opacity="1.000000" fill="#1f77b4" stroke-width="0.000000" id="id0000000714" >
+<polygon points="25.0042,6.6608 23.0042,7.6608 23.0042,5.6608 " id="id0000000716" class="triangle" />
 </g>
 
 </g>
 
 </g>
 
-<polygon points="22.5042,5.1608 22.5042,8.1608 25.5042,8.1608 25.5042,5.1608 " stroke="black" stroke-width="0.010000" fill="none" id="id0000000719" pointer-events="none" class="rectangle" />
-<text id="id0000000720" transform="matrix(1 0 0 1 22.5042 5.1608)" x="1.500000" y="-1.000000" text-anchor="middle" font-size="2.000000px" >
+<polygon points="22.5042,5.1608 22.5042,8.1608 25.5042,8.1608 25.5042,5.1608 " stroke="black" stroke-width="0.010000" fill="none" id="id0000000717" pointer-events="none" class="rectangle" />
+<text id="id0000000718" transform="matrix(1 0 0 1 22.5042 5.1608)" x="1.500000" y="-1.000000" text-anchor="middle" font-size="2.000000px" >
 '>'
 </text>
 
@@ -125,24 +125,24 @@
 
 </g>
 
-<g id="id0000000658" >
-<g id="id0000000659" >
-<clipPath id="id0000000659clipper" >
-<polygon points="27.5546,5.1608 27.5546,8.1608 30.5546,8.1608 30.5546,5.1608 " id="id0000000721" class="rectangle" />
+<g id="id0000000656" >
+<g id="id0000000657" >
+<clipPath id="id0000000657clipper" >
+<polygon points="27.5546,5.1608 27.5546,8.1608 30.5546,8.1608 30.5546,5.1608 " id="id0000000719" class="rectangle" />
 </clipPath>
 
-<g clip-path="url(#id0000000659clipper)" id="id0000000661" >
-<g id="id0000000722" >
-<g opacity="1.000000" fill="#1f77b4" stroke-width="0.000000" id="id0000000723" >
-<polygon points="29.0546,5.6608 30.0546,7.6608 28.0546,7.6608 " id="id0000000725" class="triangle" />
+<g clip-path="url(#id0000000657clipper)" id="id0000000659" >
+<g id="id0000000720" >
+<g opacity="1.000000" fill="#1f77b4" stroke-width="0.000000" id="id0000000721" >
+<polygon points="29.0546,5.6608 30.0546,7.6608 28.0546,7.6608 " id="id0000000723" class="triangle" />
 </g>
 
 </g>
 
 </g>
 
-<polygon points="27.5546,5.1608 27.5546,8.1608 30.5546,8.1608 30.5546,5.1608 " stroke="black" stroke-width="0.010000" fill="none" id="id0000000726" pointer-events="none" class="rectangle" />
-<text id="id0000000727" transform="matrix(1 0 0 1 27.5546 5.1608)" x="1.500000" y="-1.000000" text-anchor="middle" font-size="2.000000px" >
+<polygon points="27.5546,5.1608 27.5546,8.1608 30.5546,8.1608 30.5546,5.1608 " stroke="black" stroke-width="0.010000" fill="none" id="id0000000724" pointer-events="none" class="rectangle" />
+<text id="id0000000725" transform="matrix(1 0 0 1 27.5546 5.1608)" x="1.500000" y="-1.000000" text-anchor="middle" font-size="2.000000px" >
 '^'
 </text>
 
@@ -150,24 +150,24 @@
 
 </g>
 
-<g id="id0000000662" >
-<g id="id0000000663" >
-<clipPath id="id0000000663clipper" >
-<polygon points="2.3025,13.2412 2.3025,16.2412 5.3025,16.2412 5.3025,13.2412 " id="id0000000728" class="rectangle" />
+<g id="id0000000660" >
+<g id="id0000000661" >
+<clipPath id="id0000000661clipper" >
+<polygon points="2.3025,13.2412 2.3025,16.2412 5.3025,16.2412 5.3025,13.2412 " id="id0000000726" class="rectangle" />
 </clipPath>
 
-<g clip-path="url(#id0000000663clipper)" id="id0000000665" >
-<g id="id0000000729" >
-<g opacity="1.000000" fill="#1f77b4" stroke-width="0.000000" id="id0000000730" >
-<polygon points="2.8025,14.7412 4.8025,15.7412 4.8025,13.7412 " id="id0000000732" class="triangle" />
+<g clip-path="url(#id0000000661clipper)" id="id0000000663" >
+<g id="id0000000727" >
+<g opacity="1.000000" fill="#1f77b4" stroke-width="0.000000" id="id0000000728" >
+<polygon points="2.8025,14.7412 4.8025,15.7412 4.8025,13.7412 " id="id0000000730" class="triangle" />
 </g>
 
 </g>
 
 </g>
 
-<polygon points="2.3025,13.2412 2.3025,16.2412 5.3025,16.2412 5.3025,13.2412 " stroke="black" stroke-width="0.010000" fill="none" id="id0000000733" pointer-events="none" class="rectangle" />
-<text id="id0000000734" transform="matrix(1 0 0 1 2.3025 13.2412)" x="1.500000" y="-1.000000" text-anchor="middle" font-size="2.000000px" >
+<polygon points="2.3025,13.2412 2.3025,16.2412 5.3025,16.2412 5.3025,13.2412 " stroke="black" stroke-width="0.010000" fill="none" id="id0000000731" pointer-events="none" class="rectangle" />
+<text id="id0000000732" transform="matrix(1 0 0 1 2.3025 13.2412)" x="1.500000" y="-1.000000" text-anchor="middle" font-size="2.000000px" >
 '&lt;'
 </text>
 
@@ -175,24 +175,24 @@
 
 </g>
 
-<g id="id0000000666" >
-<g id="id0000000667" >
-<clipPath id="id0000000667clipper" >
-<polygon points="7.35292,13.2412 7.35292,16.2412 10.3529,16.2412 10.3529,13.2412 " id="id0000000735" class="rectangle" />
+<g id="id0000000664" >
+<g id="id0000000665" >
+<clipPath id="id0000000665clipper" >
+<polygon points="7.35292,13.2412 7.35292,16.2412 10.3529,16.2412 10.3529,13.2412 " id="id0000000733" class="rectangle" />
 </clipPath>
 
-<g clip-path="url(#id0000000667clipper)" id="id0000000669" >
-<g id="id0000000736" >
-<g opacity="1.000000" fill="#1f77b4" stroke-width="0.000000" id="id0000000737" >
-<polygon points="7.85292,13.7412 7.85292,15.7412 9.85292,15.7412 9.85292,13.7412 " id="id0000000739" class="rectangle" />
+<g clip-path="url(#id0000000665clipper)" id="id0000000667" >
+<g id="id0000000734" >
+<g opacity="1.000000" fill="#1f77b4" stroke-width="0.000000" id="id0000000735" >
+<polygon points="7.85292,13.7412 7.85292,15.7412 9.85292,15.7412 9.85292,13.7412 " id="id0000000737" class="rectangle" />
 </g>
 
 </g>
 
 </g>
 
-<polygon points="7.35292,13.2412 7.35292,16.2412 10.3529,16.2412 10.3529,13.2412 " stroke="black" stroke-width="0.010000" fill="none" id="id0000000740" pointer-events="none" class="rectangle" />
-<text id="id0000000741" transform="matrix(1 0 0 1 7.35292 13.2412)" x="1.500000" y="-1.000000" text-anchor="middle" font-size="2.000000px" >
+<polygon points="7.35292,13.2412 7.35292,16.2412 10.3529,16.2412 10.3529,13.2412 " stroke="black" stroke-width="0.010000" fill="none" id="id0000000738" pointer-events="none" class="rectangle" />
+<text id="id0000000739" transform="matrix(1 0 0 1 7.35292 13.2412)" x="1.500000" y="-1.000000" text-anchor="middle" font-size="2.000000px" >
 's'
 </text>
 
@@ -200,28 +200,24 @@
 
 </g>
 
-<g id="id0000000670" >
-<g id="id0000000671" >
-<clipPath id="id0000000671clipper" >
-<polygon points="12.4033,13.2412 12.4033,16.2412 15.4033,16.2412 15.4033,13.2412 " id="id0000000742" class="rectangle" />
+<g id="id0000000668" >
+<g id="id0000000669" >
+<clipPath id="id0000000669clipper" >
+<polygon points="12.4033,13.2412 12.4033,16.2412 15.4033,16.2412 15.4033,13.2412 " id="id0000000740" class="rectangle" />
 </clipPath>
 
-<g clip-path="url(#id0000000671clipper)" id="id0000000673" >
-<g id="id0000000743" >
-<g stroke="#1f77b4" opacity="1.000000" fill="none" id="id0000000744" >
-<g stroke-width="0.300000" class="plus" id="id0000000632" >
-<polyline points="13.9033,15.7412 13.9033,13.7412 " fill="none" id="id0000000746" class="line" />
-<polyline points="14.9033,14.7412 12.9033,14.7412 " fill="none" id="id0000000747" class="line" />
+<g clip-path="url(#id0000000669clipper)" id="id0000000671" >
+<g id="id0000000741" >
+<g opacity="1.000000" fill="#1f77b4" stroke-width="0.000000" id="id0000000742" >
+<polygon id="id0000000744" points="14.0533,14.8912 14.9033,14.8912 14.9033,14.5912 14.0533,14.5912 14.0533,13.7412 13.7533,13.7412 13.7533,14.5912 12.9033,14.5912 12.9033,14.8912 13.7533,14.8912 13.7533,15.7412 14.0533,15.7412 " />
 </g>
 
 </g>
 
 </g>
 
-</g>
-
-<polygon points="12.4033,13.2412 12.4033,16.2412 15.4033,16.2412 15.4033,13.2412 " stroke="black" stroke-width="0.010000" fill="none" id="id0000000748" pointer-events="none" class="rectangle" />
-<text id="id0000000749" transform="matrix(1 0 0 1 12.4033 13.2412)" x="1.500000" y="-1.000000" text-anchor="middle" font-size="2.000000px" >
+<polygon points="12.4033,13.2412 12.4033,16.2412 15.4033,16.2412 15.4033,13.2412 " stroke="black" stroke-width="0.010000" fill="none" id="id0000000745" pointer-events="none" class="rectangle" />
+<text id="id0000000746" transform="matrix(1 0 0 1 12.4033 13.2412)" x="1.500000" y="-1.000000" text-anchor="middle" font-size="2.000000px" >
 '+'
 </text>
 
@@ -229,28 +225,24 @@
 
 </g>
 
-<g id="id0000000674" >
-<g id="id0000000675" >
-<clipPath id="id0000000675clipper" >
-<polygon points="17.4537,13.2412 17.4537,16.2412 20.4537,16.2412 20.4537,13.2412 " id="id0000000750" class="rectangle" />
+<g id="id0000000672" >
+<g id="id0000000673" >
+<clipPath id="id0000000673clipper" >
+<polygon points="17.4537,13.2412 17.4537,16.2412 20.4537,16.2412 20.4537,13.2412 " id="id0000000747" class="rectangle" />
 </clipPath>
 
-<g clip-path="url(#id0000000675clipper)" id="id0000000677" >
-<g id="id0000000751" >
-<g stroke="#1f77b4" opacity="1.000000" fill="none" id="id0000000752" >
-<g stroke-width="0.700000" class="plus" id="id0000000633" >
-<polyline points="18.9537,15.7412 18.9537,13.7412 " fill="none" id="id0000000754" class="line" />
-<polyline points="19.9537,14.7412 17.9537,14.7412 " fill="none" id="id0000000755" class="line" />
+<g clip-path="url(#id0000000673clipper)" id="id0000000675" >
+<g id="id0000000748" >
+<g opacity="1.000000" fill="#1f77b4" stroke-width="0.000000" id="id0000000749" >
+<polygon id="id0000000751" points="19.3037,15.0912 19.9537,15.0912 19.9537,14.3912 19.3037,14.3912 19.3037,13.7412 18.6037,13.7412 18.6037,14.3912 17.9537,14.3912 17.9537,15.0912 18.6037,15.0912 18.6037,15.7412 19.3037,15.7412 " />
 </g>
 
 </g>
 
 </g>
 
-</g>
-
-<polygon points="17.4537,13.2412 17.4537,16.2412 20.4537,16.2412 20.4537,13.2412 " stroke="black" stroke-width="0.010000" fill="none" id="id0000000756" pointer-events="none" class="rectangle" />
-<text id="id0000000757" transform="matrix(1 0 0 1 17.4537 13.2412)" x="1.500000" y="-1.000000" text-anchor="middle" font-size="2.000000px" >
+<polygon points="17.4537,13.2412 17.4537,16.2412 20.4537,16.2412 20.4537,13.2412 " stroke="black" stroke-width="0.010000" fill="none" id="id0000000752" pointer-events="none" class="rectangle" />
+<text id="id0000000753" transform="matrix(1 0 0 1 17.4537 13.2412)" x="1.500000" y="-1.000000" text-anchor="middle" font-size="2.000000px" >
 'P'
 </text>
 
@@ -258,18 +250,17 @@
 
 </g>
 
-<g id="id0000000678" >
-<g id="id0000000679" >
-<clipPath id="id0000000679clipper" >
-<polygon points="22.5042,13.2412 22.5042,16.2412 25.5042,16.2412 25.5042,13.2412 " id="id0000000758" class="rectangle" />
+<g id="id0000000676" >
+<g id="id0000000677" >
+<clipPath id="id0000000677clipper" >
+<polygon points="22.5042,13.2412 22.5042,16.2412 25.5042,16.2412 25.5042,13.2412 " id="id0000000754" class="rectangle" />
 </clipPath>
 
-<g clip-path="url(#id0000000679clipper)" id="id0000000681" >
-<g id="id0000000759" >
-<g stroke="#1f77b4" opacity="1.000000" fill="none" id="id0000000760" >
-<g stroke-width="0.300000" class="times" id="id0000000634" >
-<polyline points="25.0042,15.7412 23.0042,13.7412 " fill="none" id="id0000000762" class="line" />
-<polyline points="25.0042,13.7412 23.0042,15.7412 " fill="none" id="id0000000763" class="line" />
+<g clip-path="url(#id0000000677clipper)" id="id0000000679" >
+<g id="id0000000755" >
+<g opacity="1.000000" fill="#1f77b4" stroke-width="0.000000" id="id0000000756" >
+<g id="id0000000632" >
+<polygon id="id0000000758" points="24.2163,14.7412 25.1102,13.8473 24.8981,13.6351 24.0042,14.5291 23.1102,13.6351 22.8981,13.8473 23.792,14.7412 22.8981,15.6351 23.1102,15.8473 24.0042,14.9533 24.8981,15.8473 25.1102,15.6351 " />
 </g>
 
 </g>
@@ -278,8 +269,8 @@
 
 </g>
 
-<polygon points="22.5042,13.2412 22.5042,16.2412 25.5042,16.2412 25.5042,13.2412 " stroke="black" stroke-width="0.010000" fill="none" id="id0000000764" pointer-events="none" class="rectangle" />
-<text id="id0000000765" transform="matrix(1 0 0 1 22.5042 13.2412)" x="1.500000" y="-1.000000" text-anchor="middle" font-size="2.000000px" >
+<polygon points="22.5042,13.2412 22.5042,16.2412 25.5042,16.2412 25.5042,13.2412 " stroke="black" stroke-width="0.010000" fill="none" id="id0000000759" pointer-events="none" class="rectangle" />
+<text id="id0000000760" transform="matrix(1 0 0 1 22.5042 13.2412)" x="1.500000" y="-1.000000" text-anchor="middle" font-size="2.000000px" >
 'x'
 </text>
 
@@ -287,18 +278,17 @@
 
 </g>
 
-<g id="id0000000682" >
-<g id="id0000000683" >
-<clipPath id="id0000000683clipper" >
-<polygon points="27.5546,13.2412 27.5546,16.2412 30.5546,16.2412 30.5546,13.2412 " id="id0000000766" class="rectangle" />
+<g id="id0000000680" >
+<g id="id0000000681" >
+<clipPath id="id0000000681clipper" >
+<polygon points="27.5546,13.2412 27.5546,16.2412 30.5546,16.2412 30.5546,13.2412 " id="id0000000761" class="rectangle" />
 </clipPath>
 
-<g clip-path="url(#id0000000683clipper)" id="id0000000685" >
-<g id="id0000000767" >
-<g stroke="#1f77b4" opacity="1.000000" fill="none" id="id0000000768" >
-<g stroke-width="0.700000" class="times" id="id0000000635" >
-<polyline points="30.0546,15.7412 28.0546,13.7412 " fill="none" id="id0000000770" class="line" />
-<polyline points="30.0546,13.7412 28.0546,15.7412 " fill="none" id="id0000000771" class="line" />
+<g clip-path="url(#id0000000681clipper)" id="id0000000683" >
+<g id="id0000000762" >
+<g opacity="1.000000" fill="#1f77b4" stroke-width="0.000000" id="id0000000763" >
+<g id="id0000000633" >
+<polygon id="id0000000765" points="29.5496,14.7412 30.0521,14.2387 29.5571,13.7437 29.0546,14.2462 28.5521,13.7437 28.0571,14.2387 28.5596,14.7412 28.0571,15.2437 28.5521,15.7387 29.0546,15.2362 29.5571,15.7387 30.0521,15.2437 " />
 </g>
 
 </g>
@@ -307,8 +297,8 @@
 
 </g>
 
-<polygon points="27.5546,13.2412 27.5546,16.2412 30.5546,16.2412 30.5546,13.2412 " stroke="black" stroke-width="0.010000" fill="none" id="id0000000772" pointer-events="none" class="rectangle" />
-<text id="id0000000773" transform="matrix(1 0 0 1 27.5546 13.2412)" x="1.500000" y="-1.000000" text-anchor="middle" font-size="2.000000px" >
+<polygon points="27.5546,13.2412 27.5546,16.2412 30.5546,16.2412 30.5546,13.2412 " stroke="black" stroke-width="0.010000" fill="none" id="id0000000766" pointer-events="none" class="rectangle" />
+<text id="id0000000767" transform="matrix(1 0 0 1 27.5546 13.2412)" x="1.500000" y="-1.000000" text-anchor="middle" font-size="2.000000px" >
 'X'
 </text>
 

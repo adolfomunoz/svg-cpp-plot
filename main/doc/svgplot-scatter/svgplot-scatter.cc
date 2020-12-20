@@ -67,9 +67,18 @@ int main(int argc, char** argv) {
         
     { // Example 6
         svg_cpp_plot::SVGPlot plt;
-        plt.scatter({0,0,0},{0,2,4}).c({{0,1,0.25},{1.0,0.75,0},{1,0.25,0.25}});
+        plt.scatter({0,0,0},{0,2,4}).c({{0,1,0.25},{1.0,0.75,0},{0.75,0.25,0.25}});
         plt.figsize({10,25}).axis({-2,2,-2,6}).xticks({}).yticks({}).linewidth(0);
         plt.savefig("../doc/svgplot/scatter/example6.svg");
+    }
+    
+    { // Example 7
+        svg_cpp_plot::SVGPlot plt;
+        plt.scatter({0,0,0},{0,2,3.5}).s({4,3,2});
+        plt.scatter({0},{3.4}).s(0.4).marker("v");
+        plt.scatter({-0.3,0.3,-0.3,-0.1,0.1,0.3},{3.8,3.8,3.2,3.2,3.2,3.2}).s({0.4,0.4,0.3,0.2,0.2,0.3}).marker("+");
+        plt.figsize({10,25}).axis({-2,2,-2,5}).xticks({}).yticks({}).linewidth(0);
+        plt.savefig("../doc/svgplot/scatter/example7.svg");
     }
 
 }

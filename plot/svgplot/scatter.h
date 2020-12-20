@@ -55,6 +55,18 @@ public:
     float opacity(int i) const override { return 1.0f; }
 };
 
+namespace {
+inline _2d::polygon plus(float s, float w) {
+    const float hs = 0.5f*s;
+    const float hw = 0.5f*w;
+    return _2d::polygon({{hw,hw},{hs,hw},{hs,-hw},{hw,-hw},{hw,-hs},{-hw,-hs},{-hw,-hw},{-hs,-hw},{-hs,hw},{-hw,hw},{-hw,hs},{hw,hs}});
+}
+inline _2d::Group times(float s, float w) {
+    auto g = _2d::group(_2d::rotate(0.25*M_PI));
+    g.add(plus(s*sqrt(2),w));
+    return g;
+}
+}
 
 template<typename T>
 class ScatterColorType : public ScatterColor {
@@ -99,39 +111,37 @@ class Scatter : public Plottable  {
     std::unique_ptr<ScatterColor> scatter_color;
     std::vector<float> markersize_;
     std::shared_ptr<_2d::Element> marker_;
-    bool border_based_marker_;
+//    bool border_based_marker_; <- We cannot have border_based_markers if we have to scale them so it is better that we have a single type of marker that just takes us a little bit longer to define
     float alpha_;
    
     
 public:
     template<typename T>
-	Scatter& marker(const T& t, bool border_based_marker = false,
+	Scatter& marker(const T& t,
 		std::enable_if_t<std::is_base_of_v<_2d::Element,T>,int> dummy = 0) {
-		border_based_marker_ = border_based_marker;
 		marker_ = std::make_shared<T>(t);
 		return (*this);
 	}
 	
-	Scatter& marker(const std::shared_ptr<_2d::Element>& t, bool border_based_marker = false) {
+	Scatter& marker(const std::shared_ptr<_2d::Element>& t) {
 		marker_ = t;
-		border_based_marker_ = border_based_marker;
 		return (*this);
 	}
 
 	Scatter& marker(std::string_view f) { 
-		if (f == "o") return marker(_2d::circle({0,0},2));
-        else if (f == ".") return marker(_2d::circle({0,0},1));
-		else if (f == ",") return marker(_2d::circle({0,0},0.6));
+		if (f == "o") return marker(_2d::circle({0,0},1));
+        else if (f == ".") return marker(_2d::circle({0,0},0.5));
+		else if (f == ",") return marker(_2d::circle({0,0},0.23));
 		else if (f == "v") return marker(_2d::triangle({0,1},{1,-1},{-1,-1}));
 		else if (f == ">") return marker(_2d::triangle({1,0},{-1,1},{-1,-1}));
 		else if (f == "^") return marker(_2d::triangle({0,-1},{1,1},{-1,1}));
 		else if (f == "<") return marker(_2d::triangle({-1,0},{1,1},{1,-1}));
 		else if (f == "s") return marker(_2d::rect({-1,-1},{1,1}));
         //From now on size, color and alpha affect stroke but not fill. We setup the stroke width here
-        else if (f == "+") return marker(_2d::plus({0,0},2).stroke_width(0.3),true); 
-		else if (f == "P") return marker(_2d::plus({0,0},2).stroke_width(0.7),true); 
-		else if (f == "x") return marker(_2d::times({0,0},2).stroke_width(0.3),true);
-		else if (f == "X") return marker(_2d::times({0,0},2).stroke_width(0.7),true);
+        else if (f == "+") return marker(plus(2,0.3));
+ 		else if (f == "P") return marker(plus(2,0.7)); 
+		else if (f == "x") return marker(times(2,0.3));
+		else if (f == "X") return marker(times(1.5,0.7));
 		else return marker(_2d::circle({0,0},1.2)); //By default, a circle
     
         return *this; 
@@ -191,10 +201,7 @@ public:
             float size = markersize(i);
 			auto& datapoint = g.add(Group());
             datapoint.add(FixedGenerator(_2d::translate(_2d::transform_point(m,data[i]))*_2d::scale({size,size}),marker_));
-			if (border_based_marker_)
-                datapoint.fill(none).stroke(*colors[i]).opacity(alpha()*scatter_color->opacity(i));
-            else
-                datapoint.stroke_width(0).fill(*colors[i]).opacity(alpha()*scatter_color->opacity(i));
+            datapoint.stroke_width(0).fill(*colors[i]).opacity(alpha()*scatter_color->opacity(i));
 		}
 		return g.to_string();
 	}
