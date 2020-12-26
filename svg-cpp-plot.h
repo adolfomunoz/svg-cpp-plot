@@ -1,3 +1,5 @@
+#include "plot/svgplot.h"
+
 #include "primitives/group.h"
 #include "primitives/defs.h"
 #include "primitives/group-z-ordered.h"
@@ -36,5 +38,4 @@
 #include "2d/function-2d.h"
 #include "2d/bar-plot.h"
 
-#include "plot/svgplot.h"
 

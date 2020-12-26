@@ -1,20 +1,20 @@
 <svg viewBox="0 0 200 200" height="100%" width="100%" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" id="id0000001815" >
 <g id="id0000001816" >
 <clipPath id="id0000001816clipper" >
-<polygon points="36,1 36,178 199,178 199,1 " id="id0000001819" class="rectangle" />
+<polygon points="36,1 36,178 199,178 199,1 " id="id0000001820" class="rectangle" />
 </clipPath>
 
 <g clip-path="url(#id0000001816clipper)" id="id0000001818" >
-<g stroke-width="0.000000" id="id0000001820" >
-<polygon points="101.2,71.8 101.2,83.6 112.067,83.6 112.067,71.8 " fill="rgb( 255, 0, 0 )" stroke-width="0.000000" id="id0000001821" class="rectangle" />
-<polygon points="112.067,71.8 112.067,83.6 122.933,83.6 122.933,71.8 " fill="rgb( 0, 255, 0 )" stroke-width="0.000000" id="id0000001822" class="rectangle" />
-<polygon points="122.933,71.8 122.933,83.6 133.8,83.6 133.8,71.8 " fill="rgb( 0, 0, 255 )" stroke-width="0.000000" id="id0000001823" class="rectangle" />
-<polygon points="101.2,83.6 101.2,95.4 112.067,95.4 112.067,83.6 " fill="rgb( 0, 255, 0 )" stroke-width="0.000000" id="id0000001824" class="rectangle" />
-<polygon points="112.067,83.6 112.067,95.4 122.933,95.4 122.933,83.6 " fill="rgb( 0, 0, 255 )" stroke-width="0.000000" id="id0000001825" class="rectangle" />
-<polygon points="122.933,83.6 122.933,95.4 133.8,95.4 133.8,83.6 " fill="rgb( 255, 0, 0 )" stroke-width="0.000000" id="id0000001826" class="rectangle" />
-<polygon points="101.2,95.4 101.2,107.2 112.067,107.2 112.067,95.4 " fill="rgb( 0, 0, 255 )" stroke-width="0.000000" id="id0000001827" class="rectangle" />
-<polygon points="112.067,95.4 112.067,107.2 122.933,107.2 122.933,95.4 " fill="rgb( 255, 0, 0 )" stroke-width="0.000000" id="id0000001828" class="rectangle" />
-<polygon points="122.933,95.4 122.933,107.2 133.8,107.2 133.8,95.4 " fill="rgb( 0, 255, 0 )" stroke-width="0.000000" id="id0000001829" class="rectangle" />
+<g stroke-width="0.000000" id="id0000001819" >
+<polygon points="nan,nan nan,nan nan,nan nan,nan " fill="rgb( 255, 0, 0 )" stroke-width="0.000000" id="id0000001821" class="rectangle" />
+<polygon points="nan,nan nan,nan nan,nan nan,nan " fill="rgb( 0, 255, 0 )" stroke-width="0.000000" id="id0000001822" class="rectangle" />
+<polygon points="nan,nan nan,nan nan,nan nan,nan " fill="rgb( 0, 0, 255 )" stroke-width="0.000000" id="id0000001823" class="rectangle" />
+<polygon points="nan,nan nan,nan nan,nan nan,nan " fill="rgb( 0, 255, 0 )" stroke-width="0.000000" id="id0000001824" class="rectangle" />
+<polygon points="nan,nan nan,nan nan,nan nan,nan " fill="rgb( 0, 0, 255 )" stroke-width="0.000000" id="id0000001825" class="rectangle" />
+<polygon points="nan,nan nan,nan nan,nan nan,nan " fill="rgb( 255, 0, 0 )" stroke-width="0.000000" id="id0000001826" class="rectangle" />
+<polygon points="nan,nan nan,nan nan,nan nan,nan " fill="rgb( 0, 0, 255 )" stroke-width="0.000000" id="id0000001827" class="rectangle" />
+<polygon points="nan,nan nan,nan nan,nan nan,nan " fill="rgb( 255, 0, 0 )" stroke-width="0.000000" id="id0000001828" class="rectangle" />
+<polygon points="nan,nan nan,nan nan,nan nan,nan " fill="rgb( 0, 255, 0 )" stroke-width="0.000000" id="id0000001829" class="rectangle" />
 </g>
 
 </g>

@@ -23,14 +23,23 @@ public:
 	AttributeList<std::string>& class_() noexcept {
 		return t()->get_or_set("class",AttributeList<std::string>());
 	}
+    
+    AttributeList<std::string> class_() const noexcept {
+		return t()->get_default("class",AttributeList<std::string>());
+	}
 
 	T& style(const ElementStyle& w) noexcept {
 		return t()->set("style",w); 
 	}
 
-	ElementStyle& style() {
+	ElementStyle& style() noexcept {
 		return t()->get_or_set("style",ElementStyle());
 	}
+    
+    ElementStyle style() const noexcept {
+		return t()->get_default("style",ElementStyle());     
+    }
+    
 };
 
 }

@@ -92,15 +92,17 @@ public:
         return color_[index % color_.size()]?*color_[index % color_.size()]:black; 
     }
 	
-	std::string to_string(const _2d::Matrix& m) const noexcept override {
-        auto g = _2d::group();
-        for (std::size_t i = 0; i<x().size(); ++i) 
-            g.add(_2d::rect({x(i)-0.5f*width(i),bottom(i)},{x(i)+0.5f*width(i),bottom(i)+height(i)})).stroke_width(0).fill(color(i)).fill_opacity(alpha());
+    std::shared_ptr<_2d::Element> scaled(const axis_scale::Base& xscale, const axis_scale::Base& yscale) const noexcept override {
+        auto g = std::make_shared<_2d::Group>();
+        for (std::size_t i = 0; i<x().size(); ++i) {
+            g->add(_2d::rect({xscale.transform(x(i)-0.5f*width(i)),yscale.transform(bottom(i))},
+                            {xscale.transform(x(i)+0.5f*width(i)),yscale.transform(bottom(i)+height(i))})).stroke_width(0).fill(color(i)).fill_opacity(alpha());
+        }
         
-        return g.to_string(m);   
-	}
+        return g;
+    }
 
-	std::array<float,4> axis() const override {
+	std::array<float,4> axis() const noexcept override {
         std::array<float,4> ax{x(0)-0.75f*width(0),x(0)+0.75f*width(0),bottom(0),bottom(0)+1.1f*height(0)};
         for (std::size_t i = 1; i<x().size(); ++i) {
             if ((x(i)-0.75f*width(i))<ax[0]) ax[0] = x(i)-0.75f*width(i);
@@ -108,7 +110,6 @@ public:
             if (bottom(i)<ax[2]) ax[2] = bottom(i);
             if ((bottom(i)+1.1*height(i))>ax[3]) ax[3] = bottom(i)+1.1f*height(i);
         }
-
         return ax;
 	}
 

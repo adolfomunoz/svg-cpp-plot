@@ -18,7 +18,7 @@ public:
 	AttributeList(const std::initializer_list<std::shared_ptr<T>>& il) {
 		for (const auto& t : il) this->add(t);
 	}
-
+    
 	std::string to_string() const noexcept override { return this->list_to_string(" "); }	
 };
 

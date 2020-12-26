@@ -1,87 +1,84 @@
-<svg viewBox="0 0 200 150" height="100%" width="100%" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" id="id0000000000" >
+<svg viewBox="0 0 640 480" height="100%" width="100%" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" id="id0000000000" >
 <g id="id0000000001" >
-<g id="id0000000002" >
-<g clip-path="url(#id0000000002clipper)" style="pointer-events: all; " vector-effect="non-scaling-stroke" fill="none" class="area" id="id0000000003" >
-<g id="id0000000005" >
-<polygon points="37.8571,130 37.8571,101.591 69.2857,101.591 69.2857,130 " fill="#1f77b4" stroke-width="0.000000" id="id0000000006" fill-opacity="1.000000" class="rectangle" />
-<polygon points="77.1429,130 77.1429,73.1818 108.571,73.1818 108.571,130 " fill="#1f77b4" stroke-width="0.000000" id="id0000000007" fill-opacity="1.000000" class="rectangle" />
-<polygon points="116.429,130 116.429,44.7727 147.857,44.7727 147.857,130 " fill="#1f77b4" stroke-width="0.000000" id="id0000000008" fill-opacity="1.000000" class="rectangle" />
-<polygon points="155.714,130 155.714,16.3636 187.143,16.3636 187.143,130 " fill="#1f77b4" stroke-width="0.000000" id="id0000000009" fill-opacity="1.000000" class="rectangle" />
-</g>
-
-</g>
-
-<clipPath id="id0000000002clipper" >
-<polygon points="30,5 30,130 195,130 195,5 " id="id0000000010" class="rectangle" />
+<clipPath id="id0000000001clipper" >
+<polygon points="36,1 36,458 639,458 639,1 " id="id0000000005" class="rectangle" />
 </clipPath>
 
-<polyline points="53.5714,130 53.5714,133 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000011" class="line" />
-<text id="id0000000012" transform="matrix(1 0 0 1 30 5)" x="23.571432" y="130.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+<g clip-path="url(#id0000000001clipper)" id="id0000000003" >
+<g id="id0000000004" >
+<polygon points="64.7143,458 64.7143,354.136 179.571,354.136 179.571,458 " fill="#1f77b4" stroke-width="0.000000" id="id0000000006" fill-opacity="1.000000" class="rectangle" />
+<polygon points="208.286,458 208.286,250.273 323.143,250.273 323.143,458 " fill="#1f77b4" stroke-width="0.000000" id="id0000000007" fill-opacity="1.000000" class="rectangle" />
+<polygon points="351.857,458 351.857,146.409 466.714,146.409 466.714,458 " fill="#1f77b4" stroke-width="0.000000" id="id0000000008" fill-opacity="1.000000" class="rectangle" />
+<polygon points="495.429,458 495.429,42.5455 610.286,42.5455 610.286,458 " fill="#1f77b4" stroke-width="0.000000" id="id0000000009" fill-opacity="1.000000" class="rectangle" />
+</g>
+
+</g>
+
+<polygon points="36,1 36,458 639,458 639,1 " stroke="black" stroke-width="1.000000" fill="none" id="id0000000010" pointer-events="none" class="rectangle" />
+<polyline points="122.143,458 122.143,461 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000011" class="line" />
+<text id="id0000000012" transform="matrix(1 0 0 1 36 1)" x="86.142868" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
 G1
 </text>
 
-<polyline points="92.8571,130 92.8571,133 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000013" class="line" />
-<text id="id0000000014" transform="matrix(1 0 0 1 30 5)" x="62.857147" y="130.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+<polyline points="265.714,458 265.714,461 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000013" class="line" />
+<text id="id0000000014" transform="matrix(1 0 0 1 36 1)" x="229.714294" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
 G2
 </text>
 
-<polyline points="132.143,130 132.143,133 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000015" class="line" />
-<text id="id0000000016" transform="matrix(1 0 0 1 30 5)" x="102.142853" y="130.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+<polyline points="409.286,458 409.286,461 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000015" class="line" />
+<text id="id0000000016" transform="matrix(1 0 0 1 36 1)" x="373.285706" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
 G3
 </text>
 
-<polyline points="171.429,130 171.429,133 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000017" class="line" />
-<text id="id0000000018" transform="matrix(1 0 0 1 30 5)" x="141.428574" y="130.000000" dominant-baseline="hanging" text-anchor="middle" font-size="10.000000px" >
+<polyline points="552.857,458 552.857,461 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000017" class="line" />
+<text id="id0000000018" transform="matrix(1 0 0 1 36 1)" x="516.857178" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
 G4
 </text>
 
-<polyline points="27,130 30,130 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000019" class="line" />
-<text id="id0000000020" transform="matrix(1 0 0 1 30 5)" x="-5.000000" y="125.000000" dominant-baseline="middle" text-anchor="end" font-size="10.000000px" >
+<polyline points="33,458 36,458 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000019" class="line" />
+<text id="id0000000020" transform="matrix(1 0 0 1 36 1)" x="-5.000000" y="457.000000" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
 0
 </text>
 
-<polyline points="27,115.795 30,115.795 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000021" class="line" />
-<text id="id0000000022" transform="matrix(1 0 0 1 30 5)" x="-5.000000" y="110.795456" dominant-baseline="middle" text-anchor="end" font-size="10.000000px" >
+<polyline points="33,406.068 36,406.068 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000021" class="line" />
+<text id="id0000000022" transform="matrix(1 0 0 1 36 1)" x="-5.000000" y="405.068176" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
 0.5
 </text>
 
-<polyline points="27,101.591 30,101.591 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000023" class="line" />
-<text id="id0000000024" transform="matrix(1 0 0 1 30 5)" x="-5.000000" y="96.590912" dominant-baseline="middle" text-anchor="end" font-size="10.000000px" >
+<polyline points="33,354.136 36,354.136 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000023" class="line" />
+<text id="id0000000024" transform="matrix(1 0 0 1 36 1)" x="-5.000000" y="353.136353" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
 1
 </text>
 
-<polyline points="27,87.3864 30,87.3864 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000025" class="line" />
-<text id="id0000000026" transform="matrix(1 0 0 1 30 5)" x="-5.000000" y="82.386368" dominant-baseline="middle" text-anchor="end" font-size="10.000000px" >
+<polyline points="33,302.205 36,302.205 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000025" class="line" />
+<text id="id0000000026" transform="matrix(1 0 0 1 36 1)" x="-5.000000" y="301.204529" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
 1.5
 </text>
 
-<polyline points="27,73.1818 30,73.1818 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000027" class="line" />
-<text id="id0000000028" transform="matrix(1 0 0 1 30 5)" x="-5.000000" y="68.181824" dominant-baseline="middle" text-anchor="end" font-size="10.000000px" >
+<polyline points="33,250.273 36,250.273 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000027" class="line" />
+<text id="id0000000028" transform="matrix(1 0 0 1 36 1)" x="-5.000000" y="249.272736" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
 2
 </text>
 
-<polyline points="27,58.9773 30,58.9773 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000029" class="line" />
-<text id="id0000000030" transform="matrix(1 0 0 1 30 5)" x="-5.000000" y="53.977272" dominant-baseline="middle" text-anchor="end" font-size="10.000000px" >
+<polyline points="33,198.341 36,198.341 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000029" class="line" />
+<text id="id0000000030" transform="matrix(1 0 0 1 36 1)" x="-5.000000" y="197.340912" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
 2.5
 </text>
 
-<polyline points="27,44.7727 30,44.7727 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000031" class="line" />
-<text id="id0000000032" transform="matrix(1 0 0 1 30 5)" x="-5.000000" y="39.772728" dominant-baseline="middle" text-anchor="end" font-size="10.000000px" >
+<polyline points="33,146.409 36,146.409 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000031" class="line" />
+<text id="id0000000032" transform="matrix(1 0 0 1 36 1)" x="-5.000000" y="145.409088" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
 3
 </text>
 
-<polyline points="27,30.5682 30,30.5682 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000033" class="line" />
-<text id="id0000000034" transform="matrix(1 0 0 1 30 5)" x="-5.000000" y="25.568184" dominant-baseline="middle" text-anchor="end" font-size="10.000000px" >
+<polyline points="33,94.4773 36,94.4773 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000033" class="line" />
+<text id="id0000000034" transform="matrix(1 0 0 1 36 1)" x="-5.000000" y="93.477295" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
 3.5
 </text>
 
-<polyline points="27,16.3636 30,16.3636 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000035" class="line" />
-<text id="id0000000036" transform="matrix(1 0 0 1 30 5)" x="-5.000000" y="11.363640" dominant-baseline="middle" text-anchor="end" font-size="10.000000px" >
+<polyline points="33,42.5455 36,42.5455 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000035" class="line" />
+<text id="id0000000036" transform="matrix(1 0 0 1 36 1)" x="-5.000000" y="41.545471" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
 4
 </text>
-
-<polygon points="30,5 30,130 195,130 195,5 " stroke="black" stroke-width="1.000000" fill="none" id="id0000000037" pointer-events="none" class="border" />
-</g>
 
 
 </g>

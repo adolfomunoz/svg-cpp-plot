@@ -43,6 +43,12 @@ public:
 	void remove_if(const P& p) {
 		object_list.remove_if([&p] (const std::shared_ptr<O>& o) { return p(*o); });
 	}
+    
+    template<typename T>
+    bool contains(const T& t) {
+        for (auto o : object_list) if ((*o) == t) return true;
+        return false;
+    }
 
 	std::string list_to_string(const std::string& sep) const noexcept {
 		std::stringstream sstr;

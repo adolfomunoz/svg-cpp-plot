@@ -4,7 +4,6 @@
 #include <tuple>
 #include <string>
 #include "plottable.h"
-#include "../../2d/function-2d.h"
 #include "cmap.h"
 
 namespace svg_cpp_plot {
@@ -46,7 +45,7 @@ public:
     
 	virtual std::tuple<std::size_t,std::size_t> size() const = 0;
     
-	std::array<float,4> axis() const override {
+	std::array<float,4> axis() const noexcept override {
         if (extent_set) return extent_;
         else return std::array<float,4>{
 				-0.5f,float(std::get<0>(size()))-0.5f,
@@ -94,12 +93,12 @@ public:
     }
     
 private:
-    _2d::Group nearest() const noexcept {
+    std::shared_ptr<_2d::Element> nearest(const axis_scale::Base& xscale, const axis_scale::Base& yscale) const noexcept {
         auto ax = axis();
         auto cm = detail::colormap(cmap(),vmin(),vmax());
-        auto image = _2d::group();
+        auto image = std::make_shared<_2d::Group>();
         const float border_expansion=0;
-		image.stroke_width(0);
+		image->stroke_width(0);
         std::tuple<float,float> xmin{ax[0],ax[2]};
         std::tuple<float,float> xmax{ax[1],ax[3]};
         auto nsamples = size();
@@ -112,7 +111,8 @@ private:
         for (const auto& row : data) {
             x = std::get<0>(xmin);
             for (const auto& v : row) {
-                detail::set_color(image.add(_2d::rect({x-eps,y-eps},{x+dx+eps,y+dy+eps})).stroke_width(0),cm,v);
+                detail::set_color(image->add(_2d::rect({xscale.transform(x-eps),yscale.transform(y-eps)},
+                    {xscale.transform(x+dx+eps),yscale.transform(y+dy+eps)})).stroke_width(0),cm,v);
                 x+=dx;
             }
             y+=dy;
@@ -121,7 +121,7 @@ private:
         return image;
     }
     
-    auto interpolated() const noexcept {
+    std::shared_ptr<_2d::Element> interpolated(const axis_scale::Base& xscale, const axis_scale::Base& yscale) const noexcept {
         auto ax = axis();
         auto cm = detail::colormap(cmap(),vmin(),vmax());
         auto nsamples = size();
@@ -140,18 +140,19 @@ private:
 		std::vector<uint8_t> contents((std::istreambuf_iterator<char>(stream)), std::istreambuf_iterator<char>());
 		std::stringstream ss;
 		ss << "data:image/png;base64,"<<base64_encode(contents.data(),contents.size());
-        std::tuple<float,float> xmin{ax[0],ax[2]};
-        std::tuple<float,float> xmax{ax[1],ax[3]};
+        std::tuple<float,float> xmin{xscale.transform(ax[0]),yscale.transform(ax[2])};
+        std::tuple<float,float> xmax{xscale.transform(ax[1]),yscale.transform(ax[3])};
 		Image image(ss.str()); image.rect(xmin,xmax).preserveAspectRatio(preserve_aspect_ratio_none);
-        return _2d::primitive(image);
+        return std::make_shared<_2d::primitive<Image>>(image);
     }
     
-    std::string to_string(const _2d::Matrix& m) const noexcept override {
+    std::shared_ptr<_2d::Element> scaled(const axis_scale::Base& xscale, const axis_scale::Base& yscale) const noexcept override {
         if ((interpolation()=="") || (interpolation()=="nearest") ||(interpolation()=="none")) 
-            return nearest().to_string(m);
+            return nearest(xscale,yscale);
         else
-            return interpolated().to_string(m);
+            return interpolated(xscale,yscale);
     }
+ 
 };
 
 

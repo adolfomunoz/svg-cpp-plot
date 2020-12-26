@@ -65,22 +65,30 @@ constexpr std::tuple<float, float> transform_direction(const Matrix& m, const P&
 		(std::get<0>(p)*m[1][0] + std::get<1>(p)*m[1][1]));
 }
 
+class Group : public GroupGenerator<Matrix,decltype(std::multiplies<Matrix>())> {
+public:
+    Group(const Matrix& m = identity) : GroupGenerator<Matrix,decltype(std::multiplies<Matrix>())>(m, std::multiplies<Matrix>()) {}
+};
+
 inline auto group(const Matrix& m = identity) {
-	return GroupGenerator(m, [] (const svg_cpp_plot::_2d::Matrix& a, const svg_cpp_plot::_2d::Matrix& b) { return a*b; });
+	return Group(m);
 }
+
 inline auto clip_path(const svg_cpp_plot::_2d::Matrix& m = identity) {
-	return ClipPathGenerator(m, [] (const svg_cpp_plot::_2d::Matrix& a, const svg_cpp_plot::_2d::Matrix& b) { return a*b; });
+	return ClipPathGenerator(m, std::multiplies<Matrix>());
 }
 inline auto defs(const svg_cpp_plot::_2d::Matrix& m = identity) {
-	return DefsGenerator(m, [] (const svg_cpp_plot::_2d::Matrix& a, const svg_cpp_plot::_2d::Matrix& b) { return a*b; });
+	return DefsGenerator(m, std::multiplies<Matrix>());
 }
 inline auto mask(const svg_cpp_plot::_2d::Matrix& m = identity) {
-	return MaskGenerator(m, [] (const svg_cpp_plot::_2d::Matrix& a, const svg_cpp_plot::_2d::Matrix& b) { return a*b; });
+	return MaskGenerator(m, std::multiplies<Matrix>());
 }
 
 
-using Group = decltype(group());
 using Element = Generator<svg_cpp_plot::_2d::Matrix>;
 
 }
 }
+
+using svg_cpp_plot::_2d::operator*;
+

@@ -5,7 +5,6 @@
 #include <string>
 #include "plottable.h"
 #include "../../2d/transform.h"
-#include "../../2d/points.h"
 #include "../../2d/polyline.h"
 #include "scatter.h"
 
@@ -43,21 +42,24 @@ public:
     template<typename C>
 	Plot& color(const C& c) { color_=detail::color(c); return *this; }
 	const Color& color() const { return color_?*color_:black; }
-	
-	std::string to_string(const _2d::Matrix& m) const noexcept override {
-        if (format().empty() || (format()[0] == '-') || (format()[0] == ':')) { // This is a line, not a point that can be represented by a scatter plot
-			auto pl = _2d::polyline(data).stroke_width(this->linewidth()).stroke(this->color()).stroke_linecap(stroke_linecap_round).stroke_opacity(alpha());
-			if (format() == "--") pl.stroke_dasharray({3,3});
-			else if	(format() == "-.") pl.stroke_dasharray({3,2,1,2});
-			else if (format()==":") pl.stroke_dasharray({1,2});
-			
-			return pl.to_string(m);
-		} else { // The format indicates that it is drawn with points so we use a scatter plot for plotting this
-            return Scatter(std::vector<std::tuple<float,float>>(data.begin(),data.end())).marker(format()).s(markersize()).c(color_).alpha(alpha()).to_string(m);
-        }
-	}
     
-    std::array<float,4> axis() const override {
+    std::shared_ptr<_2d::Element> scaled(const axis_scale::Base& xscale, const axis_scale::Base& yscale) const noexcept override {
+        if (format().empty() || (format()[0] == '-') || (format()[0] == ':')) { // This is a line, not a point that can be represented by a scatter plot
+            auto pl = std::make_shared<_2d::polyline>();
+            for (auto [x,y] : data)
+                pl->add_point(xscale.transform(x),yscale.transform(y));
+			pl->stroke_width(this->linewidth()).stroke(this->color()).stroke_linecap(stroke_linecap_round).stroke_opacity(alpha());
+			if (format() == "--") pl->stroke_dasharray({3,3});
+			else if	(format() == "-.") pl->stroke_dasharray({3,2,1,2});
+			else if (format()==":") pl->stroke_dasharray({1,2});
+            return pl;
+        } else { // The format indicates that it is drawn with points so we use a scatter plot for plotting this
+            return Scatter(std::vector<std::tuple<float,float>>(data.begin(),data.end())).marker(format()).s(markersize()).c(color_).alpha(alpha()).scaled(xscale,yscale);
+        }      
+    }
+
+    
+    std::array<float,4> axis() const noexcept override {
         std::array<float,4> ax{std::get<0>(data.front()),std::get<0>(data.front()),std::get<1>(data.front()),std::get<1>(data.front())};
         for (auto [x,y] : data) {
             if (x < ax[0]) ax[0] = x;

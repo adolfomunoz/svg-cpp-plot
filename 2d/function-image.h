@@ -3,6 +3,7 @@
 #include "transform.h"
 #include "primitive.h"
 #include "../primitives/linear-gradient.h"
+#include "../primitives/image.h"
 #include "../attributes/color.h"
 #include "../3d/point-3d.h"
 #include <cmath>

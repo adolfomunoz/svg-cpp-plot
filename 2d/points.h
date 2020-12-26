@@ -2,6 +2,7 @@
 
 #include "../core/element-generator.h"
 #include "transform.h"
+#include "curve.h"
 #include "../primitives/point.h"
 #include "../primitives/line.h"
 #include <cmath>

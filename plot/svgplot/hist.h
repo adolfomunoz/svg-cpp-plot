@@ -144,7 +144,7 @@ public:
 	Hist& color(const C& c) { color_=detail::color(c); return *this; }
 	const Color& color() const { return color_?*color_:black; }
    
-	std::array<float,4> axis() const override {
+	std::array<float,4> axis() const noexcept override {
         float bmin = bin(0); float bmax = bin(bins_size());
         std::vector<float> h = hist_values();
         float hmax = 1.1f*(*std::max_element(h.begin(),h.end()));
@@ -154,19 +154,20 @@ public:
             return std::array<float,4>{0.0f,hmax,bmin,bmax};
 	}
     
-	std::string to_string(const _2d::Matrix& m) const noexcept override {
+    std::shared_ptr<_2d::Element> scaled(const axis_scale::Base& xscale, const axis_scale::Base& yscale) const noexcept override {
         if (histtype_==HistType::bar) {
             if (orientation_==Orientation::vertical)
-                return Bar(hist_positions(),hist_values()).width(hist_widths()).color(color_).alpha(alpha()).to_string(m);
+                return Bar(hist_positions(),hist_values()).width(hist_widths()).color(color_).alpha(alpha()).scaled(xscale,yscale);
             else 
-                return BarH(hist_positions(),hist_values()).height(hist_widths()).color(color_).alpha(alpha()).to_string(m);    
+                return BarH(hist_positions(),hist_values()).height(hist_widths()).color(color_).alpha(alpha()).scaled(xscale,yscale);    
         } else { // histtype_==HistType::step
             if (orientation_==Orientation::vertical)
-                return Plot(hist_positions(),hist_values()).color(color_).alpha(alpha()).to_string(m);
+                return Plot(hist_positions(),hist_values()).color(color_).alpha(alpha()).scaled(xscale,yscale);
             else    
-                return Plot(hist_values(),hist_positions()).color(color_).alpha(alpha()).to_string(m);
+                return Plot(hist_values(),hist_positions()).color(color_).alpha(alpha()).scaled(xscale,yscale);
         }
-	}
+    }
+
 
 };
 

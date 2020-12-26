@@ -6,7 +6,9 @@
 #include "plottable.h"
 #include "../../2d/transform.h"
 #include "../../2d/points.h"
+#include "../../2d/ignore-scale.h"
 #include "../../2d/polyline.h"
+#include "../../2d/polygon.h"
 #include "color.h"
 #include "cmap.h"
 
@@ -211,10 +213,10 @@ private:
 public:
     Scatter& alpha(float f) { alpha_=f; return *this; }
     float alpha() const { return alpha_; }
-
-	std::string to_string(const _2d::Matrix& m) const noexcept override {
+    
+    std::shared_ptr<_2d::Element> scaled(const axis_scale::Base& xscale, const axis_scale::Base& yscale) const noexcept override {
         //Maybe this could be sped up with marker beeing a referenzable svg element but that part is not ready yet in the core primitives
-		Group g;
+		auto g = std::make_shared<_2d::Group>();
         
         //We need this in memory in case we are generating the corresponding color and it gets out of memory
         std::vector<std::shared_ptr<Color>> colors(data.size()); 
@@ -224,14 +226,17 @@ public:
         
 		for (std::size_t i = 0; i<data.size(); ++i) {
             float size = markersize(i);
-			auto& datapoint = g.add(Group());
-            datapoint.add(FixedGenerator(_2d::translate(_2d::transform_point(m,data[i]))*_2d::scale({size,size}),marker_));
-            datapoint.stroke_width(linewidth(i)).stroke(*edgecolors[i]).fill(*colors[i]).opacity(alpha()*scatter_color->opacity(i));
+            auto datapoint = std::make_shared<_2d::Group>(_2d::scale({size,size}));
+            datapoint->stroke_width(linewidth(i)).stroke(*edgecolors[i]).fill(*colors[i]).opacity(alpha()*scatter_color->opacity(i));
+            datapoint->add_ptr(marker_);
+			g->add(
+                _2d::group(_2d::translate(xscale.transform(std::get<0>(data[i])),yscale.transform(std::get<1>(data[i])))))
+                    .add(_2d::ignore_scale(datapoint));
 		}
-		return g.to_string();
-	}
-    
-    std::array<float,4> axis() const override {
+		return g;        
+    }
+   
+    std::array<float,4> axis() const noexcept override {
         std::array<float,4> ax{std::get<0>(data.front()),std::get<0>(data.front()),std::get<1>(data.front()),std::get<1>(data.front())};
         float max_size = 0.0f;
         for (std::size_t i = 0; i<data.size(); ++i) {

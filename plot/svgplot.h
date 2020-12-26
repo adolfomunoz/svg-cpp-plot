@@ -2,7 +2,9 @@
 
 #include <list>
 #include <tuple>
+#include <fstream>
 #include <memory>
+#include "../primitives/svg.h"
 #include "../2d/transform.h"
 #include "../2d/polygon.h"
 #include "../2d/point-list.h"
@@ -19,7 +21,6 @@
 
 namespace svg_cpp_plot {
     
-using _2d::operator*;
 namespace { //Anonymous namespace, only visible from this .h
 	template<std::size_t N>
 	std::array<float,N>& operator+=(std::array<float,N>& a, const std::array<float,N>& b) {
@@ -63,6 +64,7 @@ class SVGPlot {
 	
 	
     std::list<std::shared_ptr<Plottable>> plottables;
+    std::unique_ptr<axis_scale::Base> xscale_, yscale_;
 	
 	
 	std::vector<std::unique_ptr<SVGPlot>> subplots_;
@@ -286,7 +288,8 @@ public:
 		else if (plottables.empty()) return std::array<float,4>{0,0,0,0};
         else {
             std::array<float,4> a = plottables.front()->axis();
-            for (const auto& plottable : plottables) axis_include(a,plottable->axis());
+            auto it = plottables.begin(); ++it;
+            for (;it!=plottables.end();++it) axis_include(a,(*it)->axis());
             return a;
 		}
 	}
@@ -459,7 +462,7 @@ public:
        
         auto group = _2d::group(_2d::translate({marg[0],marg[2]}));
 		
-         if ((ncols>0) && (nrows>0)) {  
+        if ((ncols>0) && (nrows>0)) {  
             float ypos = 0;   
             for (int r = 0;r<nrows;++r) {
                 float xpos = 0;
@@ -480,7 +483,7 @@ public:
                 _2d::translate(-local_axis[0],-local_axis[3])));
             area.set("clip-path",std::string("url(#")+group.id()+"clipper)");
             group.add(_2d::rect({0,0},area_size)).fill(none).stroke_width(linewidth()).stroke(black).pointer_events(pointer_events_none);
-            for (const auto& p : plottables) area.add_ptr(p);
+            for (const auto& p : plottables) area.add_ptr(p->scaled(*xscale_,*yscale_));
 		
             add_xticks(group, graph_size, local_axis);
             add_yticks(group, graph_size, local_axis);
@@ -488,8 +491,6 @@ public:
         add_xlabel(group, graph_size, local_axis);
         add_ylabel(group, graph_size, local_axis);
         add_title(group, graph_size, local_axis); 
-		
-
 		return group;
 	}
 
@@ -503,7 +504,8 @@ protected:
 	}
 public:
 	SVGPlot() :
-		figsize_set(false), cycle(detail::color_vector({"#1f77b4","#ff7f0e","#2ca02c","#d62728","#9467bd","#8c564b","#e377c2","#7f7f7f","#bcbd22","#17becf"})), cycle_pos(0), ylabel_font(18), xlabel_font(18), title_font(24), xticklabels_font(14), yticklabels_font(14), axis_set(false),xticklabels_set(false), xticks_set(false), yticklabels_set(false), yticks_set(false), linewidth_(1), nrows(-1), ncols(-1), parent(nullptr), target_xticks(5), target_yticks(5) {	}
+		figsize_set(false), cycle(detail::color_vector({"#1f77b4","#ff7f0e","#2ca02c","#d62728","#9467bd","#8c564b","#e377c2","#7f7f7f","#bcbd22","#17becf"})), cycle_pos(0), ylabel_font(18), xlabel_font(18), title_font(24), xticklabels_font(14), yticklabels_font(14), axis_set(false),xticklabels_set(false), xticks_set(false), yticklabels_set(false), yticks_set(false), linewidth_(1), 
+        xscale_(std::make_unique<axis_scale::linear>()), yscale_(std::make_unique<axis_scale::linear>()), nrows(-1), ncols(-1), parent(nullptr), target_xticks(5), target_yticks(5) {	}
         
     /*******************************************************
      * SUBPLOT
@@ -797,5 +799,4 @@ public:
 		f<<svg();
 	}	
 };
-
 }

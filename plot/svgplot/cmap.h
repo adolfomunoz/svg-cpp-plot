@@ -1,4 +1,5 @@
 #pragma once
+#include "../../2d/function-2d.h"
 
 namespace svg_cpp_plot {
 namespace detail {
