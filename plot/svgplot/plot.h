@@ -46,8 +46,11 @@ public:
     std::shared_ptr<_2d::Element> scaled(const axis_scale::Base& xscale, const axis_scale::Base& yscale) const noexcept override {
         if (format().empty() || (format()[0] == '-') || (format()[0] == ':')) { // This is a line, not a point that can be represented by a scatter plot
             auto pl = std::make_shared<_2d::polyline>();
-            for (auto [x,y] : data)
-                pl->add_point(xscale.transform(x),yscale.transform(y));
+            for (auto [x,y] : data) 
+                if (xscale.is_valid(x) && yscale.is_valid(y))
+                    pl->add_point(xscale.transform(x),yscale.transform(y));
+                
+            
 			pl->stroke_width(this->linewidth()).stroke(this->color()).stroke_linecap(stroke_linecap_round).stroke_opacity(alpha());
 			if (format() == "--") pl->stroke_dasharray({3,3});
 			else if	(format() == "-.") pl->stroke_dasharray({3,2,1,2});

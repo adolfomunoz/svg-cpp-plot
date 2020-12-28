@@ -14,8 +14,8 @@
 
 namespace svg_cpp_plot {
     
-enum class Orientation { vertical, horizontal };
-enum class HistType { bar, barstacked, step, stepfilled };
+enum Orientation { vertical, horizontal };
+enum HistType { bar, barstacked, step, stepfilled };
 
 class Hist : public Plottable  {
     std::vector<float> x_; //Todo: enable multiple data (std::vector<std::vector<float>>)

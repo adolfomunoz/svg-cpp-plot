@@ -161,11 +161,49 @@ private:
     std::array<float,4> margin(const std::array<float,4>& ax) const {
         return xmargin(ax) + ymargin(ax) + subplots_margin() + title_margin();
     }
+       
+
+public:    
+    template<typename Scale>
+    Scale& set_xscale(const Scale& scale,
+		typename std::enable_if<std::is_base_of<axis_scale::Base,Scale>::value, int>::type = 0) {
+        xscale_ =std::make_unique<Scale>(scale);
+        return static_cast<Scale&>(*xscale_);
+    }
+
+    template<typename Scale>
+    Scale& set_yscale(const Scale& scale,
+		typename std::enable_if<std::is_base_of<axis_scale::Base,Scale>::value, int>::type = 0) {
+        yscale_ =std::make_unique<Scale>(scale);
+        return static_cast<Scale&>(*yscale_);
+    } 
+
+    axis_scale::Base& set_xscale(std::string_view s) {
+        if (s == "log") return set_xscale(axis_scale::log());
+        else if (s == "symlog") return set_xscale(axis_scale::symlog());
+        else return set_xscale(axis_scale::linear());
+    }
+
+    axis_scale::Base& set_yscale(std::string_view s) {
+        if (s == "log") return set_yscale(axis_scale::log());
+        else if (s == "symlog") return set_yscale(axis_scale::symlog());
+        else return set_yscale(axis_scale::linear());
+    } 
+    
+    template<typename Scale>
+    SVGPlot& xscale(const Scale& scale) {
+        set_xscale(scale); return (*this);
+    }
     
 
-    
+    template<typename Scale>
+    SVGPlot& yscale(const Scale& scale) {
+        set_yscale(scale); return (*this);
+    }
 
-public:
+    const axis_scale::Base& xscale() const { return *xscale_; }
+    const axis_scale::Base& yscale() const { return *yscale_; }
+
     SubplotsAdjust& subplots_adjust() { return subplots_adjust_; }
     
 	std::array<float,2> figsize() const { 
@@ -293,6 +331,12 @@ public:
             return a;
 		}
 	}
+    
+	std::array<float,4> scaled_axis() const {
+        auto ax = axis();
+        return std::array<float,4>{xscale().transform(ax[0]),xscale().transform(ax[1]),
+            yscale().transform(ax[2]),yscale().transform(ax[3])};
+	}
 
 private:	
 	std::vector<float> xticks(const std::array<float,4>& ax) const {
@@ -305,25 +349,13 @@ private:
 				sol[i]=xmin + float(0.5+i)*dx;
 			return sol;
 		} else {
-			const float target_ticks = float(target_xticks);
 			auto [xmin,xmax,d1,d2] = ax;
-			float tick_step = std::floor((xmax - xmin)/float(target_ticks));
-			int factor = 2;
-			while (tick_step<=0.0f) {
-				tick_step=std::floor(factor*(xmax - xmin)/float(target_ticks))/float(factor);
-				if ((factor % 4) == 0) factor = (factor*10)/4;
-				else factor*=2;
-			}
-			float first_tick = std::ceil(xmin/tick_step)*tick_step;
-			std::vector<float> sol;
-			for (float x = first_tick; x <= xmax; x+=tick_step)
-				sol.push_back(x);
-			return sol;
+            return xscale().ticks(target_yticks,xscale().antitransform(xmin),xscale().antitransform(xmax));
 		}
 	}
     
 public:   
-    std::vector<float> xticks() const { return xticks(axis()); }
+    std::vector<float> xticks() const { return xticks(scaled_axis()); }
 
 private:	
 	std::vector<float> yticks(const std::array<float,4>& ax) const {
@@ -336,24 +368,12 @@ private:
 				sol[i]=ymin + float(0.5+i)*dy;
 			return sol;
 		} else {
-			const float target_ticks = float(target_yticks);
 			auto [d1,d2,ymin,ymax] = ax;
-			float tick_step = std::floor((ymax - ymin)/float(target_ticks));
-			int factor = 2;
-			while (tick_step<=0.0f) {
-				tick_step=std::floor(factor*(ymax - ymin)/float(target_ticks))/float(factor);
-				if ((factor % 4) == 0) factor = (factor*10)/4;
-				else factor*=2;
-			}
-			float first_tick = std::ceil(ymin/tick_step)*tick_step;
-			std::vector<float> sol;
-			for (float y = first_tick; y <= ymax; y+=tick_step)
-				sol.push_back(y);
-			return sol;
+            return yscale().ticks(target_yticks,yscale().antitransform(ymin),yscale().antitransform(ymax));
 		}
 	}
 public:
-    std::vector<float> yticks() const { return yticks(axis()); }
+    std::vector<float> yticks() const { return yticks(scaled_axis()); }
 	
 private:
 	std::vector<std::string> xticklabels(const std::array<float,4>& ax) const {
@@ -362,15 +382,16 @@ private:
 			std::vector<float> x = xticks(ax);
 			std::vector<std::string> sol(x.size());
 			for (std::size_t i = 0; i<x.size(); ++i) {
+                float v = x[i];
 				std::stringstream s; 
-				s<<((x[i]==0)?0:x[i]);
+				s<<((v==0)?0:v);
 				sol[i]=s.str();
 			}
 			return sol;
 		}
 	}
 public:
-    std::vector<std::string> xticklabels() const { return xticklabels(axis()); }
+    std::vector<std::string> xticklabels() const { return xticklabels(scaled_axis()); }
     
 private:	
 	std::vector<std::string> yticklabels(const std::array<float,4>& ax) const {
@@ -379,8 +400,9 @@ private:
 			std::vector<float> y = yticks(ax);
 			std::vector<std::string> sol(y.size());
 			for (std::size_t i = 0; i<y.size(); ++i) {
+                float v = y[i];
 				std::stringstream s; 
-				s<<((y[i]==0)?0:y[i]);
+				s<<((v==0)?0:v);
 				sol[i]=s.str();
 			}
 			return sol;
@@ -388,7 +410,7 @@ private:
 	}
 
 public:
-    std::vector<std::string> yticklabels() const { return yticklabels(axis()); }
+    std::vector<std::string> yticklabels() const { return yticklabels(scaled_axis()); }
 	
 
 private:
@@ -424,7 +446,7 @@ private:
 		auto x = xticks(local_axis);
 		auto labels = xticklabels(local_axis);
 		for (std::size_t i=0;i<x.size();++i) {
-			float global_x = (graph_size[0] - (marg[0]+marg[1]))*(x[i] - local_axis[0])/
+			float global_x = (graph_size[0] - (marg[0]+marg[1]))*(xscale().transform(x[i]) - local_axis[0])/
 						(local_axis[1]-local_axis[0]);
 			graph.add(_2d::line(
 				{global_x,graph_size[1]-(marg[2]+marg[3])},
@@ -445,7 +467,7 @@ private:
 		auto y = yticks(local_axis);
 		auto labels = yticklabels(local_axis);
 		for (std::size_t i=0;i<y.size();++i) {
-			float global_y = graph_size[1] - (marg[2]+marg[3]) - (graph_size[1]-marg[2]-marg[3])*(y[i] - local_axis[2])/(local_axis[3]-local_axis[2]);
+			float global_y = graph_size[1] - (marg[2]+marg[3]) - (graph_size[1]-marg[2]-marg[3])*(yscale().transform(y[i]) - local_axis[2])/(local_axis[3]-local_axis[2]);
 			graph.add(_2d::line({-3,global_y},{0,global_y}))
 				.stroke(black).stroke_width(linewidth());
 			if (i<labels.size()) {		
@@ -457,7 +479,7 @@ private:
 public: 
 	_2d::Group graph() const {
 		std::array<float,2> graph_size = figsize();
-		std::array<float,4> local_axis = axis();
+		std::array<float,4> local_axis = scaled_axis();
 		auto marg = margin(local_axis);
        
         auto group = _2d::group(_2d::translate({marg[0],marg[2]}));
@@ -483,7 +505,7 @@ public:
                 _2d::translate(-local_axis[0],-local_axis[3])));
             area.set("clip-path",std::string("url(#")+group.id()+"clipper)");
             group.add(_2d::rect({0,0},area_size)).fill(none).stroke_width(linewidth()).stroke(black).pointer_events(pointer_events_none);
-            for (const auto& p : plottables) area.add_ptr(p->scaled(*xscale_,*yscale_));
+            for (const auto& p : plottables) area.add_ptr(p->scaled(xscale(),yscale()));
 		
             add_xticks(group, graph_size, local_axis);
             add_yticks(group, graph_size, local_axis);
