@@ -312,13 +312,7 @@ public:
     SVGPlot& yticks(const std::vector<float>& c1, const std::vector<std::string>& c2) {
         return yticks(c1).yticklabels(c2);
     }	    
-private:
-    static void axis_include(std::array<float,4>& a, const std::array<float,4>& b) {
-        if (a[0]>b[0]) a[0]=b[0];
-        if (a[1]<b[1]) a[1]=b[1];
-        if (a[2]>b[2]) a[2]=b[2];
-        if (a[3]<b[3]) a[3]=b[3];
-    }        
+      
 public:
 	SVGPlot& axis(const std::array<float,4>& a) { axis_set=true; axis_=a; return (*this); }
 	std::array<float,4> axis() const {
@@ -327,18 +321,27 @@ public:
         else {
             std::array<float,4> a = plottables.front()->axis();
             auto it = plottables.begin(); ++it;
-            for (;it!=plottables.end();++it) axis_include(a,(*it)->axis());
+            for (;it!=plottables.end();++it) a = axis_join(a,(*it)->axis());
             return a;
 		}
 	}
     
+private:	 
 	std::array<float,4> scaled_axis() const {
-        auto ax = axis();
-        return std::array<float,4>{xscale().transform(ax[0]),xscale().transform(ax[1]),
-            yscale().transform(ax[2]),yscale().transform(ax[3])};
+		if (axis_set) {
+            auto ax = axis_;
+            return std::array<float,4>{xscale().transform(ax[0]),xscale().transform(ax[1]),
+                yscale().transform(ax[2]),yscale().transform(ax[3])};
+        }
+		else if (plottables.empty()) return std::array<float,4>{0,0,0,0};
+        else {
+            std::array<float,4> a = plottables.front()->scaled_axis(xscale(),yscale());
+            auto it = plottables.begin(); ++it;
+            for (;it!=plottables.end();++it) a = axis_join(a,(*it)->scaled_axis(xscale(),yscale()));
+            return a;
+		}
 	}
 
-private:	
 	std::vector<float> xticks(const std::array<float,4>& ax) const {
 		if (xticks_set) return xticks_;
 		else if (xticklabels_set) {

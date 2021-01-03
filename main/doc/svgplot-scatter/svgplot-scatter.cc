@@ -6,7 +6,7 @@
 int main(int argc, char** argv) {
 	{ // Example 1
         std::mt19937 gen{1}; //Fixed seed
-        std::normal_distribution<> d{0,2};
+        std::normal_distribution<float> d{0,2};
         std::list<float> x,y;
         for (int n=0;n<50;++n) { x.push_back(d(gen)); y.push_back(d(gen)); }
         svg_cpp_plot::SVGPlot plt;
@@ -16,7 +16,7 @@ int main(int argc, char** argv) {
     
 	{ // Example 2
         std::mt19937 gen{1}; //Fixed seed
-        std::normal_distribution<> d{0,1};
+        std::normal_distribution<float> d{0,1};
         svg_cpp_plot::SVGPlot plt;
         for (int r = 0; r<3; ++r) {
             std::list<float> x,y;

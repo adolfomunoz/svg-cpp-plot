@@ -1,5 +1,6 @@
 #include <array>
 #include <cmath>
+#include "exceptions.h"
 
 namespace svg_cpp_plot {
 namespace axis_scale {
@@ -8,7 +9,20 @@ class Base {
 public:
     virtual float transform(float x)     const noexcept = 0;
     virtual float antitransform(float y) const noexcept = 0;
+    virtual Base& base(float b)      { throw exception_invalid_parameter(*this,"base"); }
+    virtual Base& linthresh(float b) { throw exception_invalid_parameter(*this,"linthresh"); }
+    virtual Base& linscale(float b)   { throw exception_invalid_parameter(*this,"linscale"); }
     virtual bool is_valid(float x) const noexcept { return true; }
+    std::vector<float> filter(const std::vector<float>& sol, float threshold) const noexcept {
+        std::vector<float> filtered_sol;
+        for (float x : sol) {
+            if ( (std::abs(transform(sol.back()) - transform(x))>threshold) &&
+                    (filtered_sol.empty() || (std::abs(transform(filtered_sol.back()) - transform(x))>threshold) ) ) 
+                filtered_sol.push_back(x);
+        }
+        filtered_sol.push_back(sol.back()); 
+        return filtered_sol;
+    }
     virtual std::vector<float> ticks(int target_ticks, float xmin, float xmax) const noexcept {
         float tick_step = std::floor((xmax - xmin)/float(target_ticks));
 		int factor = 2;
@@ -19,19 +33,8 @@ public:
 		}
 		float first_tick = std::ceil(xmin/tick_step)*tick_step;
 		std::vector<float> sol;
-		for (float x = first_tick; x <= xmax; x+=tick_step) 
-            if (is_valid(x)) 
-                sol.push_back(x);
-           
-        float threshold = (transform(sol.back()) - transform(sol.front()))/target_ticks;
-        std::vector<float> filtered_sol;
-        for (float x : sol) {
-            if ( (std::abs(transform(sol.back()) - transform(x))>threshold) &&
-                    (filtered_sol.empty() || (std::abs(transform(filtered_sol.back()) - transform(x))>threshold) ) ) 
-                filtered_sol.push_back(x);
-        }
-        filtered_sol.push_back(sol.back());
-		return filtered_sol;
+		for (float x = first_tick; x <= xmax; x+=tick_step) if (is_valid(x)) sol.push_back(x);
+		return filter(sol,(transform(sol.back()) - transform(sol.front()))/target_ticks) ;
     }
 };
 
@@ -45,7 +48,7 @@ class log : public Base {
     float base_;
 public:
     log(float base = 10.0f) : base_(base) {}
-    log& base(float b) { base_ = b; return (*this); }
+    log& base(float b) override { base_ = b; return (*this); }
     float base() const { return base_; }
     bool is_valid(float x)       const noexcept override { return x>0; }
     float transform(float x)     const noexcept override { return std::log((x>0)?x:1.e-3f)/std::log(base()); }
@@ -58,7 +61,7 @@ class symlog : public Base {
     log l;
 public:
     symlog(float lt = 0.01f, float ls = 1.0f, float b = 10.0f) : linthresh_(lt), linscale_(ls), l(b) {}
-    symlog& base(float b) { l.base(b); return (*this); }
+    symlog& base(float b) override { l.base(b); return (*this); }
     float base() const { return l.base(); }
     float linthresh() const { return linthresh_; }
     symlog& linthresh(float l) { linthresh_ = l; return (*this); }
@@ -84,5 +87,9 @@ public:
     }    
 };
 }    
-    
+   
+axis_scale::log log;
+axis_scale::symlog symlog;
+axis_scale::linear linear;
+   
 };

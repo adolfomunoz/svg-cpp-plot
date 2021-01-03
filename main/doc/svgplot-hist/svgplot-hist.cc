@@ -3,9 +3,8 @@
 
 int main(int argc, char** argv) {
 	{ // Example 1
-        std::random_device rd{};
-        std::mt19937 gen{rd()};
-        std::normal_distribution<> d{5,2};
+        std::mt19937 gen{1}; //Fixed seed
+        std::normal_distribution<float> d{5,2};
         std::list<float> samples;
         for (int n=0;n<1000;++n) { samples.push_back(d(gen)); }
         svg_cpp_plot::SVGPlot plt;
@@ -14,9 +13,8 @@ int main(int argc, char** argv) {
 	}
     
 	{ // Example 2
-        std::random_device rd{};
-        std::mt19937 gen{rd()};
-        std::normal_distribution<> d{5,2};
+        std::mt19937 gen{1}; //Fixed seed
+        std::normal_distribution<float> d{5,2};
         std::list<float> samples;
         for (int n=0;n<1000;++n) { samples.push_back(d(gen)); }
         svg_cpp_plot::SVGPlot plt;
@@ -45,9 +43,8 @@ int main(int argc, char** argv) {
     }
     
     { // Example 6
-        std::random_device rd{};
-        std::mt19937 gen{rd()};
-        std::normal_distribution<> d{5,2};
+        std::mt19937 gen{1}; //Fixed seed
+        std::normal_distribution<float> d{5,2};
         std::list<float> samples;
         for (int n=0;n<1000;++n) { samples.push_back(d(gen)); }
         svg_cpp_plot::SVGPlot plt;
@@ -59,9 +56,8 @@ int main(int argc, char** argv) {
 	}
     
 	{ // Example 7
-        std::random_device rd{};
-        std::mt19937 gen{rd()};
-        std::normal_distribution<> d{5,2};
+        std::mt19937 gen{1}; //Fixed seed
+        std::normal_distribution<float> d{5,2};
         std::list<float> samples;
         for (int n=0;n<1000;++n) { samples.push_back(d(gen)); }
         svg_cpp_plot::SVGPlot plt;
@@ -74,8 +70,7 @@ int main(int argc, char** argv) {
 	}
     
 	{ // Example 8
-        std::random_device rd{};
-        std::mt19937 gen{rd()};
+        std::mt19937 gen{1}; //Fixed seed
         std::normal_distribution<> d1{5,2}, d2{-2,4};
         std::list<float> samples1, samples2;
         for (int n=0;n<1000;++n) { samples1.push_back(d1(gen)); samples2.push_back(d2(gen)); }

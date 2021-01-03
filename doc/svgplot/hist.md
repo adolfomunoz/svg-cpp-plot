@@ -3,9 +3,8 @@
 The `hist` method provides a way to generate histograms from data, from `svg_cpp_plot::SVGPlot` class. It expectes a single parameter, which are the samples from which the histogram is going to be calculated and plotted:
 
 ```cpp
-std::random_device rd{};
-std::mt19937 gen{rd()};
-std::normal_distribution<> d{5,2};
+std::mt19937 gen{1}; //Fixed seed
+std::normal_distribution<float> d{5,2};
 std::list<float> samples;
 for (int n=0;n<1000;++n) { samples.push_back(d(gen)); }
 svg_cpp_plot::SVGPlot plt;
@@ -25,9 +24,8 @@ By default the histogram is distributed uniformly among *10* bins. However, thes
 The `bins` named attribute can be set as a number (integer) that indicates the number of bins of the histogram:
 
 ```cpp
-std::random_device rd{};
-std::mt19937 gen{rd()};
-std::normal_distribution<> d{5,2};
+std::mt19937 gen{1}; //Fixed seed
+std::normal_distribution<float> d{5,2};
 std::list<float> samples;
 for (int n=0;n<1000;++n) { samples.push_back(d(gen)); }
 svg_cpp_plot::SVGPlot plt;
@@ -90,9 +88,8 @@ The `cumulative` named parameter is a boolean (that can be setup either with a `
 The usage of both booleans is illustrated in the following example (for the same sample points):
 
 ```cpp
-std::random_device rd{};
-std::mt19937 gen{rd()};
-std::normal_distribution<> d{5,2};
+std::mt19937 gen{1}; //Fixed seed
+std::normal_distribution<float> d{5,2};
 std::list<float> samples;
 for (int n=0;n<1000;++n) { samples.push_back(d(gen)); }
 svg_cpp_plot::SVGPlot plt;
@@ -119,9 +116,8 @@ For instance, the `histtype` named parameter (represented by a method) defines t
 Also, it is possible to choose the orientation of the histogram with the `orientation` named attribute, which can be either `"vertical"` or `"horizontal"`. Both options are illustrated in the follwoing example:
 
 ```cpp
-std::random_device rd{};
-std::mt19937 gen{rd()};
-std::normal_distribution<> d{5,2};
+std::mt19937 gen{1}; //Fixed seed
+std::normal_distribution<float> d{5,2};
 std::list<float> samples;
 for (int n=0;n<1000;++n) { samples.push_back(d(gen)); }
 svg_cpp_plot::SVGPlot plt;
@@ -147,9 +143,8 @@ Last, it is also possible to tweak the color of the histogram with the `color` n
 Also, the `alpha` parameter defines transparency, which is specially useful for plotting multiple histograms in the same graph:
 
 ```cpp
-std::random_device rd{};
-std::mt19937 gen{rd()};
-std::normal_distribution<> d1{5,2}, d2{-2,4};
+std::mt19937 gen{1}; //Fixed seed
+std::normal_distribution<float> d1{5,2}, d2{-2,4};
 std::list<float> samples1, samples2;
 for (int n=0;n<1000;++n) { samples1.push_back(d1(gen)); samples2.push_back(d2(gen)); }
 svg_cpp_plot::SVGPlot plt;

@@ -101,18 +101,24 @@ public:
         
         return g;
     }
+    
+private:
+    std::array<float,4> axis(int i) const noexcept {
+        return std::array<float,4>{x(i)-0.5f*width(i),x(i)+0.5f*width(i),bottom(i),bottom(i)+height(i)};
+    }
 
+public:
 	std::array<float,4> axis() const noexcept override {
-        std::array<float,4> ax{x(0)-0.75f*width(0),x(0)+0.75f*width(0),bottom(0),bottom(0)+1.1f*height(0)};
-        for (std::size_t i = 1; i<x().size(); ++i) {
-            if ((x(i)-0.75f*width(i))<ax[0]) ax[0] = x(i)-0.75f*width(i);
-            if ((x(i)+0.75f*width(i))>ax[1]) ax[1] = x(i)+0.75f*width(i);
-            if (bottom(i)<ax[2]) ax[2] = bottom(i);
-            if ((bottom(i)+1.1*height(i))>ax[3]) ax[3] = bottom(i)+1.1f*height(i);
-        }
+        std::array<float,4> ax = axis(0);
+        for (std::size_t i = 1; i<x().size(); ++i) ax = axis_join(ax,axis(i));
+        return ax;
+	}    
+
+    std::array<float,4> scaled_axis(const axis_scale::Base& xscale, const axis_scale::Base& yscale) const noexcept override {
+        std::array<float,4> ax = axis_transform(axis(0),xscale,yscale);
+        for (std::size_t i = 1; i<x().size(); ++i) if (height(i)>0) ax = axis_join(ax,axis_transform(axis(i),xscale,yscale));
         return ax;
 	}
-
 };
 
 	
