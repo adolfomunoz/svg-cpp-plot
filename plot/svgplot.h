@@ -353,7 +353,7 @@ private:
 			return sol;
 		} else {
 			auto [xmin,xmax,d1,d2] = ax;
-            return xscale().ticks(target_yticks,xscale().antitransform(xmin),xscale().antitransform(xmax));
+            return xscale().ticks(target_xticks,xscale().antitransform(xmin),xscale().antitransform(xmax));
 		}
 	}
     
@@ -384,12 +384,7 @@ private:
 		else {
 			std::vector<float> x = xticks(ax);
 			std::vector<std::string> sol(x.size());
-			for (std::size_t i = 0; i<x.size(); ++i) {
-                float v = x[i];
-				std::stringstream s; 
-				s<<((v==0)?0:v);
-				sol[i]=s.str();
-			}
+			for (std::size_t i = 0; i<x.size(); ++i) sol[i] = xscale().ticklabel(x[i]);
 			return sol;
 		}
 	}
@@ -402,12 +397,7 @@ private:
 		else {
 			std::vector<float> y = yticks(ax);
 			std::vector<std::string> sol(y.size());
-			for (std::size_t i = 0; i<y.size(); ++i) {
-                float v = y[i];
-				std::stringstream s; 
-				s<<((v==0)?0:v);
-				sol[i]=s.str();
-			}
+			for (std::size_t i = 0; i<y.size(); ++i) sol[i] = yscale().ticklabel(y[i]);
 			return sol;
 		}
 	}

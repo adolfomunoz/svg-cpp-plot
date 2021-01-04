@@ -1,6 +1,7 @@
 #include <array>
 #include <cmath>
 #include "exceptions.h"
+#include <sstream>
 
 namespace svg_cpp_plot {
 namespace axis_scale {
@@ -9,9 +10,6 @@ class Base {
 public:
     virtual float transform(float x)     const noexcept = 0;
     virtual float antitransform(float y) const noexcept = 0;
-    virtual Base& base(float b)      { throw exception_invalid_parameter(*this,"base"); }
-    virtual Base& linthresh(float b) { throw exception_invalid_parameter(*this,"linthresh"); }
-    virtual Base& linscale(float b)   { throw exception_invalid_parameter(*this,"linscale"); }
     virtual bool is_valid(float x) const noexcept { return true; }
     std::vector<float> filter(const std::vector<float>& sol, float threshold) const noexcept {
         std::vector<float> filtered_sol;
@@ -34,7 +32,13 @@ public:
 		float first_tick = std::ceil(xmin/tick_step)*tick_step;
 		std::vector<float> sol;
 		for (float x = first_tick; x <= xmax; x+=tick_step) if (is_valid(x)) sol.push_back(x);
-		return filter(sol,(transform(sol.back()) - transform(sol.front()))/target_ticks) ;
+		return filter(sol,0.5*(sol.back() - sol.front())/target_ticks);
+    }
+    
+    virtual std::string ticklabel(float value) const noexcept {
+        std::stringstream s; 
+		s<<((value==0)?0:value);
+		return s.str(); 
     }
 };
 
@@ -48,12 +52,26 @@ class log : public Base {
     float base_;
 public:
     log(float base = 10.0f) : base_(base) {}
-    log& base(float b) override { base_ = b; return (*this); }
+    log& base(float b) { base_ = b; return (*this); }
     float base() const { return base_; }
     bool is_valid(float x)       const noexcept override { return x>0; }
     float transform(float x)     const noexcept override { return std::log((x>0)?x:1.e-3f)/std::log(base()); }
     float antitransform(float y) const noexcept override { return std::pow(base(),y); }
-};
+    std::vector<float> ticks(int target_ticks, float xmin, float xmax) const noexcept override {
+        int low = std::ceil(transform(xmin));
+        int top = std::floor(transform(xmax));
+		std::vector<float> sol;
+        for (int e = low; e<=top; ++e) sol.push_back(antitransform(e));
+		return filter(sol,0.5*(float(top)-float(low))/float(target_ticks)) ;
+    }
+    
+    std::string ticklabel(float value) const noexcept override {
+        std::stringstream s; 
+        float l = transform(value);
+        if (std::abs(l - int(l)) < 1.e-3) s<<base()<<"<tspan dy=\"-7\" font-size=\".7em\">"<<int(l)<<"</tspan>";
+        else s<<((value==0)?0:value);
+		return s.str(); 
+    }};
 
 class symlog : public Base {
     float linthresh_;
@@ -61,7 +79,7 @@ class symlog : public Base {
     log l;
 public:
     symlog(float lt = 0.01f, float ls = 1.0f, float b = 10.0f) : linthresh_(lt), linscale_(ls), l(b) {}
-    symlog& base(float b) override { l.base(b); return (*this); }
+    symlog& base(float b) { l.base(b); return (*this); }
     float base() const { return l.base(); }
     float linthresh() const { return linthresh_; }
     symlog& linthresh(float l) { linthresh_ = l; return (*this); }
