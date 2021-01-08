@@ -78,7 +78,8 @@ public:
         if (std::abs(l - int(l)) < 1.e-3) s<<base()<<"<tspan dy=\"-7\" font-size=\".7em\">"<<int(l)<<"</tspan>";
         else s<<((value==0)?0:value);
 		return s.str(); 
-    }};
+    }
+};
 
 class symlog : public Base {
     float linthresh_;
@@ -109,7 +110,45 @@ public:
             float sign = (y>=0)?1.0f:-1.0f;
             return sign * linthresh()* l.antitransform(std::abs(y)/linthresh() - linscale_adj);
         }
-    }    
+    } 
+
+    std::vector<float> ticks(int target_ticks, float xmin, float xmax) const noexcept override {
+        std::vector<float> sol;
+        //Negative area
+        if (xmin < -linthresh()) {
+            std::vector<float> negative_sol = l.ticks(target_ticks/2,linthresh(),-xmin);
+            std::reverse(negative_sol.begin(),negative_sol.end());
+            std::transform(negative_sol.begin(),negative_sol.end(),negative_sol.begin(),std::negate<float>());
+            sol.insert(sol.end(),negative_sol.begin(),negative_sol.end());
+        }
+        if ((xmin < 0) && (xmax > 0)) sol.push_back(0);
+        if (xmax > linthresh()) {
+            std::vector<float> positive_sol = l.ticks(target_ticks/2,linthresh(),xmax);
+            sol.insert(sol.end(),positive_sol.begin(),positive_sol.end());
+        }
+		return sol;
+    }
+
+    virtual std::tuple<float,float> axis_adjust(float xmin, float xmax) const noexcept {
+        if (xmin > linthresh()) { return l.axis_adjust(xmin,xmax); }
+        else if (xmax < -linthresh()) { 
+            auto [a,b] = l.axis_adjust(-xmax,-xmin);
+            return std::tuple<float,float>(-b,-a);
+        } else {
+            auto [pa,pb] = l.axis_adjust(linthresh(),xmax);
+            auto [nb,na] = l.axis_adjust(linthresh(),-xmin); na*=-1; nb*=-1;
+            return std::tuple<float,float>(std::min(0.0f,std::min(pa,na)),std::max(0.0f,std::max(pb,nb)));
+        }
+    }
+    
+    std::string ticklabel(float value) const noexcept override {
+        if (value == 0) return "0";
+        else if (value > 0) return l.ticklabel(value);
+        else { // value < 0
+            return std::string("-")+l.ticklabel(-value);
+        }
+    }
+    
 };
 }    
    
