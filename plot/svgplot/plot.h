@@ -70,9 +70,9 @@ public:
             if (y < ax[2]) ax[2] = y;
             if (y > ax[3]) ax[3] = y;
         }
-		float dx = (ax[1]-ax[0])/32.0f;
+/*		float dx = (ax[1]-ax[0])/32.0f;
 		float dy = (ax[3]-ax[2])/32.0f;
-        ax[0]-=dx; ax[1]+=dx; ax[2]-=dy; ax[3]+=dy;
+        ax[0]-=dx; ax[1]+=dx; ax[2]-=dy; ax[3]+=dy;*/
 
         return ax;
 	}
