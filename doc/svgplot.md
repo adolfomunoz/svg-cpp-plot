@@ -46,7 +46,8 @@ which although techically are not named parameters they look similar hence we wi
 ## Diagrams 
 The provided methods that generate different types of diagrams are:
 
-- [`plot`](./svgplot/plot.md): plots *x,y* scatter plots or lines with different styles and configuration options. 
+- [`plot`](./svgplot/plot.md): plots *x,y* graphs with different styles and configuration options. 
+- [`scatter`](./svgplot/scatter.md): generates *x,y* scatter plots with potential visualizations of more variables through marker colors or sizes.
 - [`imshow`](./svgplot/imshow.md): plots two-dimensional data.
 - [`bar` and `barh`](./svgplot/bar.md): generates bar graphs.
 - [`hist`](./svgplot/hist.md): generates histograms from 1D samples.

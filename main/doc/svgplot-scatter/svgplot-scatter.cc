@@ -41,7 +41,6 @@ int main(int argc, char** argv) {
 	}
     
     { // Example 4
-
         svg_cpp_plot::SVGPlot plt; int p=0;
         for (std::string marker : {"o",".",",","v",">","^","<","s","+","P","x","X"}) {
             auto& sub = plt.subplot(2,6,p++);

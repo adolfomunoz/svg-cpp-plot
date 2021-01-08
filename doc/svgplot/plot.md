@@ -110,7 +110,7 @@ For lines the following named attributes are provided:
 - `linestyle(<string>)` defines the style of the line (see format strings above).
 
 For both the following named attribute is provided:
-- `color(<color>)` sets the color of the marker / line. Colors can be a named color (`svg_cpp_plot::red`), a RGB color (`svg_cpp_plot::rgb(0.2,0.8,0.2)`), a HSV color (`svg_cpp_plot::hsv(0,1,1)`) or a string that represents a color, either named colors `"magenta"`, or color URLs `"#FF00EE"`.
+- `color(<color>)` sets the color of the marker / line. Colors can be a named color (`svg_cpp_plot::red`), a RGB color (`svg_cpp_plot::rgb(0.2,0.8,0.2)`), a HSV color (`svg_cpp_plot::hsv(0,1,1)`) or a string that represents a color, either named colors `"magenta"`, color URLs `"#FF00EE"` or single char colors (```r```  red, ```g```  green, ```b```  blue, ```c``` cyan, ```m``` magenta, ```y```  yellow, ```k```  black, ```w``` white).
 
 The following is an example of the usage of these named attributes described above:
 
