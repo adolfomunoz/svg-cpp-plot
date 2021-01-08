@@ -22,17 +22,17 @@ public:
         return filtered_sol;
     }
     virtual std::vector<float> ticks(int target_ticks, float xmin, float xmax) const noexcept {
-        float tick_step = std::floor((xmax - xmin)/float(target_ticks));
+        float tick_step = std::floor((xmax - xmin)/float(target_ticks-1));
 		int factor = 2;
 		while (tick_step<=0.0f) {
-			tick_step=std::floor(factor*(xmax - xmin)/float(target_ticks))/float(factor);
+			tick_step=std::floor(factor*(xmax - xmin)/float(target_ticks-1))/float(factor);
 			if ((factor % 4) == 0) factor = (factor*10)/4;
 			else factor*=2;
 		}
 		float first_tick = std::ceil(xmin/tick_step)*tick_step;
 		std::vector<float> sol;
-		for (float x = first_tick; x <= xmax; x+=tick_step) if (is_valid(x)) sol.push_back(x);
-		return filter(sol,0.5*(sol.back() - sol.front())/target_ticks);
+		for (float x = first_tick; x <= (xmax + 0.5*tick_step); x+=tick_step) if (is_valid(x)) sol.push_back(x);
+		return filter(sol,0.5*(sol.back() - sol.front())/(target_ticks-1));
     }
     virtual std::tuple<float,float> axis_adjust(float xmin, float xmax) const noexcept {
         return std::tuple<float,float>(xmin,xmax);

@@ -28,9 +28,9 @@ int main(int argc, char** argv) {
 	
 	{ // Example 4
 		svg_cpp_plot::SVGPlot plt;
-		plt.plot(svg_cpp_plot::arange(0,5,0.05),
-					[] (float x) { return x*std::sin(x);});
-		plt.plot(svg_cpp_plot::arange(0,5,0.05),sqrtf);
+        auto x = svg_cpp_plot::linspace(0,5);
+		plt.plot(x,[] (float x) { return x*std::sin(x);});
+		plt.plot(x,sqrtf);
 		plt.savefig("../doc/svgplot/plot/example4.svg");
 	}
 	

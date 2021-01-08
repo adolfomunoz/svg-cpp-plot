@@ -12,6 +12,7 @@
 #include "../2d/text.h"
 #include "../attributes/style.h"
 #include "svgplot/arange.h"
+#include "svgplot/linspace.h"
 #include "svgplot/plot.h"
 #include "svgplot/imshow.h"
 #include "svgplot/bar.h"

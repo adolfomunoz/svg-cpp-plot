@@ -48,13 +48,14 @@ Furthermore, it is also possible to use functions as the *y* parameter. In that 
 
 ```cpp
 svg_cpp_plot::SVGPlot plt;
-plt.plot(svg_cpp_plot::arange(0,5,0.05),
-			[] (float x) { return x*std::sin(x);});
-plt.plot(svg_cpp_plot::arange(0,5,0.05),sqrtf);
-plt.savefig("../doc/example4.svg");
+auto x = svg_cpp_plot::linspace(0,5);
+plt.plot(x,[] (float x) { return x*std::sin(x);});
+plt.plot(x,sqrtf);
+plt.savefig("../doc/svgplot/plot/example4.svg");
 ```
- 
-generating the following graph:
+
+The above example also illustrates the provided python-like `linspace(<start>,<stop>,<nsamples=50>)` list generator. It generates
+generatea the following graph:
 
 <div style="text-align:center"><img 
  src="./plot/example4.svg" alt="example4" width="50%" /></div>
@@ -99,15 +100,17 @@ The above example tests many format combinations, yielding:
 Another option to better customize the appearance of each of the plots is through *named attributes*. However, as C++ does not specifically support such feature, these named attributes are implemented as postfix methods, appended consecutively at the end of the `plot` method call.
 
 For markers the following named attributes are provided:
-- `marker(<string>)` defines the style of the marker (see format strings above).
 - `markersize(<float>)` sets the size of the marker.
+- `marker(<string>)` defines the style of the marker represented as a single charater.
+<div style="text-align:center"><img 
+ src="./scatter/example4.svg" alt="example4" width="100%" /></div>
 
 For lines the following named attributes are provided:
-- `linestyle(<string>)` defines the style of the line (see format strings above).
 - `linewidth(<float>)` sets the width of the line.
+- `linestyle(<string>)` defines the style of the line (see format strings above).
 
 For both the following named attribute is provided:
-- `color(<color>)` sets the color of the marker / line. Colors can be a named color (`svg_cpp_plot::red`), a RGB color (`svg_cpp_plot::rgb(0.2,0.8,0.2)`) or a HSV color (`svg_cpp_plot::hsv(0,1,1)`).
+- `color(<color>)` sets the color of the marker / line. Colors can be a named color (`svg_cpp_plot::red`), a RGB color (`svg_cpp_plot::rgb(0.2,0.8,0.2)`), a HSV color (`svg_cpp_plot::hsv(0,1,1)`) or a string that represents a color, either named colors `"magenta"`, or color URLs `"#FF00EE"`.
 
 The following is an example of the usage of these named attributes described above:
 

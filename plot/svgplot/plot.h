@@ -76,6 +76,22 @@ public:
 
         return ax;
 	}
+    
+    std::array<float,4> scaled_axis(const axis_scale::Base& xscale, const axis_scale::Base& yscale) const noexcept override {
+        std::array<float,4> ax{0,0,0,0};
+        bool first = true;
+        for (auto [x,y] : data) {
+            if (xscale.is_valid(x) && yscale.is_valid(y)) {
+                float tx = xscale.transform(x); float ty = yscale.transform(y);
+                if (first || (tx < ax[0])) ax[0] = tx;
+                if (first || (tx > ax[1])) ax[1] = tx;
+                if (first || (ty < ax[2])) ax[2] = ty;
+                if (first || (ty > ax[3])) ax[3] = ty;
+                first = false;
+            }
+        }        
+        return ax;
+	}
 };
 
 /**
