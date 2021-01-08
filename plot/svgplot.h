@@ -322,6 +322,8 @@ public:
             std::array<float,4> a = plottables.front()->axis();
             auto it = plottables.begin(); ++it;
             for (;it!=plottables.end();++it) a = axis_join(a,(*it)->axis());
+            std::tie(a[0],a[1]) = xscale().axis_adjust(a[0],a[1]);
+            std::tie(a[2],a[3]) = yscale().axis_adjust(a[2],a[3]);
             return a;
 		}
 	}
@@ -338,6 +340,11 @@ private:
             std::array<float,4> a = plottables.front()->scaled_axis(xscale(),yscale());
             auto it = plottables.begin(); ++it;
             for (;it!=plottables.end();++it) a = axis_join(a,(*it)->scaled_axis(xscale(),yscale()));
+            auto [xmin,xmax] = xscale().axis_adjust(xscale().antitransform(a[0]),xscale().antitransform(a[1]));
+            auto [ymin,ymax] = yscale().axis_adjust(yscale().antitransform(a[2]),yscale().antitransform(a[3]));
+            a[0] = xscale().transform(xmin); a[1] = xscale().transform(xmax);
+            a[2] = yscale().transform(ymin); a[3] = yscale().transform(ymax);
+
             return a;
 		}
 	}

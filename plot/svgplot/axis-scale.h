@@ -34,6 +34,9 @@ public:
 		for (float x = first_tick; x <= xmax; x+=tick_step) if (is_valid(x)) sol.push_back(x);
 		return filter(sol,0.5*(sol.back() - sol.front())/target_ticks);
     }
+    virtual std::tuple<float,float> axis_adjust(float xmin, float xmax) const noexcept {
+        return std::tuple<float,float>(xmin,xmax);
+    }
     
     virtual std::string ticklabel(float value) const noexcept {
         std::stringstream s; 
@@ -60,9 +63,13 @@ public:
     std::vector<float> ticks(int target_ticks, float xmin, float xmax) const noexcept override {
         int low = std::ceil(transform(xmin));
         int top = std::floor(transform(xmax));
+        int de = std::max(1,(top - low)/(target_ticks-1));
 		std::vector<float> sol;
-        for (int e = low; e<=top; ++e) sol.push_back(antitransform(e));
-		return filter(sol,0.5*(float(top)-float(low))/float(target_ticks)) ;
+        for (int e = low; e<=top; e+=de) sol.push_back(antitransform(e));
+		return sol;
+    }
+    virtual std::tuple<float,float> axis_adjust(float xmin, float xmax) const noexcept {
+        return std::tuple<float,float>(antitransform(std::floor(transform(xmin))),antitransform(std::ceil(transform(xmax))));
     }
     
     std::string ticklabel(float value) const noexcept override {

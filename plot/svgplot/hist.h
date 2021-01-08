@@ -143,29 +143,43 @@ public:
     template<typename C>
 	Hist& color(const C& c) { color_=detail::color(c); return *this; }
 	const Color& color() const { return color_?*color_:black; }
+    
+private:
+    std::unique_ptr<Plottable> representation() const {
+        if (histtype_==HistType::bar) {
+            if (orientation_==Orientation::vertical) {
+                auto sol = std::make_unique<Bar>(hist_positions(),hist_values());
+                sol->width(hist_widths()).color(color_).alpha(alpha());
+                return sol;
+            } else {
+                auto sol = std::make_unique<BarH>(hist_positions(),hist_values());
+                sol->height(hist_widths()).color(color_).alpha(alpha());
+                return sol;
+            }
+        } else { // histtype_==HistType::step
+            if (orientation_==Orientation::vertical) {
+                auto sol = std::make_unique<Plot>(hist_positions(),hist_values());
+                sol->color(color_).alpha(alpha());
+                return sol;
+            } else { 
+                auto sol = std::make_unique<Plot>(hist_values(),hist_positions());
+                sol->color(color_).alpha(alpha());
+                return sol;
+            }
+        }  
+    }
    
+public:
 	std::array<float,4> axis() const noexcept override {
-        float bmin = bin(0); float bmax = bin(bins_size());
-        std::vector<float> h = hist_values();
-        float hmax = 1.1f*(*std::max_element(h.begin(),h.end()));
-        if (orientation_ == Orientation::vertical)
-            return std::array<float,4>{bmin,bmax,0.0f,hmax};
-        else
-            return std::array<float,4>{0.0f,hmax,bmin,bmax};
+        return representation()->axis();
 	}
     
+    std::array<float,4> scaled_axis(const axis_scale::Base& xscale, const axis_scale::Base& yscale) const noexcept override {
+        return representation()->scaled_axis(xscale,yscale);
+    }
+    
     std::shared_ptr<_2d::Element> scaled(const axis_scale::Base& xscale, const axis_scale::Base& yscale) const noexcept override {
-        if (histtype_==HistType::bar) {
-            if (orientation_==Orientation::vertical)
-                return Bar(hist_positions(),hist_values()).width(hist_widths()).color(color_).alpha(alpha()).scaled(xscale,yscale);
-            else 
-                return BarH(hist_positions(),hist_values()).height(hist_widths()).color(color_).alpha(alpha()).scaled(xscale,yscale);    
-        } else { // histtype_==HistType::step
-            if (orientation_==Orientation::vertical)
-                return Plot(hist_positions(),hist_values()).color(color_).alpha(alpha()).scaled(xscale,yscale);
-            else    
-                return Plot(hist_values(),hist_positions()).color(color_).alpha(alpha()).scaled(xscale,yscale);
-        }
+        return representation()->scaled(xscale,yscale);
     }
 
 
