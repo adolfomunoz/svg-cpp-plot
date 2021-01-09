@@ -124,7 +124,7 @@ plt.savefig("../doc/svgplot/scatter/example6.svg");
 which generates:
 
 <div style="text-align:center"><img 
- src="./scatter/example6.svg" alt="example6" width="50%" /></div>
+ src="./scatter/example6.svg" alt="example6" width="20%" /></div>
  
 In this case the parameters `cmap`, `vmin` and `vmax` will just be ignored.
 
@@ -142,7 +142,7 @@ plt.savefig("../doc/svgplot/scatter/example7.svg");
 yielding
 
 <div style="text-align:center"><img 
- src="./scatter/example7.svg" alt="example7" width="50%" /></div>
+ src="./scatter/example7.svg" alt="example7" width="20%" /></div>
 
 
 
