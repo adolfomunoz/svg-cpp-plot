@@ -75,7 +75,7 @@ public:
     std::string ticklabel(float value) const noexcept override {
         std::stringstream s; 
         float l = transform(value);
-        if (std::abs(l - int(l)) < 1.e-3) s<<base()<<"<tspan dy=\"-7\" font-size=\".7em\">"<<int(l)<<"</tspan>";
+        if (std::abs(l - int(l)) < 1.e-3) s<<"<tspan dy=\"2\" font-size=\".9em\">"<<base()<<"</tspan><tspan dy=\"-6\" font-size=\".7em\">"<<int(l)<<"</tspan>";
         else s<<((value==0)?0:value);
 		return s.str(); 
     }
