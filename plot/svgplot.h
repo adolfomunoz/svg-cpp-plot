@@ -216,6 +216,9 @@ public:
                                        marg[2]+marg[3]+height};
             
         }
+        else if (parent && (parent->figsize_set)) {
+            return std::array<float,2>{parent->figsize_[0]/float(parent->ncols),parent->figsize_[1]/float(parent->nrows)};
+        }
 		else return std::array<float,2>{640.0f,480.0f}; // Default size in matplotlib, although instead of inches we have dots and assume 100 dpi
     }
 	

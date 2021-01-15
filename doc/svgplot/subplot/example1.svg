@@ -1,0 +1,771 @@
+<svg viewBox="0 0 1973.46 1480.59" height="100%" width="100%" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" id="id0000000000" >
+<g id="id0000000001" >
+<g id="id0000000002" >
+<g id="id0000000003" >
+<clipPath id="id0000000003clipper" >
+<polygon points="56.328,16.496 56.328,473.496 659.328,473.496 659.328,16.496 " id="id0000000038" class="rectangle" />
+</clipPath>
+
+<g clip-path="url(#id0000000003clipper)" id="id0000000005" >
+<polyline id="id0000000039" points="56.328,244.236 62.4189,240.303 68.5098,229.037 74.6007,211.986 80.6916,191.537 86.7825,170.657 92.8734,152.561 98.9643,140.351 105.055,136.661 111.146,143.338 117.237,161.211 123.328,189.947 129.419,228.038 135.51,272.898 141.601,321.08 147.692,368.581 153.783,411.214 159.873,445.004 165.964,466.577 172.055,473.496 178.146,464.514 184.237,439.719 190.328,400.556 196.419,349.717 202.51,290.917 208.601,228.576 214.692,167.424 220.783,112.087 226.873,66.679 232.964,34.4379 239.055,17.4531 245.146,16.4962 251.237,30.9775 257.328,59.0296 263.419,97.7089 269.51,143.295 275.601,191.658 281.692,238.653 287.783,280.512 293.873,314.185 299.964,337.605 306.055,349.847 312.146,351.168 318.237,342.932 324.328,327.412 330.419,307.521 336.51,286.461 342.601,267.37 348.692,252.96 354.783,245.228 360.873,245.228 366.964,252.961 373.055,267.37 379.146,286.462 385.237,307.521 391.328,327.413 397.419,342.932 403.51,351.169 409.601,349.847 415.692,337.604 421.783,314.184 427.873,280.51 433.964,238.651 440.055,191.656 446.146,143.294 452.237,97.7074 458.328,59.0283 464.419,30.9768 470.51,16.496 476.601,17.4534 482.692,34.4388 488.783,66.6805 494.873,112.089 500.964,167.426 507.055,228.578 513.146,290.919 519.237,349.719 525.328,400.558 531.419,439.721 537.51,464.515 543.601,473.496 549.692,466.576 555.783,445.003 561.873,411.213 567.964,368.58 574.055,321.078 580.146,272.896 586.237,228.036 592.328,189.946 598.419,161.21 604.51,143.338 610.601,136.661 616.692,140.352 622.783,152.561 628.873,170.658 634.964,191.538 641.055,211.987 647.146,229.038 653.237,240.303 659.328,244.236 " fill="none" stroke-opacity="1.000000" stroke-linecap="round" stroke="#1f77b4" stroke-width="1.000000" />
+</g>
+
+<polygon points="56.328,16.496 56.328,473.496 659.328,473.496 659.328,16.496 " stroke="black" stroke-width="1.000000" fill="none" id="id0000000040" pointer-events="none" class="rectangle" />
+<polyline points="56.328,473.496 56.328,476.496 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000041" class="line" />
+<text id="id0000000042" transform="matrix(1 0 0 1 56.328 16.496)" x="0.000000" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+0
+</text>
+
+<polyline points="152.298,473.496 152.298,476.496 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000043" class="line" />
+<text id="id0000000044" transform="matrix(1 0 0 1 56.328 16.496)" x="95.970390" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+1
+</text>
+
+<polyline points="248.269,473.496 248.269,476.496 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000045" class="line" />
+<text id="id0000000046" transform="matrix(1 0 0 1 56.328 16.496)" x="191.940781" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+2
+</text>
+
+<polyline points="344.239,473.496 344.239,476.496 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000047" class="line" />
+<text id="id0000000048" transform="matrix(1 0 0 1 56.328 16.496)" x="287.911163" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+3
+</text>
+
+<polyline points="440.21,473.496 440.21,476.496 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000049" class="line" />
+<text id="id0000000050" transform="matrix(1 0 0 1 56.328 16.496)" x="383.881561" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+4
+</text>
+
+<polyline points="536.18,473.496 536.18,476.496 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000051" class="line" />
+<text id="id0000000052" transform="matrix(1 0 0 1 56.328 16.496)" x="479.851959" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+5
+</text>
+
+<polyline points="632.15,473.496 632.15,476.496 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000053" class="line" />
+<text id="id0000000054" transform="matrix(1 0 0 1 56.328 16.496)" x="575.822327" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+6
+</text>
+
+<polyline points="53.328,429.443 56.328,429.443 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000055" class="line" />
+<text id="id0000000056" transform="matrix(1 0 0 1 56.328 16.496)" x="-5.000000" y="412.947327" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+-0.75
+</text>
+
+<polyline points="53.328,367.708 56.328,367.708 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000057" class="line" />
+<text id="id0000000058" transform="matrix(1 0 0 1 56.328 16.496)" x="-5.000000" y="351.211639" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+-0.5
+</text>
+
+<polyline points="53.328,305.972 56.328,305.972 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000059" class="line" />
+<text id="id0000000060" transform="matrix(1 0 0 1 56.328 16.496)" x="-5.000000" y="289.475952" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+-0.25
+</text>
+
+<polyline points="53.328,244.236 56.328,244.236 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000061" class="line" />
+<text id="id0000000062" transform="matrix(1 0 0 1 56.328 16.496)" x="-5.000000" y="227.740265" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+0
+</text>
+
+<polyline points="53.328,182.501 56.328,182.501 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000063" class="line" />
+<text id="id0000000064" transform="matrix(1 0 0 1 56.328 16.496)" x="-5.000000" y="166.004578" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+0.25
+</text>
+
+<polyline points="53.328,120.765 56.328,120.765 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000065" class="line" />
+<text id="id0000000066" transform="matrix(1 0 0 1 56.328 16.496)" x="-5.000000" y="104.268860" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+0.5
+</text>
+
+<polyline points="53.328,59.0292 56.328,59.0292 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000067" class="line" />
+<text id="id0000000068" transform="matrix(1 0 0 1 56.328 16.496)" x="-5.000000" y="42.533173" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+0.75
+</text>
+
+</g>
+
+</g>
+
+<g id="id0000000006" >
+<g id="id0000000007" >
+<clipPath id="id0000000007clipper" >
+<polygon points="702.771,16.496 702.771,473.496 1305.77,473.496 1305.77,16.496 " id="id0000000069" class="rectangle" />
+</clipPath>
+
+<g clip-path="url(#id0000000007clipper)" id="id0000000009" >
+<polyline id="id0000000070" points="702.771,245.271 708.862,235.822 714.953,208.981 721.043,169.047 727.134,122.489 733.225,77.0071 739.316,40.4137 745.407,19.492 751.498,19.0003 757.589,40.9616 763.68,84.3427 769.771,145.168 775.862,217.053 781.953,292.081 788.043,361.901 794.134,418.882 800.225,457.172 806.316,473.496 812.407,467.591 818.498,442.212 824.589,402.701 830.68,356.203 836.771,310.608 842.862,273.412 848.953,250.617 855.043,245.869 861.134,259.923 867.225,290.539 873.316,332.802 879.407,379.837 885.498,423.808 891.589,457.055 897.68,473.218 903.771,468.169 909.862,440.635 915.953,392.414 922.043,328.148 928.134,254.698 934.225,180.198 940.316,112.925 946.407,60.1578 952.498,27.166 958.589,16.496 964.68,27.6394 970.771,57.1392 976.862,99.1149 982.953,146.132 989.043,190.288 995.134,224.367 1001.23,242.885 1007.32,242.885 1013.41,224.366 1019.5,190.286 1025.59,146.13 1031.68,99.113 1037.77,57.1377 1043.86,27.6385 1049.95,16.496 1056.04,27.1669 1062.13,60.1595 1068.23,112.928 1074.32,180.201 1080.41,254.701 1086.5,328.151 1092.59,392.416 1098.68,440.636 1104.77,468.169 1110.86,473.218 1116.95,457.054 1123.04,423.806 1129.13,379.835 1135.23,332.8 1141.32,290.538 1147.41,259.923 1153.5,245.869 1159.59,250.618 1165.68,273.413 1171.77,310.61 1177.86,356.204 1183.95,402.703 1190.04,442.213 1196.13,467.592 1202.23,473.496 1208.32,457.171 1214.41,418.88 1220.5,361.898 1226.59,292.078 1232.68,217.05 1238.77,145.165 1244.86,84.3407 1250.95,40.9604 1257.04,18.9999 1263.13,19.4924 1269.23,40.4148 1275.32,77.0087 1281.41,122.491 1287.5,169.049 1293.59,208.982 1299.68,235.823 1305.77,245.271 " fill="none" stroke-opacity="1.000000" stroke-linecap="round" stroke="#1f77b4" stroke-width="1.000000" />
+</g>
+
+<polygon points="702.771,16.496 702.771,473.496 1305.77,473.496 1305.77,16.496 " stroke="black" stroke-width="1.000000" fill="none" id="id0000000071" pointer-events="none" class="rectangle" />
+<polyline points="702.771,473.496 702.771,476.496 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000072" class="line" />
+<text id="id0000000073" transform="matrix(1 0 0 1 702.771 16.496)" x="0.000000" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+0
+</text>
+
+<polyline points="798.741,473.496 798.741,476.496 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000074" class="line" />
+<text id="id0000000075" transform="matrix(1 0 0 1 702.771 16.496)" x="95.970390" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+1
+</text>
+
+<polyline points="894.711,473.496 894.711,476.496 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000076" class="line" />
+<text id="id0000000077" transform="matrix(1 0 0 1 702.771 16.496)" x="191.940781" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+2
+</text>
+
+<polyline points="990.682,473.496 990.682,476.496 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000078" class="line" />
+<text id="id0000000079" transform="matrix(1 0 0 1 702.771 16.496)" x="287.911163" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+3
+</text>
+
+<polyline points="1086.65,473.496 1086.65,476.496 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000080" class="line" />
+<text id="id0000000081" transform="matrix(1 0 0 1 702.771 16.496)" x="383.881561" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+4
+</text>
+
+<polyline points="1182.62,473.496 1182.62,476.496 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000082" class="line" />
+<text id="id0000000083" transform="matrix(1 0 0 1 702.771 16.496)" x="479.851959" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+5
+</text>
+
+<polyline points="1278.59,473.496 1278.59,476.496 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000084" class="line" />
+<text id="id0000000085" transform="matrix(1 0 0 1 702.771 16.496)" x="575.822327" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+6
+</text>
+
+<polyline points="699.771,468.169 702.771,468.169 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000086" class="line" />
+<text id="id0000000087" transform="matrix(1 0 0 1 702.771 16.496)" x="-5.000000" y="451.672882" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+-0.75
+</text>
+
+<polyline points="699.771,393.87 702.771,393.87 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000088" class="line" />
+<text id="id0000000089" transform="matrix(1 0 0 1 702.771 16.496)" x="-5.000000" y="377.373596" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+-0.5
+</text>
+
+<polyline points="699.771,319.57 702.771,319.57 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000090" class="line" />
+<text id="id0000000091" transform="matrix(1 0 0 1 702.771 16.496)" x="-5.000000" y="303.074280" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+-0.25
+</text>
+
+<polyline points="699.771,245.271 702.771,245.271 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000092" class="line" />
+<text id="id0000000093" transform="matrix(1 0 0 1 702.771 16.496)" x="-5.000000" y="228.774979" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+0
+</text>
+
+<polyline points="699.771,170.972 702.771,170.972 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000094" class="line" />
+<text id="id0000000095" transform="matrix(1 0 0 1 702.771 16.496)" x="-5.000000" y="154.475647" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+0.25
+</text>
+
+<polyline points="699.771,96.6723 702.771,96.6723 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000096" class="line" />
+<text id="id0000000097" transform="matrix(1 0 0 1 702.771 16.496)" x="-5.000000" y="80.176361" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+0.5
+</text>
+
+<polyline points="699.771,22.373 702.771,22.373 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000098" class="line" />
+<text id="id0000000099" transform="matrix(1 0 0 1 702.771 16.496)" x="-5.000000" y="5.877045" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+0.75
+</text>
+
+</g>
+
+</g>
+
+<g id="id0000000010" >
+<g id="id0000000011" >
+<clipPath id="id0000000011clipper" >
+<polygon points="1349.21,16.496 1349.21,473.496 1952.21,473.496 1952.21,16.496 " id="id0000000100" class="rectangle" />
+</clipPath>
+
+<g clip-path="url(#id0000000011clipper)" id="id0000000013" >
+<polyline id="id0000000101" points="1349.21,246.104 1355.3,234.631 1361.4,202.486 1367.49,156.047 1373.58,104.561 1379.67,58.3452 1385.76,26.7814 1391.85,16.4961 1397.94,30.0698 1404.03,65.5345 1410.12,116.753 1416.21,174.607 1422.3,228.764 1428.4,269.68 1434.49,290.451 1440.58,288.143 1446.67,264.363 1452.76,224.941 1458.85,178.79 1464.94,136.177 1471.03,106.716 1477.12,97.5039 1483.21,111.733 1489.3,148.064 1495.4,200.887 1501.49,261.397 1507.58,319.302 1513.67,364.814 1519.76,390.544 1525.85,392.932 1531.94,372.928 1538.03,335.806 1544.12,290.134 1550.21,246.104 1556.3,213.546 1562.4,200.02 1568.49,209.338 1574.58,240.82 1580.67,289.424 1586.76,346.719 1592.85,402.516 1598.94,446.847 1605.03,471.892 1611.12,473.496 1617.21,451.973 1623.3,412.044 1629.4,361.915 1635.49,311.684 1641.58,271.379 1647.67,249.009 1653.76,249.009 1659.85,271.38 1665.94,311.686 1672.03,361.918 1678.12,412.046 1684.21,451.975 1690.3,473.496 1696.4,471.891 1702.49,446.846 1708.58,402.514 1714.67,346.716 1720.76,289.422 1726.85,240.818 1732.94,209.337 1739.03,200.02 1745.12,213.547 1751.21,246.105 1757.3,290.136 1763.4,335.808 1769.49,372.929 1775.58,392.932 1781.67,390.544 1787.76,364.812 1793.85,319.3 1799.94,261.395 1806.03,200.885 1812.12,148.063 1818.21,111.732 1824.3,97.5039 1830.4,106.717 1836.49,136.178 1842.58,178.792 1848.67,224.942 1854.76,264.364 1860.85,288.143 1866.94,290.45 1873.03,269.679 1879.12,228.762 1885.21,174.604 1891.3,116.751 1897.4,65.5329 1903.49,30.0688 1909.58,16.496 1915.67,26.7822 1921.76,58.3468 1927.85,104.563 1933.94,156.049 1940.03,202.487 1946.12,234.632 1952.21,246.104 " fill="none" stroke-opacity="1.000000" stroke-linecap="round" stroke="#1f77b4" stroke-width="1.000000" />
+</g>
+
+<polygon points="1349.21,16.496 1349.21,473.496 1952.21,473.496 1952.21,16.496 " stroke="black" stroke-width="1.000000" fill="none" id="id0000000102" pointer-events="none" class="rectangle" />
+<polyline points="1349.21,473.496 1349.21,476.496 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000103" class="line" />
+<text id="id0000000104" transform="matrix(1 0 0 1 1349.21 16.496)" x="0.000000" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+0
+</text>
+
+<polyline points="1445.18,473.496 1445.18,476.496 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000105" class="line" />
+<text id="id0000000106" transform="matrix(1 0 0 1 1349.21 16.496)" x="95.970390" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+1
+</text>
+
+<polyline points="1541.15,473.496 1541.15,476.496 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000107" class="line" />
+<text id="id0000000108" transform="matrix(1 0 0 1 1349.21 16.496)" x="191.940781" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+2
+</text>
+
+<polyline points="1637.12,473.496 1637.12,476.496 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000109" class="line" />
+<text id="id0000000110" transform="matrix(1 0 0 1 1349.21 16.496)" x="287.911163" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+3
+</text>
+
+<polyline points="1733.09,473.496 1733.09,476.496 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000111" class="line" />
+<text id="id0000000112" transform="matrix(1 0 0 1 1349.21 16.496)" x="383.881561" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+4
+</text>
+
+<polyline points="1829.07,473.496 1829.07,476.496 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000113" class="line" />
+<text id="id0000000114" transform="matrix(1 0 0 1 1349.21 16.496)" x="479.851959" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+5
+</text>
+
+<polyline points="1925.04,473.496 1925.04,476.496 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000115" class="line" />
+<text id="id0000000116" transform="matrix(1 0 0 1 1349.21 16.496)" x="575.822327" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+6
+</text>
+
+<polyline points="1346.21,427.143 1349.21,427.143 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000117" class="line" />
+<text id="id0000000118" transform="matrix(1 0 0 1 1349.21 16.496)" x="-5.000000" y="410.646973" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+-0.75
+</text>
+
+<polyline points="1346.21,366.797 1349.21,366.797 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000119" class="line" />
+<text id="id0000000120" transform="matrix(1 0 0 1 1349.21 16.496)" x="-5.000000" y="350.300720" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+-0.5
+</text>
+
+<polyline points="1346.21,306.45 1349.21,306.45 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000121" class="line" />
+<text id="id0000000122" transform="matrix(1 0 0 1 1349.21 16.496)" x="-5.000000" y="289.954468" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+-0.25
+</text>
+
+<polyline points="1346.21,246.104 1349.21,246.104 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000123" class="line" />
+<text id="id0000000124" transform="matrix(1 0 0 1 1349.21 16.496)" x="-5.000000" y="229.608231" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+0
+</text>
+
+<polyline points="1346.21,185.758 1349.21,185.758 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000125" class="line" />
+<text id="id0000000126" transform="matrix(1 0 0 1 1349.21 16.496)" x="-5.000000" y="169.262024" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+0.25
+</text>
+
+<polyline points="1346.21,125.412 1349.21,125.412 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000127" class="line" />
+<text id="id0000000128" transform="matrix(1 0 0 1 1349.21 16.496)" x="-5.000000" y="108.915771" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+0.5
+</text>
+
+<polyline points="1346.21,65.0655 1349.21,65.0655 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000129" class="line" />
+<text id="id0000000130" transform="matrix(1 0 0 1 1349.21 16.496)" x="-5.000000" y="48.569550" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+0.75
+</text>
+
+</g>
+
+</g>
+
+<g id="id0000000014" >
+<g id="id0000000015" >
+<clipPath id="id0000000015clipper" >
+<polygon points="56.328,501.328 56.328,958.328 659.328,958.328 659.328,501.328 " id="id0000000131" class="rectangle" />
+</clipPath>
+
+<g clip-path="url(#id0000000015clipper)" id="id0000000017" >
+<polyline id="id0000000132" points="56.328,730.518 62.4189,723.275 68.5098,705.251 74.6007,686.115 80.6916,677.661 86.7825,688.956 92.8734,722.22 98.9643,770.994 105.055,821.397 111.146,856.218 117.237,860.616 123.328,827.57 129.419,761.195 135.51,676.677 141.601,596.594 147.692,544.574 153.783,538.141 159.873,582.958 165.964,670.322 172.055,778.86 178.146,880.074 184.237,946.235 190.328,958.327 196.419,911.705 202.51,817.719 208.601,700.785 214.692,591.686 220.783,519.027 226.873,501.328 232.964,542.026 239.055,628.805 245.146,737.393 251.237,838.629 257.328,906.688 263.419,926.058 269.51,895.277 275.601,826.491 281.692,741.135 287.783,663.203 293.873,612.241 299.964,598.141 306.055,619.229 312.146,663.984 318.237,715.639 324.328,757.996 330.419,780.531 336.51,781.17 342.601,765.957 348.692,745.926 354.783,732.39 360.873,732.39 366.964,745.927 373.055,765.958 379.146,781.171 385.237,780.531 391.328,757.995 397.419,715.637 403.51,663.982 409.601,619.227 415.692,598.141 421.783,612.242 427.873,663.206 433.964,741.138 440.055,826.495 446.146,895.279 452.237,926.058 458.328,906.686 464.419,838.625 470.51,737.389 476.601,628.802 482.692,542.023 488.783,501.328 494.873,519.029 500.964,591.689 507.055,700.79 513.146,817.723 519.237,911.708 525.328,958.328 531.419,946.233 537.51,880.071 543.601,778.856 549.692,670.318 555.783,582.955 561.873,538.141 567.964,544.575 574.055,596.597 580.146,676.68 586.237,761.197 592.328,827.572 598.419,860.617 604.51,856.217 610.601,821.396 616.692,770.992 622.783,722.218 628.873,688.955 634.964,677.661 641.055,686.116 647.146,705.252 653.237,723.276 659.328,730.518 " fill="none" stroke-opacity="1.000000" stroke-linecap="round" stroke="#1f77b4" stroke-width="1.000000" />
+</g>
+
+<polygon points="56.328,501.328 56.328,958.328 659.328,958.328 659.328,501.328 " stroke="black" stroke-width="1.000000" fill="none" id="id0000000133" pointer-events="none" class="rectangle" />
+<polyline points="56.328,958.328 56.328,961.328 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000134" class="line" />
+<text id="id0000000135" transform="matrix(1 0 0 1 56.328 501.328)" x="0.000000" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+0
+</text>
+
+<polyline points="152.298,958.328 152.298,961.328 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000136" class="line" />
+<text id="id0000000137" transform="matrix(1 0 0 1 56.328 501.328)" x="95.970390" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+1
+</text>
+
+<polyline points="248.269,958.328 248.269,961.328 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000138" class="line" />
+<text id="id0000000139" transform="matrix(1 0 0 1 56.328 501.328)" x="191.940781" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+2
+</text>
+
+<polyline points="344.239,958.328 344.239,961.328 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000140" class="line" />
+<text id="id0000000141" transform="matrix(1 0 0 1 56.328 501.328)" x="287.911163" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+3
+</text>
+
+<polyline points="440.21,958.328 440.21,961.328 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000142" class="line" />
+<text id="id0000000143" transform="matrix(1 0 0 1 56.328 501.328)" x="383.881561" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+4
+</text>
+
+<polyline points="536.18,958.328 536.18,961.328 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000144" class="line" />
+<text id="id0000000145" transform="matrix(1 0 0 1 56.328 501.328)" x="479.851959" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+5
+</text>
+
+<polyline points="632.15,958.328 632.15,961.328 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000146" class="line" />
+<text id="id0000000147" transform="matrix(1 0 0 1 56.328 501.328)" x="575.822327" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+6
+</text>
+
+<polyline points="53.328,906.687 56.328,906.687 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000148" class="line" />
+<text id="id0000000149" transform="matrix(1 0 0 1 56.328 501.328)" x="-5.000000" y="405.359314" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+-0.75
+</text>
+
+<polyline points="53.328,847.964 56.328,847.964 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000150" class="line" />
+<text id="id0000000151" transform="matrix(1 0 0 1 56.328 501.328)" x="-5.000000" y="346.636261" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+-0.5
+</text>
+
+<polyline points="53.328,789.241 56.328,789.241 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000152" class="line" />
+<text id="id0000000153" transform="matrix(1 0 0 1 56.328 501.328)" x="-5.000000" y="287.913208" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+-0.25
+</text>
+
+<polyline points="53.328,730.518 56.328,730.518 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000154" class="line" />
+<text id="id0000000155" transform="matrix(1 0 0 1 56.328 501.328)" x="-5.000000" y="229.190186" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+0
+</text>
+
+<polyline points="53.328,671.795 56.328,671.795 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000156" class="line" />
+<text id="id0000000157" transform="matrix(1 0 0 1 56.328 501.328)" x="-5.000000" y="170.467133" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+0.25
+</text>
+
+<polyline points="53.328,613.072 56.328,613.072 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000158" class="line" />
+<text id="id0000000159" transform="matrix(1 0 0 1 56.328 501.328)" x="-5.000000" y="111.744110" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+0.5
+</text>
+
+<polyline points="53.328,554.349 56.328,554.349 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000160" class="line" />
+<text id="id0000000161" transform="matrix(1 0 0 1 56.328 501.328)" x="-5.000000" y="53.021057" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+0.75
+</text>
+
+</g>
+
+</g>
+
+<g id="id0000000018" >
+<g id="id0000000019" >
+<clipPath id="id0000000019clipper" >
+<polygon points="702.771,501.328 702.771,958.328 1305.77,958.328 1305.77,501.328 " id="id0000000162" class="rectangle" />
+</clipPath>
+
+<g clip-path="url(#id0000000019clipper)" id="id0000000021" >
+<polyline id="id0000000163" points="702.771,729.068 708.862,713.869 714.953,676.369 721.043,637.393 727.134,621.493 733.225,646.043 739.316,712.87 745.407,805.912 751.498,896.046 757.589,951.409 763.68,949.346 769.771,885.388 775.862,775.749 781.953,652.256 788.043,551.511 794.134,502.285 800.225,515.809 806.316,582.541 812.407,676.49 818.498,765.344 824.589,822.437 830.68,836 836.771,812.244 842.862,771.293 848.953,737.792 855.043,730.06 861.134,752.202 867.225,792.353 873.316,827.764 879.407,834.679 885.498,799.016 891.589,723.483 897.68,628.126 903.771,543.86 909.862,501.328 915.953,519.271 922.043,596.921 928.134,713.41 934.225,834.551 940.316,924.553 946.407,958.328 952.498,929.835 958.589,853.412 964.68,757.728 970.771,674.778 976.862,628.17 982.953,625.184 989.043,655.49 995.134,696.819 1001.23,725.135 1007.32,725.134 1013.41,696.817 1019.5,655.488 1025.59,625.183 1031.68,628.171 1037.77,674.78 1043.86,757.732 1049.95,853.415 1056.04,929.837 1062.13,958.328 1068.23,924.55 1074.32,834.546 1080.41,713.405 1086.5,596.917 1092.59,519.269 1098.68,501.328 1104.77,543.863 1110.86,628.129 1116.95,723.487 1123.04,799.018 1129.13,834.679 1135.23,827.763 1141.32,792.352 1147.41,752.201 1153.5,730.06 1159.59,737.793 1165.68,771.295 1171.77,812.246 1177.86,836.001 1183.95,822.436 1190.04,765.341 1196.13,676.486 1202.23,582.538 1208.32,515.808 1214.41,502.286 1220.5,551.514 1226.59,652.26 1232.68,775.754 1238.77,885.392 1244.86,949.347 1250.95,951.408 1257.04,896.043 1263.13,805.909 1269.23,712.867 1275.32,646.041 1281.41,621.493 1287.5,637.394 1293.59,676.371 1299.68,713.87 1305.77,729.068 " fill="none" stroke-opacity="1.000000" stroke-linecap="round" stroke="#1f77b4" stroke-width="1.000000" />
+</g>
+
+<polygon points="702.771,501.328 702.771,958.328 1305.77,958.328 1305.77,501.328 " stroke="black" stroke-width="1.000000" fill="none" id="id0000000164" pointer-events="none" class="rectangle" />
+<polyline points="702.771,958.328 702.771,961.328 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000165" class="line" />
+<text id="id0000000166" transform="matrix(1 0 0 1 702.771 501.328)" x="0.000000" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+0
+</text>
+
+<polyline points="798.741,958.328 798.741,961.328 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000167" class="line" />
+<text id="id0000000168" transform="matrix(1 0 0 1 702.771 501.328)" x="95.970390" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+1
+</text>
+
+<polyline points="894.711,958.328 894.711,961.328 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000169" class="line" />
+<text id="id0000000170" transform="matrix(1 0 0 1 702.771 501.328)" x="191.940781" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+2
+</text>
+
+<polyline points="990.682,958.328 990.682,961.328 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000171" class="line" />
+<text id="id0000000172" transform="matrix(1 0 0 1 702.771 501.328)" x="287.911163" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+3
+</text>
+
+<polyline points="1086.65,958.328 1086.65,961.328 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000173" class="line" />
+<text id="id0000000174" transform="matrix(1 0 0 1 702.771 501.328)" x="383.881561" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+4
+</text>
+
+<polyline points="1182.62,958.328 1182.62,961.328 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000175" class="line" />
+<text id="id0000000176" transform="matrix(1 0 0 1 702.771 501.328)" x="479.851959" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+5
+</text>
+
+<polyline points="1278.59,958.328 1278.59,961.328 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000177" class="line" />
+<text id="id0000000178" transform="matrix(1 0 0 1 702.771 501.328)" x="575.822327" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+6
+</text>
+
+<polyline points="699.771,914.275 702.771,914.275 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000179" class="line" />
+<text id="id0000000180" transform="matrix(1 0 0 1 702.771 501.328)" x="-5.000000" y="412.947327" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+-0.75
+</text>
+
+<polyline points="699.771,852.54 702.771,852.54 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000181" class="line" />
+<text id="id0000000182" transform="matrix(1 0 0 1 702.771 501.328)" x="-5.000000" y="351.211639" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+-0.5
+</text>
+
+<polyline points="699.771,790.804 702.771,790.804 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000183" class="line" />
+<text id="id0000000184" transform="matrix(1 0 0 1 702.771 501.328)" x="-5.000000" y="289.475952" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+-0.25
+</text>
+
+<polyline points="699.771,729.068 702.771,729.068 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000185" class="line" />
+<text id="id0000000186" transform="matrix(1 0 0 1 702.771 501.328)" x="-5.000000" y="227.740265" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+0
+</text>
+
+<polyline points="699.771,667.333 702.771,667.333 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000187" class="line" />
+<text id="id0000000188" transform="matrix(1 0 0 1 702.771 501.328)" x="-5.000000" y="166.004578" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+0.25
+</text>
+
+<polyline points="699.771,605.597 702.771,605.597 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000189" class="line" />
+<text id="id0000000190" transform="matrix(1 0 0 1 702.771 501.328)" x="-5.000000" y="104.268860" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+0.5
+</text>
+
+<polyline points="699.771,543.861 702.771,543.861 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000191" class="line" />
+<text id="id0000000192" transform="matrix(1 0 0 1 702.771 501.328)" x="-5.000000" y="42.533173" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+0.75
+</text>
+
+</g>
+
+</g>
+
+<g id="id0000000022" >
+<g id="id0000000023" >
+<clipPath id="id0000000023clipper" >
+<polygon points="1349.21,501.328 1349.21,958.328 1952.21,958.328 1952.21,501.328 " id="id0000000193" class="rectangle" />
+</clipPath>
+
+<g clip-path="url(#id0000000023clipper)" id="id0000000025" >
+<polyline id="id0000000194" points="1349.21,728.193 1355.3,706.58 1361.4,654.011 1367.49,601.344 1373.58,582.957 1379.67,619.693 1385.76,707.883 1391.85,819.714 1397.94,914.9 1404.03,958.328 1410.12,935.549 1416.21,858.95 1422.3,761.789 1428.4,682.885 1434.49,649.126 1440.58,663.882 1446.67,706.672 1452.76,744.106 1458.85,746.837 1464.94,704.48 1471.03,631.377 1477.12,560.436 1483.21,527.861 1489.3,555.909 1495.4,641.782 1501.49,757.896 1507.58,863.537 1513.67,922.55 1519.76,918.929 1525.85,863.147 1531.94,786.383 1538.03,725.423 1544.12,705.358 1550.21,728.193 1556.3,772.642 1562.4,805.145 1568.49,796.85 1574.58,738.472 1580.67,645.956 1586.76,554.145 1592.85,501.328 1598.94,511.785 1605.03,584.472 1611.12,693.123 1617.21,797.769 1623.3,862.354 1629.4,870.316 1635.49,830.972 1641.58,773.859 1647.67,733.8 1653.76,733.801 1659.85,773.861 1665.94,830.974 1672.03,870.316 1678.12,862.353 1684.21,797.766 1690.3,693.118 1696.4,584.468 1702.49,511.783 1708.58,501.329 1714.67,554.148 1720.76,645.96 1726.85,738.476 1732.94,796.851 1739.03,805.144 1745.12,772.64 1751.21,728.192 1757.3,705.358 1763.4,725.424 1769.49,786.386 1775.58,863.15 1781.67,918.93 1787.76,922.549 1793.85,863.534 1799.94,757.892 1806.03,641.778 1812.12,555.907 1818.21,527.861 1824.3,560.438 1830.4,631.38 1836.49,704.482 1842.58,746.838 1848.67,744.105 1854.76,706.671 1860.85,663.88 1866.94,649.126 1873.03,682.887 1879.12,761.792 1885.21,858.954 1891.3,935.551 1897.4,958.328 1903.49,914.897 1909.58,819.71 1915.67,707.879 1921.76,619.691 1927.85,582.957 1933.94,601.346 1940.03,654.014 1946.12,706.581 1952.21,728.193 " fill="none" stroke-opacity="1.000000" stroke-linecap="round" stroke="#1f77b4" stroke-width="1.000000" />
+</g>
+
+<polygon points="1349.21,501.328 1349.21,958.328 1952.21,958.328 1952.21,501.328 " stroke="black" stroke-width="1.000000" fill="none" id="id0000000195" pointer-events="none" class="rectangle" />
+<polyline points="1349.21,958.328 1349.21,961.328 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000196" class="line" />
+<text id="id0000000197" transform="matrix(1 0 0 1 1349.21 501.328)" x="0.000000" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+0
+</text>
+
+<polyline points="1445.18,958.328 1445.18,961.328 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000198" class="line" />
+<text id="id0000000199" transform="matrix(1 0 0 1 1349.21 501.328)" x="95.970390" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+1
+</text>
+
+<polyline points="1541.15,958.328 1541.15,961.328 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000200" class="line" />
+<text id="id0000000201" transform="matrix(1 0 0 1 1349.21 501.328)" x="191.940781" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+2
+</text>
+
+<polyline points="1637.12,958.328 1637.12,961.328 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000202" class="line" />
+<text id="id0000000203" transform="matrix(1 0 0 1 1349.21 501.328)" x="287.911163" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+3
+</text>
+
+<polyline points="1733.09,958.328 1733.09,961.328 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000204" class="line" />
+<text id="id0000000205" transform="matrix(1 0 0 1 1349.21 501.328)" x="383.881561" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+4
+</text>
+
+<polyline points="1829.07,958.328 1829.07,961.328 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000206" class="line" />
+<text id="id0000000207" transform="matrix(1 0 0 1 1349.21 501.328)" x="479.851959" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+5
+</text>
+
+<polyline points="1925.04,958.328 1925.04,961.328 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000208" class="line" />
+<text id="id0000000209" transform="matrix(1 0 0 1 1349.21 501.328)" x="575.822327" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+6
+</text>
+
+<polyline points="1346.21,904.362 1349.21,904.362 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000210" class="line" />
+<text id="id0000000211" transform="matrix(1 0 0 1 1349.21 501.328)" x="-5.000000" y="403.034302" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+-0.75
+</text>
+
+<polyline points="1346.21,845.639 1349.21,845.639 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000212" class="line" />
+<text id="id0000000213" transform="matrix(1 0 0 1 1349.21 501.328)" x="-5.000000" y="344.311188" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+-0.5
+</text>
+
+<polyline points="1346.21,786.916 1349.21,786.916 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000214" class="line" />
+<text id="id0000000215" transform="matrix(1 0 0 1 1349.21 501.328)" x="-5.000000" y="285.588074" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+-0.25
+</text>
+
+<polyline points="1346.21,728.193 1349.21,728.193 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000216" class="line" />
+<text id="id0000000217" transform="matrix(1 0 0 1 1349.21 501.328)" x="-5.000000" y="226.864975" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+0
+</text>
+
+<polyline points="1346.21,669.47 1349.21,669.47 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000218" class="line" />
+<text id="id0000000219" transform="matrix(1 0 0 1 1349.21 501.328)" x="-5.000000" y="168.141876" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+0.25
+</text>
+
+<polyline points="1346.21,610.747 1349.21,610.747 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000220" class="line" />
+<text id="id0000000221" transform="matrix(1 0 0 1 1349.21 501.328)" x="-5.000000" y="109.418762" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+0.5
+</text>
+
+<polyline points="1346.21,552.024 1349.21,552.024 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000222" class="line" />
+<text id="id0000000223" transform="matrix(1 0 0 1 1349.21 501.328)" x="-5.000000" y="50.695679" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+0.75
+</text>
+
+</g>
+
+</g>
+
+<g id="id0000000026" >
+<g id="id0000000027" >
+<clipPath id="id0000000027clipper" >
+<polygon points="56.328,986.16 56.328,1443.16 659.328,1443.16 659.328,986.16 " id="id0000000224" class="rectangle" />
+</clipPath>
+
+<g clip-path="url(#id0000000027clipper)" id="id0000000029" >
+<polyline id="id0000000225" points="56.328,1216.29 62.4189,1206.01 68.5098,1186.59 74.6007,1182.7 80.6916,1210.69 86.7825,1261.6 92.8734,1302.71 98.9643,1298.53 105.055,1237.91 111.146,1147.64 117.237,1080.95 123.328,1085.54 129.419,1170.63 135.51,1295.36 141.601,1388.58 147.692,1390.34 153.783,1290.48 159.873,1139.34 165.964,1021.94 172.055,1008.94 178.146,1113.52 184.237,1280.61 190.328,1416.63 196.419,1443.16 202.51,1343.14 208.601,1171.85 214.692,1025.56 220.783,986.161 226.873,1074.17 232.964,1237.82 239.055,1384.05 245.146,1432.7 251.237,1361.53 257.328,1216.29 263.419,1081.34 269.51,1029.59 275.601,1082.14 281.692,1200.38 287.783,1313.11 293.873,1360.02 299.964,1324.79 306.055,1239.13 312.146,1158.1 318.237,1124.77 324.328,1146.72 330.419,1197.65 336.51,1240.01 342.601,1251.37 348.692,1236.6 354.783,1219.06 360.873,1219.06 366.964,1236.61 373.055,1251.37 379.146,1240.01 385.237,1197.65 391.328,1146.72 397.419,1124.77 403.51,1158.11 409.601,1239.13 415.692,1324.8 421.783,1360.02 427.873,1313.11 433.964,1200.38 440.055,1082.13 446.146,1029.59 452.237,1081.34 458.328,1216.3 464.419,1361.53 470.51,1432.7 476.601,1384.05 482.692,1237.81 488.783,1074.17 494.873,986.16 500.964,1025.56 507.055,1171.85 513.146,1343.15 519.237,1443.16 525.328,1416.62 531.419,1280.6 537.51,1113.51 543.601,1008.94 549.692,1021.94 555.783,1139.35 561.873,1290.48 567.964,1390.34 574.055,1388.58 580.146,1295.36 586.237,1170.62 592.328,1085.54 598.419,1080.95 604.51,1147.64 610.601,1237.91 616.692,1298.53 622.783,1302.71 628.873,1261.6 634.964,1210.69 641.055,1182.7 647.146,1186.59 653.237,1206.02 659.328,1216.29 " fill="none" stroke-opacity="1.000000" stroke-linecap="round" stroke="#1f77b4" stroke-width="1.000000" />
+</g>
+
+<polygon points="56.328,986.16 56.328,1443.16 659.328,1443.16 659.328,986.16 " stroke="black" stroke-width="1.000000" fill="none" id="id0000000226" pointer-events="none" class="rectangle" />
+<polyline points="56.328,1443.16 56.328,1446.16 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000227" class="line" />
+<text id="id0000000228" transform="matrix(1 0 0 1 56.328 986.16)" x="0.000000" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+0
+</text>
+
+<polyline points="152.298,1443.16 152.298,1446.16 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000229" class="line" />
+<text id="id0000000230" transform="matrix(1 0 0 1 56.328 986.16)" x="95.970390" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+1
+</text>
+
+<polyline points="248.269,1443.16 248.269,1446.16 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000231" class="line" />
+<text id="id0000000232" transform="matrix(1 0 0 1 56.328 986.16)" x="191.940781" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+2
+</text>
+
+<polyline points="344.239,1443.16 344.239,1446.16 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000233" class="line" />
+<text id="id0000000234" transform="matrix(1 0 0 1 56.328 986.16)" x="287.911163" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+3
+</text>
+
+<polyline points="440.21,1443.16 440.21,1446.16 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000235" class="line" />
+<text id="id0000000236" transform="matrix(1 0 0 1 56.328 986.16)" x="383.881561" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+4
+</text>
+
+<polyline points="536.18,1443.16 536.18,1446.16 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000237" class="line" />
+<text id="id0000000238" transform="matrix(1 0 0 1 56.328 986.16)" x="479.851959" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+5
+</text>
+
+<polyline points="632.15,1443.16 632.15,1446.16 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000239" class="line" />
+<text id="id0000000240" transform="matrix(1 0 0 1 56.328 986.16)" x="575.822327" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+6
+</text>
+
+<polyline points="53.328,1392.46 56.328,1392.46 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000241" class="line" />
+<text id="id0000000242" transform="matrix(1 0 0 1 56.328 986.16)" x="-5.000000" y="406.303741" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+-0.75
+</text>
+
+<polyline points="53.328,1333.74 56.328,1333.74 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000243" class="line" />
+<text id="id0000000244" transform="matrix(1 0 0 1 56.328 986.16)" x="-5.000000" y="347.580811" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+-0.5
+</text>
+
+<polyline points="53.328,1275.02 56.328,1275.02 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000245" class="line" />
+<text id="id0000000246" transform="matrix(1 0 0 1 56.328 986.16)" x="-5.000000" y="288.857880" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+-0.25
+</text>
+
+<polyline points="53.328,1216.29 56.328,1216.29 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000247" class="line" />
+<text id="id0000000248" transform="matrix(1 0 0 1 56.328 986.16)" x="-5.000000" y="230.134964" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+0
+</text>
+
+<polyline points="53.328,1157.57 56.328,1157.57 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000249" class="line" />
+<text id="id0000000250" transform="matrix(1 0 0 1 56.328 986.16)" x="-5.000000" y="171.412048" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+0.25
+</text>
+
+<polyline points="53.328,1098.85 56.328,1098.85 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000251" class="line" />
+<text id="id0000000252" transform="matrix(1 0 0 1 56.328 986.16)" x="-5.000000" y="112.689117" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+0.5
+</text>
+
+<polyline points="53.328,1040.13 56.328,1040.13 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000253" class="line" />
+<text id="id0000000254" transform="matrix(1 0 0 1 56.328 986.16)" x="-5.000000" y="53.966187" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+0.75
+</text>
+
+</g>
+
+</g>
+
+<g id="id0000000030" >
+<g id="id0000000031" >
+<clipPath id="id0000000031clipper" >
+<polygon points="702.771,986.16 702.771,1443.16 1305.77,1443.16 1305.77,986.16 " id="id0000000255" class="rectangle" />
+</clipPath>
+
+<g clip-path="url(#id0000000031clipper)" id="id0000000033" >
+<polyline id="id0000000256" points="702.771,1214.56 708.862,1193.82 714.953,1155 721.043,1147.87 727.134,1203.59 733.225,1301.59 739.316,1376.75 745.407,1364.68 751.498,1252.74 757.589,1097.79 763.68,994.218 769.771,1012.05 775.862,1147.74 781.953,1323.02 788.043,1434.19 794.134,1418.67 800.225,1293.63 806.316,1141.09 812.407,1051.33 818.498,1064.95 824.589,1152.86 830.68,1245.22 836.771,1284.89 842.862,1265.4 848.953,1226.76 855.043,1215.99 861.134,1245.12 867.225,1280.78 873.316,1273.41 879.407,1202.97 885.498,1103.63 891.589,1045.53 897.68,1084.17 903.771,1214.56 909.862,1365.69 915.953,1443.16 922.043,1392.18 928.134,1237.13 934.225,1068.69 940.316,986.16 946.407,1033.88 952.498,1174.95 958.589,1319.13 964.68,1384.07 970.771,1346.74 976.862,1250.73 982.953,1167.8 989.043,1144.55 995.134,1173.69 1001.23,1208.96 1007.32,1208.96 1013.41,1173.68 1019.5,1144.55 1025.59,1167.8 1031.68,1250.73 1037.77,1346.74 1043.86,1384.07 1049.95,1319.13 1056.04,1174.95 1062.13,1033.88 1068.23,986.161 1074.32,1068.69 1080.41,1237.13 1086.5,1392.19 1092.59,1443.16 1098.68,1365.69 1104.77,1214.56 1110.86,1084.17 1116.95,1045.53 1123.04,1103.64 1129.13,1202.97 1135.23,1273.41 1141.32,1280.78 1147.41,1245.12 1153.5,1215.99 1159.59,1226.76 1165.68,1265.4 1171.77,1284.89 1177.86,1245.21 1183.95,1152.86 1190.04,1064.95 1196.13,1051.33 1202.23,1141.09 1208.32,1293.64 1214.41,1418.67 1220.5,1434.19 1226.59,1323.02 1232.68,1147.74 1238.77,1012.05 1244.86,994.22 1250.95,1097.8 1257.04,1252.75 1263.13,1364.68 1269.23,1376.75 1275.32,1301.58 1281.41,1203.58 1287.5,1147.87 1293.59,1155 1299.68,1193.82 1305.77,1214.56 " fill="none" stroke-opacity="1.000000" stroke-linecap="round" stroke="#1f77b4" stroke-width="1.000000" />
+</g>
+
+<polygon points="702.771,986.16 702.771,1443.16 1305.77,1443.16 1305.77,986.16 " stroke="black" stroke-width="1.000000" fill="none" id="id0000000257" pointer-events="none" class="rectangle" />
+<polyline points="702.771,1443.16 702.771,1446.16 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000258" class="line" />
+<text id="id0000000259" transform="matrix(1 0 0 1 702.771 986.16)" x="0.000000" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+0
+</text>
+
+<polyline points="798.741,1443.16 798.741,1446.16 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000260" class="line" />
+<text id="id0000000261" transform="matrix(1 0 0 1 702.771 986.16)" x="95.970390" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+1
+</text>
+
+<polyline points="894.711,1443.16 894.711,1446.16 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000262" class="line" />
+<text id="id0000000263" transform="matrix(1 0 0 1 702.771 986.16)" x="191.940781" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+2
+</text>
+
+<polyline points="990.682,1443.16 990.682,1446.16 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000264" class="line" />
+<text id="id0000000265" transform="matrix(1 0 0 1 702.771 986.16)" x="287.911163" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+3
+</text>
+
+<polyline points="1086.65,1443.16 1086.65,1446.16 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000266" class="line" />
+<text id="id0000000267" transform="matrix(1 0 0 1 702.771 986.16)" x="383.881561" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+4
+</text>
+
+<polyline points="1182.62,1443.16 1182.62,1446.16 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000268" class="line" />
+<text id="id0000000269" transform="matrix(1 0 0 1 702.771 986.16)" x="479.851959" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+5
+</text>
+
+<polyline points="1278.59,1443.16 1278.59,1446.16 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000270" class="line" />
+<text id="id0000000271" transform="matrix(1 0 0 1 702.771 986.16)" x="575.822327" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+6
+</text>
+
+<polyline points="699.771,1392.64 702.771,1392.64 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000272" class="line" />
+<text id="id0000000273" transform="matrix(1 0 0 1 702.771 986.16)" x="-5.000000" y="406.483673" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+-0.75
+</text>
+
+<polyline points="699.771,1333.28 702.771,1333.28 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000274" class="line" />
+<text id="id0000000275" transform="matrix(1 0 0 1 702.771 986.16)" x="-5.000000" y="347.122925" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+-0.5
+</text>
+
+<polyline points="699.771,1273.92 702.771,1273.92 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000276" class="line" />
+<text id="id0000000277" transform="matrix(1 0 0 1 702.771 986.16)" x="-5.000000" y="287.762177" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+-0.25
+</text>
+
+<polyline points="699.771,1214.56 702.771,1214.56 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000278" class="line" />
+<text id="id0000000279" transform="matrix(1 0 0 1 702.771 986.16)" x="-5.000000" y="228.401428" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+0
+</text>
+
+<polyline points="699.771,1155.2 702.771,1155.2 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000280" class="line" />
+<text id="id0000000281" transform="matrix(1 0 0 1 702.771 986.16)" x="-5.000000" y="169.040710" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+0.25
+</text>
+
+<polyline points="699.771,1095.84 702.771,1095.84 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000282" class="line" />
+<text id="id0000000283" transform="matrix(1 0 0 1 702.771 986.16)" x="-5.000000" y="109.679962" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+0.5
+</text>
+
+<polyline points="699.771,1036.48 702.771,1036.48 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000284" class="line" />
+<text id="id0000000285" transform="matrix(1 0 0 1 702.771 986.16)" x="-5.000000" y="50.319214" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+0.75
+</text>
+
+</g>
+
+</g>
+
+<g id="id0000000034" >
+<g id="id0000000035" >
+<clipPath id="id0000000035clipper" >
+<polygon points="1349.21,986.16 1349.21,1443.16 1952.21,1443.16 1952.21,986.16 " id="id0000000286" class="rectangle" />
+</clipPath>
+
+<g clip-path="url(#id0000000035clipper)" id="id0000000037" >
+<polyline id="id0000000287" points="1349.21,1216.92 1355.3,1184.1 1361.4,1123.64 1367.49,1114.25 1373.58,1200.44 1379.67,1343.44 1385.76,1443.16 1391.85,1415.83 1397.94,1264.42 1404.03,1082.45 1410.12,986.161 1416.21,1028.47 1422.3,1163.42 1428.4,1288.09 1434.49,1325.73 1440.58,1281.31 1446.67,1225.8 1452.76,1225.8 1458.85,1281.31 1464.94,1325.73 1471.03,1288.09 1477.12,1163.42 1483.21,1028.47 1489.3,986.161 1495.4,1082.46 1501.49,1264.42 1507.58,1415.83 1513.67,1443.16 1519.76,1343.44 1525.85,1200.44 1531.94,1114.25 1538.03,1123.64 1544.12,1184.1 1550.21,1216.92 1556.3,1184.1 1562.4,1123.64 1568.49,1114.25 1574.58,1200.44 1580.67,1343.45 1586.76,1443.16 1592.85,1415.83 1598.94,1264.42 1605.03,1082.45 1611.12,986.16 1617.21,1028.47 1623.3,1163.42 1629.4,1288.1 1635.49,1325.73 1641.58,1281.31 1647.67,1225.8 1653.76,1225.8 1659.85,1281.32 1665.94,1325.73 1672.03,1288.09 1678.12,1163.42 1684.21,1028.46 1690.3,986.161 1696.4,1082.46 1702.49,1264.42 1708.58,1415.83 1714.67,1443.16 1720.76,1343.44 1726.85,1200.43 1732.94,1114.25 1739.03,1123.64 1745.12,1184.11 1751.21,1216.92 1757.3,1184.1 1763.4,1123.64 1769.49,1114.25 1775.58,1200.44 1781.67,1343.45 1787.76,1443.16 1793.85,1415.83 1799.94,1264.41 1806.03,1082.45 1812.12,986.16 1818.21,1028.47 1824.3,1163.42 1830.4,1288.1 1836.49,1325.73 1842.58,1281.31 1848.67,1225.8 1854.76,1225.8 1860.85,1281.32 1866.94,1325.73 1873.03,1288.09 1879.12,1163.41 1885.21,1028.46 1891.3,986.162 1897.4,1082.46 1903.49,1264.43 1909.58,1415.83 1915.67,1443.16 1921.76,1343.44 1927.85,1200.43 1933.94,1114.25 1940.03,1123.64 1946.12,1184.11 1952.21,1216.92 " fill="none" stroke-opacity="1.000000" stroke-linecap="round" stroke="#1f77b4" stroke-width="1.000000" />
+</g>
+
+<polygon points="1349.21,986.16 1349.21,1443.16 1952.21,1443.16 1952.21,986.16 " stroke="black" stroke-width="1.000000" fill="none" id="id0000000288" pointer-events="none" class="rectangle" />
+<polyline points="1349.21,1443.16 1349.21,1446.16 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000289" class="line" />
+<text id="id0000000290" transform="matrix(1 0 0 1 1349.21 986.16)" x="0.000000" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+0
+</text>
+
+<polyline points="1445.18,1443.16 1445.18,1446.16 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000291" class="line" />
+<text id="id0000000292" transform="matrix(1 0 0 1 1349.21 986.16)" x="95.970390" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+1
+</text>
+
+<polyline points="1541.15,1443.16 1541.15,1446.16 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000293" class="line" />
+<text id="id0000000294" transform="matrix(1 0 0 1 1349.21 986.16)" x="191.940781" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+2
+</text>
+
+<polyline points="1637.12,1443.16 1637.12,1446.16 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000295" class="line" />
+<text id="id0000000296" transform="matrix(1 0 0 1 1349.21 986.16)" x="287.911163" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+3
+</text>
+
+<polyline points="1733.09,1443.16 1733.09,1446.16 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000297" class="line" />
+<text id="id0000000298" transform="matrix(1 0 0 1 1349.21 986.16)" x="383.881561" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+4
+</text>
+
+<polyline points="1829.07,1443.16 1829.07,1446.16 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000299" class="line" />
+<text id="id0000000300" transform="matrix(1 0 0 1 1349.21 986.16)" x="479.851959" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+5
+</text>
+
+<polyline points="1925.04,1443.16 1925.04,1446.16 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000301" class="line" />
+<text id="id0000000302" transform="matrix(1 0 0 1 1349.21 986.16)" x="575.822327" y="462.000000" dominant-baseline="hanging" text-anchor="middle" font-size="14.000000px" >
+6
+</text>
+
+<polyline points="1346.21,1405.37 1349.21,1405.37 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000303" class="line" />
+<text id="id0000000304" transform="matrix(1 0 0 1 1349.21 986.16)" x="-5.000000" y="419.214233" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+-0.75
+</text>
+
+<polyline points="1346.21,1342.56 1349.21,1342.56 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000305" class="line" />
+<text id="id0000000306" transform="matrix(1 0 0 1 1349.21 986.16)" x="-5.000000" y="356.396149" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+-0.5
+</text>
+
+<polyline points="1346.21,1279.74 1349.21,1279.74 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000307" class="line" />
+<text id="id0000000308" transform="matrix(1 0 0 1 1349.21 986.16)" x="-5.000000" y="293.578064" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+-0.25
+</text>
+
+<polyline points="1346.21,1216.92 1349.21,1216.92 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000309" class="line" />
+<text id="id0000000310" transform="matrix(1 0 0 1 1349.21 986.16)" x="-5.000000" y="230.759949" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+0
+</text>
+
+<polyline points="1346.21,1154.1 1349.21,1154.1 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000311" class="line" />
+<text id="id0000000312" transform="matrix(1 0 0 1 1349.21 986.16)" x="-5.000000" y="167.941833" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+0.25
+</text>
+
+<polyline points="1346.21,1091.28 1349.21,1091.28 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000313" class="line" />
+<text id="id0000000314" transform="matrix(1 0 0 1 1349.21 986.16)" x="-5.000000" y="105.123718" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+0.5
+</text>
+
+<polyline points="1346.21,1028.47 1349.21,1028.47 " fill="none" stroke-width="1.000000" stroke="black" id="id0000000315" class="line" />
+<text id="id0000000316" transform="matrix(1 0 0 1 1349.21 986.16)" x="-5.000000" y="42.305634" dominant-baseline="middle" text-anchor="end" font-size="14.000000px" >
+0.75
+</text>
+
+</g>
+
+</g>
+
+
+</g>
+
+</svg>

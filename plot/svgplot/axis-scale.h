@@ -31,7 +31,7 @@ public:
 		}
 		float first_tick = std::ceil(xmin/tick_step)*tick_step;
 		std::vector<float> sol;
-		for (float x = first_tick; x <= (xmax + 0.5*tick_step); x+=tick_step) if (is_valid(x)) sol.push_back(x);
+		for (float x = first_tick; x <= (xmax + 0.01*tick_step); x+=tick_step) if (is_valid(x)) sol.push_back(x);
 		return filter(sol,0.5*(sol.back() - sol.front())/(target_ticks-1));
     }
     virtual std::tuple<float,float> axis_adjust(float xmin, float xmax) const noexcept {

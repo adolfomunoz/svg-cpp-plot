@@ -91,6 +91,7 @@ public:
 	const Color& color(std::size_t index) const { 
         return color_[index % color_.size()]?*color_[index % color_.size()]:black; 
     }
+    
 	
     std::shared_ptr<_2d::Element> scaled(const axis_scale::Base& xscale, const axis_scale::Base& yscale) const noexcept override {
         auto g = std::make_shared<_2d::Group>();
@@ -102,19 +103,23 @@ public:
         return g;
     }
 
-	std::array<float,4> axis() const noexcept override {
-        std::array<float,4> ax{left(0),left(0)+1.1f*width(0),y(0)-0.75f*height(0),y(0)+0.75f*height(0)};
-        for (std::size_t i = 1; i<y().size(); ++i) {
-            if (left(i)<ax[0]) ax[0] = left(i);
-            if ((left(i)+1.1*width(i))>ax[1]) ax[1] = left(i)+1.1f*width(i);
-            if ((y(i)-0.75f*height(i))<ax[2]) ax[2] = y(i)-0.75f*height(i);
-            if ((y(i)+0.75f*height(i))>ax[3]) ax[3] = y(i)+0.75f*height(i);
-        }
+private:
+    std::array<float,4> axis(int i) const noexcept {
+        return std::array<float,4>{left(i),left(i)+width(i),y(i)-0.5f*height(i),y(i)+0.5f*height(i)};
+    }
 
+public:
+	std::array<float,4> axis() const noexcept override {
+        std::array<float,4> ax = axis(0);
+        for (std::size_t i = 1; i<y().size(); ++i) ax = axis_join(ax,axis(i));
+        return ax;
+	}    
+
+    std::array<float,4> scaled_axis(const axis_scale::Base& xscale, const axis_scale::Base& yscale) const noexcept override {
+        std::array<float,4> ax = axis_transform(axis(0),xscale,yscale);
+        for (std::size_t i = 1; i<y().size(); ++i) if (height(i)>0) ax = axis_join(ax,axis_transform(axis(i),xscale,yscale));
         return ax;
 	}
-
 };
-
 	
 }
