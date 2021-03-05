@@ -40,7 +40,7 @@ is emulated as
 plt.imshow(data).interpolation("bicubic").extent({0,1,0,1}).vmin(0).vmax(1).cmap("inferno");
 ```
 
-which although techically are not named parameters they look similar hence we will call them named parameters throughout the documentation.
+which although technically are not named parameters they look similar hence we will call them named parameters throughout the documentation.
 
 
 ## Diagrams 
@@ -51,6 +51,9 @@ The provided methods that generate different types of diagrams are:
 - [`imshow`](./svgplot/imshow.md): plots two-dimensional data.
 - [`bar` and `barh`](./svgplot/bar.md): generates bar graphs.
 - [`hist`](./svgplot/hist.md): generates histograms from 1D samples.
+
+Also, the appearance of the diagrams can be modified and/or combined through:
+- [`subplot`](./svgplot/subplot.md): Enables generating figures with multiple plots with relative positioning between them.
 
 ## Saving
 

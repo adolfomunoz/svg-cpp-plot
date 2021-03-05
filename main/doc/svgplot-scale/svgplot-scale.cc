@@ -62,5 +62,30 @@ int main(int argc, char** argv) {
         plt.savefig("../doc/svgplot/scale/example4.svg");
     }
     
+    { // Example 5  
+        std::mt19937 gen{1}; //Fixed seed
+        std::lognormal_distribution<float> d{0,1};
+        std::list<float> p0, p1, n0, n1;
+        for (int n=0;n<1000;++n) {  
+            p0.push_back( d(gen)); p1.push_back( d(gen)); 
+            n0.push_back(-d(gen)); n1.push_back(-d(gen));
+        }
+        svg_cpp_plot::SVGPlot plt;
+        plt.subplot(1,3,0).figsize({200,200}).title("Linear").set_yscale(svg_cpp_plot::linear);
+        plt.subplot(1,3,1).figsize({200,200}).title("Symlog base 2");
+        plt.subplot(1,3,2).figsize({200,200}).title("Symlog base 10");
+        plt.subplot(1,3,1).set_xscale(svg_cpp_plot::symlog).base(2);
+        plt.subplot(1,3,2).set_xscale(svg_cpp_plot::symlog).base(10);
+        plt.subplot(1,3,1).set_yscale(svg_cpp_plot::symlog).base(2);
+        plt.subplot(1,3,2).set_yscale(svg_cpp_plot::symlog).base(10);
+        for (int p = 0; p<3;++p) {
+            plt.subplot(1,3,p).scatter(p0,p1);
+            plt.subplot(1,3,p).scatter(p1,n0);
+            plt.subplot(1,3,p).scatter(n0,n1);
+            plt.subplot(1,3,p).scatter(n1,p0);
+        }
+        plt.savefig("../doc/svgplot/scale/example4.svg");
+    }
+    
     
 }
