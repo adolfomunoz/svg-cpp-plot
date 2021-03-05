@@ -16,7 +16,7 @@ plt.savefig("../doc/svgplot/subplot/example1.svg");
 generates the following graph
 
 <div style="text-align:center"><img 
- src="./subplot/example1.svg" alt="example1" width="80%" /></div>
+ src="./subplot/example1.svg" alt="example1" width="50%" /></div>
 
 The subplots can modify all their properties for visualization (title, size, ticks...) the same way than plots do, as the following code illustrates:
 
@@ -34,7 +34,7 @@ plt.savefig("../doc/svgplot/subplot/example2.svg");
 That code modifies sizes, ticks and titles for each of the subplots, yielding the following result:
 
 <div style="text-align:center"><img 
- src="./subplot/example2.svg" alt="example2" width="80%" /></div>
+ src="./subplot/example2.svg" alt="example2" width="50%" /></div>
  
 The sizes for each subplot can be irregular, and the subplot positioning will do its best to adapt the positions while preserving the corresponding sizes as described by the `figsize` named parameter. Also, some subplots might be empty (if you never access to one of the indices then the corresponding space will be empty). This is illustrated here:
 
@@ -55,7 +55,7 @@ plt.savefig("../doc/svgplot/subplot/example3.svg");
 that generates a figure with some subplots of uneven sizes and some empty space:
 
 <div style="text-align:center"><img 
- src="./subplot/example3.svg" alt="example3" width="80%" /></div>
+ src="./subplot/example3.svg" alt="example3" width="50%" /></div>
  
 Last, as the `subplot` method of the `svg_cpp_plot::SVGPlot` class actually returns `svg_cpp_plot::SVGPlot&`, subplots can be constructed recursively to define sophisticated layouts:
 
@@ -78,7 +78,7 @@ plt.savefig("../doc/svgplot/subplot/example4.svg");
 that generates the following subplot distribution:
 
 <div style="text-align:center"><img 
- src="./subplot/example4.svg" alt="example4" width="100%" /></div>
+ src="./subplot/example4.svg" alt="example4" width="50%" /></div>
 
 
 ## Subplot positioning
@@ -109,7 +109,7 @@ plt.savefig("../doc/svgplot/subplot/example5.svg");
 ```
 
 
-returning a new graph with no distance between the plots:
+returning a new graph with shorter distance between the plots:
 <div style="text-align:center"><img 
- src="./subplot/example5.svg" alt="example5" width="80%" /></div>
+ src="./subplot/example5.svg" alt="example5" width="50%" /></div>
 

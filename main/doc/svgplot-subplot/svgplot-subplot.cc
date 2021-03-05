@@ -62,7 +62,7 @@ int main(int argc, char** argv) {
             y.push_back(d(gen)); x.push_back(0.8*y.back() + 0.5*d(gen));
         }
 		svg_cpp_plot::SVGPlot plt; 
-        plt.subplots_adjust().hspace(0).wspace(0).left(0.05).right(0.95).top(0.05).bottom(0.95);
+        plt.subplots_adjust().hspace(0).wspace(0).left(0.05).right(0.95).top(0.95).bottom(0.05);
         plt.subplot(2,2,2).figsize({300,300}).scatter(x,y).s(2).alpha(0.6);
         plt.subplot(2,2,0).figsize({300,150}).xticks({}).hist(x).bins(20).orientation(svg_cpp_plot::vertical);
         plt.subplot(2,2,3).figsize({150,300}).yticks({}).hist(y).bins(20).orientation(svg_cpp_plot::horizontal);
