@@ -217,7 +217,8 @@ public:
     std::shared_ptr<_2d::Element> scaled(const axis_scale::Base& xscale, const axis_scale::Base& yscale) const noexcept override {
         //Maybe this could be sped up with marker beeing a referenzable svg element but that part is not ready yet in the core primitives
 		auto g = std::make_shared<_2d::Group>();
-        
+         if (data.empty()) return g;
+       
         //We need this in memory in case we are generating the corresponding color and it gets out of memory
         std::vector<std::shared_ptr<Color>> colors(data.size()); 
 		for (std::size_t i = 0; i<data.size(); ++i) { colors[i] = scatter_color->color(i); }
@@ -237,8 +238,9 @@ public:
     }
    
     std::array<float,4> axis() const noexcept override {
+        if (data.empty()) return std::array<float,4>{0,0,0,0};
         std::array<float,4> ax{std::get<0>(data.front()),std::get<0>(data.front()),std::get<1>(data.front()),std::get<1>(data.front())};
-        float max_size = 0.0f;
+        float max_size = markersize(0);
         for (std::size_t i = 0; i<data.size(); ++i) {
             auto [x,y] = data[i];
             if (x < ax[0]) ax[0] = x;
@@ -252,6 +254,33 @@ public:
 		float dy = std::abs(ax[3]-ax[2])/32.0f + max_size/std::abs(ax[3]-ax[2]);
         ax[0]-=dx; ax[1]+=dx; ax[2]-=dy; ax[3]+=dy;
 
+        return ax;
+	}
+    
+    std::array<float,4> scaled_axis(const axis_scale::Base& xscale, const axis_scale::Base& yscale) const noexcept override {
+        std::array<float,4> ax{0,0,0,0};
+        if (data.empty()) return ax;
+        
+        bool first = true; float max_size=0;
+        for (std::size_t i = 0; i<data.size(); ++i) {
+            auto [x,y] = data[i]; 
+            if (xscale.is_valid(x) && yscale.is_valid(y)) {
+                float size = markersize(i);
+                if (size > max_size) max_size = size;
+                float tx = xscale.transform(x); float ty = yscale.transform(y);
+                if (first || ((tx-size) < ax[0])) ax[0] = tx-size;
+                if (first || ((tx+size) > ax[1])) ax[1] = tx+size;
+                if (first || ((ty-size) < ax[2])) ax[2] = ty-size;
+                if (first || ((ty+size) > ax[3])) ax[3] = ty+size;
+                first = false;
+            }
+        } 
+
+        //Don't like this below but otherwise dots hit within borders
+ 		float dx = std::abs(ax[1]-ax[0])/32.0f + max_size/std::abs(ax[1]-ax[0]);
+		float dy = std::abs(ax[3]-ax[2])/32.0f + max_size/std::abs(ax[3]-ax[2]);
+        ax[0]-=dx; ax[1]+=dx; ax[2]-=dy; ax[3]+=dy;
+       
         return ax;
 	}
 };
