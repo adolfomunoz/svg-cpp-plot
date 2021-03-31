@@ -41,7 +41,15 @@ std::ostream& operator<<(std::ostream& os, const Matrix& m) {
 	}
 	return os;
 }
-	
+
+struct MatrixProduct {
+constexpr svg_cpp_plot::_2d::Matrix operator()(const svg_cpp_plot::_2d::Matrix& m1, const svg_cpp_plot::_2d::Matrix& m2) const noexcept {
+	svg_cpp_plot::_2d::Matrix r{ {{0,0,0},{0,0,0},{0,0,0}} };
+	for (int f=0;f<3;++f) for (int c=0;c<3;++c) for (int i=0;i<3;++i) r[f][c] += m1[f][i]*m2[i][c];
+	return r;
+}
+};
+
 constexpr svg_cpp_plot::_2d::Matrix operator*(const svg_cpp_plot::_2d::Matrix& m1, const svg_cpp_plot::_2d::Matrix& m2) noexcept {
 	svg_cpp_plot::_2d::Matrix r{ {{0,0,0},{0,0,0},{0,0,0}} };
 	for (int f=0;f<3;++f) for (int c=0;c<3;++c) for (int i=0;i<3;++i) r[f][c] += m1[f][i]*m2[i][c];
@@ -65,9 +73,9 @@ constexpr std::tuple<float, float> transform_direction(const Matrix& m, const P&
 		(std::get<0>(p)*m[1][0] + std::get<1>(p)*m[1][1]));
 }
 
-class Group : public GroupGenerator<Matrix,decltype(std::multiplies<Matrix>())> {
+class Group : public GroupGenerator<Matrix,MatrixProduct> {
 public:
-    Group(const Matrix& m = identity) : GroupGenerator<Matrix,decltype(std::multiplies<Matrix>())>(m, std::multiplies<Matrix>()) {}
+    Group(const Matrix& m = identity) : GroupGenerator<Matrix,MatrixProduct>(m, MatrixProduct()) {}
 };
 
 inline auto group(const Matrix& m = identity) {
@@ -75,13 +83,13 @@ inline auto group(const Matrix& m = identity) {
 }
 
 inline auto clip_path(const svg_cpp_plot::_2d::Matrix& m = identity) {
-	return ClipPathGenerator(m, std::multiplies<Matrix>());
+	return ClipPathGenerator(m, MatrixProduct());
 }
 inline auto defs(const svg_cpp_plot::_2d::Matrix& m = identity) {
-	return DefsGenerator(m, std::multiplies<Matrix>());
+	return DefsGenerator(m, MatrixProduct());
 }
 inline auto mask(const svg_cpp_plot::_2d::Matrix& m = identity) {
-	return MaskGenerator(m, std::multiplies<Matrix>());
+	return MaskGenerator(m, MatrixProduct());
 }
 
 
