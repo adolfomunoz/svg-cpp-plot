@@ -16,7 +16,7 @@ plt.savefig("../doc/svgplot/teaser.svg");
 
 ## Description
 
-Plotting with svg-cpp-plot is designed to be similar to (or more accurately, a subset of) `matplotlib.pyplot` or `MATLAB` in terms of plotting. Each method makes some change to a figure: e.g., creates a figure, creates a plotting area in a figure, plots some lines in a plotting area, decorates the plot with labels, etc. There is, however, a small difference: all the functions are translated into methods of the class `svg_cpp_plot::SVGPlot`. Each of these methods provides a functionality similar to their `matplotlib.pyplot` counterparts. The result of the diagrams can be saved into an svg file, which is easily converted to other formats. 
+Plotting with `svg-cpp-plot` is designed to be similar to (or more accurately, a subset of) `matplotlib.pyplot` or `MATLAB` in terms of plotting. Each method makes some change to a figure: e.g., creates a figure, creates a plotting area in a figure, plots some lines in a plotting area, decorates the plot with labels, etc. There is, however, a small difference: all the functions are translated into methods of the class `svg_cpp_plot::SVGPlot`. Each of these methods provides a functionality similar to their `matplotlib.pyplot` counterparts. The result of the diagrams can be saved into an svg file, which is easily converted to other formats. 
 
 The provided functionality is rather small, compared to the well stablished `matplotlib.pyplot`. While I am expanding it to fulfill my own needs, some very niche features will never ever be provided. However, the provided functionality seems to be enough (at least for my needs) given the fact that the resulting diagrams can easily be edited and tweaked afterwards, for instance with the vector drawing software [Inkscape](https://inkscape.org/).  
 
@@ -70,4 +70,14 @@ and with Inkscape >= 1.0
 ```
 inkscape file.svg --export-type=pdf --export-filename=file.pdf
 ```
+
+## C++ plotting alternatives
+
+There are several alternatives to `svg-cpp-plot` for plotting from C++.
+- [**sciplot**](https://github.com/sciplot/sciplot) - Requires [gnuplot](http://www.gnuplot.info/)
+- [**Matplot++**](https://github.com/alandefreitas/matplotplusplus) - Requires [gnuplot](http://www.gnuplot.info/)
+- [**matplotlib-cpp**](https://github.com/lava/matplotlib-cpp) - Resembles `matplotlib`, and requires an installed version of `matplotlib` with python interoperability.
+
+In contrast `svg_cpp_plot::SVGPlot` resembles `matplotlib` and has no dependency, except for, optionally, `libpng` for interpolated `imshow`.
+
 
