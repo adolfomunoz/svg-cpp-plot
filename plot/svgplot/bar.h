@@ -111,12 +111,20 @@ public:
 	std::array<float,4> axis() const noexcept override {
         std::array<float,4> ax = axis(0);
         for (std::size_t i = 1; i<x().size(); ++i) ax = axis_join(ax,axis(i));
+        if (x().size()>1) {
+            ax[0]=std::min(ax[0],2*x(0)-x(1));
+            ax[1]=std::max(ax[1],2*x(x().size()-1)-x(x().size()-2));
+        }
         return ax;
 	}    
 
     std::array<float,4> scaled_axis(const axis_scale::Base& xscale, const axis_scale::Base& yscale) const noexcept override {
         std::array<float,4> ax = axis_transform(axis(0),xscale,yscale);
         for (std::size_t i = 1; i<x().size(); ++i) if (height(i)>0) ax = axis_join(ax,axis_transform(axis(i),xscale,yscale));
+        if (x().size()>1) {
+            if (xscale.is_valid(2*x(0)-x(1))) ax[0]=std::min(ax[0],xscale.transform(2*x(0)-x(1)));
+            if (xscale.is_valid(2*x(x().size()-1)-x(x().size()-2))) ax[1]=std::max(ax[1],2*x(x().size()-1)-x(x().size()-2));
+        }
         return ax;
 	}
 };
