@@ -59,17 +59,13 @@ Also, the appearance of the diagrams can be modified and/or combined through:
 
 Finally, the method `savefig("file.svg")` enables the saving of the corresponding plot into the *file.svg* file. The format of this svg is designed so that it holds reasonably well when converting it to pdf, for instance with the vector drawing software [Inkscape](https://inkscape.org/). 
 
-In fact, with Inkscape it is possible to convert svg to pdf using the command line. With Inkscape <= 0.91
-
-```
-inkscape file.svg --export-pdf=file.pdf
-```
-
-and with Inkscape >= 1.0
+In fact, with Inkscape it is possible to convert `svg` to `pdf` using the command line.
 
 ```
 inkscape file.svg --export-type=pdf --export-filename=file.pdf
 ```
+
+By default, the `savefig()` method expects file with `svg` extension. Other extensions are supported: `png`,  `pdf` amd `eps`, but they require Inkscape to be installed and its executable accesible from the command line path, while the `svg` output does not require additional software.
 
 ## C++ plotting alternatives
 

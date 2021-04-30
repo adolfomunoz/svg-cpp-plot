@@ -112,8 +112,8 @@ public:
         std::array<float,4> ax = axis(0);
         for (std::size_t i = 1; i<x().size(); ++i) ax = axis_join(ax,axis(i));
         if (x().size()>1) {
-            ax[0]=std::min(ax[0],2*x(0)-x(1));
-            ax[1]=std::max(ax[1],2*x(x().size()-1)-x(x().size()-2));
+            ax[0]=std::min(ax[0],1.5f*x(0)-0.5f*x(1));
+            ax[1]=std::max(ax[1],1.5f*x(x().size()-1)-0.5f*x(x().size()-2));
         }
         return ax;
 	}    
@@ -122,8 +122,8 @@ public:
         std::array<float,4> ax = axis_transform(axis(0),xscale,yscale);
         for (std::size_t i = 1; i<x().size(); ++i) if (height(i)>0) ax = axis_join(ax,axis_transform(axis(i),xscale,yscale));
         if (x().size()>1) {
-            if (xscale.is_valid(2*x(0)-x(1))) ax[0]=std::min(ax[0],xscale.transform(2*x(0)-x(1)));
-            if (xscale.is_valid(2*x(x().size()-1)-x(x().size()-2))) ax[1]=std::max(ax[1],2*x(x().size()-1)-x(x().size()-2));
+            if (xscale.is_valid(1.5f*x(0)-0.5f*x(1))) ax[0]=std::min(ax[0],xscale.transform(1.5f*x(0)-0.5f*x(1)));
+            if (xscale.is_valid(1.5f*x(x().size()-1)-0.5*x(x().size()-2))) ax[1]=std::max(ax[1],1.5f*x(x().size()-1)-0.5f*x(x().size()-2));
         }
         return ax;
 	}

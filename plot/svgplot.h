@@ -4,6 +4,7 @@
 #include <tuple>
 #include <fstream>
 #include <memory>
+#include <filesystem>
 #include "../primitives/svg.h"
 #include "../2d/transform.h"
 #include "../2d/polygon.h"
@@ -820,9 +821,26 @@ public:
         return hist(std::vector<float>(x.begin(),x.end()));
     } 
     
-	void savefig(const std::string& name) const {
-		std::ofstream f(name);
+	/*****************************************************
+     * SAVEFIG 
+     *****************************************************/
+    void savefig(const std::filesystem::path& name) const {
+        std::filesystem::path svg_name = name;
+        svg_name.replace_extension("svg");
+        std::ofstream f(svg_name);
 		f<<svg();
+        f.close();
+        if (name.extension() == ".png") {
+            std::cerr<<(std::string("inkscape --export-type=\"png\" ")+svg_name.native())<<std::endl;
+            std::system((std::string("inkscape --export-type=\"png\" ")+svg_name.native()).c_str());
+            std::filesystem::remove(svg_name);
+        } else if (name.extension() == ".pdf") {
+            std::system((std::string("inkscape --export-type=\"pdf\" ")+svg_name.native()).c_str());
+            std::filesystem::remove(svg_name);
+        } else if (name.extension() == ".eps") {
+            std::system((std::string("inkscape --export-type=\"eps\" ")+svg_name.native()).c_str());
+            std::filesystem::remove(svg_name);
+        }
 	}	
 };
 }
