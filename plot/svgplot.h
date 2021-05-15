@@ -824,6 +824,14 @@ public:
 	/*****************************************************
      * SAVEFIG 
      *****************************************************/
+private:
+    static const std::string& convert(const std::string& s) { return s; }
+    template<typename T>
+    static std::string convert(const std::basic_string<T>& s) {
+        std::wstring_convert<std::codecvt_utf8<T>, T> converter;
+        return converter.to_bytes(s);
+    }
+public:
     void savefig(const std::filesystem::path& name) const {
         std::filesystem::path svg_name = name;
         svg_name.replace_extension("svg");
@@ -831,14 +839,13 @@ public:
 		f<<svg();
         f.close();
         if (name.extension() == ".png") {
-            std::cerr<<(std::string("inkscape --export-type=\"png\" ")+svg_name.native())<<std::endl;
-            std::system((std::string("inkscape --export-type=\"png\" ")+svg_name.native()).c_str());
+            std::system((std::string("inkscape --export-type=\"png\" ")+convert(svg_name.native())).c_str());
             std::filesystem::remove(svg_name);
         } else if (name.extension() == ".pdf") {
-            std::system((std::string("inkscape --export-type=\"pdf\" ")+svg_name.native()).c_str());
+            std::system((std::string("inkscape --export-type=\"pdf\" ")+convert(svg_name.native())).c_str());
             std::filesystem::remove(svg_name);
         } else if (name.extension() == ".eps") {
-            std::system((std::string("inkscape --export-type=\"eps\" ")+svg_name.native()).c_str());
+            std::system((std::string("inkscape --export-type=\"eps\" ")+convert(svg_name.native())).c_str());
             std::filesystem::remove(svg_name);
         }
 	}	
