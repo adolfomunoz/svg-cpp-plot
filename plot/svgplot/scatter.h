@@ -174,7 +174,12 @@ public:
     
     
     template<typename C>
-	Scatter& c(const C& col) { scatter_color = std::make_unique<ScatterColorType<typename std::decay<C>::type::value_type>>(col); return *this; }
+	Scatter& c(const C& col, typename std::enable_if<!std::is_base_of<Color,C>::value,int>::type x = 0) { scatter_color = std::make_unique<ScatterColorType<typename std::decay<C>::type::value_type>>(col); return *this; }
+    template<typename C>
+	Scatter& c(const C& col, typename std::enable_if<std::is_base_of<Color,C>::value,int>::type x = 0) { 
+        scatter_color=std::make_unique<ScatterColorConstant>(std::make_shared<C>(col)); 
+        return *this; 
+    }
     template<typename C>
 	Scatter& c(std::vector<C>&& col) { scatter_color = std::make_unique<ScatterColorType<C>>(std::forward<std::vector<C>>(col)); return *this; }
     Scatter& c(const std::initializer_list<float>& l) { return c(std::vector<float>(l)); }
@@ -188,7 +193,12 @@ public:
     }
     
     template<typename C>
-	Scatter& edgecolors(const C& col) { edgecolors_ = std::make_unique<ScatterColorType<typename std::decay<C>::type::value_type>>(col); return *this; }
+	Scatter& edgecolors(const C& col, typename std::enable_if<!std::is_base_of<Color,C>::value,int>::type x = 0) { edgecolors_ = std::make_unique<ScatterColorType<typename std::decay<C>::type::value_type>>(col); return *this; }
+    template<typename C>
+	Scatter& edgecolors(const C& col, typename std::enable_if<std::is_base_of<Color,C>::value,int>::type x = 0) { 
+        edgecolors_=std::make_unique<ScatterColorConstant>(std::make_shared<C>(col)); 
+        return *this; 
+    }
     template<typename C>
 	Scatter& edgecolors(std::vector<C>&& col) { edgecolors_ = std::make_unique<ScatterColorType<C>>(std::forward<std::vector<C>>(col)); return *this; }
     Scatter& edgecolors(const std::initializer_list<float>& l) { return edgecolors(std::vector<float>(l)); }
