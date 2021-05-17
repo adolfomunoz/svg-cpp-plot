@@ -248,8 +248,8 @@ public:
         for (float f:c) v.push_back(f);
         return xticks(v);
     }
-	void set_xticks(const std::vector<float>& v) {
-		xticks(v);
+	Font& set_xticks(const std::vector<float>& v) {
+		xticks(v); return xticklabels_font;
 	}
 	SVGPlot& yticks(const std::vector<float>& v) {
 		yticks_ = v; yticks_set=true; return (*this);
@@ -260,8 +260,8 @@ public:
         for (float f:c) v.push_back(f);
         return yticks(v);
     }
-	void set_yticks(const std::vector<float>& v) {
-		yticks(v);
+	Font& set_yticks(const std::vector<float>& v) {
+		yticks(v); return yticklabels_font;
 	}
 	SVGPlot& xticklabels(const std::vector<std::string>& v) {
 		xticklabels_ = v; xticklabels_set=true; return (*this);
@@ -272,8 +272,8 @@ public:
         for (const auto& f:c) v.push_back(f);
         return xticklabels(v);
     }
-	void set_xticklabels(const std::vector<std::string>& v) {
-		xticklabels(v);
+	Font& set_xticklabels(const std::vector<std::string>& v) {
+		xticklabels(v); return xticklabels_font;
 	}
 	SVGPlot& yticklabels(const std::vector<std::string>& v) {
 		yticklabels_ = v; yticklabels_set=true; return (*this);
@@ -284,8 +284,8 @@ public:
         for (const auto& f:c) v.push_back(f);
         return yticklabels(v);
     }	
-    void set_yticklabels(const std::vector<std::string>& v) {
-		yticklabels(v);
+    Font& set_yticklabels(const std::vector<std::string>& v) {
+		yticklabels(v); return yticklabels_font;
 	}
     template<typename C1, typename C2>
     SVGPlot& xticks(const C1& c1, const C2& c2) {
