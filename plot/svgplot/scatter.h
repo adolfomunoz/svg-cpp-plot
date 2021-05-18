@@ -250,19 +250,21 @@ public:
     std::array<float,4> axis() const noexcept override {
         if (data.empty()) return std::array<float,4>{0,0,0,0};
         std::array<float,4> ax{std::get<0>(data.front()),std::get<0>(data.front()),std::get<1>(data.front()),std::get<1>(data.front())};
-        float max_size = markersize(0);
+//        float max_size = markersize(0);
         for (std::size_t i = 0; i<data.size(); ++i) {
             auto [x,y] = data[i];
             if (x < ax[0]) ax[0] = x;
             if (x > ax[1]) ax[1] = x;
             if (y < ax[2]) ax[2] = y;
             if (y > ax[3]) ax[3] = y;
-            if (markersize(i) > max_size) max_size = markersize(i);
+//            if (markersize(i) > max_size) max_size = markersize(i);
         }
-     
-		float dx = std::abs(ax[1]-ax[0])/32.0f + max_size/std::abs(ax[1]-ax[0]);
-		float dy = std::abs(ax[3]-ax[2])/32.0f + max_size/std::abs(ax[3]-ax[2]);
+
+        //Arbitrary expansion, maybe not a good idea but it is worse to account for markersize which is in a different space
+		float dx = std::abs(ax[1]-ax[0])/32.0f; //+ max_size/std::abs(ax[1]-ax[0]);
+		float dy = std::abs(ax[3]-ax[2])/32.0f; //+ max_size/std::abs(ax[3]-ax[2]);
         ax[0]-=dx; ax[1]+=dx; ax[2]-=dy; ax[3]+=dy;
+
 
         return ax;
 	}
@@ -271,26 +273,26 @@ public:
         std::array<float,4> ax{0,0,0,0};
         if (data.empty()) return ax;
         
-        bool first = true; float max_size=0;
+        bool first = true; //float max_size=0;
         for (std::size_t i = 0; i<data.size(); ++i) {
             auto [x,y] = data[i]; 
             if (xscale.is_valid(x) && yscale.is_valid(y)) {
-                float size = markersize(i);
-                if (size > max_size) max_size = size;
+//                float size = markersize(i);
+//                if (size > max_size) max_size = size;
                 float tx = xscale.transform(x); float ty = yscale.transform(y);
-                if (first || ((tx-size) < ax[0])) ax[0] = tx-size;
-                if (first || ((tx+size) > ax[1])) ax[1] = tx+size;
-                if (first || ((ty-size) < ax[2])) ax[2] = ty-size;
-                if (first || ((ty+size) > ax[3])) ax[3] = ty+size;
+                if (first || ((tx) < ax[0])) ax[0] = tx;
+                if (first || ((tx) > ax[1])) ax[1] = tx;
+                if (first || ((ty) < ax[2])) ax[2] = ty;
+                if (first || ((ty) > ax[3])) ax[3] = ty;
                 first = false;
             }
         } 
 
-        //Don't like this below but otherwise dots hit within borders
- 		float dx = std::abs(ax[1]-ax[0])/32.0f + max_size/std::abs(ax[1]-ax[0]);
-		float dy = std::abs(ax[3]-ax[2])/32.0f + max_size/std::abs(ax[3]-ax[2]);
+        //Arbitrary expansion, maybe not a good idea but it is worse to account for markersize which is in a different space
+		float dx = std::abs(ax[1]-ax[0])/32.0f; //+ max_size/std::abs(ax[1]-ax[0]);
+		float dy = std::abs(ax[3]-ax[2])/32.0f; //+ max_size/std::abs(ax[3]-ax[2]);
         ax[0]-=dx; ax[1]+=dx; ax[2]-=dy; ax[3]+=dy;
-       
+
         return ax;
 	}
 };
