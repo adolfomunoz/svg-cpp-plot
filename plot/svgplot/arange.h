@@ -6,7 +6,7 @@ class arange {
 	
 public:
 	arange(float start, float stop, float step) :
-		start(start), stop(stop), step(step) {}
+		start(start), stop(stop), step(step) { }
 	arange(int n) :
 		start(0), stop(n), step(1) {}
 	
@@ -42,7 +42,7 @@ public:
 			const_iterator i = (*this); ++(*this); return i;
 		}
 		bool operator==(const const_iterator& that) const {
-			return (that.x > (x-0.5f*step)) && (that.x < (x+0.5f*step));
+			return (that.x > (x-0.5f*step)) && (that.x <= (x+0.5f*step));
 		}
 		bool operator!=(const const_iterator& that) const {
 			return !((*this)==that);
