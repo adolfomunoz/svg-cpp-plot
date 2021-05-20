@@ -52,9 +52,9 @@ public:
                 
             
 			pl->stroke_width(this->linewidth()).stroke(this->color()).stroke_linecap(stroke_linecap_round).stroke_opacity(alpha());
-			if (format() == "--") pl->stroke_dasharray({3,3});
-			else if	(format() == "-.") pl->stroke_dasharray({3,2,1,2});
-			else if (format()==":") pl->stroke_dasharray({1,2});
+			if (format() == "--") pl->stroke_dasharray({linewidth()*3,linewidth()*3});
+			else if	(format() == "-.") pl->stroke_dasharray({linewidth()*3,linewidth()*2,linewidth()*1,linewidth()*2});
+			else if (format()==":") pl->stroke_dasharray({linewidth()*1,linewidth()*2});
             return pl;
         } else { // The format indicates that it is drawn with points so we use a scatter plot for plotting this
             return Scatter(std::vector<std::tuple<float,float>>(data.begin(),data.end())).marker(format()).s(markersize()).c(color_).alpha(alpha()).scaled(xscale,yscale);
