@@ -18,6 +18,8 @@ class Bar : public Plottable  {
     std::vector<float> bottom_;
     std::vector<std::shared_ptr<Color>> color_;
     float alpha_;
+    
+    std::size_t size() const { return std::max(std::max(x_.size(),height_.size()),std::max(width_.size(),bottom_.size())); }
 public:
 	Bar(const std::vector<float>& x, const std::vector<float>& height) : x_(x), height_(height), width_(1,0.8f), bottom_(1,0.0f), color_(1),alpha_(1) {}
 
@@ -94,7 +96,7 @@ public:
 	
     std::shared_ptr<_2d::Element> scaled(const axis_scale::Base& xscale, const axis_scale::Base& yscale) const noexcept override {
         auto g = std::make_shared<_2d::Group>();
-        for (std::size_t i = 0; i<x().size(); ++i) {
+        for (std::size_t i = 0; i<size(); ++i) {
             g->add(_2d::rect({xscale.transform(x(i)-0.5f*width_at(i)),yscale.transform(bottom_at(i))},
                             {xscale.transform(x(i)+0.5f*width_at(i)),yscale.transform(bottom_at(i)+height_at(i))})).stroke_width(0).fill(color(i)).fill_opacity(alpha());
         }
@@ -110,20 +112,20 @@ private:
 public:
 	std::array<float,4> axis() const noexcept override {
         std::array<float,4> ax = axis(0);
-        for (std::size_t i = 1; i<x().size(); ++i) ax = axis_join(ax,axis(i));
-        if (x().size()>1) {
+        for (std::size_t i = 1; i<size(); ++i) ax = axis_join(ax,axis(i));
+        if (size()>1) {
             ax[0]=std::min(ax[0],1.5f*x(0)-0.5f*x(1));
-            ax[1]=std::max(ax[1],1.5f*x(x().size()-1)-0.5f*x(x().size()-2));
+            ax[1]=std::max(ax[1],1.5f*x(size()-1)-0.5f*x(size()-2));
         }
         return ax;
 	}    
 
     std::array<float,4> scaled_axis(const axis_scale::Base& xscale, const axis_scale::Base& yscale) const noexcept override {
         std::array<float,4> ax = axis_transform(axis(0),xscale,yscale);
-        for (std::size_t i = 1; i<x().size(); ++i) if (height_at(i)>0) ax = axis_join(ax,axis_transform(axis(i),xscale,yscale));
-        if (x().size()>1) {
+        for (std::size_t i = 1; i<size(); ++i) if (height_at(i)>0) ax = axis_join(ax,axis_transform(axis(i),xscale,yscale));
+        if (size()>1) {
             if (xscale.is_valid(1.5f*x(0)-0.5f*x(1))) ax[0]=std::min(ax[0],xscale.transform(1.5f*x(0)-0.5f*x(1)));
-            if (xscale.is_valid(1.5f*x(x().size()-1)-0.5*x(x().size()-2))) ax[1]=std::max(ax[1],1.5f*x(x().size()-1)-0.5f*x(x().size()-2));
+            if (xscale.is_valid(1.5f*x(size()-1)-0.5*x(size()-2))) ax[1]=std::max(ax[1],1.5f*x(size()-1)-0.5f*x(size()-2));
         }
         return ax;
 	}

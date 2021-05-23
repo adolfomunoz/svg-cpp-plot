@@ -18,6 +18,7 @@ class BarH : public Plottable  {
     std::vector<float> left_;
     std::vector<std::shared_ptr<Color>> color_;
     float alpha_;
+    std::size_t size() const { return std::max(std::max(y_.size(),height_.size()),std::max(width_.size(),left_.size())); }
 public:
 	BarH(const std::vector<float>& y, const std::vector<float>& width) : y_(y), width_(width), height_(1,0.8f), left_(1,0.0f), color_(1),alpha_(1) {}
 
@@ -96,7 +97,7 @@ public:
     std::shared_ptr<_2d::Element> scaled(const axis_scale::Base& xscale, const axis_scale::Base& yscale) const noexcept override {
         auto g = std::make_shared<_2d::Group>();
         
-        for (std::size_t i = 0; i<y().size(); ++i) 
+        for (std::size_t i = 0; i<size(); ++i) 
             g->add(_2d::rect({xscale.transform(left(i)),yscale.transform(y(i)-0.5f*height(i))},
                             {xscale.transform(left(i)+width(i)),yscale.transform(y(i)+0.5f*height(i))})).stroke_width(0).fill(color(i)).fill_opacity(alpha());
         
@@ -111,13 +112,21 @@ private:
 public:
 	std::array<float,4> axis() const noexcept override {
         std::array<float,4> ax = axis(0);
-        for (std::size_t i = 1; i<y().size(); ++i) ax = axis_join(ax,axis(i));
+        for (std::size_t i = 1; i<size(); ++i) ax = axis_join(ax,axis(i));
+        if (size()>1) {
+            ax[2]=std::min(ax[2],1.5f*y(0)-0.5f*y(1));
+            ax[3]=std::max(ax[3],1.5f*y(size()-1)-0.5f*y(size()-2));
+        }
         return ax;
 	}    
 
     std::array<float,4> scaled_axis(const axis_scale::Base& xscale, const axis_scale::Base& yscale) const noexcept override {
         std::array<float,4> ax = axis_transform(axis(0),xscale,yscale);
-        for (std::size_t i = 1; i<y().size(); ++i) if (height(i)>0) ax = axis_join(ax,axis_transform(axis(i),xscale,yscale));
+        for (std::size_t i = 1; i<size(); ++i) if (height(i)>0) ax = axis_join(ax,axis_transform(axis(i),xscale,yscale));
+        if (size()>1) {
+            if (yscale.is_valid(1.5f*y(0)-0.5f*y(1))) ax[2]=std::min(ax[2],yscale.transform(1.5f*y(0)-0.5f*y(1)));
+            if (yscale.is_valid(1.5f*y(size()-1)-0.5*y(size()-2))) ax[3]=std::max(ax[3],1.5f*y(size()-1)-0.5f*y(size()-2));
+        }
         return ax;
 	}
 };

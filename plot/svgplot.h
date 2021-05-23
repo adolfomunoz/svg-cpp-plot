@@ -746,7 +746,7 @@ public:
     Bar& bar(const std::vector<std::string>& x, const std::vector<float>& height) {
         this->xticks(arange(x.size()),x);
         return this->bar(arange(x.size()),height);
-    }
+    } 
     
     template<typename C1>
     Bar& bar(const C1& x, const std::vector<float>& height) {
@@ -757,17 +757,29 @@ public:
     }
     
     template<typename C2>
-    Bar& bar(const std::vector<float>& x, const C2& height) {
-        return bar(x,std::vector<float>(height.begin(),height.end()));
+    Bar& bar(const std::vector<float>& x, const C2& height, 
+            typename std::enable_if<std::is_arithmetic<decltype(std::declval<C2>()(0.0f))>::value,int>::type = 0) {
+
+            std::vector<float> h(x.size());
+            std::transform(x.begin(),x.end(),h.begin(),height);
+            return bar(x,h);
     }
-	
+    
+    template<typename C2>
+    Bar& bar(const std::vector<float>& x, const C2& height, 
+            typename std::enable_if<std::is_arithmetic<typename std::decay<typename C2::value_type>::type>::value,int>::type = 0) {
+        return bar(x,std::vector<float>(height.begin(),height.end()));
+    }	
+    
     template<typename C1,typename C2>
     Bar& bar(const C1& x, const C2& height) {
         if constexpr (std::is_arithmetic<typename std::decay<typename C1::value_type>::type>::value)
-            return bar(std::vector<float>(x.begin(),x.end()),std::vector<float>(height.begin(),height.end()));
+            return bar(std::vector<float>(x.begin(),x.end()),height); //<- This should call the adequate method
         else
-            return bar(std::vector<std::string>(x.begin(),x.end()),std::vector<float>(height.begin(),height.end()));
+            return bar(std::vector<std::string>(x.begin(),x.end()),height); //<- This should call the adequate method
     }
+
+
     
     /*****************************************************
      * BARH
