@@ -30,17 +30,7 @@ std::shared_ptr<CodeConstant> code_from_string(const std::string& code) {
 	return std::make_shared<CodeConstant>(code);
 }	
 
-template<std::size_t N>
-class CodeFunction {
-public:
-	virtual std::shared_ptr<Code> apply(const std::array<std::string,N>& params) const noexcept = 0;
-	std::shared_ptr<Code> apply(const std::initializer_list<std::string>& params) const  {
-		//We don't check for the number of parameters, we should.
-		std::array<std::string,N> p;
-		std::copy(params.begin(),params.end(),p.begin());
-		return apply(p);
-	}
-};
+
 std::string random_string(std::string::size_type length = 10) {
     static auto& chrs = "0123456789"
         "abcdefghijklmnopqrstuvwxyz"
@@ -56,9 +46,50 @@ std::string random_string(std::string::size_type length = 10) {
     return s;
 }
 
-std::string random_parameter_name(std::string::size_type length = 10) {
-	return std::string("param")+random_string(length);
-}
+template<std::size_t N>
+class CodeFunction : public Code {
+    std::string function_name_;
+    std::array<std::string,N> param_names_;
+public:
+    CodeFunction(const std::string& fname = std::string("function_")+random_string()) :
+        function_name_(fname) {
+        if (N==1) param_names_[0]="param";
+        else for(std::size_t i = 0; i<N; ++i) param_names_[i]=std::string("param")+std::to_string(i);
+    }
+    CodeFunction(const std::string& fname, const std::array<std::string,N>& pnames) :
+        function_name_(fname), param_names_(pnames) { }
+    CodeFunction(const std::string& fname, const std::initializer_list<std::string>& params) :
+        function_name_(fname) {
+        auto it = params.begin(); std::size_t i;
+        for (i = 0; (it!=params.end()) && (i<N); ++i, ++it) param_names_[i]=(*it);
+        for (;i<N;++i) param_names_[i]=std::string("param")+std::to_string(i);
+    }
+        
+     
+	virtual std::shared_ptr<Code> apply(const std::array<std::string,N>& params) const noexcept = 0;
+	std::shared_ptr<Code> apply(const std::initializer_list<std::string>& params) const  {
+        auto it = params.begin();
+		std::array<std::string,N> p; std::size_t i;
+        for (i = 0; (it!=params.end()) && (i<N); ++i, ++it) p[i]=(*it);
+        for (;i<N;++i) p[i]=std::string("param")+std::to_string(i);
+		return apply(p);
+	}
+    
+    const std::string& function_name() const { return function_name_; }
+    
+    std::string to_string() const noexcept override {
+		std::stringstream sstr;
+		sstr<<"function "<<function_name()<<"(";
+        int first = true;
+        for (std::string p : param_names_) {
+            if (first) first = false; else sstr<<", ";
+            sstr<<p;
+        }
+        sstr<<") {"<<std::endl;
+        sstr<<this->apply(param_names_)->indented()<<std::endl<<"}"<<std::endl;
+	    return sstr.str();	  
+    }
+};
 
 class Script : public NotTerminal, public Attributes<Style>, public ObjectList<Code> {
 public:

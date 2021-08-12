@@ -1,0 +1,80 @@
+<svg height="100%" xmlns="http://www.w3.org/2000/svg" width="100%" preserveAspectRatio="xMidYMid meet" onload='init(evt)'>
+<script type="text/javascript">
+<![CDATA[
+    var slidenumber=0;
+    function switchSlide(evt,slidenum) {
+        var svgDocument = evt.target.ownerDocument;
+        var svgRoot = svgDocument.documentElement;
+        var slideAway = svgRoot.getElementById("slide"+slidenumber);
+        var slideIn = svgRoot.getElementById("slide"+slidenum);
+        if (slideIn) {
+            if (slideAway) {
+                if (slidenum>slidenumber) {
+                    slideAway.setAttribute("style","");
+                    setTimeout(function(){
+                        slideAway.setAttribute("fill-opacity",0.0);
+                    },200.0);              
+                }
+                else {
+                    slideAway.setAttribute("style","transition: fill-opacity 0.2s");
+                    slideAway.setAttribute("fill-opacity",0.0);
+                }                    
+            }
+            if (slidenum>slidenumber) slideIn.setAttribute("style","transition: fill-opacity 0.2s");
+            else slideIn.setAttribute("style","");
+            slideIn.setAttribute("fill-opacity",1.0);
+            
+            slidenumber=slidenum;
+        }
+    }
+    function init(evt) {
+        var svgDocument = evt.target.ownerDocument;
+        svgDocument.addEventListener("keydown", function(ev) {
+            if (ev.keyCode == '37') switchSlide(ev,slidenumber-1);
+            else if (ev.keyCode == '39') switchSlide(ev,slidenumber+1);
+        });
+
+        var svgRoot = svgDocument.documentElement;
+        var slides = svgRoot.getElementsByClassName("slide");
+        for (var i = 0; i < slides.length; ++i) {
+            slides[i].setAttribute("fill-opacity","0");
+            slides[i].setAttribute("id","slide"+(i+1));
+        }
+        switchSlide(evt,1);
+    }
+]]></script>
+<g class="slide">
+<svg id="header" y="0" width="100%" height="200" preserveAspectRatio="xMidYMid meet">
+<rect id="header-background" width="100%" height="100%" fill="blue"/>
+<text font-size="100" font-weight="bold" x="10" y="50%" dominant-baseline="middle" font-family="sans-serif"
+fill="white">Hello</text>
+</svg>
+<svg id="footer" x="0" y="95%" width="100%" height="5%" preserveAspectRatio="xMidYMid meet">
+<rect id="footer-background" width="100%" height="100%" fill="green"/>
+<text x="10" y="50%" dominant-baseline="middle" fill="red">First slide</text>
+</svg>
+</g>
+<g class="slide">
+<svg id="header" y="0" width="100%" height="200" preserveAspectRatio="xMidYMid meet">
+<rect id="header-background" width="100%" height="100%" fill="blue"/>
+<text font-size="100" font-weight="bold" x="10" y="50%" dominant-baseline="middle" font-family="sans-serif"
+fill="white">Second slide</text>
+</svg>
+<svg id="footer" x="0" y="95%" width="100%" height="5%" preserveAspectRatio="xMidYMid meet">
+<rect id="footer-background" width="100%" height="100%" fill="green"/>
+<text x="10" y="50%" dominant-baseline="middle" fill="red">Goodbye</text>
+</svg>
+</g>
+<g class="slide">
+<svg id="header" y="0" width="100%" height="200" preserveAspectRatio="xMidYMid meet">
+<rect id="header-background" width="100%" height="100%" fill="blue"/>
+<text font-size="100" font-weight="bold" x="10" y="50%" dominant-baseline="middle" font-family="sans-serif"
+fill="white">Third slide</text>
+</svg>
+<svg id="footer" x="0" y="95%" width="100%" height="5%" preserveAspectRatio="xMidYMid meet">
+<rect id="footer-background" width="100%" height="100%" fill="green"/>
+<text x="10" y="50%" dominant-baseline="middle" fill="red">Goodbye</text>
+</svg>
+</g>
+
+</svg>

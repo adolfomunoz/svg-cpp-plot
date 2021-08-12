@@ -13,7 +13,7 @@ public:
 	ForAll(const std::string& selector, const C& code) : ForAll(selector,std::make_shared<C>(code)) { }
 
 	std::string to_string() const noexcept override {
-		std::string param = random_parameter_name();
+		std::string param = std::string("param")+random_string();
 		std::stringstream output;
 		output << "document.querySelectorAll(\"" << selector <<"\").forEach(function("<<param<<") {"<<std::endl;
 		output << code->apply({param})->indented()<< std::endl;
