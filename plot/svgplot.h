@@ -5,6 +5,7 @@
 #include <fstream>
 #include <memory>
 #include <filesystem>
+#include <codecvt>
 #include "../primitives/svg.h"
 #include "../2d/transform.h"
 #include "../2d/polygon.h"

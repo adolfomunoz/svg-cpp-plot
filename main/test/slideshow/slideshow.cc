@@ -1,16 +1,15 @@
 #include "../../../svg-cpp-plot.h"
 #include <fstream>
 #include <random>
-#include <thread>         // std::this_thread::sleep_for
-#include <chrono>         // std::chrono::seconds
-
 
 using namespace svg_cpp_plot;
 int main(int argc, char** argv) {
     SlideShow slideshow;
-    slideshow.add(Circle(0,0,1));
-    slideshow.add(Rect(0,0,1,1));
-    slideshow.add(Polygon({{0,1},{0.5,0},{1,1}}));
+    Group& slide1 = slideshow.add(Group());
+    slide1.add(Rect()).x(0).y(0).width(Length(100,percentage)).height(Length(100,percentage)).fill(white);
+    Group& slide2 = slideshow.add(Group());
+    slide2.add(Rect()).x(0).y(0).width(Length(100,percentage)).height(Length(100,percentage)).fill(green);
+//    slideshow.add(Polygon({{0,1},{0.5,0},{1,1}}));
 	std::ofstream f(std::string(argv[0])+".svg");
-	f<<slideshow.viewBox(BoundingBox(-1.5,-1.5,1.5,1.5));
+	f<<slideshow;//.viewBox(BoundingBox(-1.5,-1.5,1.5,1.5));
 }

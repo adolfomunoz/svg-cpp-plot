@@ -2,6 +2,7 @@
 #include <cmath>
 #include "exceptions.h"
 #include <sstream>
+#include <vector>
 
 namespace svg_cpp_plot {
 namespace axis_scale {

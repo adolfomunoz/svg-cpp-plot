@@ -1,0 +1,11 @@
+svg.header {
+    height: 200pt;
+    width: 100%;
+}
+
+.header > text {
+    font-size: 100px;
+    font-weight: bold;
+    font-family: sans-serif;
+    fill: white;
+}

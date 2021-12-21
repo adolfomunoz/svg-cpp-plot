@@ -1,10 +1,11 @@
 #pragma once 
 
 #include "../core/node.h"
+#include "../attributes/aspect-ratio-attributes.h"
 
 namespace svg_cpp_plot {
 
-class SVG : public NodeBase, public Attributes<SVG> {
+class SVG : public NodeBase, public Attributes<SVG>, public AspectRatioAttributes<SVG> {
 public:
 	SVG() : NodeBase("svg") {
 		set("xmlns","http://www.w3.org/2000/svg");

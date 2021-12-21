@@ -48,7 +48,7 @@ public:
 	}
 
 	AlignmentBaseline alignment_baseline() const noexcept {
-		return t()->get_default("alignment-baseline",alignment_baseline);
+		return t()->get_default("alignment-baseline",svg_cpp_plot::alignment_baseline);
 	}
 
 	DominantBaseline dominant_baseline() const noexcept {

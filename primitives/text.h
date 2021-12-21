@@ -5,6 +5,7 @@
 #include "../attributes/text-presentation-attributes.h"
 #include "../attributes/style-attributes.h"
 #include "../attributes/graphical-attributes.h"
+#include "../attributes/units.h"
 
 namespace svg_cpp_plot {
 
@@ -19,10 +20,10 @@ public:
 		return text();
 	}
 
-	float x() const noexcept { return get_float("x"); }
-	Text& x(float v) noexcept { return set("x",v); }
-	float y() const noexcept { return get_float("y"); }
-	Text& y(float v) noexcept { return set("y",v); }
+	Length x() const noexcept { return get_default("x",Length(0)); }
+	Text& x(const Length& v) noexcept { return set("x",v); }
+	Length y() const noexcept { return get_default("y",Length(0)); }
+	Text& y(const Length& v) noexcept { return set("y",v); }
 
 	Text(float x, float y, const std::string& text) : NotTerminal("text"), text_(text) {
 		this->x(x).y(y);

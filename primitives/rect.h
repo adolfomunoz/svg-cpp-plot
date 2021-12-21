@@ -11,6 +11,8 @@ namespace svg_cpp_plot {
 
 class Rect : public Terminal, public Attributes<Rect>, public GraphicalAttributes<Rect>, public StyleAttributes<Rect>, public PresentationAttributes<Rect>, public GeometryAttributes<Rect> {
 public:
+    Rect() : Terminal("rect") {}
+
 	Rect(float x1, float y1, float x2, float y2) : Terminal("rect")  {
 		rect(x1,y1,x2,y2);
 	}

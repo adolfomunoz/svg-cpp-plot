@@ -5,6 +5,7 @@
 #include <string>
 #include "plottable.h"
 #include "cmap.h"
+#include "../../utils/png.h"
 
 namespace svg_cpp_plot {
     
@@ -122,6 +123,9 @@ private:
     }
     
     std::shared_ptr<_2d::Element> interpolated(const axis_scale::Base& xscale, const axis_scale::Base& yscale) const noexcept {
+        #ifndef USE_PNG
+        return nearest(xscale,yscale);
+        #else
         auto ax = axis();
         auto cm = detail::colormap(cmap(),vmin(),vmax());
         auto nsamples = size();
@@ -144,6 +148,7 @@ private:
         std::tuple<float,float> xmax{xscale.transform(ax[1]),yscale.transform(ax[3])};
 		Image image(ss.str()); image.rect(xmin,xmax).preserveAspectRatio(preserve_aspect_ratio_none);
         return std::make_shared<_2d::primitive<Image>>(image);
+        #endif
     }
     
     std::shared_ptr<_2d::Element> scaled(const axis_scale::Base& xscale, const axis_scale::Base& yscale) const noexcept override {
