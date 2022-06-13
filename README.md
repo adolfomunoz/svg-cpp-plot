@@ -22,11 +22,8 @@ include it from C++.
 #include <svg-cpp-plot/svg-cpp-plot.h>
 ```
 
-Some features (bicubic interpolation in `imshow` depend on `libpng`) but they are not mandatory. Still, if you want to use them you have
-make sure to have `libpng` installed in your system and linked against the executable code, and make sure to define `USE_PNG`, either
-within your source code by adding `#define USE_PNG` before `#include <svg-cpp-plot/svg-cpp-plot.h>`, by using the commandline 
-(`-DUSE_PNG` in g++) or in cmake (for your `executable` you would add `target_compile_definitions(executable PRIVATE "USE_PNG"}`).
-
+Some features have some external dependencies but they are not mandatory:
+- Bicubic interpolation in `imshow` depends on `libpng`. To use it make sure to have `libpng` installed in your system and linked against the executable code, and make sure to define the `USE_PNG` macro, either within your source code by adding `#define USE_PNG` before `#include <svg-cpp-plot/svg-cpp-plot.h>`, by using the commandline  (`-DUSE_PNG` in g++) or in cmake (for your `executable` you would add `target_compile_definitions(executable PRIVATE "USE_PNG"}`).
 
 If your project is already in git, `svg-cpp-plot` can also be included as a submodule with git:
 
