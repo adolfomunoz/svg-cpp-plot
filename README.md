@@ -1,10 +1,7 @@
 # svg-cpp-plot
-A simple C++17 header-only library for generating SVG images and plots. It provides a huge (undocumented) codebase that serves as base for smaller (partially documented) useful APIs and executable files for different specific applications.
+A simple C++17 header-only library for generating SVG images and plots. It provides a huge (undocumented) codebase that serves as base for smaller (partially documented) useful APIs and executable files for different specific applications. All this funcitonality has been superseeded by my newer library [svg.cc](https://github.com/adolfomunoz/svg.cc). I won't be mantaining this library but feel free to use it.
 
-These applications are:
-
-- [SVGPlot](./doc/svgplot.md): API for plotting different types of graphs in a `matplotlib.pyplot` way with vector (SVG) output.
-- More on the way.
+The only working application is [SVGPlot](./doc/svgplot.md), an API for plotting different types of graphs in a `matplotlib.pyplot` way with vector (SVG) output.
 
 # Installation
 
